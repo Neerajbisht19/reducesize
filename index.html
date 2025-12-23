@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReduceSize – Compress Image to Exact KB or MB</title>
+
+<!-- SEO -->
+<meta name="description" content="Reduce image size to exact KB or MB without quality loss. Free, fast & secure image compressor.">
+<meta name="keywords" content="image size reducer, compress image kb mb, photo size reduce online">
+<meta name="author" content="ReduceSize">
+
+<style>
+/* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== BODY ===== */
+body{
+  background: radial-gradient(circle at top,#1a1a2e,#0f0f18);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
+
+/* ===== MAIN WRAPPER ===== */
+.wrapper{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+
+/* ===== APP CARD ===== */
+.app{
+  flex:1;
+  background: #141423;
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* ===== HEADER ===== */
+.app h1{
+  font-size:26px;
+  margin-bottom:6px;
+}
+.app p{
+  color:#aaa;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+/* ===== INPUTS ===== */
+input[type="file"]{
+  width:100%;
+  background:#1e1e32;
+  border:1px solid #2d2d4d;
+  padding:12px;
+  border-radius:10px;
+  color:#fff;
+}
+
+.size-row{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+.size-row input,
+.size-row select{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #2d2d4d;
+  background:#1e1e32;
+  color:#fff;
+  font-size:16px;
+}
+
+/* ===== BUTTON ===== */
+button{
+  margin-top:18px;
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  background: linear-gradient(135deg,#6a5cff,#8f7bff);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(106,92,255,0.4);
+  transition:0.25s;
+}
+
+button:active{
+  transform:scale(0.97);
+  background: linear-gradient(135deg,#8f7bff,#6a5cff);
+}
+
+/* ===== STATUS ===== */
+#status{
+  margin-top:12px;
+  font-size:14px;
+  color:#9fa3ff;
+}
+
+/* ===== DOWNLOAD ===== */
+#download{
+  display:none;
+  margin-top:14px;
+  text-align:center;
+  font-weight:600;
+  color:#6a5cff;
+  cursor:pointer;
+}
+
+/* ===== AD SIDEBAR ===== */
+.ad-box{
+  width:260px;
+  background:#141423;
+  border-radius:18px;
+  padding:16px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.ad-box p{
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:8px;
+}
+
+.ad-placeholder{
+  height:250px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#23234a,#2f2f5f);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#888;
+  font-size:14px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .wrapper{
+    flex-direction:column;
+    align-items:center;
+  }
+  .ad-box{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- MAIN APP -->
+  <div class="app">
+    <h1>ReduceSize</h1>
+    <p>Compress image to exact KB or MB without quality loss</p>
+
+    <input type="file" id="upload" accept="image/*">
+
+    <div class="size-row">
+      <input type="number" id="size" placeholder="Target size">
+      <select id="unit">
+        <option value="kb">KB</option>
+        <option value="mb">MB</option>
+      </select>
+    </div>
+
+    <button onclick="start()">Compress & Download</button>
+
+    <div id="status"></div>
+    <div id="download">Preparing download…</div>
+  </div>
+
+  <!-- SIDE AD -->
+  <div class="ad-box">
+    <p>Advertisement</p>
+    <div class="ad-placeholder">
+      Google Ad Here
+    </div>
+  </div>
+
+</div>
+
+<script>
+let finalBlob = null;
+
+function start(){
+  const file = upload.files[0];
+  if(!file){ alert("Upload image"); return; }
+
+  let target = size.value;
+  if(!target){ alert("Enter size"); return; }
+
+  if(unit.value === "mb") target *= 1024;
+
+  compress(file, target);
+}
+
+function compress(file, targetKB){
+  status.innerText = "Compressing...";
+  const img = new Image();
+  const reader = new FileReader();
+
+  reader.onload = e => img.src = e.target.result;
+  reader.readAsDataURL(file);
+
+  img.onload = ()=>{
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    canvas.getContext("2d").drawImage(img,0,0);
+
+    let q = 0.95;
+
+    (function loop(){
+      canvas.toBlob(b=>{
+        if(b.size/1024 <= targetKB || q <= 0.4){
+          finalBlob = b;
+          status.innerText = "Done! Starting download in 2 seconds…";
+          showDownload();
+        }else{
+          q -= 0.03;
+          loop();
+        }
+      },"image/jpeg",q);
+    })();
+  };
+}
+
+function showDownload(){
+  const d = document.getElementById("download");
+  d.style.display = "block";
+
+  setTimeout(()=>{
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(finalBlob);
+    a.download = "reducesize.jpg";
+    a.click();
+    d.innerText = "Downloaded ✔";
+  },2000);
+}
+</script>
+
+</body>
+</html>
