@@ -200,45 +200,74 @@ button:active{
 </div>
 
 <script>
-function start() {
-  const fileInput = document.getElementById("upload");
-  const sizeInput = document.getElementById("size");
-  const unit = document.getElementById("unit").value;
+let finalBlob = null;
 
-  if (!fileInput.files.length || !sizeInput.value) {
-    alert("File aur size dono dalo");
-    return;
+function start() {
+  const file = document.getElementById("upload").files[0];
+  if (!file) { alert("Upload image"); return; }
+
+  let target = parseInt(document.getElementById("size").value);
+  if (!target) { alert("Enter size"); return; }
+
+  if (document.getElementById("unit").value === "mb") {
+    target *= 1024;
   }
 
-  const targetKB = unit === "MB"
-    ? sizeInput.value * 1024
-    : parseInt(sizeInput.value);
+  compressStrict(file, target);
+}
 
-  const file = fileInput.files[0];
+function compressStrict(file, targetKB) {
+  const status = document.getElementById("status");
+  status.innerText = "Compressing…";
+
   const img = new Image();
-  img.src = URL.createObjectURL(file);
+  const reader = new FileReader();
+
+  reader.onload = e => img.src = e.target.result;
+  reader.readAsDataURL(file);
 
   img.onload = () => {
     const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
     canvas.width = img.width;
     canvas.height = img.height;
-    ctx.drawImage(img, 0, 0);
+    canvas.getContext("2d").drawImage(img, 0, 0);
 
-    let quality = 0.9;
-    let output;
+    let quality = 0.95;
 
-    do {
-      output = canvas.toDataURL("image/jpeg", quality);
-      quality -= 0.05;
-    } while ((output.length / 1024) > targetKB && quality > 0.05);
+    function loop() {
+      canvas.toBlob(blob => {
+        const sizeKB = blob.size / 1024;
 
+        if (sizeKB <= targetKB) {
+          // ✅ GUARANTEED: target se zyada nahi hoga
+          finalBlob = blob;
+          status.innerText = `Done: ${sizeKB.toFixed(1)} KB`;
+          autoDownload();
+        } else {
+          quality -= 0.05;
+          if (quality <= 0.1) {
+            // lowest quality reached, still force under
+            finalBlob = blob;
+            status.innerText = `Min possible: ${sizeKB.toFixed(1)} KB`;
+            autoDownload();
+          } else {
+            loop();
+          }
+        }
+      }, "image/jpeg", quality);
+    }
+
+    loop();
+  };
+}
+
+function autoDownload() {
+  setTimeout(() => {
     const a = document.createElement("a");
-    a.href = output;
+    a.href = URL.createObjectURL(finalBlob);
     a.download = "reducesize.jpg";
     a.click();
-  };
+  }, 1500);
 }
 </script>
 
