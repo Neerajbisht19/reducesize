@@ -241,26 +241,42 @@ button:active{
   <!-- MAIN APP -->
   <div class="app">
     <div style="display:flex; gap:10px; margin-bottom:18px;">
-  <button id="imgTab" onclick="showImage()" style="flex:1;">🖼 Image</button>
-  <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
+  <button id="imgTab" onclick="showImage()" class="tab-btn active">🖼 Image</button>
     </div>
     <h1>ReduceSize – Compress Image to Exact KB or MB</h1>
 
     <p>Compress image to exact KB or MB without quality loss</p>
 
-    <input type="file" id="upload" accept="image/*">
+    <div id="imageBox">
 
-    <div class="size-row">
-      <input type="number" id="size" placeholder="Target size">
-      <select id="unit">
-        <option value="kb">KB</option>
-        <option value="mb">MB</option>
-      </select>
+  <input type="file" id="upload" accept="image/*">
+
+  <div class="size-row">
+    <input type="number" id="size" placeholder="Target size">
+    <select id="unit">
+      <option value="kb">KB</option>
+      <option value="mb">MB</option>
+    </select>
+  </div>
+
+  <button onclick="start()">Compress & Download</button>
+
     </div>
+    <div id="pdfBox" style="display:none;">
 
-    <button onclick="start()">Compress & Download</button>
+  <input type="file" id="pdfUpload" accept="application/pdf">
 
+  <div class="size-row">
+    <input type="number" placeholder="Target size (KB)" disabled>
+  </div>
 
+  <button onclick="compressPDF()">Compress PDF</button>
+
+  <div style="margin-top:10px; font-size:13px; color:#aaa; text-align:center;">
+    📄 Best for scanned PDFs (image-based)
+  </div>
+
+    </div>
     <div id="status"></div>
     <button id="download" style="display:none;">⬇ Download Image</button>
   </div>
