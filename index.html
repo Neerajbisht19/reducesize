@@ -200,62 +200,45 @@ button:active{
 </div>
 
 <script>
-let finalBlob = null;
+function start() {
+  const fileInput = document.getElementById("upload");
+  const sizeInput = document.getElementById("size");
+  const unit = document.getElementById("unit").value;
 
-function start(){
-  const file = upload.files[0];
-  if(!file){ alert("Upload image"); return; }
+  if (!fileInput.files.length || !sizeInput.value) {
+    alert("File aur size dono dalo");
+    return;
+  }
 
-  let target = size.value;
-  if(!target){ alert("Enter size"); return; }
+  const targetKB = unit === "MB"
+    ? sizeInput.value * 1024
+    : parseInt(sizeInput.value);
 
-  if(unit.value === "mb") target *= 1024;
-
-  compress(file, target);
-}
-
-function compress(file, targetKB){
-  status.innerText = "Compressing...";
+  const file = fileInput.files[0];
   const img = new Image();
-  const reader = new FileReader();
+  img.src = URL.createObjectURL(file);
 
-  reader.onload = e => img.src = e.target.result;
-  reader.readAsDataURL(file);
-
-  img.onload = ()=>{
+  img.onload = () => {
     const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
     canvas.width = img.width;
     canvas.height = img.height;
-    canvas.getContext("2d").drawImage(img,0,0);
+    ctx.drawImage(img, 0, 0);
 
-    let q = 0.95;
+    let quality = 0.9;
+    let output;
 
-    (function loop(){
-      canvas.toBlob(b=>{
-        if(b.size/1024 <= targetKB || q <= 0.4){
-          finalBlob = b;
-          status.innerText = "Done! Starting download in 2 seconds…";
-          showDownload();
-        }else{
-          q -= 0.03;
-          loop();
-        }
-      },"image/jpeg",q);
-    })();
-  };
-}
+    do {
+      output = canvas.toDataURL("image/jpeg", quality);
+      quality -= 0.05;
+    } while ((output.length / 1024) > targetKB && quality > 0.05);
 
-function showDownload(){
-  const d = document.getElementById("download");
-  d.style.display = "block";
-
-  setTimeout(()=>{
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(finalBlob);
+    a.href = output;
     a.download = "reducesize.jpg";
     a.click();
-    d.innerText = "Downloaded ✔";
-  },2000);
+  };
 }
 </script>
 
