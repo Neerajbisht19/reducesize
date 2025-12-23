@@ -212,6 +212,7 @@ button:active{
 }
   
 </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 
 <body>
@@ -220,6 +221,10 @@ button:active{
 
   <!-- MAIN APP -->
   <div class="app">
+    <div style="display:flex; gap:10px; margin-bottom:18px;">
+  <button id="imgTab" onclick="showImage()" style="flex:1;">🖼 Image</button>
+  <button id="pdfTab" onclick="showPDF()" style="flex:1; opacity:0.6;">📄 PDF</button>
+    </div>
     <h1>ReduceSize – Compress Image to Exact KB or MB</h1>
 
     <p>Compress image to exact KB or MB without quality loss</p>
@@ -338,9 +343,44 @@ async function start() {
   };
       }
 
+async function compressPDF() {
+  const fileInput = document.getElementById("pdfUpload");
 
+  if (!fileInput.files.length) {
+    alert("PDF select karo");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+
+  reader.onload = async function () {
+    const typedArray = new Uint8Array(this.result);
+
+    const pdf = await pdfjsLib.getDocument(typedArray).promise;
+    const page = await pdf.getPage(1); // abhi sirf first page
+
+    const scale = 1.5;
+    const viewport = page.getViewport({ scale });
+
+    const canvas = document.getElementById("pdfCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    await page.render({
+      canvasContext: ctx,
+      viewport: viewport
+    }).promise;
+
+    alert("PDF ka first page image me convert ho gaya ✔ (Step-2 done)");
+  };
+
+  reader.readAsArrayBuffer(file);
+}
 </script>
 
-  
+  <canvas id="pdfCanvas" style="display:none;"></canvas>
 </body>
 </html>
