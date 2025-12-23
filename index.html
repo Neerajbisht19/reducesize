@@ -183,7 +183,7 @@ button:active{
       </select>
     </div>
 
-    <button id="compressBtn">Compress & Download</button>
+    <button onclick="start()">Compress & Download</button>
 
     <div id="status"></div>
     <div id="download">Preparing download…</div>
@@ -199,62 +199,69 @@ button:active{
 
 </div>
 <script>
-async function compressExact(file, targetKB) {
+async function start() {
+  const fileInput = document.getElementById("upload");
+  const sizeInput = document.getElementById("size");
+  const unit = document.getElementById("unit").value;
+
+  if (!fileInput.files.length) return alert("Image select karo");
+  if (!sizeInput.value) return alert("Size daalo");
+
+  let targetKB = unit === "MB"
+    ? sizeInput.value * 1024
+    : parseInt(sizeInput.value);
+
+  const file = fileInput.files[0];
   const img = new Image();
   img.src = URL.createObjectURL(file);
   await img.decode();
 
-  const canvas = document.createElement("canvas");
-  canvas.width = img.width;
-  canvas.height = img.height;
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
+  let canvas = document.createElement("canvas");
+  let ctx = canvas.getContext("2d");
 
-  let minQ = 0.05;
-  let maxQ = 1.0;
-  let bestBlob = null;
+  let width = img.width;
+  let height = img.height;
+  let quality = 0.9;
+  let blob;
 
-  for (let i = 0; i < 25; i++) {
-    const midQ = (minQ + maxQ) / 2;
+  // 🔥 HARD RULE: 50 KB guarantee
+  const HARD_MIN = 50;
 
-    const blob = await new Promise(res =>
-      canvas.toBlob(res, "image/jpeg", midQ)
+  while (true) {
+    canvas.width = width;
+    canvas.height = height;
+    ctx.drawImage(img, 0, 0, width, height);
+
+    blob = await new Promise(r =>
+      canvas.toBlob(r, "image/jpeg", quality)
     );
 
-    const sizeKB = blob.size / 1024;
+    let kb = blob.size / 1024;
 
-    if (sizeKB <= targetKB) {
-      bestBlob = blob;
-      maxQ = midQ;
-    } else {
-      minQ = midQ;
+    if (kb <= targetKB) break;
+
+    if (targetKB <= HARD_MIN) {
+      width *= 0.9;
+      height *= 0.9;
+    }
+
+    quality -= 0.05;
+
+    if (quality <= 0.05) {
+      if (kb <= HARD_MIN) break;
+      width *= 0.85;
+      height *= 0.85;
+      quality = 0.9;
     }
   }
 
-  return bestBlob;
-}
-
-document.getElementById("compressBtn").onclick = async () => {
-  const file = document.getElementById("upload").files[0];
-  const target = parseInt(document.getElementById("size").value);
-
-  if (!file || !target) {
-    alert("File aur target size dono dalo");
-    return;
-  }
-
-  const result = await compressExact(file, target);
-
-  if (!result) {
-    alert("Is image ko itna chhota karna possible nahi");
-    return;
-  }
-
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(result);
+  a.href = URL.createObjectURL(blob);
   a.download = "reducesize.jpg";
   a.click();
-};
+}
 </script>
+
+  
 </body>
 </html>
