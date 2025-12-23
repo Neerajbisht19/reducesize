@@ -202,21 +202,21 @@ button:active{
 <script>
 let finalBlob = null;
 
-function start() {
+function start(){
   const file = document.getElementById("upload").files[0];
-  if (!file) { alert("Upload image"); return; }
+  if(!file){ alert("Upload image"); return; }
 
-  let target = parseInt(document.getElementById("size").value);
-  if (!target) { alert("Enter size"); return; }
+  let target = Number(document.getElementById("size").value);
+  if(!target){ alert("Enter size"); return; }
 
-  if (document.getElementById("unit").value === "mb") {
+  if(document.getElementById("unit").value === "mb"){
     target *= 1024;
   }
 
-  compressStrict(file, target);
+  compressExact(file, target);
 }
 
-function compressStrict(file, targetKB) {
+function compressExact(file, targetKB){
   const status = document.getElementById("status");
   status.innerText = "Compressing…";
 
@@ -228,32 +228,38 @@ function compressStrict(file, targetKB) {
 
   img.onload = () => {
     const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
     canvas.width = img.width;
     canvas.height = img.height;
-    canvas.getContext("2d").drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, 0);
 
     let quality = 0.95;
 
-    function loop() {
+    function loop(){
       canvas.toBlob(blob => {
+
         const sizeKB = blob.size / 1024;
 
-        if (sizeKB <= targetKB) {
-          // ✅ GUARANTEED: target se zyada nahi hoga
+        // 🔒 HARD RULE
+        if(sizeKB <= targetKB){
           finalBlob = blob;
-          status.innerText = `Done: ${sizeKB.toFixed(1)} KB`;
-          autoDownload();
-        } else {
+          status.innerText = `Done ✔ Final size: ${Math.floor(sizeKB)} KB`;
+          triggerDownload();
+        }else{
           quality -= 0.05;
-          if (quality <= 0.1) {
-            // lowest quality reached, still force under
+
+          // safety stop
+          if(quality <= 0.1){
             finalBlob = blob;
-            status.innerText = `Min possible: ${sizeKB.toFixed(1)} KB`;
-            autoDownload();
-          } else {
-            loop();
+            status.innerText = `Lowest possible: ${Math.floor(sizeKB)} KB`;
+            triggerDownload();
+            return;
           }
+
+          loop();
         }
+
       }, "image/jpeg", quality);
     }
 
@@ -261,8 +267,8 @@ function compressStrict(file, targetKB) {
   };
 }
 
-function autoDownload() {
-  setTimeout(() => {
+function triggerDownload(){
+  setTimeout(()=>{
     const a = document.createElement("a");
     a.href = URL.createObjectURL(finalBlob);
     a.download = "reducesize.jpg";
@@ -270,6 +276,5 @@ function autoDownload() {
   }, 1500);
 }
 </script>
-
 </body>
 </html>
