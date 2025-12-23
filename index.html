@@ -11,7 +11,26 @@
 <meta name="author" content="ReduceSize">
 
 <style>
-/* ===== RESET ===== */
+/* ===== TAB BUTTONS ===== */
+.tab-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2a2a4a;
+  color: #aaa;
+  transition: 0.25s;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg,#6a5cff,#8f7bff);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(106,92,255,0.4);
+}
+  /* ===== RESET ===== */
 *{
   margin:0;
   padding:0;
@@ -223,7 +242,7 @@ button:active{
   <div class="app">
     <div style="display:flex; gap:10px; margin-bottom:18px;">
   <button id="imgTab" onclick="showImage()" style="flex:1;">🖼 Image</button>
-  <button id="pdfTab" onclick="showPDF()" style="flex:1; opacity:0.6;">📄 PDF</button>
+  <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
     </div>
     <h1>ReduceSize – Compress Image to Exact KB or MB</h1>
 
@@ -343,41 +362,20 @@ async function start() {
   };
       }
 
-async function compressPDF() {
-  const fileInput = document.getElementById("pdfUpload");
+function showImage() {
+  document.getElementById("imageBox").style.display = "block";
+  document.getElementById("pdfBox").style.display = "none";
 
-  if (!fileInput.files.length) {
-    alert("PDF select karo");
-    return;
-  }
+  document.getElementById("imgTab").classList.add("active");
+  document.getElementById("pdfTab").classList.remove("active");
+}
 
-  const file = fileInput.files[0];
-  const reader = new FileReader();
+function showPDF() {
+  document.getElementById("imageBox").style.display = "none";
+  document.getElementById("pdfBox").style.display = "block";
 
-  reader.onload = async function () {
-    const typedArray = new Uint8Array(this.result);
-
-    const pdf = await pdfjsLib.getDocument(typedArray).promise;
-    const page = await pdf.getPage(1); // abhi sirf first page
-
-    const scale = 1.5;
-    const viewport = page.getViewport({ scale });
-
-    const canvas = document.getElementById("pdfCanvas");
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-
-    await page.render({
-      canvasContext: ctx,
-      viewport: viewport
-    }).promise;
-
-    alert("PDF ka first page image me convert ho gaya ✔ (Step-2 done)");
-  };
-
-  reader.readAsArrayBuffer(file);
+  document.getElementById("pdfTab").classList.add("active");
+  document.getElementById("imgTab").classList.remove("active");
 }
 </script>
 
