@@ -159,6 +159,20 @@ button:active{
   .ad-box{
     width:100%;
   }
+  #download {
+  display: none;
+  margin-top: 14px;
+  text-align: center;
+  font-weight: 600;
+  color: #6a5cff;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
 </style>
 </head>
 
@@ -200,6 +214,11 @@ button:active{
 </div>
 <script>
 async function start() {
+  const status = document.getElementById("status");
+const downloadText = document.getElementById("download");
+
+status.innerText = "Processing image…";
+downloadText.style.display = "block";
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
   const unit = document.getElementById("unit").value;
@@ -260,6 +279,9 @@ async function start() {
   document.body.appendChild(a);
   a.click();
   a.remove();
+  
+  downloadText.style.display = "none";
+status.innerText = "Download started ✔";
 }
 
 </script>
