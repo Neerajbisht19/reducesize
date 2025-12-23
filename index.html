@@ -372,24 +372,31 @@ async function start() {
       }
 
 function showImage() {
+  document.title = "ReduceSize – Compress Image to Exact KB or MB";
+
   document.getElementById("imageBox").style.display = "block";
   document.getElementById("pdfBox").style.display = "none";
 
   document.getElementById("imgTab").classList.add("active");
   document.getElementById("pdfTab").classList.remove("active");
+
+  document.getElementById("mainTitle").innerText =
+    "ReduceSize – Compress Image to Exact KB or MB";
 }
 
 function showPDF() {
+function showPDF() {
   document.title = "ReduceSize – Compress PDF to Exact KB";
+
   document.getElementById("imageBox").style.display = "none";
   document.getElementById("pdfBox").style.display = "block";
 
   document.getElementById("pdfTab").classList.add("active");
   document.getElementById("imgTab").classList.remove("active");
-document.getElementById("mainTitle").innerText =
-  "ReduceSize – Compress Image to Exact KB or MB";
-<canvas id="pdfCanvas" style="display:none;"></canvas>
-  }
+
+  document.getElementById("mainTitle").innerText =
+    "ReduceSize – Compress PDF to Exact KB";
+}
   async function compressPDF() {
   const fileInput = document.getElementById("pdfUpload");
   const sizeInput = document.getElementById("pdfSize");
@@ -455,8 +462,7 @@ document.getElementById("mainTitle").innerText =
   status.innerText = "PDF Compressed & Downloaded ✔";
   }
 
-  reader.readAsArrayBuffer(file);
-      }
+
 </script>
 
   <canvas id="pdfCanvas" style="display:none;"></canvas>
