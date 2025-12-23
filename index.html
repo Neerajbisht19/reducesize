@@ -200,7 +200,7 @@ button:active{
 
 
     <div id="status"></div>
-    <div id="download">Preparing download!🥰</div>
+    <button id="download" style="display:none;">Download Image</button>
   </div>
 
   <!-- SIDE AD -->
@@ -271,14 +271,23 @@ downloadText.style.display = "block";
   if (!blob) {
     alert("Compression failed");
     return;
-  }
+  const downloadBtn = document.getElementById("download");
 
+downloadBtn.style.display = "block";
+status.innerText = "Compression ready ✔ Tap download";
+
+downloadBtn.onclick = () => {
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "reducesize.jpg";
   document.body.appendChild(a);
   a.click();
   a.remove();
+};
+  }
+
+  
+  
   
   downloadText.style.display = "none";
 status.innerText = "Downloaded!🌸";
