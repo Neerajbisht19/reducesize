@@ -232,7 +232,7 @@ button:active{
   <button id="imgTab" onclick="showImage()" class="tab-btn active">🖼 Image</button>
   <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
     </div>
-    <h1>ReduceSize – Compress Image to Exact KB or MB</h1>
+    <h1 id="mainTitle">ReduceSize – Compress Image to Exact KB or MB</h1>
 
     <p>Compress image to exact KB or MB without quality loss</p>
 
@@ -376,12 +376,54 @@ function showImage() {
 }
 
 function showPDF() {
+  document.title = "ReduceSize – Compress PDF to Exact KB";
   document.getElementById("imageBox").style.display = "none";
   document.getElementById("pdfBox").style.display = "block";
 
   document.getElementById("pdfTab").classList.add("active");
   document.getElementById("imgTab").classList.remove("active");
+document.getElementById("mainTitle").innerText =
+  "ReduceSize – Compress Image to Exact KB or MB";
 }
+  async function compressPDF() {
+  const status = document.getElementById("status");
+  const fileInput = document.getElementById("pdfUpload");
+
+  if (!fileInput.files.length) {
+    alert("PDF select karo");
+    return;
+  }
+
+  status.innerText = "Reading PDF…";
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+
+  reader.onload = async function () {
+    const typedArray = new Uint8Array(this.result);
+
+    const pdf = await pdfjsLib.getDocument(typedArray).promise;
+    const page = await pdf.getPage(1); // abhi sirf first page
+
+    const viewport = page.getViewport({ scale: 1.5 });
+
+    const canvas = document.getElementById("pdfCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    await page.render({
+      canvasContext: ctx,
+      viewport: viewport
+    }).promise;
+
+    status.innerText =
+      "PDF loaded ✔ (Next step: compression engine add hoga)";
+  };
+
+  reader.readAsArrayBuffer(file);
+      }
 </script>
 
   <canvas id="pdfCanvas" style="display:none;"></canvas>
