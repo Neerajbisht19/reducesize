@@ -402,13 +402,13 @@ function showPDF() {
   const status = document.getElementById("status");
 
   if (!fileInput.files.length) {
-    alert("Please select a PDF file");
+    alert("Select a PDF first");
     return;
   }
 
   const targetKB = parseInt(sizeInput.value);
   if (!targetKB || targetKB < 20) {
-    alert("Enter target size (minimum 20 KB)");
+    alert("Minimum target size is 20 KB");
     return;
   }
 
@@ -421,38 +421,59 @@ function showPDF() {
   const totalPages = pdf.numPages;
 
   const { jsPDF } = window.jspdf;
-  const newPdf = new jsPDF("p", "pt");
 
-  for (let i = 1; i <= totalPages; i++) {
-    status.innerText = `Compressing page ${i} / ${totalPages}…`;
+  let quality = 0.6;
+  let outputBlob;
 
-    const page = await pdf.getPage(i);
-    const viewport = page.getViewport({ scale: 1.5 });
+  // 🔁 QUALITY REDUCTION LOOP
+  while (quality > 0.1) {
+    const newPdf = new jsPDF("p", "pt");
 
-    const canvas = document.getElementById("pdfCanvas");
-    const ctx = canvas.getContext("2d");
+    for (let i = 1; i <= totalPages; i++) {
+      status.innerText = `Compressing page ${i}/${totalPages} (quality ${quality.toFixed(2)})`;
 
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale: 1.2 });
 
-    await page.render({
-      canvasContext: ctx,
-      viewport: viewport
-    }).promise;
+      const canvas = document.getElementById("pdfCanvas");
+      const ctx = canvas.getContext("2d");
 
-    // 🔥 IMAGE COMPRESSION HERE
-    const imgData = canvas.toDataURL("image/jpeg", 0.6);
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
 
-    if (i > 1) newPdf.addPage();
-    newPdf.addImage(
-      imgData,
-      "JPEG",
-      0,
-      0,
-      newPdf.internal.pageSize.getWidth(),
-      newPdf.internal.pageSize.getHeight()
-    );
+      await page.render({ canvasContext: ctx, viewport }).promise;
+
+      const imgData = canvas.toDataURL("image/jpeg", quality);
+
+      if (i > 1) newPdf.addPage();
+      newPdf.addImage(
+        imgData,
+        "JPEG",
+        0,
+        0,
+        newPdf.internal.pageSize.getWidth(),
+        newPdf.internal.pageSize.getHeight()
+      );
+    }
+
+    outputBlob = newPdf.output("blob");
+    const outputKB = outputBlob.size / 1024;
+
+    if (outputKB <= targetKB) break;
+
+    quality -= 0.1;
   }
+
+  status.innerText = "Preparing download…";
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(outputBlob);
+  link.download = "compressed.pdf";
+  link.click();
+
+  status.innerText = `PDF Compressed ✔ (Final size ~${Math.round(outputBlob.size / 1024)} KB)`;
+  }
+ 
 
   status.innerText = "Preparing download…";
 
