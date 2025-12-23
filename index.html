@@ -159,7 +159,18 @@ button:active{
   .ad-box{
     width:100%;
   }
+.loader {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #9aa4ff;
+  animation: blink 1s infinite;
 }
+
+@keyframes blink {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}}
 </style>
 </head>
 
@@ -183,7 +194,13 @@ button:active{
       </select>
     </div>
 
-    <button onclick="start()">Compress & Download</button>
+    <button id="compressBtn" onclick="startCompress()">
+  Compress & Download
+</button>
+
+<div id="loader" class="loader" style="display:none;">
+  Processing...
+</div>
 
     <div id="status"></div>
     <div id="download">Preparing download…</div>
@@ -259,6 +276,25 @@ async function start() {
   a.href = URL.createObjectURL(blob);
   a.download = "reducesize.jpg";
   a.click();
+}
+function showLoader() {
+  document.getElementById("loader").style.display = "block";
+  document.getElementById("compressBtn").disabled = true;
+}
+
+function hideLoader() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("compressBtn").disabled = false;
+}
+
+function startCompress() {
+  showLoader();
+
+  // yaha tumhara existing compress code chalega
+  // example:
+  setTimeout(() => {
+    hideLoader();
+  }, 2000); // compression complete hone par call karo
 }
 </script>
 
