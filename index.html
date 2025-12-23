@@ -451,17 +451,20 @@ function showPDF() {
       newPdf.internal.pageSize.getHeight()
     );
 
-  const outputBlob = newPdf.output("blob");
-  }
+  const downloadBtn = document.getElementById("downloadPdfBtn");
 
+downloadBtn.style.display = "block";
+downloadBtn.onclick = () => {
   const link = document.createElement("a");
   link.href = URL.createObjectURL(outputBlob);
   link.download = "compressed.pdf";
+  document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
+};
 
-  status.innerText =
-    `PDF compressed ✔ ${Math.round(outputBlob.size / 1024)} KB (image-based)`;
-   }
+status.innerText =
+  `PDF ready ✔ ${Math.round(outputBlob.size / 1024)} KB`;
 </script>
 
   <canvas id="pdfCanvas" style="display:none;"></canvas>
