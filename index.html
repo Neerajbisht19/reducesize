@@ -450,14 +450,8 @@ function showPDF() {
       newPdf.internal.pageSize.getWidth(),
       newPdf.internal.pageSize.getHeight()
     );
-  }
 
   const outputBlob = newPdf.output("blob");
-
-  // SAFETY CHECK
-  if (outputBlob.size / 1024 > userKB) {
-    alert("PDF cannot be reduced further without heavy blur");
-    return;
   }
 
   const link = document.createElement("a");
