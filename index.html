@@ -396,7 +396,7 @@ function showPDF() {
   document.getElementById("mainTitle").innerText =
     "ReduceSize – Compress PDF to Exact KB";
 }
-  async function compressPDF() {
+   async function compressPDF() {
   const fileInput = document.getElementById("pdfUpload");
   const sizeInput = document.getElementById("pdfSize");
   const status = document.getElementById("status");
@@ -406,28 +406,27 @@ function showPDF() {
     return;
   }
 
-  const userKB = parseInt(sizeInput.value);
+  let userKB = parseInt(sizeInput.value);
   if (!userKB || userKB < 100) {
-    alert("For readable PDFs, minimum 100 KB recommended");
+    alert("Minimum PDF size is 100 KB");
     return;
   }
 
-  status.innerText = "Checking PDF type…";
+  const targetKB = Math.floor(userKB * 0.9); // safety buffer
+  status.innerText = "Converting PDF to image-based…";
 
   const file = fileInput.files[0];
   const buffer = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
 
   const { jsPDF } = window.jspdf;
-
-  let quality = 0.9;        // ❗ high quality lock
-  let scale = 2.0;          // ❗ high resolution
-  let outputBlob;
+  const scale = 1.2;
+  const quality = 0.55;
 
   const newPdf = new jsPDF("p", "pt");
 
   for (let i = 1; i <= pdf.numPages; i++) {
-    status.innerText = `Rendering page ${i}/${pdf.numPages}`;
+    status.innerText = `Processing page ${i}/${pdf.numPages}`;
 
     const page = await pdf.getPage(i);
     const viewport = page.getViewport({ scale });
@@ -453,7 +452,13 @@ function showPDF() {
     );
   }
 
-  outputBlob = newPdf.output("blob");
+  const outputBlob = newPdf.output("blob");
+
+  // SAFETY CHECK
+  if (outputBlob.size / 1024 > userKB) {
+    alert("PDF cannot be reduced further without heavy blur");
+    return;
+  }
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(outputBlob);
@@ -461,9 +466,8 @@ function showPDF() {
   link.click();
 
   status.innerText =
-    `PDF compressed safely ✔ ${Math.round(outputBlob.size / 1024)} KB (text readable)`;
-  }
-
+    `PDF compressed ✔ ${Math.round(outputBlob.size / 1024)} KB (image-based)`;
+   }
 </script>
 
   <canvas id="pdfCanvas" style="display:none;"></canvas>
