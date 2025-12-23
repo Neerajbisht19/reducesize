@@ -218,7 +218,11 @@ button:active{
 }
   
 </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -384,27 +388,39 @@ function showPDF() {
   document.getElementById("imgTab").classList.remove("active");
 document.getElementById("mainTitle").innerText =
   "ReduceSize – Compress Image to Exact KB or MB";
-}
+<canvas id="pdfCanvas" style="display:none;"></canvas>
+  }
   async function compressPDF() {
-  const status = document.getElementById("status");
   const fileInput = document.getElementById("pdfUpload");
+  const sizeInput = document.getElementById("pdfSize");
+  const status = document.getElementById("status");
 
   if (!fileInput.files.length) {
-    alert("PDF select karo");
+    alert("Please select a PDF file");
+    return;
+  }
+
+  const targetKB = parseInt(sizeInput.value);
+  if (!targetKB || targetKB < 20) {
+    alert("Enter target size (minimum 20 KB)");
     return;
   }
 
   status.innerText = "Reading PDF…";
 
   const file = fileInput.files[0];
-  const reader = new FileReader();
+  const buffer = await file.arrayBuffer();
 
-  reader.onload = async function () {
-    const typedArray = new Uint8Array(this.result);
+  const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+  const totalPages = pdf.numPages;
 
-    const pdf = await pdfjsLib.getDocument(typedArray).promise;
-    const page = await pdf.getPage(1); // abhi sirf first page
+  const { jsPDF } = window.jspdf;
+  const newPdf = new jsPDF("p", "pt");
 
+  for (let i = 1; i <= totalPages; i++) {
+    status.innerText = `Compressing page ${i} / ${totalPages}…`;
+
+    const page = await pdf.getPage(i);
     const viewport = page.getViewport({ scale: 1.5 });
 
     const canvas = document.getElementById("pdfCanvas");
@@ -418,9 +434,26 @@ document.getElementById("mainTitle").innerText =
       viewport: viewport
     }).promise;
 
-    status.innerText =
-      "PDF loaded ✔ (Next step: compression engine add hoga)";
-  };
+    // 🔥 IMAGE COMPRESSION HERE
+    const imgData = canvas.toDataURL("image/jpeg", 0.6);
+
+    if (i > 1) newPdf.addPage();
+    newPdf.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      newPdf.internal.pageSize.getWidth(),
+      newPdf.internal.pageSize.getHeight()
+    );
+  }
+
+  status.innerText = "Preparing download…";
+
+  newPdf.save("compressed.pdf");
+
+  status.innerText = "PDF Compressed & Downloaded ✔";
+  }
 
   reader.readAsArrayBuffer(file);
       }
