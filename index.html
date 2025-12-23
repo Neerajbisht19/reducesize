@@ -159,6 +159,7 @@ button:active{
   .ad-box{
     width:100%;
   }
+}
   #download {
   display: none;
   margin-top: 14px;
@@ -169,10 +170,11 @@ button:active{
 }
 
 @keyframes pulse {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
+  0%   { opacity: 0.3; }
+  50%  { opacity: 1; }
   100% { opacity: 0.3; }
 }
+  
 </style>
 </head>
 
@@ -215,16 +217,24 @@ button:active{
 <script>
 async function start() {
   const status = document.getElementById("status");
-const downloadText = document.getElementById("download");
+  const downloadBtn = document.getElementById("download");
 
-status.innerText = "Processing image…";
-downloadText.style.display = "block";
+  // reset UI
+  status.innerText = "Processing image…";
+  downloadBtn.style.display = "none";
+
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
   const unit = document.getElementById("unit").value;
 
-  if (!fileInput.files.length) return alert("Image select karo");
-  if (!sizeInput.value) return alert("Size daalo");
+  if (!fileInput.files.length) {
+    status.innerText = "";
+    return alert("Image select karo");
+  }
+  if (!sizeInput.value) {
+    status.innerText = "";
+    return alert("Size daalo");
+  }
 
   let targetKB = unit === "mb"
     ? sizeInput.value * 1024
@@ -235,15 +245,15 @@ downloadText.style.display = "block";
   img.src = URL.createObjectURL(file);
   await img.decode();
 
-  let canvas = document.createElement("canvas");
-  let ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
   let width = img.width;
   let height = img.height;
   let quality = 0.85;
   const MIN_QUALITY = 0.75;
 
-  let blob;
+  let blob = null;
   let attempts = 0;
 
   while (attempts < 40) {
@@ -257,6 +267,8 @@ downloadText.style.display = "block";
       canvas.toBlob(r, "image/jpeg", quality)
     );
 
+    if (!blob) break;
+
     let kb = blob.size / 1024;
     if (kb <= targetKB) break;
 
@@ -269,29 +281,27 @@ downloadText.style.display = "block";
   }
 
   if (!blob) {
+    status.innerText = "";
     alert("Compression failed");
     return;
-  const downloadBtn = document.getElementById("download");
-
-downloadBtn.style.display = "block";
-status.innerText = "Compression ready ✔ Tap download";
-
-downloadBtn.onclick = () => {
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "reducesize.jpg";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-};
   }
 
-  
-  
-  
-  downloadText.style.display = "none";
-status.innerText = "Downloaded!🌸";
-}
+  // ✅ SUCCESS
+  status.innerText = "Compression ready ✔";
+  downloadBtn.style.display = "block";
+
+  downloadBtn.onclick = () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "reducesize.jpg";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    status.innerText = "Downloaded! 🌸";
+  };
+      }
+
 
 </script>
 
