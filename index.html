@@ -179,20 +179,7 @@ button:active{
     width:100%;
   }
 }
-  #download {
-  display: none;
-  margin-top: 14px;
-  text-align: center;
-  font-weight: 600;
-  color: #6a5cff;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%   { opacity: 0.3; }
-  50%  { opacity: 1; }
-  100% { opacity: 0.3; }
-}
+  
   /* ===== PREMIUM DOWNLOAD BUTTON ===== */
 #download {
   background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -240,8 +227,10 @@ button:active{
 
   <!-- MAIN APP -->
   <div class="app">
+    
     <div style="display:flex; gap:10px; margin-bottom:18px;">
   <button id="imgTab" onclick="showImage()" class="tab-btn active">🖼 Image</button>
+  <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
     </div>
     <h1>ReduceSize – Compress Image to Exact KB or MB</h1>
 
