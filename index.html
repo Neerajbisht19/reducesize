@@ -407,64 +407,53 @@ function showPDF() {
   }
 
   const userKB = parseInt(sizeInput.value);
-  if (!userKB || userKB < 30) {
-    alert("Minimum 30 KB recommended for quality");
+  if (!userKB || userKB < 100) {
+    alert("For readable PDFs, minimum 100 KB recommended");
     return;
   }
 
-  const targetKB = Math.floor(userKB * 0.8); // safety buffer
-  status.innerText = "Reading PDF…";
+  status.innerText = "Checking PDF type…";
 
   const file = fileInput.files[0];
   const buffer = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
 
   const { jsPDF } = window.jspdf;
-  const totalPages = pdf.numPages;
 
-  let quality = 0.75;          // start high
-  let scale = 1.3;             // resolution control
+  let quality = 0.9;        // ❗ high quality lock
+  let scale = 2.0;          // ❗ high resolution
   let outputBlob;
 
-  while (quality >= 0.35) {    // ❌ quality never below this
-    const newPdf = new jsPDF("p", "pt");
+  const newPdf = new jsPDF("p", "pt");
 
-    for (let i = 1; i <= totalPages; i++) {
-      status.innerText =
-        `Compressing page ${i}/${totalPages} (quality ${quality.toFixed(2)})`;
+  for (let i = 1; i <= pdf.numPages; i++) {
+    status.innerText = `Rendering page ${i}/${pdf.numPages}`;
 
-      const page = await pdf.getPage(i);
-      const viewport = page.getViewport({ scale });
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({ scale });
 
-      const canvas = document.getElementById("pdfCanvas");
-      const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("pdfCanvas");
+    const ctx = canvas.getContext("2d");
 
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
 
-      await page.render({ canvasContext: ctx, viewport }).promise;
+    await page.render({ canvasContext: ctx, viewport }).promise;
 
-      const imgData = canvas.toDataURL("image/jpeg", quality);
+    const imgData = canvas.toDataURL("image/jpeg", quality);
 
-      if (i > 1) newPdf.addPage();
-      newPdf.addImage(
-        imgData,
-        "JPEG",
-        0,
-        0,
-        newPdf.internal.pageSize.getWidth(),
-        newPdf.internal.pageSize.getHeight()
-      );
-    }
-
-    outputBlob = newPdf.output("blob");
-    const sizeKB = outputBlob.size / 1024;
-
-    if (sizeKB <= targetKB) break;
-
-    quality -= 0.08;     // quality thoda thoda kam
-    scale -= 0.1;        // resolution bhi thoda kam
+    if (i > 1) newPdf.addPage();
+    newPdf.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      newPdf.internal.pageSize.getWidth(),
+      newPdf.internal.pageSize.getHeight()
+    );
   }
+
+  outputBlob = newPdf.output("blob");
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(outputBlob);
@@ -472,7 +461,7 @@ function showPDF() {
   link.click();
 
   status.innerText =
-    `PDF Compressed ✔ ${Math.round(outputBlob.size / 1024)} KB (target ${userKB} KB)`;
+    `PDF compressed safely ✔ ${Math.round(outputBlob.size / 1024)} KB (text readable)`;
   }
 
 </script>
