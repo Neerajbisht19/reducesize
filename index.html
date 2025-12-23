@@ -406,34 +406,35 @@ function showPDF() {
     return;
   }
 
-  const targetKB = parseInt(sizeInput.value);
-  if (!targetKB || targetKB < 20) {
-    alert("Minimum target size is 20 KB");
+  const userKB = parseInt(sizeInput.value);
+  if (!userKB || userKB < 30) {
+    alert("Minimum 30 KB recommended for quality");
     return;
   }
 
+  const targetKB = Math.floor(userKB * 0.8); // safety buffer
   status.innerText = "Reading PDF…";
 
   const file = fileInput.files[0];
   const buffer = await file.arrayBuffer();
-
   const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
-  const totalPages = pdf.numPages;
 
   const { jsPDF } = window.jspdf;
+  const totalPages = pdf.numPages;
 
-  let quality = 0.6;
+  let quality = 0.75;          // start high
+  let scale = 1.3;             // resolution control
   let outputBlob;
 
-  // 🔁 QUALITY REDUCTION LOOP
-  while (quality > 0.1) {
+  while (quality >= 0.35) {    // ❌ quality never below this
     const newPdf = new jsPDF("p", "pt");
 
     for (let i = 1; i <= totalPages; i++) {
-      status.innerText = `Compressing page ${i}/${totalPages} (quality ${quality.toFixed(2)})`;
+      status.innerText =
+        `Compressing page ${i}/${totalPages} (quality ${quality.toFixed(2)})`;
 
       const page = await pdf.getPage(i);
-      const viewport = page.getViewport({ scale: 1.2 });
+      const viewport = page.getViewport({ scale });
 
       const canvas = document.getElementById("pdfCanvas");
       const ctx = canvas.getContext("2d");
@@ -457,31 +458,22 @@ function showPDF() {
     }
 
     outputBlob = newPdf.output("blob");
-    const outputKB = outputBlob.size / 1024;
+    const sizeKB = outputBlob.size / 1024;
 
-    if (outputKB <= targetKB) break;
+    if (sizeKB <= targetKB) break;
 
-    quality -= 0.1;
+    quality -= 0.08;     // quality thoda thoda kam
+    scale -= 0.1;        // resolution bhi thoda kam
   }
-
-  status.innerText = "Preparing download…";
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(outputBlob);
   link.download = "compressed.pdf";
   link.click();
 
-  status.innerText = `PDF Compressed ✔ (Final size ~${Math.round(outputBlob.size / 1024)} KB)`;
+  status.innerText =
+    `PDF Compressed ✔ ${Math.round(outputBlob.size / 1024)} KB (target ${userKB} KB)`;
   }
- 
-
-  status.innerText = "Preparing download…";
-
-  newPdf.save("compressed.pdf");
-
-  status.innerText = "PDF Compressed & Downloaded ✔";
-  }
-
 
 </script>
 
