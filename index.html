@@ -183,7 +183,7 @@ button:active{
       </select>
     </div>
 
-    <button onclick="start()">Compress & Download</button>
+    <button id="compressBtn">Compress & Download</button>
 
     <div id="status"></div>
     <div id="download">Preparing download…</div>
@@ -198,83 +198,63 @@ button:active{
   </div>
 
 </div>
-
 <script>
-let finalBlob = null;
+async function compressExact(file, targetKB) {
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  await img.decode();
 
-function start(){
-  const file = document.getElementById("upload").files[0];
-  if(!file){ alert("Upload image"); return; }
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
 
-  let target = Number(document.getElementById("size").value);
-  if(!target){ alert("Enter size"); return; }
+  let minQ = 0.05;
+  let maxQ = 1.0;
+  let bestBlob = null;
 
-  if(document.getElementById("unit").value === "mb"){
-    target *= 1024;
+  for (let i = 0; i < 25; i++) {
+    const midQ = (minQ + maxQ) / 2;
+
+    const blob = await new Promise(res =>
+      canvas.toBlob(res, "image/jpeg", midQ)
+    );
+
+    const sizeKB = blob.size / 1024;
+
+    if (sizeKB <= targetKB) {
+      bestBlob = blob;
+      maxQ = midQ;
+    } else {
+      minQ = midQ;
+    }
   }
 
-  compressExact(file, target);
+  return bestBlob;
 }
 
-function compressExact(file, targetKB){
-  const status = document.getElementById("status");
-  status.innerText = "Compressing…";
+document.getElementById("compressBtn").onclick = async () => {
+  const file = document.getElementById("upload").files[0];
+  const target = parseInt(document.getElementById("size").value);
 
-  const img = new Image();
-  const reader = new FileReader();
+  if (!file || !target) {
+    alert("File aur target size dono dalo");
+    return;
+  }
 
-  reader.onload = e => img.src = e.target.result;
-  reader.readAsDataURL(file);
+  const result = await compressExact(file, target);
 
-  img.onload = () => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+  if (!result) {
+    alert("Is image ko itna chhota karna possible nahi");
+    return;
+  }
 
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0);
-
-    let quality = 0.95;
-
-    function loop(){
-      canvas.toBlob(blob => {
-
-        const sizeKB = blob.size / 1024;
-
-        // 🔒 HARD RULE
-        if(sizeKB <= targetKB){
-          finalBlob = blob;
-          status.innerText = `Done ✔ Final size: ${Math.floor(sizeKB)} KB`;
-          triggerDownload();
-        }else{
-          quality -= 0.05;
-
-          // safety stop
-          if(quality <= 0.1){
-            finalBlob = blob;
-            status.innerText = `Lowest possible: ${Math.floor(sizeKB)} KB`;
-            triggerDownload();
-            return;
-          }
-
-          loop();
-        }
-
-      }, "image/jpeg", quality);
-    }
-
-    loop();
-  };
-}
-
-function triggerDownload(){
-  setTimeout(()=>{
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(finalBlob);
-    a.download = "reducesize.jpg";
-    a.click();
-  }, 1500);
-}
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(result);
+  a.download = "reducesize.jpg";
+  a.click();
+};
 </script>
 </body>
 </html>
