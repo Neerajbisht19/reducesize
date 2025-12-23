@@ -277,25 +277,7 @@ async function start() {
   a.download = "reducesize.jpg";
   a.click();
 }
-function showLoader() {
-  document.getElementById("loader").style.display = "block";
-  document.getElementById("compressBtn").disabled = true;
-}
 
-function hideLoader() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("compressBtn").disabled = false;
-}
-
-function startCompress() {
-  showLoader();
-
-  // yaha tumhara existing compress code chalega
-  // example:
-  setTimeout(() => {
-    hideLoader();
-  }, 2000); // compression complete hone par call karo
-}
 </script>
 
   
