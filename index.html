@@ -207,7 +207,7 @@ async function start() {
   if (!fileInput.files.length) return alert("Image select karo");
   if (!sizeInput.value) return alert("Size daalo");
 
-  let targetKB = unit === "MB"
+  let targetKB = unit === "mb"
     ? sizeInput.value * 1024
     : parseInt(sizeInput.value);
 
@@ -224,10 +224,12 @@ async function start() {
   let quality = 0.9;
   let blob;
 
-  // 🔥 HARD RULE: 50 KB guarantee
   const HARD_MIN = 50;
+  let attempts = 0;
 
-  while (true) {
+  while (attempts < 40) {
+    attempts++;
+
     canvas.width = width;
     canvas.height = height;
     ctx.drawImage(img, 0, 0, width, height);
@@ -248,17 +250,23 @@ async function start() {
     quality -= 0.05;
 
     if (quality <= 0.05) {
-      if (kb <= HARD_MIN) break;
       width *= 0.85;
       height *= 0.85;
       quality = 0.9;
     }
   }
 
+  if (!blob) {
+    alert("Compression failed");
+    return;
+  }
+
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "reducesize.jpg";
+  document.body.appendChild(a);
   a.click();
+  a.remove();
 }
 
 </script>
