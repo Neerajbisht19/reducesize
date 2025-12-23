@@ -221,38 +221,38 @@ async function start() {
 
   let width = img.width;
   let height = img.height;
-  let quality = 0.85; // 🔥 SAFE QUALITY
-const MIN_QUALITY = 0.75;
+  let quality = 0.85;
+  const MIN_QUALITY = 0.75;
 
-while (attempts < 40) {
-  attempts++;
+  let blob;
+  let attempts = 0;
 
-  canvas.width = width;
-  canvas.height = height;
-  ctx.drawImage(img, 0, 0, width, height);
+  while (attempts < 40) {
+    attempts++;
 
-  blob = await new Promise(r =>
-    canvas.toBlob(r, "image/jpeg", quality)
-  );
+    canvas.width = width;
+    canvas.height = height;
+    ctx.drawImage(img, 0, 0, width, height);
 
-  let kb = blob.size / 1024;
-  if (kb <= targetKB) break;
+    blob = await new Promise(r =>
+      canvas.toBlob(r, "image/jpeg", quality)
+    );
 
-  // ❌ never destroy quality
-  if (quality > MIN_QUALITY) {
-    quality -= 0.02;   // very soft drop
-  } else {
-    // 👁️ eye-safe resize
-    width *= 0.95;
-    height *= 0.95;
+    let kb = blob.size / 1024;
+    if (kb <= targetKB) break;
+
+    if (quality > MIN_QUALITY) {
+      quality -= 0.02;
+    } else {
+      width *= 0.95;
+      height *= 0.95;
+    }
   }
-}
 
   if (!blob) {
     alert("Compression failed");
     return;
   }
-}
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
