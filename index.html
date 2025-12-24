@@ -540,92 +540,71 @@ function showPDF() {
    <script>
 /* ========= IMAGE + PDF COMPRESS (FINAL WORKING) ========= */
 
+<script>
 async function start() {
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
   const unit = document.getElementById("unit");
   const status = document.getElementById("status");
 
-  if (!fileInput.files.length) {
-    alert("Select an image first");
-    return;
-  }
+  if (!fileInput.files.length) return;
 
   let targetKB = parseFloat(sizeInput.value);
   if (unit.value === "mb") targetKB *= 1024;
 
-  // ✅ Reality check already handled by popup (<15 KB)
-  if (targetKB < 15) {
-    document.getElementById("realityModal").style.display = "flex";
-    return;
-  }
+  // 🔥 Reality check handled earlier (15 KB popup)
+  status.innerText = "Processing...";
 
-  status.innerText = "Processing…";
-
-  const file = fileInput.files[0];
   const img = new Image();
-  img.src = URL.createObjectURL(file);
+  img.src = URL.createObjectURL(fileInput.files[0]);
   await img.decode();
 
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  let canvas = document.createElement("canvas");
+  let ctx = canvas.getContext("2d");
 
-  /* ---------------- SMART RESIZE ---------------- */
-  let maxWidth;
+  let scale = 1;
+  let quality = 0.9;
+  let blob = null;
 
-  if (targetKB <= 30) maxWidth = 600;
-  else if (targetKB <= 60) maxWidth = 900;
-  else if (targetKB <= 100) maxWidth = 1200;
-  else maxWidth = 1600;
+  // 🔥 MULTI-PASS compression (like other sites)
+  for (let pass = 0; pass < 10; pass++) {
 
-  let scale = Math.min(1, maxWidth / img.width);
-  canvas.width = Math.round(img.width * scale);
-  canvas.height = Math.round(img.height * scale);
+    canvas.width = Math.round(img.width * scale);
+    canvas.height = Math.round(img.height * scale);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  // 🔹 smooth draw (important)
-  ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-  /* ---------------- SMART JPEG SEARCH ---------------- */
-  let minQ = 0.55;
-  let maxQ = 0.95;
-  let bestBlob = null;
-
-  for (let i = 0; i < 18; i++) {
-    const q = (minQ + maxQ) / 2;
-
-    const blob = await new Promise(res =>
-      canvas.toBlob(res, "image/jpeg", q)
+    blob = await new Promise(r =>
+      canvas.toBlob(r, "image/jpeg", quality)
     );
 
     if (!blob) break;
 
     const sizeKB = blob.size / 1024;
 
-    if (sizeKB > targetKB) {
-      maxQ = q;
+    // ✅ SUCCESS CONDITION
+    if (sizeKB <= targetKB) break;
+
+    // 🔥 REAL FIX
+    if (quality > 0.35) {
+      quality -= 0.12;        // reduce quality first
     } else {
-      minQ = q;
-      bestBlob = blob;
+      scale *= 0.85;          // THEN reduce resolution
     }
   }
 
-  // ✅ Final fallback (force under target)
-  if (!bestBlob) {
-  const blob = await new Promise(res =>
-    canvas.toBlob(res, "image/jpeg", 0.4)
-  );
-  bestBlob = blob;
+  if (!blob || blob.size / 1024 > targetKB) {
+    status.innerText = "Try slightly higher KB for better clarity";
+    return;
   }
 
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(bestBlob);
-  link.download = "compressed.jpg";
-  link.click();
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "compressed.jpg";
+  a.click();
 
-  status.innerText = `Done: ${(bestBlob.size / 1024).toFixed(2)} KB`;
+  status.innerText = "Done: " + (blob.size / 1024).toFixed(2) + " KB";
 }
+</script>
   
 /* ======== PDF COMPRESS (BASIC & WORKING) ========= */
 
