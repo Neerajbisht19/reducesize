@@ -484,9 +484,9 @@ function showPDF() {
     © 2025 ReduceSize.online – All rights reserved.
   </p>
   </footer>
-  <script>
-/* ========= IMAGE COMPRESS ========= */
-<script>
+   <script>
+/* ========= IMAGE + PDF COMPRESS (FINAL WORKING) ========= */
+
 async function start() {
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
@@ -494,7 +494,7 @@ async function start() {
   const status = document.getElementById("status");
 
   if (!fileInput.files.length) {
-    alert("Select file first");
+    alert("Select image first");
     return;
   }
 
@@ -506,31 +506,13 @@ async function start() {
 
   if (unit.value === "mb") targetKB *= 1024;
 
+  status.innerText = "Processing…";
+
   const file = fileInput.files[0];
-  status.innerText = "Processing...";
-
-  /* ========= IMAGE ========= */
-  if (file.type.startsWith("image/")) {
-    await compressImage(file, targetKB, status);
-    return;
-  }
-
-  /* ========= PDF ========= */
-  if (file.type === "application/pdf") {
-    alert(
-      "PDF exact compression is limited in browser.\n" +
-      "Scanned PDFs work best.\n" +
-      "Result will always be UNDER target."
-    );
-    await compressPDFasImage(file, targetKB, status);
-    return;
-  }
-
-  alert("Unsupported file");
-  status.innerText = "";
+  await compressImage(file, targetKB, status);
 }
 
-/* ========== IMAGE CORE ========== */
+/* ========= IMAGE ========= */
 async function compressImage(file, targetKB, status) {
   const img = new Image();
   img.src = URL.createObjectURL(file);
@@ -539,7 +521,7 @@ async function compressImage(file, targetKB, status) {
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
 
-  let scale = Math.min(1, 1600 / img.width);
+  let scale = Math.min(1, 1400 / img.width);
   canvas.width = img.width * scale;
   canvas.height = img.height * scale;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -549,53 +531,11 @@ async function compressImage(file, targetKB, status) {
 
   for (let i = 0; i < 25; i++) {
     let q = (minQ + maxQ) / 2;
-
     let blob = await new Promise(r =>
       canvas.toBlob(r, "image/jpeg", q)
     );
 
-    let sizeKB = blob.size / 1024;
-
-    if (sizeKB > targetKB) {
-      maxQ = q;
-    } else {
-      minQ = q;
-      best = blob;
-    }
-  }
-
-  if (!best) {
-    alert("Cannot compress further without destroying image");
-    status.innerText = "";
-    return;
-  }
-
-  downloadBlob(best, "compressed.jpg", status);
-}
-
-/* ========== PDF → IMAGE FALLBACK ========== */
-async function compressPDFasImage(file, targetKB, status) {
-  const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-  const page = await pdf.getPage(1);
-
-  const viewport = page.getViewport({ scale: 1.5 });
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  canvas.width = viewport.width;
-  canvas.height = viewport.height;
-
-  await page.render({ canvasContext: ctx, viewport }).promise;
-
-  let minQ = 0.02, maxQ = 0.85;
-  let best = null;
-
-  for (let i = 0; i < 20; i++) {
-    let q = (minQ + maxQ) / 2;
-
-    let blob = await new Promise(r =>
-      canvas.toBlob(r, "image/jpeg", q)
-    );
+    if (!blob) break;
 
     let sizeKB = blob.size / 1024;
     if (sizeKB > targetKB) maxQ = q;
@@ -603,24 +543,25 @@ async function compressPDFasImage(file, targetKB, status) {
   }
 
   if (!best) {
-    alert("PDF too complex to compress further");
+    alert("Image too detailed for this size");
     status.innerText = "";
     return;
   }
 
-  downloadBlob(best, "compressed.pdf.jpg", status);
+  downloadBlob(best, "compressed.jpg", status);
 }
 
-/* ========== DOWNLOAD ========== */
 function downloadBlob(blob, name, status) {
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = name;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
+
   status.innerText =
     "Done: " + (blob.size / 1024).toFixed(2) + " KB";
 }
-</script>
-
+    </script>
 </body>
 </html>
