@@ -388,7 +388,7 @@ async function start() {
   let width = img.width;
   let height = img.height;
   let quality = 0.85;
-  const MIN_QUALITY = 0.75;
+  const MIN_QUALITY = 0.88;
 
   let blob = null;
   let attempts = 0;
@@ -400,9 +400,16 @@ async function start() {
     canvas.height = height;
     ctx.drawImage(img, 0, 0, width, height);
 
-    blob = await new Promise(r =>
-      canvas.toBlob(r, "image/jpeg", quality)
-    );
+    let mime = "image/jpeg";
+
+// text-heavy images ke liye PNG pe switch
+if (file.type === "image/png" || img.width < 2000) {
+  mime = "image/png";
+}
+
+blob = await new Promise(r =>
+  canvas.toBlob(r, mime, quality)
+);
 
     if (!blob) break;
 
@@ -412,8 +419,8 @@ async function start() {
     if (quality > MIN_QUALITY) {
       quality -= 0.02;
     } else {
-      width *= 0.95;
-      height *= 0.95;
+      width *= 0.98;
+      height *= 0.98;
     }
   }
 
