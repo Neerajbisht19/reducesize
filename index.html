@@ -392,7 +392,7 @@ button:active{
 
     </div>
     <div id="status"></div>
-  
+    <button id="download" style="display:none;">⬇ Download Image</button>
   </div>
   <canvas id="pdfCanvas" style="display:none;"></canvas>
 
@@ -438,6 +438,8 @@ function showPDF() {
 
   
 </script>
+
+  <canvas id="pdfCanvas" style="display:none;"></canvas>
   
 <section class="seo-content">
   <h2>Compress Image to Exact KB or MB</h2>
@@ -540,134 +542,93 @@ function showPDF() {
    <script>
 /* ========= IMAGE + PDF COMPRESS (FINAL WORKING) ========= */
 
-<script>
 async function start() {
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
   const unit = document.getElementById("unit");
   const status = document.getElementById("status");
 
-  if (!fileInput.files.length) return;
+  if (!fileInput.files.length) {
+    alert("Select image first");
+    return;
+  }
 
   let targetKB = parseFloat(sizeInput.value);
-  if (unit.value === "mb") targetKB *= 1024;
-
-  // 🔥 Reality check handled earlier (15 KB popup)
-  status.innerText = "Processing...";
-
-  const img = new Image();
-  img.src = URL.createObjectURL(fileInput.files[0]);
-  await img.decode();
-
-  let canvas = document.createElement("canvas");
-  let ctx = canvas.getContext("2d");
-
-  let scale = 1;
-  let quality = 0.9;
-  let blob = null;
-
-  // 🔥 MULTI-PASS compression (like other sites)
-  for (let pass = 0; pass < 10; pass++) {
-
-    canvas.width = Math.round(img.width * scale);
-    canvas.height = Math.round(img.height * scale);
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    blob = await new Promise(r =>
-      canvas.toBlob(r, "image/jpeg", quality)
-    );
-
-    if (!blob) break;
-
-    const sizeKB = blob.size / 1024;
-
-    // ✅ SUCCESS CONDITION
-    if (sizeKB <= targetKB) break;
-
-    // 🔥 REAL FIX
-    if (quality > 0.35) {
-      quality -= 0.12;        // reduce quality first
-    } else {
-      scale *= 0.85;          // THEN reduce resolution
-    }
-  }
-
-  if (!blob || blob.size / 1024 > targetKB) {
-    status.innerText = "Try slightly higher KB for better clarity";
-    return;
-  }
-
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "compressed.jpg";
-  a.click();
-
-  status.innerText = "Done: " + (blob.size / 1024).toFixed(2) + " KB";
-}
-</script>
-  
-/* ======== PDF COMPRESS (BASIC & WORKING) ========= */
-
-async function compressPDF() {
-  const pdfInput = document.getElementById("pdfUpload");
-  const sizeInput = document.getElementById("pdfSize");
-  const status = document.getElementById("status");
-
-  if (!pdfInput.files.length) {
-    alert("Select PDF first");
-    return;
-  }
-
-  let targetKB = parseInt(sizeInput.value);
   if (!targetKB || targetKB <= 0) {
     alert("Enter valid size");
     return;
   }
 
-  // 🔒 PDF Reality Check (50 KB rule)
-  if (targetKB < 50) {
-    openRealityModal();
-    status.innerText = "";
-    return;
-  }
+  if (unit.value === "mb") targetKB *= 1700;
+  // ⚠️ Reality Check popup for very small size (IMAGE ONLY)
 
-  status.innerText = "Processing PDF…";
-
-  const file = pdfInput.files[0];
-
-  // If already under target, direct download
-  if (file.size / 1024 <= targetKB) {
-    downloadBlob(file, "compressed.pdf", status);
-    return;
-  }
-
-  const buffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
-
-  const { jsPDF } = window.jspdf;
-  const newPdf = new jsPDF();
-  const canvas = document.getElementById("pdfCanvas");
-  const ctx = canvas.getContext("2d");
-
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const viewport = page.getViewport({ scale: 1 });
-
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-
-    await page.render({ canvasContext: ctx, viewport }).promise;
-
-    const imgData = canvas.toDataURL("image/jpeg", 0.6);
-    if (i > 1) newPdf.addPage();
-    newPdf.addImage(imgData, "JPEG", 0, 0, 210, 297);
-  }
-
-  const outputBlob = newPdf.output("blob");
-  downloadBlob(outputBlob, "compressed.pdf", status);
-}
-   </script>
   
+if (targetKB <= 15) {
+  openRealityModal();
+  status.innerText = "";
+  return;
+}
+
+  status.innerText = "Processing…";
+
+  const file = fileInput.files[0];
+  await compressImage(file, targetKB, status);
+}
+
+/* ========= IMAGE ========= */
+async function compressImage(file, targetKB, status) {
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  await img.decode();
+
+  let canvas = document.createElement("canvas");
+  let ctx = canvas.getContext("2d");
+
+  let scale = Math.min(1, 900 / img.width);
+  canvas.width = img.width * scale;
+  canvas.height = img.height * scale;
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  let minQ = 0.005, maxQ = 0.9;
+  let best = null;
+
+  for (let i = 0; i < 25; i++) {
+    let q = (minQ + maxQ) / 2;
+    let blob = await new Promise(r =>
+      canvas.toBlob(r, "image/jpeg", q)
+    );
+
+    if (!blob) break;
+
+    let sizeKB = blob.size / 1024;
+    if (sizeKB > targetKB) maxQ = q;
+    else { minQ = q; best = blob; }
+  }
+
+
+  downloadBlob(best, "compressed.jpg", status);
+}
+
+function downloadBlob(blob, name, status) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  status.innerText =
+    "Done: " + (blob.size / 1024).toFixed(2) + " KB";
+}
+function openRealityModal() {
+  document.getElementById("realityModal").style.display = "flex";
+}
+
+function closeRealityModal() {
+  document.getElementById("realityModal").style.display = "none";
+}
+     
+    </script>
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
   <div class="modal-box">
@@ -686,5 +647,6 @@ async function compressPDF() {
     <button onclick="closeRealityModal()">Got it 👍</button>
   </div>
 </div>
+  
 </body>
 </html>
