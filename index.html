@@ -627,6 +627,98 @@ function openRealityModal() {
 function closeRealityModal() {
   document.getElementById("realityModal").style.display = "none";
 }
+
+/* ========= PDF COMPRESS (IMAGE-LIKE LOGIC) ========= */
+
+async function compressPDF() {
+  const fileInput = document.getElementById("pdfUpload");
+  const sizeInput = document.getElementById("pdfSize");
+  const status = document.getElementById("status");
+
+  if (!fileInput.files.length) {
+    alert("Select PDF first");
+    return;
+  }
+
+  let targetKB = parseFloat(sizeInput.value);
+  if (!targetKB || targetKB <= 0) {
+    alert("Enter valid size");
+    return;
+  }
+
+  // 🔔 PDF Reality Check (50 KB)
+  if (targetKB < 50) {
+    openPdfRealityModal();
+    status.innerText = "";
+    return;
+  }
+
+  status.innerText = "Processing PDF…";
+
+  const file = fileInput.files[0];
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+  const { jsPDF } = window.jspdf;
+  let quality = 0.8;
+  let scale = 1;
+  let outputBlob = null;
+
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const newPdf = new jsPDF();
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale });
+
+      const canvas = document.getElementById("pdfCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      await page.render({ canvasContext: ctx, viewport }).promise;
+
+      const imgData = canvas.toDataURL("image/jpeg", quality);
+
+      if (i > 1) newPdf.addPage();
+      newPdf.addImage(
+        imgData,
+        "JPEG",
+        0,
+        0,
+        newPdf.internal.pageSize.getWidth(),
+        newPdf.internal.pageSize.getHeight()
+      );
+    }
+
+    outputBlob = newPdf.output("blob");
+    const sizeKB = outputBlob.size / 1024;
+
+    if (sizeKB <= targetKB) break;
+
+    quality -= 0.08;
+    scale -= 0.08;
+
+    if (quality < 0.3) quality = 0.3;
+    if (scale < 0.4) scale = 0.4;
+  }
+
+  if (!outputBlob || outputBlob.size / 1024 > targetKB) {
+    alert("PDF cannot be compressed cleanly to this size");
+    status.innerText = "";
+    return;
+  }
+
+  downloadBlob(outputBlob, "compressed.pdf", status);
+}
+     function openPdfRealityModal() {
+  document.getElementById("pdfRealityModal").style.display = "flex";
+}
+
+function closePdfRealityModal() {
+  document.getElementById("pdfRealityModal").style.display = "none";
+}
      
     </script>
   <!-- Reality Check Modal -->
@@ -645,6 +737,25 @@ function closeRealityModal() {
       👉 Best results ke liye <strong>20 KB+</strong> try karein.
     </p>
     <button onclick="closeRealityModal()">Got it 👍</button>
+  </div>
+</div>
+
+  <!-- PDF Reality Check Modal -->
+<div id="pdfRealityModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>⚠️ Reality Check!</h2>
+    <p>
+      <strong>50 KB se kam mein PDF nahi…</strong><br>
+      syllabus hi gayab ho jaata hai 😅
+    </p>
+    <p>
+      Itne chhote size mein text blur<br>
+      aur pages unreadable ho jaate hain.
+    </p>
+    <p class="modal-tip">
+      👉 Best results ke liye <strong>80–100 KB+</strong> try karein.
+    </p>
+    <button onclick="closePdfRealityModal()">Samjha 👍</button>
   </div>
 </div>
   
