@@ -504,9 +504,9 @@ async function start() {
     return;
   }
 
-  if (unit.value === "mb") targetKB *= 1024;
+  if (unit.value === "mb") targetKB *= 1700;
   // ⚠️ Reality Check popup for very small size (IMAGE ONLY)
-if (targetKB <= 10) {
+if (targetKB <= 16) {
   alert(
     "⚠️ Reality Check!\n\n" +
     "10 KB mein image nahi…\n" +
