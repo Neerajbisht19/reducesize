@@ -379,80 +379,9 @@ function showPDF() {
   document.getElementById("mainTitle").innerText =
     "ReduceSize – Compress PDF to Exact KB";
 }
-   async function compressPDF() {
-  const fileInput = document.getElementById("pdfUpload");
-  const sizeInput = document.getElementById("pdfSize");
-  const status = document.getElementById("status");
+   
 
-  if (!fileInput.files.length) {
-    alert("Select a PDF first");
-    return;
-  }
-
-  let userKB = parseInt(sizeInput.value);
-  if (!userKB || userKB < 100) {
-    alert("Minimum PDF size is 100 KB");
-    return;
-  }
-
-  status.innerText = "Converting PDF to image-based…";
-
-  const file = fileInput.files[0];
-  const buffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
-
-  const { jsPDF } = window.jspdf;
-  const scale = 1.2;
-  const quality = 0.55;
-
-  const newPdf = new jsPDF("p", "pt");
-  const canvas = document.getElementById("pdfCanvas");
-  const ctx = canvas.getContext("2d");
-
-  for (let i = 1; i <= pdf.numPages; i++) {
-    status.innerText = `Processing page ${i}/${pdf.numPages}`;
-
-    const page = await pdf.getPage(i);
-    const viewport = page.getViewport({ scale });
-
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-
-    await page.render({ canvasContext: ctx, viewport }).promise;
-
-    const imgData = canvas.toDataURL("image/jpeg", quality);
-
-    if (i > 1) newPdf.addPage();
-    newPdf.addImage(
-      imgData,
-      "JPEG",
-      0,
-      0,
-      newPdf.internal.pageSize.getWidth(),
-      newPdf.internal.pageSize.getHeight()
-    );
-  }
-
-  // ✅ PDF blob AFTER loop
-  const outputBlob = newPdf.output("blob");
-
-  // show download
-  const downloadBtn = document.getElementById("download");
-  downloadBtn.style.display = "block";
-  downloadBtn.innerText = "⬇ Download PDF";
-
-  downloadBtn.onclick = () => {
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(outputBlob);
-    a.download = "compressed.pdf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  };
-
-  status.innerText =
-    `PDF ready ✔ ${Math.round(outputBlob.size / 1024)} KB`;
-     }
+  
 </script>
 
   <canvas id="pdfCanvas" style="display:none;"></canvas>
@@ -556,6 +485,7 @@ function showPDF() {
   </p>
   </footer>
   <script>
+/* ========= IMAGE COMPRESS ========= */
 async function start() {
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
@@ -568,71 +498,73 @@ async function start() {
   }
 
   let targetKB = parseFloat(sizeInput.value);
-  if (!targetKB || targetKB <= 0) {
-    alert("Enter valid size");
-    return;
-  }
+  if (unit.value === "mb") targetKB *= 1024;
 
-  if (unit.value === "mb") {
-    targetKB = targetKB * 1024;
-  }
+  status.innerText = "Processing image...";
 
-  status.innerText = "Processing...";
-
-  const file = fileInput.files[0];
   const img = new Image();
-  img.src = URL.createObjectURL(file);
+  img.src = URL.createObjectURL(fileInput.files[0]);
   await img.decode();
 
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
 
-  let scale = 1;
-  let minQ = 0.05;
-  let maxQ = 0.95;
-  let bestBlob = null;
-
-  // Resize very large images
-  if (img.width > 2000) {
-    scale = 2000 / img.width;
-  }
-
-  canvas.width = Math.round(img.width * scale);
-  canvas.height = Math.round(img.height * scale);
+  let scale = img.width > 2000 ? 2000 / img.width : 1;
+  canvas.width = img.width * scale;
+  canvas.height = img.height * scale;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  // Binary search quality
-  for (let i = 0; i < 20; i++) {
-    const q = (minQ + maxQ) / 2;
+  let q = 0.9, blob;
+  do {
+    blob = await new Promise(r => canvas.toBlob(r, "image/jpeg", q));
+    q -= 0.03;
+  } while (blob.size / 1024 > targetKB && q > 0.05);
 
-    const blob = await new Promise(res =>
-      canvas.toBlob(res, "image/jpeg", q)
-    );
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "compressed.jpg";
+  a.click();
 
-    const sizeKB = blob.size / 1024;
+  status.innerText = "Image done (" + (blob.size/1024).toFixed(1) + " KB)";
+}
 
-    if (sizeKB > targetKB) {
-      maxQ = q;
-    } else {
-      minQ = q;
-      bestBlob = blob;
-    }
-  }
+/* ========= PDF COMPRESS (IMAGE-BASED) ========= */
+async function compressPDF() {
+  const fileInput = document.getElementById("pdfUpload");
+  const sizeInput = document.getElementById("pdfSize");
+  const status = document.getElementById("status");
 
-  if (!bestBlob || bestBlob.size / 1024 > targetKB) {
-    alert("Cannot reach exact size without destroying image");
-    status.innerText = "";
+  if (!fileInput.files.length) {
+    alert("Select PDF first");
     return;
   }
 
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(bestBlob);
-  link.download = "compressed.jpg";
-  link.click();
+  status.innerText = "Processing PDF...";
 
-  status.innerText =
-    "Done: " + (bestBlob.size / 1024).toFixed(2) + " KB";
+  const buffer = await fileInput.files[0].arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+  const doc = new jspdf.jsPDF();
+
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({ scale: 1.2 });
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    await page.render({ canvasContext: ctx, viewport }).promise;
+
+    const img = canvas.toDataURL("image/jpeg", 0.6);
+    if (i > 1) doc.addPage();
+    doc.addImage(img, "JPEG", 0, 0, 210, 297);
+  }
+
+  doc.save("compressed.pdf");
+  status.innerText = "PDF done";
 }
-      </script>
+  </script>
+
 </body>
 </html>
