@@ -392,7 +392,7 @@ button:active{
 
     </div>
     <div id="status"></div>
-    <button id="download" style="display:none;">⬇ Download Image</button>
+  
   </div>
   <canvas id="pdfCanvas" style="display:none;"></canvas>
 
@@ -559,7 +559,7 @@ async function start() {
     return;
   }
 
-  if (unit.value === "mb") targetKB *= 1700;
+  if (unit.value === "mb") targetKB *= 1024;
   // ⚠️ Reality Check popup for very small size (IMAGE ONLY)
 
   
@@ -606,7 +606,13 @@ async function compressImage(file, targetKB, status) {
   }
 
 
-  downloadBlob(best, "compressed.jpg", status);
+  if (!best) {
+  alert("Image cannot be compressed to this size");
+  status.innerText = "";
+  return;
+}
+
+downloadBlob(best, "compressed.jpg", status);
 }
 
 function downloadBlob(blob, name, status) {
