@@ -521,12 +521,12 @@ async function compressImage(file, targetKB, status) {
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
 
-  let scale = Math.min(1, 1400 / img.width);
+  let scale = Math.min(1, 900 / img.width);
   canvas.width = img.width * scale;
   canvas.height = img.height * scale;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  let minQ = 0.02, maxQ = 0.9;
+  let minQ = 0.005, maxQ = 0.9;
   let best = null;
 
   for (let i = 0; i < 25; i++) {
@@ -542,11 +542,6 @@ async function compressImage(file, targetKB, status) {
     else { minQ = q; best = blob; }
   }
 
-  if (!best) {
-    alert("Image too detailed for this size");
-    status.innerText = "";
-    return;
-  }
 
   downloadBlob(best, "compressed.jpg", status);
 }
