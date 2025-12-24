@@ -505,6 +505,19 @@ async function start() {
   }
 
   if (unit.value === "mb") targetKB *= 1024;
+  // ⚠️ Reality Check popup for very small size (IMAGE ONLY)
+if (targetKB <= 10) {
+  alert(
+    "⚠️ Reality Check!\n\n" +
+    "10 KB mein image nahi…\n" +
+    "yaadein compress hoti hain 😅\n\n" +
+    "Is size mein image itni chhoti ho jaayegi\n" +
+    "ki insaan pehchaanna mushkil ho jaayega.\n\n" +
+    "👉 Best results ke liye 20 KB+ try karein."
+  );
+  status.innerText = "";
+  return;
+}
 
   status.innerText = "Processing…";
 
