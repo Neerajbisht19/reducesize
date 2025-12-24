@@ -613,9 +613,10 @@ async function start() {
 
   // ✅ Final fallback (force under target)
   if (!bestBlob) {
-    alert("Image cannot be compressed cleanly to this size");
-    status.innerText = "";
-    return;
+  const blob = await new Promise(res =>
+    canvas.toBlob(res, "image/jpeg", 0.4)
+  );
+  bestBlob = blob;
   }
 
   const link = document.createElement("a");
