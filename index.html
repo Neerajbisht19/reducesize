@@ -42,10 +42,8 @@
 body{
   background: radial-gradient(circle at top,#1a1a2e,#0f0f18);
   min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
   color:#fff;
+  overflow-x:hidden;
 }
 
 /* ===== MAIN WRAPPER ===== */
@@ -55,6 +53,7 @@ body{
   display:flex;
   gap:20px;
   padding:20px;
+  margin: 0 auto;
 }
 
 /* ===== APP CARD ===== */
@@ -216,91 +215,30 @@ button:active{
 #download:hover {
   transform: scale(1.03);
 }
-  .seo-content {
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 20px;
-  color: #cfd3ff;
-  font-size: 15px;
-  line-height: 1.7;
-}
-.seo-content h2 {
-  margin-top: 25px;
-  color: #ffffff;
-    }
-  /* ===== MOBILE FIX FOR SEO CONTENT ===== */
-
-@media (max-width: 768px) {
-
-  body {
-    overflow-x: hidden;
-  }
-
-  .container,
-  .main-container,
-  .wrapper,
-  .content,
-  .layout {
-    display: block !important;
-    width: 100% !important;
-  }
-
-  .seo-content {
-    position: static !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 30px 0 0 0 !important;
-    padding: 20px !important;
-    box-sizing: border-box;
-  }
-
-  .tool-box,
-  .compress-box,
-  .card {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-}
-  /* ===== SEO CONTENT FIX ===== */
-.seo-content {
-  width: 100%;
-  max-width: 1100px;
-  margin: 60px auto 0 auto;
+  
+  /* ===== SEO CONTENT FINAL FIX ===== */
+.seo-content{
+  width:100%;
+  max-width:1100px;
+  margin: 60px auto;
   padding: 24px;
-  box-sizing: border-box;
-
-  /* IMPORTANT */
-  clear: both;
-  display: block;
+  color:#cfd3ff;
+  font-size:15px;
+  line-height:1.7;
+  display:block;
+  clear:both;
 }
 
-/* Mobile fix */
-@media (max-width: 768px) {
-  .seo-content {
-    margin-top: 40px;
-    padding: 18px;
-  }
-}
-  /* ===== FORCE SEO CONTENT BELOW MAIN UI ===== */
-.seo-content {
-  width: 100%;
-  max-width: 1100px;
-  margin: 60px auto 0 auto;
-  padding: 24px;
-  box-sizing: border-box;
-  clear: both;
+.seo-content h2,
+.seo-content h3{
+  color:#ffffff;
+  margin-top:28px;
 }
 
-/* Desktop fix */
-.wrapper + .seo-content {
-  display: block;
-}
-
-/* Mobile fix */
-@media (max-width: 900px) {
-  .seo-content {
-    margin-top: 40px;
-    padding: 18px;
+@media (max-width:900px){
+  .seo-content{
+    margin:40px 0 0 0;
+    padding:18px;
   }
 }
 </style>
