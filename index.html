@@ -352,83 +352,79 @@ button:active{
 
 </div>
 <script>
-async function start() {
-  const status = document.getElementById("status");
-  const downloadBtn = document.getElementById("download");
+async function compressToExactKB(img, file, targetKB, statusCb) {
+  const targetBytes = targetKB * 1024;
 
-  // reset UI
-  status.innerText = "Processing image…";
-  downloadBtn.style.display = "none";
-
-  const fileInput = document.getElementById("upload");
-  const sizeInput = document.getElementById("size");
-  const unit = document.getElementById("unit").value;
-
-  if (!fileInput.files.length) {
-    status.innerText = "";
-    return alert("Image select karo");
+  // 1️⃣ HARD GUARD: already small → return original
+  if (file.size <= targetBytes) {
+    return file; // NEVER re-encode
   }
-  if (!sizeInput.value) {
-    status.innerText = "";
-    return alert("Size daalo");
-  }
-
-  let targetKB = unit === "mb"
-    ? sizeInput.value * 1024
-    : parseInt(sizeInput.value);
-
-  const file = fileInput.files[0];
-  const img = new Image();
-  img.src = URL.createObjectURL(file);
-  await img.decode();
 
   const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
-  let width = img.width;
-  let height = img.height;
-  let quality = 0.85;
-  const MIN_QUALITY = 0.88;
+  let w = img.width;
+  let h = img.height;
 
-  let blob = null;
-  let attempts = 0;
+  // ---------- helper: draw with edge-preserve ----------
+  function drawEdgeSafe(scale = 1) {
+    canvas.width = Math.max(1, Math.floor(w * scale));
+    canvas.height = Math.max(1, Math.floor(h * scale));
 
-  while (attempts < 40) {
-    attempts++;
+    // mild edge-preserving filter (text friendly)
+    ctx.filter = "contrast(1.12) brightness(1.04)";
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    ctx.filter = "none";
+  }
 
-    canvas.width = width;
-    canvas.height = height;
-    ctx.drawImage(img, 0, 0, width, height);
+  // ---------- helper: encode ----------
+  function toBlob(mime, q) {
+    return new Promise(r => canvas.toBlob(r, mime, q));
+  }
 
-    let mime = "image/jpeg";
+  // 2️⃣ MODE SELECTION (like other sites)
+  const TEXT_MODE = targetKB < 25;        // ultra small
+  const SAFE_MODE = targetKB < 50;        // small
+  let mime = TEXT_MODE ? "image/png" : "image/jpeg";
 
-// text-heavy images ke liye PNG pe switch
-if (file.type === "image/png" || img.width < 2000) {
-  mime = "image/png";
-}
+  // 3️⃣ INITIAL DRAW (gentle downscale)
+  let scale = Math.min(1, Math.sqrt(targetBytes / file.size));
+  scale = Math.max(scale, 0.35); // never destroy text
+  drawEdgeSafe(scale);
 
-blob = await new Promise(r =>
-  canvas.toBlob(r, mime, quality)
-);
+  // 4️⃣ BINARY SEARCH SIZE CLAMP
+  let lowQ = TEXT_MODE ? undefined : 0.45; // floor (text-safe)
+  let highQ = TEXT_MODE ? undefined : 0.85;
+  let bestBlob = null;
 
+  for (let i = 0; i < 10; i++) {
+    let q = TEXT_MODE ? undefined : (lowQ + highQ) / 2;
+    const blob = await toBlob(mime, q);
     if (!blob) break;
 
-    let kb = blob.size / 1024;
-    if (kb <= targetKB) break;
-
-    if (quality > MIN_QUALITY) {
-      quality -= 0.02;
+    if (blob.size <= targetBytes) {
+      bestBlob = blob;
+      if (!TEXT_MODE) lowQ = q; // try higher quality
     } else {
-      width *= 0.98;
-      height *= 0.98;
+      if (!TEXT_MODE) highQ = q;
+      // size still big → gentle downscale
+      scale *= 0.94;
+      drawEdgeSafe(scale);
     }
+
+    statusCb && statusCb(`Optimizing… ${Math.round(blob.size/1024)} KB`);
   }
 
-  if (!blob) {
-    status.innerText = "";
-    alert("Compression failed");
-    return;
+  // 5️⃣ FINAL GUARANTEE (never > target)
+  if (bestBlob && bestBlob.size <= targetBytes) {
+    return bestBlob;
   }
+
+  // last-resort clamp (still ≤ target)
+  drawEdgeSafe(scale * 0.9);
+  const finalBlob = await toBlob(mime, TEXT_MODE ? undefined : 0.48);
+  return finalBlob.size <= targetBytes ? finalBlob : file;
+}
 
   // ✅ SUCCESS
   status.innerText = "Compression ready ✔";
