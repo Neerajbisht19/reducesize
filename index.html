@@ -547,90 +547,85 @@ async function start() {
   const status = document.getElementById("status");
 
   if (!fileInput.files.length) {
-    alert("Select image first");
+    alert("Select an image first");
     return;
   }
 
   let targetKB = parseFloat(sizeInput.value);
-  if (!targetKB || targetKB <= 0) {
-    alert("Enter valid size");
+  if (unit.value === "mb") targetKB *= 1024;
+
+  // ✅ Reality check already handled by popup (<15 KB)
+  if (targetKB < 15) {
+    document.getElementById("realityModal").style.display = "flex";
     return;
   }
-
-  if (unit.value === "mb") targetKB *= 1024;
-  // ⚠️ Reality Check popup for very small size (IMAGE ONLY)
-
-  
-if (targetKB <= 15) {
-  openRealityModal();
-  status.innerText = "";
-  return;
-}
 
   status.innerText = "Processing…";
 
   const file = fileInput.files[0];
-  await compressImage(file, targetKB, status);
-}
-
-/* ========= IMAGE ========= */
-async function compressImage(file, targetKB, status) {
   const img = new Image();
   img.src = URL.createObjectURL(file);
   await img.decode();
 
-  let canvas = document.createElement("canvas");
-  let ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
-  let scale = Math.min(1, 900 / img.width);
-  canvas.width = img.width * scale;
-  canvas.height = img.height * scale;
+  /* ---------------- SMART RESIZE ---------------- */
+  let maxWidth;
+
+  if (targetKB <= 30) maxWidth = 600;
+  else if (targetKB <= 60) maxWidth = 900;
+  else if (targetKB <= 100) maxWidth = 1200;
+  else maxWidth = 1600;
+
+  let scale = Math.min(1, maxWidth / img.width);
+  canvas.width = Math.round(img.width * scale);
+  canvas.height = Math.round(img.height * scale);
+
+  // 🔹 smooth draw (important)
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  let minQ = 0.005, maxQ = 0.9;
-  let best = null;
+  /* ---------------- SMART JPEG SEARCH ---------------- */
+  let minQ = 0.55;
+  let maxQ = 0.95;
+  let bestBlob = null;
 
-  for (let i = 0; i < 25; i++) {
-    let q = (minQ + maxQ) / 2;
-    let blob = await new Promise(r =>
-      canvas.toBlob(r, "image/jpeg", q)
+  for (let i = 0; i < 18; i++) {
+    const q = (minQ + maxQ) / 2;
+
+    const blob = await new Promise(res =>
+      canvas.toBlob(res, "image/jpeg", q)
     );
 
     if (!blob) break;
 
-    let sizeKB = blob.size / 1024;
-    if (sizeKB > targetKB) maxQ = q;
-    else { minQ = q; best = blob; }
+    const sizeKB = blob.size / 1024;
+
+    if (sizeKB > targetKB) {
+      maxQ = q;
+    } else {
+      minQ = q;
+      bestBlob = blob;
+    }
   }
 
+  // ✅ Final fallback (force under target)
+  if (!bestBlob) {
+    alert("Image cannot be compressed cleanly to this size");
+    status.innerText = "";
+    return;
+  }
 
-  if (!best) {
-  alert("Image cannot be compressed to this size");
-  status.innerText = "";
-  return;
-}
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(bestBlob);
+  link.download = "compressed.jpg";
+  link.click();
 
-downloadBlob(best, "compressed.jpg", status);
+  status.innerText = `Done: ${(bestBlob.size / 1024).toFixed(2)} KB`;
 }
-
-function downloadBlob(blob, name, status) {
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = name;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  status.innerText =
-    "Done: " + (blob.size / 1024).toFixed(2) + " KB";
-}
-function openRealityModal() {
-  document.getElementById("realityModal").style.display = "flex";
-}
-
-function closeRealityModal() {
-  document.getElementById("realityModal").style.display = "none";
-}
+  
 /* ======== PDF COMPRESS (BASIC & WORKING) ========= */
 
 async function compressPDF() {
