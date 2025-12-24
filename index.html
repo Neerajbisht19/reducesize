@@ -261,6 +261,48 @@ button:active{
     max-width: 100% !important;
   }
 }
+  /* ===== SEO CONTENT FIX ===== */
+.seo-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 60px auto 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+
+  /* IMPORTANT */
+  clear: both;
+  display: block;
+}
+
+/* Mobile fix */
+@media (max-width: 768px) {
+  .seo-content {
+    margin-top: 40px;
+    padding: 18px;
+  }
+}
+  /* ===== FORCE SEO CONTENT BELOW MAIN UI ===== */
+.seo-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 60px auto 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+  clear: both;
+}
+
+/* Desktop fix */
+.wrapper + .seo-content {
+  display: block;
+}
+
+/* Mobile fix */
+@media (max-width: 900px) {
+  .seo-content {
+    margin-top: 40px;
+    padding: 18px;
+  }
+}
 </style>
   <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
