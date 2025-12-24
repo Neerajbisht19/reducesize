@@ -630,6 +630,18 @@ function closeRealityModal() {
 /* ========= PDF COMPRESS (BASIC & WORKING) ========= */
 
 async function compressPDF() {
+  const sizeInput = document.getElementById("pdfSize");
+let targetKB = parseInt(sizeInput.value);
+
+// 🔒 PDF Reality Check (50 KB rule)
+if (!targetKB || targetKB < 50) {
+  showRealityModal(
+    "📄 Reality Check!",
+    "50 KB se kam mein PDF nahi…<br>sirf bhagwan bharose text hota hai 😅<br><br>Is size mein letters toot jaate hain,<br>signature blur ho jaata hai.",
+    "👉 Best results ke liye <strong>50 KB+</strong> try karein"
+  );
+  return; // ❌ compression yahin stop
+}
   const pdfInput = document.getElementById("pdfUpload");
   const sizeInput = document.getElementById("pdfSize");
   const status = document.getElementById("status");
