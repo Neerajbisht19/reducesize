@@ -438,8 +438,6 @@ function showPDF() {
 
   
 </script>
-
-  <canvas id="pdfCanvas" style="display:none;"></canvas>
   
 <section class="seo-content">
   <h2>Compress Image to Exact KB or MB</h2>
@@ -693,8 +691,8 @@ async function compressPDF() {
   const outputBlob = newPdf.output("blob");
   downloadBlob(outputBlob, "compressed.pdf", status);
 }
+   </script>
   
-
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
   <div class="modal-box">
@@ -713,6 +711,5 @@ async function compressPDF() {
     <button onclick="closeRealityModal()">Got it 👍</button>
   </div>
 </div>
-  
 </body>
 </html>
