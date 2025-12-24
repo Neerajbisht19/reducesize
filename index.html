@@ -627,21 +627,9 @@ function openRealityModal() {
 function closeRealityModal() {
   document.getElementById("realityModal").style.display = "none";
 }
-/* ========= PDF COMPRESS (BASIC & WORKING) ========= */
+/* ======== PDF COMPRESS (BASIC & WORKING) ========= */
 
 async function compressPDF() {
-  const sizeInput = document.getElementById("pdfSize");
-let targetKB = parseInt(sizeInput.value);
-
-// 🔒 PDF Reality Check (50 KB rule)
-if (!targetKB || targetKB < 50) {
-  showRealityModal(
-    "📄 Reality Check!",
-    "50 KB se kam mein PDF nahi…<br>sirf bhagwan bharose text hota hai 😅<br><br>Is size mein letters toot jaate hain,<br>signature blur ho jaata hai.",
-    "👉 Best results ke liye <strong>50 KB+</strong> try karein"
-  );
-  return; // ❌ compression yahin stop
-}
   const pdfInput = document.getElementById("pdfUpload");
   const sizeInput = document.getElementById("pdfSize");
   const status = document.getElementById("status");
@@ -651,14 +639,14 @@ if (!targetKB || targetKB < 50) {
     return;
   }
 
-  let targetKB = parseFloat(sizeInput.value);
+  let targetKB = parseInt(sizeInput.value);
   if (!targetKB || targetKB <= 0) {
     alert("Enter valid size");
     return;
   }
 
-  // Same reality check (for PDF also)
-  if (targetKB <= 15) {
+  // 🔒 PDF Reality Check (50 KB rule)
+  if (targetKB < 50) {
     openRealityModal();
     status.innerText = "";
     return;
@@ -668,20 +656,17 @@ if (!targetKB || targetKB < 50) {
 
   const file = pdfInput.files[0];
 
-  // ❗ Browser-side PDF exact compression LIMITATION
-  // इसलिए realistic behaviour:
+  // If already under target, direct download
   if (file.size / 1024 <= targetKB) {
     downloadBlob(file, "compressed.pdf", status);
     return;
   }
 
-  // Minimal recompress using jsPDF (scanned PDFs best)
-  const pdfData = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+  const buffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
 
   const { jsPDF } = window.jspdf;
   const newPdf = new jsPDF();
-
   const canvas = document.getElementById("pdfCanvas");
   const ctx = canvas.getContext("2d");
 
@@ -702,8 +687,8 @@ if (!targetKB || targetKB < 50) {
   const outputBlob = newPdf.output("blob");
   downloadBlob(outputBlob, "compressed.pdf", status);
 }
-     
-    </script>
+  
+
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
   <div class="modal-box">
