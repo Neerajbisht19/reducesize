@@ -362,21 +362,23 @@ button:active{
   margin-bottom:6px;
 ">
   <img src="logo.svg"
-       alt="ReduceSize Logo"
-       style="
-        width:130px;
-        filter: drop-shadow(0 6px 18px rgba(120,90,255,.35));
-       ">
+     alt="ReduceSize"
+     style="width:130px; margin-bottom:6px;">
+  
     </div>
     
     <div style="display:flex; gap:10px; margin-bottom:18px;">
   <button id="imgTab" onclick="showImage()" class="tab-btn active">🖼 Image</button>
   <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
     </div>
-    <h1 id="mainTitle">ReduceSize – Compress Image to Exact KB or MB</h1>
+    <h1 style="font-size:20px; margin-top:4px;">
+  Compress Image to Exact KB or MB
+</h1>
+<p style="color:#aaa; margin-top:4px;">
+  Fast & secure image/PDF compression — works in your browser
+</p>
 
-    <p>Compress image to exact KB or MB without quality loss</p>
-
+    
     <div id="imageBox">
 
   <input type="file" id="upload" accept="image/*">
