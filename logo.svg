@@ -1,21 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64">
-  <rect width="240" height="64" rx="16"
-        fill="rgba(20,20,35,0.9)"
-        stroke="rgba(140,120,255,0.35)"
-        stroke-width="1.5"/>
-
-  <text x="22" y="40"
-        font-size="26"
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="60">
+  <text x="10" y="40"
+        font-size="28"
         font-weight="700"
         fill="#ffffff">
     Reduce<tspan fill="#8f7bff">Size</tspan>
   </text>
-
-  <filter id="glow">
-    <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-    <feMerge>
-      <feMergeNode in="coloredBlur"/>
-      <feMergeNode in="SourceGraphic"/>
-    </feMerge>
-  </filter>
 </svg>
