@@ -599,10 +599,14 @@ function downloadBlob(blob, name, status) {
   a.click();
   document.body.removeChild(a);
 
-  // 🔽 NEW — hide button after download
+  // hide download button
   this.style.display = "none";
 
-  // optional — free memory
+  // 🔽 also hide "Ready — Click Download Button"
+  const status = document.getElementById("status");
+  status.innerText = "";
+  status.style.display = "none";
+
   URL.revokeObjectURL(url);
 };
 
