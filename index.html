@@ -598,6 +598,12 @@ function downloadBlob(blob, name, status) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+
+  // 🔽 NEW — hide button after download
+  this.style.display = "none";
+
+  // optional — free memory
+  URL.revokeObjectURL(url);
 };
 
      
