@@ -573,16 +573,34 @@ async function compressImage(file, targetKB, status) {
 }
 
 function downloadBlob(blob, name, status) {
+
+  const url = URL.createObjectURL(blob);
+
+  const btn = document.getElementById("download");
+  btn.style.display = "block";   // show button
+  btn.innerText = "⬇ Download (" + (blob.size / 1024).toFixed(2) + " KB)";
+
+  // store values for button click
+  btn.dataset.url = url;
+  btn.dataset.name = name;
+
+  status.innerText = "Ready — Click Download Button 👇";
+}
+
+     document.getElementById("download").onclick = function () {
+
+  const url = this.dataset.url;
+  const name = this.dataset.name || "compressed.jpg";
+
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
+  a.href = url;
   a.download = name;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+};
 
-  status.innerText =
-    "Done: " + (blob.size / 1024).toFixed(2) + " KB";
-}
+     
 function openRealityModal() {
   document.getElementById("realityModal").style.display = "flex";
 }
