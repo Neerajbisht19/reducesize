@@ -610,25 +610,41 @@ async function compressImage(file, targetKB) {
   canvas.height = img.height * scale;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  let minQ = 0.005, maxQ = 0.9;
-  let best = null;
+  let minQ = 0.01, maxQ = 0.95;
+let best = null;
 
-  for (let i = 0; i < 25; i++) {
-    let q = (minQ + maxQ) / 2;
-    let blob = await new Promise(r =>
-      canvas.toBlob(r, "image/jpeg", q)
-    );
+for (let i = 0; i < 35; i++) {
 
-    if (!blob) break;
+  let q = (minQ + maxQ) / 2;
 
-    let sizeKB = blob.size / 1024;
-    if (sizeKB > targetKB) maxQ = q;
-    else { minQ = q; best = blob; }
+  let blob = await new Promise(r =>
+    canvas.toBlob(r, "image/jpeg", q)
+  );
+
+  if (!blob) continue;
+
+  let sizeKB = blob.size / 1024;
+
+  if (sizeKB > targetKB) {
+    maxQ = q;
+  } else {
+    minQ = q;
+    best = blob;
+  }
+}
+
+// ✅ fallback (IMPORTANT)
+if (!best) {
+  best = await new Promise(r =>
+    canvas.toBlob(r, "image/jpeg", 0.8)
+  );
+}
+  if (!blob) {
+  console.log("Compression failed");
+  continue;
   }
 
-
-  return best;
-}
+return best;
      
 
 function downloadBlob(blob, name, status) {
