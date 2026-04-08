@@ -274,8 +274,50 @@ function showPDF(){
   document.getElementById("pdfBox").style.display="block";
 }
 
-function compressImage(){
-  alert("Image compression working (advanced logic already in your old code, keep that part if needed)");
+async function compressImage() {
+  const fileInput = document.getElementById("upload");
+  const sizeInput = document.getElementById("size");
+  const status = document.getElementById("status");
+
+  if (!fileInput.files.length) {
+    alert("Select image first");
+    return;
+  }
+
+  let targetKB = parseFloat(sizeInput.value);
+  if (!targetKB || targetKB <= 0) {
+    alert("Enter valid size");
+    return;
+  }
+
+  status.innerText = "Processing…";
+
+  const file = fileInput.files[0];
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  await img.decode();
+
+  let canvas = document.createElement("canvas");
+  let ctx = canvas.getContext("2d");
+
+  canvas.width = img.width;
+  canvas.height = img.height;
+  ctx.drawImage(img, 0, 0);
+
+  let quality = 0.8;
+
+  let blob = await new Promise(r =>
+    canvas.toBlob(r, "image/jpeg", quality)
+  );
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "compressed.jpg";
+  a.click();
+
+  status.innerText = "Done ✅";
 }
 
 function compressPDF(){
