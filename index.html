@@ -639,13 +639,10 @@ if (!best) {
     canvas.toBlob(r, "image/jpeg", 0.8)
   );
 }
-  if (!blob) {
-  console.log("Compression failed");
-  continue;
-  }
+  
 
 return best;
-     
+}  
 
 function downloadBlob(blob, name, status) {
 
