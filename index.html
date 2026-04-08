@@ -344,6 +344,23 @@ button:active{
     padding: 14px;
   }
 }
+  .result-item{
+  margin-top:15px;
+  padding:10px;
+  border:1px solid #2d2d4d;
+  border-radius:10px;
+}
+
+.result-item img{
+  width:100%;
+  max-width:200px;
+  display:block;
+  margin-bottom:10px;
+}
+
+.result-item button{
+  margin-top:5px;
+}
 </style>
   <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -392,7 +409,7 @@ button:active{
     
     <div id="imageBox">
 
-  <input type="file" id="upload" accept="image/*">
+  <input type="file" id="upload" accept="image/*" multiple>
 
   <div class="size-row">
     <input type="number" id="size" placeholder="Target size">
@@ -422,6 +439,7 @@ button:active{
     </div>
     <div id="status"></div>
     <button id="download" style="display:none;">⬇ Download Image</button>
+    <div id="results"></div>
   </div>
   
 
@@ -539,10 +557,14 @@ function showPDF() {
 /* ========= IMAGE + PDF COMPRESS (FINAL WORKING) ========= */
 
 async function start() {
+
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
   const unit = document.getElementById("unit");
   const status = document.getElementById("status");
+  const results = document.getElementById("results");
+
+  results.innerHTML = "";
 
   if (!fileInput.files.length) {
     alert("Select image first");
@@ -555,24 +577,27 @@ async function start() {
     return;
   }
 
-  if (unit.value === "mb") targetKB *= 1700;
-  // ⚠️ Reality Check popup for very small size (IMAGE ONLY)
+  if (unit.value === "mb") targetKB *= 1024;
 
-  
-if (targetKB <= 15) {
-  openRealityModal();
-  status.innerText = "";
-  return;
-}
+  let safeTargetKB = targetKB - 1;
+  if (safeTargetKB < 5) safeTargetKB = targetKB * 0.9;
 
-  status.innerText = "Processing…";
+  const files = fileInput.files;
 
-  const file = fileInput.files[0];
-  await compressImage(file, targetKB, status);
+  for (let i = 0; i < files.length; i++) {
+
+    status.innerText = `Processing ${i+1} / ${files.length}...`;
+
+    const blob = await compressImage(files[i], safeTargetKB);
+
+    createResultUI(blob, i);
+  }
+
+  status.innerText = "Done ✅";
 }
 
 /* ========= IMAGE ========= */
-async function compressImage(file, targetKB, status) {
+async function compressImage(file, targetKB) {
   const img = new Image();
   img.src = URL.createObjectURL(file);
   await img.decode();
@@ -602,8 +627,9 @@ async function compressImage(file, targetKB, status) {
   }
 
 
-  downloadBlob(best, "compressed.jpg", status);
+  return best;
 }
+     
 
 function downloadBlob(blob, name, status) {
 
@@ -743,7 +769,37 @@ async function compressPDF() {
 function closePdfRealityModal() {
   document.getElementById("pdfRealityModal").style.display = "none";
 }
-     
+    function createResultUI(blob, index) {
+
+  const results = document.getElementById("results");
+
+  const url = URL.createObjectURL(blob);
+
+  const div = document.createElement("div");
+  div.className = "result-item";
+
+  const img = document.createElement("img");
+  img.src = url;
+
+  const size = document.createElement("p");
+  size.innerText = (blob.size / 1024).toFixed(2) + " KB";
+
+  const btn = document.createElement("button");
+  btn.innerText = "Download";
+
+  btn.onclick = () => {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `compressed_${index+1}.jpg`;
+    a.click();
+  };
+
+  div.appendChild(img);
+  div.appendChild(size);
+  div.appendChild(btn);
+
+  results.appendChild(div);
+    } 
     </script>
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
