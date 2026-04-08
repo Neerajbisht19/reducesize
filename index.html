@@ -361,6 +361,19 @@ button:active{
 .result-item button{
   margin-top:5px;
 }
+  #preview{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+#preview img{
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border-radius:6px;
+}
 </style>
   <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -410,7 +423,7 @@ button:active{
     <div id="imageBox">
 
   <input type="file" id="upload" accept="image/*" multiple>
-
+<div id="preview"></div>
   <div class="size-row">
     <input type="number" id="size" placeholder="Target size">
     <select id="unit">
@@ -605,7 +618,8 @@ async function compressImage(file, targetKB) {
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
 
-  let scale = Math.min(1, 900 / img.width);
+  canvas.width = img.width;
+canvas.height = img.height;
   canvas.width = img.width * scale;
   canvas.height = img.height * scale;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
