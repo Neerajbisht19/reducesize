@@ -620,8 +620,7 @@ async function compressImage(file, targetKB) {
 
   canvas.width = img.width;
 canvas.height = img.height;
-  canvas.width = img.width * scale;
-  canvas.height = img.height * scale;
+  
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
   let minQ = 0.01, maxQ = 0.95;
@@ -827,6 +826,19 @@ function closePdfRealityModal() {
 
   results.appendChild(div);
     } 
+     document.getElementById("upload").addEventListener("change", function(){
+
+  const preview = document.getElementById("preview");
+  preview.innerHTML = "";
+
+  const files = this.files;
+
+  for(let i=0; i<files.length; i++){
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(files[i]);
+    preview.appendChild(img);
+  }
+});
     </script>
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
