@@ -1059,43 +1059,47 @@ function closePdfRealityModal() {
 
   results.appendChild(div);
     } 
-     document.getElementById("upload").addEventListener("change", function(){
+     window.addEventListener("DOMContentLoaded", () => {
 
-  const preview = document.getElementById("preview");
-  preview.innerHTML = "";
+  document.getElementById("upload").addEventListener("change", function(){
 
-  const files = Array.from(this.files);
+    const preview = document.getElementById("preview");
+    preview.innerHTML = "";
 
-  files.forEach((file, index) => {
+    const files = Array.from(this.files);
 
-    const reader = new FileReader();
+    files.forEach((file) => {
 
-    reader.onload = function(e){
+      const reader = new FileReader();
 
-      const div = document.createElement("div");
-      div.className = "preview-item";
+      reader.onload = function(e){
 
-      const img = document.createElement("img");
-      img.src = e.target.result;
+        const div = document.createElement("div");
+        div.className = "preview-item";
 
-      img.onclick = () => openPreview(e.target.result);
+        const img = document.createElement("img");
+        img.src = e.target.result;
 
-      const btn = document.createElement("button");
-      btn.innerText = "×";
-      btn.className = "remove-btn";
+        img.onclick = () => openPreview(e.target.result);
 
-      btn.onclick = (ev) => {
-        ev.stopPropagation();
-        div.remove();
+        const btn = document.createElement("button");
+        btn.innerText = "×";
+        btn.className = "remove-btn";
+
+        btn.onclick = (ev) => {
+          ev.stopPropagation();
+          div.remove();
+        };
+
+        div.appendChild(img);
+        div.appendChild(btn);
+
+        preview.appendChild(div);
       };
 
-      div.appendChild(img);
-      div.appendChild(btn);
+      reader.readAsDataURL(file);
+    });
 
-      preview.appendChild(div);
-    };
-
-    reader.readAsDataURL(file);
   });
 
 });
