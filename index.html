@@ -345,22 +345,41 @@ button:active{
     padding: 14px;
   }
 }
-  .result-item{
+  
+
+#results{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
   margin-top:15px;
-  padding:10px;
-  border:1px solid #2d2d4d;
+}
+
+.result-item{
+  width:30%;
+  min-width:120px;
+  text-align:center;
+  padding:8px;
+  background:#1e1e32;
   border-radius:10px;
 }
 
 .result-item img{
   width:100%;
-  max-width:200px;
-  display:block;
-  margin-bottom:10px;
+  height:120px;
+  object-fit:cover;
+  border-radius:8px;
 }
 
 .result-item button{
-  margin-top:5px;
+  width:100%;
+  padding:8px;
+  font-size:14px;
+  margin-top:6px;
+}
+
+.result-item p{
+  font-size:13px;
+  margin-top:4px;
 }
   #preview{
   display:flex;
