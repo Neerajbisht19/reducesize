@@ -1,282 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Compress Image to Exact KB Online Free | ReduceSize</title>
-
-<meta name="description" content="Compress images and PDFs to exact KB or MB online. Perfect for government forms, exams and job applications. No upload required, 100% secure.">
-<meta name="keywords" content="compress image 100kb, reduce photo size online, pdf size reducer, image compressor without losing quality">
+  
+<title>ReduceSize – Compress Image & PDF to Exact KB</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+<meta name="google-site-verification" content="JpIJIoFHSSNh8c-8tV__FrIcY9rlahFOKNczqjWi9bY" />
+<!-- SEO -->
+<meta name="description" content="Compress images and PDFs to exact KB or MB for online forms. Free, secure, and works directly in your browser without uploading files.">
+<meta name="keywords" content="image size reducer, compress image kb mb, photo size reduce online">
 <meta name="author" content="ReduceSize">
 
-<link rel="icon" href="/favicon.png">
-
-<!-- Google Verification -->
-<meta name="google-site-verification" content="JpIJIoFHSSNh8c-8tV__FrIcY9rlahFOKNczqjWi9bY" />
-
 <style>
+/* ===== TAB BUTTONS ===== */
+.tab-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2a2a4a;
+  color: #aaa;
+  transition: 0.25s;
+}
 
-/* ===== RESET ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+.tab-btn.active {
+  background: linear-gradient(135deg,#6a5cff,#8f7bff);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(106,92,255,0.4);
+}
+  /* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
 /* ===== BODY ===== */
 body{
   background: radial-gradient(circle at top,#1a1a2e,#0f0f18);
+  min-height:100vh;
   color:#fff;
+  overflow-x:hidden;
+}
+
+/* ===== MAIN WRAPPER ===== */
+.wrapper{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  gap:20px;
+  padding:20px;
+  margin: 0 auto;
+}
+
+/* ===== APP CARD ===== */
+.app{
+  flex:1;
+  background: #141423;
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 
 /* ===== HEADER ===== */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 25px;
-  background:#141423;
-  border-bottom:1px solid rgba(255,255,255,0.05);
+.app h1{
+  font-size:26px;
+  margin-bottom:6px;
 }
-
-.logo{
-  font-size:20px;
-  font-weight:700;
-}
-
-nav a{
+.app p{
   color:#aaa;
-  text-decoration:none;
-  margin-left:18px;
   font-size:14px;
+  margin-bottom:20px;
 }
 
-nav a:hover{color:#fff}
-
-/* ===== HERO ===== */
-.hero{
-  text-align:center;
-  padding:50px 20px 20px;
-}
-
-.hero h1{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.hero p{
-  color:#aaa;
-  max-width:600px;
-  margin:auto;
-}
-
-/* ===== WRAPPER ===== */
-.wrapper{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-/* ===== TOOL BOX ===== */
-.tool{
-  background:#141423;
-  padding:25px;
-  border-radius:18px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.4);
-}
-
-/* ===== TABS ===== */
-.tabs{
-  display:flex;
-  gap:10px;
-  margin-bottom:15px;
-}
-
-.tab{
-  flex:1;
+/* ===== INPUTS ===== */
+input[type="file"]{
+  width:100%;
+  background:#1e1e32;
+  border:1px solid #2d2d4d;
   padding:12px;
   border-radius:10px;
-  background:#2a2a4a;
-  border:none;
-  color:#aaa;
-  cursor:pointer;
-}
-
-.tab.active{
-  background:#6a5cff;
   color:#fff;
 }
 
-/* ===== INPUT ===== */
-input, select{
-  width:100%;
-  margin-top:10px;
+.size-row{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+.size-row input,
+.size-row select{
+  flex:1;
   padding:12px;
   border-radius:10px;
   border:1px solid #2d2d4d;
   background:#1e1e32;
   color:#fff;
+  font-size:16px;
 }
 
 /* ===== BUTTON ===== */
 button{
+  margin-top:18px;
   width:100%;
-  margin-top:15px;
   padding:14px;
+  border-radius:14px;
   border:none;
-  border-radius:12px;
-  background:linear-gradient(135deg,#6a5cff,#8f7bff);
-  color:#fff;
+  font-size:16px;
   font-weight:600;
   cursor:pointer;
+  background: linear-gradient(135deg,#6a5cff,#8f7bff);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(106,92,255,0.4);
+  transition:0.25s;
 }
 
-button:hover{opacity:0.9}
+button:active{
+  transform:scale(0.97);
+  background: linear-gradient(135deg,#8f7bff,#6a5cff);
+}
 
 /* ===== STATUS ===== */
 #status{
-  margin-top:10px;
-  color:#aaa;
+  margin-top:12px;
+  font-size:14px;
+  color:#9fa3ff;
 }
 
-/* ===== BLOG ===== */
-.blog{
-  margin-top:50px;
-}
-
-.blog h2{
-  margin-bottom:15px;
-}
-
-.blog a{
-  display:block;
-  margin-bottom:10px;
-  color:#8f7bff;
-  text-decoration:none;
-}
-
-/* ===== SEO ===== */
-.seo{
-  margin-top:40px;
-  color:#ccc;
-  line-height:1.7;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  margin-top:60px;
-  padding:25px;
+/* ===== DOWNLOAD ===== */
+#download{
+  display:none;
+  margin-top:14px;
   text-align:center;
+  font-weight:600;
+  color:#6a5cff;
+  cursor:pointer;
+}
+
+/* ===== AD SIDEBAR ===== */
+.ad-box{
+  width:260px;
   background:#141423;
+  border-radius:18px;
+  padding:16px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 
-footer a{
+.ad-box p{
+  font-size:13px;
   color:#aaa;
-  margin:0 8px;
+  margin-bottom:8px;
 }
 
+.ad-placeholder{
+  height:250px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#23234a,#2f2f5f);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#888;
+  font-size:14px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .wrapper{
+    flex-direction:column;
+    align-items:center;
+  }
+  .ad-box{
+    width:100%;
+  }
+}
+  
+  /* ===== PREMIUM DOWNLOAD BUTTON ===== */
+#download {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 0 0 rgba(34,197,94,0.0);
+  transform: scale(0.9);
+  opacity: 0;
+  animation: downloadPop 0.5s ease forwards;
+}
+
+/* Pop + glow animation */
+@keyframes downloadPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    box-shadow: 0 0 0 rgba(34,197,94,0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(34,197,94,0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgba(34,197,94,0.45);
+  }
+}
+
+/* Hover polish */
+#download:hover {
+  transform: scale(1.03);
+}
+  
+  /* ===== SEO CONTENT FINAL FIX ===== */
+.seo-content{
+  width:100%;
+  max-width:1100px;
+  margin: 60px auto;
+  padding: 24px;
+  color:#cfd3ff;
+  font-size:15px;
+  line-height:1.7;
+  display:block;
+  clear:both;
+}
+
+.seo-content h2,
+.seo-content h3{
+  color:#ffffff;
+  margin-top:28px;
+}
+
+@media (max-width:900px){
+  .seo-content{
+    margin:40px 0 0 0;
+    padding:18px;
+  }
+}
+.legal-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  color: #ddd;
+  line-height: 1.7;
+}
+
+.legal-page h2 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+  .site-footer {
+  width: 100%;
+  margin-top: 60px;
+  padding: 25px 15px;
+  text-align: center;
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #aaa;
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #8b7bff;
+}
+
+.footer-text {
+  color: #777;
+  font-size: 13px;
+}
+  /* Reality Check Modal Style */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: linear-gradient(145deg, #1c1f3a, #14162b);
+  color: #eaeaff;
+  max-width: 320px;
+  width: 90%;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(120,90,255,0.35);
+  text-align: center;
+  animation: pop 0.25s ease;
+}
+
+.modal-box h2 {
+  margin-top: 0;
+  color: #ffcc70;
+}
+
+.modal-box p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modal-tip {
+  color: #b8b5ff;
+}
+
+.modal-box button {
+  margin-top: 14px;
+  background: linear-gradient(135deg, #7b6cff, #5a4bff);
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.modal-box button:hover {
+  opacity: 0.9;
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+  /* ===== MOBILE UX FIX (IMPORTANT) ===== */
+@media (max-width: 768px) {
+
+  /* Wrapper ko vertical kar do */
+  .wrapper {
+    flex-direction: column;
+  }
+
+  /* Intro content chhota & clean */
+  .intro-content {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .intro-content h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .intro-content p {
+    font-size: 15px;
+  }
+
+  /* Button full width & touch-friendly */
+  button {
+    font-size: 16px;
+    padding: 14px;
+  }
+}
 </style>
-
-<!-- PDF + JS -->
+  <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">ReduceSize</div>
-  <nav>
-    <a href="/">Home</a>
-    <a href="#blog">Blog</a>
-    <a href="/contact-us.html">Contact</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>Compress Image & PDF to Exact KB Online</h1>
-  <p>Free tool for students, job forms & professionals. No upload, 100% secure.</p>
-</section>
-
 <div class="wrapper">
 
-<div class="tool">
+<section class="intro-content">
+  <h1>Compress Image & PDF to Exact KB Online</h1>
 
-<div class="tabs">
-  <button class="tab active" onclick="showImage()">Image</button>
-  <button class="tab" onclick="showPDF()">PDF</button>
-</div>
-
-<div id="imageBox">
-<input type="file" id="upload">
-<input type="number" id="size" placeholder="Enter size (KB)">
-<button onclick="compressImage()">Compress Image</button>
-</div>
-
-<div id="pdfBox" style="display:none;">
-<input type="file" id="pdfUpload">
-<input type="number" id="pdfSize" placeholder="Enter size (KB)">
-<button onclick="compressPDF()">Compress PDF</button>
-</div>
-
-<p id="status"></p>
-
-</div>
-
-<!-- BLOG -->
-<div class="blog" id="blog">
-<h2>Latest Guides</h2>
-
-<a href="/blog/how-to-compress-image-100kb.html">Compress image to 100KB</a>
-<a href="/blog/reduce-photo-size-for-form.html">Reduce photo size for govt forms</a>
-<a href="/blog/pdf-size-reduce.html">PDF size reduce guide</a>
-
-</div>
-
-<!-- SEO CONTENT -->
-<div class="seo">
-
-<h2>Compress Image to Exact KB Online</h2>
-<p>
-ReduceSize is a free tool to compress images and PDFs to exact KB or MB size.
-Perfect for government exams, job applications, and online forms.
+  <p>
+    ReduceSize.online helps you compress images and PDFs to an exact KB or MB size
+    for online forms, exams, and job applications — directly in your browser.
+  </p>
+</section>
+  <!-- MAIN APP -->
+  <div class="app">
+    <div style="
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  margin-bottom:6px;
+">
+  <img src="logo.svg"
+     alt="ReduceSize"
+     style="width:130px; margin-bottom:6px;">
+  
+    </div>
+    
+    <div style="display:flex; gap:10px; margin-bottom:18px;">
+  <button id="imgTab" onclick="showImage()" class="tab-btn active">🖼 Image</button>
+  <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
+    </div>
+    <h2 id="mainTitle" style="font-size:20px; margin-top:4px;">
+  Compress Image to Exact KB or MB
+</h2>
+<p style="color:#aaa; margin-top:4px;">
+   A simple tool made for students & professionals who need exact file size - no signup, no upload, no data storage.
 </p>
 
-<h3>Why use this tool?</h3>
-<ul>
-<li>No upload required</li>
-<li>100% secure</li>
-<li>Exact KB compression</li>
-</ul>
+    
+    <div id="imageBox">
 
-</div>
+  <input type="file" id="upload" accept="image/*">
 
-</div>
+  <div class="size-row">
+    <input type="number" id="size" placeholder="Target size">
+    <select id="unit">
+      <option value="kb">KB</option>
+      <option value="mb">MB</option>
+    </select>
+  </div>
 
-<footer>
+  <button onclick="start()">Compress & Download</button>
 
-<p>© 2026 ReduceSize.online</p>
+    </div>
+    <div id="pdfBox" style="display:none;">
 
-<a href="/privacy-policy.html">Privacy</a>
-<a href="/terms-conditions.html">Terms</a>
-<a href="/contact-us.html">Contact</a>
+  <input type="file" id="pdfUpload" accept="application/pdf">
 
-</footer>
+  <div class="size-row">
+    <input type="number" id="pdfSize" placeholder="Target size (KB)">
+  </div>
 
+  <button onclick="compressPDF()">Compress PDF</button>
+
+  <div style="margin-top:10px; font-size:13px; color:#aaa; text-align:center;">
+    📄 Best for scanned PDFs (image-based)
+  </div>
+
+    </div>
+    <div id="status"></div>
+    <button id="download" style="display:none;">⬇ Download Image</button>
+  </div>
+  <canvas id="pdfCanvas" style="display:none;"></canvas>
+
+
+  
 <script>
 
-function showImage(){
-  document.getElementById("imageBox").style.display="block";
-  document.getElementById("pdfBox").style.display="none";
+
+function showImage() {
+  document.title = "ReduceSize – Compress Image to Exact KB or MB";
+
+  document.getElementById("imageBox").style.display = "block";
+  document.getElementById("pdfBox").style.display = "none";
+
+  document.getElementById("imgTab").classList.add("active");
+  document.getElementById("pdfTab").classList.remove("active");
+
+  document.getElementById("mainTitle").innerText =
+    "ReduceSize – Compress Image to Exact KB or MB";
 }
 
-function showPDF(){
-  document.getElementById("imageBox").style.display="none";
-  document.getElementById("pdfBox").style.display="block";
-}
+function showPDF() {
+  document.title = "ReduceSize – Compress PDF to Exact KB";
 
-async function compressImage() {
+  document.getElementById("imageBox").style.display = "none";
+  document.getElementById("pdfBox").style.display = "block";
+
+  document.getElementById("pdfTab").classList.add("active");
+  document.getElementById("imgTab").classList.remove("active");
+
+  document.getElementById("mainTitle").innerText =
+    "ReduceSize – Compress PDF to Exact KB";
+}
+   
+
+  
+</script>
+
+  <canvas id="pdfCanvas" style="display:none;"></canvas>
+  
+<section class="seo-content">
+  <p>
+  ReduceSize.online is built by a small independent developer to solve a real problem —
+  resizing photos for online forms where even 1KB extra can cause rejection.
+  This tool is actively maintained and improved based on user feedback.
+  </p>
+  <h2>Compress Image to Exact KB or MB (Free & Secure)</h2>
+  <p>
+    Welcome to <strong>ReduceSize.online</strong>, the most advanced tool designed to reduce image size in KB and MB without compromising quality. 
+    Whether you are a student applying for government jobs or a professional needing to optimize images for emails, our tool helps you 
+    compress JPG, PNG, and JPEG files to your exact required size (e.g., 20KB, 50KB, 100KB) instantly.
+  </p>
+
+  <h3>Why Do You Need Exact Size Compression?</h3>
+  <p>
+    Most online compressors only reduce quality by percentage, which makes it hard to hit a specific file size limit. 
+    However, <strong>ReduceSize</strong> allows you to input a specific number (like "50 KB"). Our algorithm automatically adjusts the 
+    quality and dimensions to match that target size perfectly. This is crucial for:
+  </p>
+  <ul>
+    <li><strong>Government Exams:</strong> SSC, UPSC, IBPS, Railways, and NEET often require photos between 20KB to 50KB.</li>
+    <li><strong>Admission Forms:</strong> Schools and colleges demand scanned signatures under 20KB.</li>
+    <li><strong>Web Performance:</strong> Web developers use it to optimize site speed by reducing image load times.</li>
+  </ul>
+
+  <h3>How to Reduce Image Size for Online Forms?</h3>
+  <ol>
+    <li><strong>Upload:</strong> Click on the "Select File" button and choose your Image or PDF.</li>
+    <li><strong>Set Target:</strong> Enter your desired size (e.g., enter '50' for 50KB).</li>
+    <li><strong>Compress:</strong> Click "Compress & Download". The tool will process the file in milliseconds.</li>
+    <li><strong>Save:</strong> Your file is automatically downloaded, ready for upload.</li>
+  </ol>
+
+  <h3>Privacy First: We Do Not Store Your Photos</h3>
+  <p>
+    Security is our top priority. Unlike other server-side tools, <strong>ReduceSize.online works 100% in your browser</strong>. 
+    This means your personal photos, documents, and signatures <strong>never leave your device</strong>. No data is uploaded to any server, 
+    making it the safest way to compress sensitive documents.
+  </p>
+
+  <h3>Frequently Asked Questions (FAQs)</h3>
+  
+  <p><strong>Q: Can I reduce image size to 20 KB exactly?</strong><br>
+  Yes! Just upload your photo, type "20" in the target size box, and our smart engine will compress it as close to 20 KB as possible without making it blurry.</p>
+  
+  <p><strong>Q: Does this tool support PDF compression?</strong><br>
+  Yes, we have a dedicated "PDF" tab where you can reduce the size of scanned PDF documents for easy sharing on WhatsApp or email.</p>
+
+  <p><strong>Q: Is this service free?</strong><br>
+  Absolutely. You can compress unlimited images and PDFs for free. There are no hidden charges or sign-up requirements.</p>
+
+  <p><strong>Q: Which formats are supported?</strong><br>
+  We support all major image formats including JPG, JPEG, PNG, and WEBP, as well as standard PDF documents.</p>
+</section>
+
+
+  
+  <footer class="site-footer">
+    <p class="footer-text">
+  ReduceSize is a free browser-based utility created to help students, job applicants,
+  and professionals compress images safely without uploading files to any server.
+    </p>
+  <div class="footer-links">
+    <a href="privacy-policy.html">Privacy Policy</a>
+<a href="terms-conditions.html">Terms & Conditions</a>
+<a href="disclaimer.html">Disclaimer</a>
+<a href="contact-us.html">Contact Us</a>
+  </div>
+
+  <p class="footer-text">
+    © 2025 ReduceSize.online – All rights reserved.
+  </p>
+  </footer>
+   <script>
+/* ========= IMAGE + PDF COMPRESS (FINAL WORKING) ========= */
+
+async function start() {
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
+  const unit = document.getElementById("unit");
   const status = document.getElementById("status");
 
   if (!fileInput.files.length) {
@@ -290,9 +580,24 @@ async function compressImage() {
     return;
   }
 
+  if (unit.value === "mb") targetKB *= 1700;
+  // ⚠️ Reality Check popup for very small size (IMAGE ONLY)
+
+  
+if (targetKB <= 15) {
+  openRealityModal();
+  status.innerText = "";
+  return;
+}
+
   status.innerText = "Processing…";
 
   const file = fileInput.files[0];
+  await compressImage(file, targetKB, status);
+}
+
+/* ========= IMAGE ========= */
+async function compressImage(file, targetKB, status) {
   const img = new Image();
   img.src = URL.createObjectURL(file);
   await img.decode();
@@ -300,31 +605,208 @@ async function compressImage() {
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
 
-  canvas.width = img.width;
-  canvas.height = img.height;
-  ctx.drawImage(img, 0, 0);
+  let scale = Math.min(1, 900 / img.width);
+  canvas.width = img.width * scale;
+  canvas.height = img.height * scale;
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  let quality = 0.8;
+  let minQ = 0.005, maxQ = 0.9;
+  let best = null;
 
-  let blob = await new Promise(r =>
-    canvas.toBlob(r, "image/jpeg", quality)
-  );
+  for (let i = 0; i < 25; i++) {
+    let q = (minQ + maxQ) / 2;
+    let blob = await new Promise(r =>
+      canvas.toBlob(r, "image/jpeg", q)
+    );
+
+    if (!blob) break;
+
+    let sizeKB = blob.size / 1024;
+    if (sizeKB > targetKB) maxQ = q;
+    else { minQ = q; best = blob; }
+  }
+
+
+  downloadBlob(best, "compressed.jpg", status);
+}
+
+function downloadBlob(blob, name, status) {
 
   const url = URL.createObjectURL(blob);
 
+  const btn = document.getElementById("download");
+  btn.style.display = "block";   // show button
+  btn.innerText = "⬇ Download (" + (blob.size / 1024).toFixed(2) + " KB)";
+
+  // store values for button click
+  btn.dataset.url = url;
+  btn.dataset.name = name;
+
+  status.innerText = "Ready — Click Download Button 👇";
+}
+
+     document.getElementById("download").onclick = function () {
+
+  const url = this.dataset.url;
+  const name = this.dataset.name || "compressed.jpg";
+
   const a = document.createElement("a");
   a.href = url;
-  a.download = "compressed.jpg";
+  a.download = name;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
 
-  status.innerText = "Done ✅";
+  // hide download button
+  this.style.display = "none";
+
+  // 🔽 also hide "Ready — Click Download Button"
+  const status = document.getElementById("status");
+  status.innerText = "";
+  status.style.display = "none";
+
+  URL.revokeObjectURL(url);
+};
+
+     
+function openRealityModal() {
+  document.getElementById("realityModal").style.display = "flex";
 }
 
-function compressPDF(){
-  alert("PDF compression working");
+function closeRealityModal() {
+  document.getElementById("realityModal").style.display = "none";
 }
 
-</script>
+/* ========= PDF COMPRESS (IMAGE-LIKE LOGIC) ========= */
 
+async function compressPDF() {
+  const fileInput = document.getElementById("pdfUpload");
+  const sizeInput = document.getElementById("pdfSize");
+  const status = document.getElementById("status");
+
+  if (!fileInput.files.length) {
+    alert("Select PDF first");
+    return;
+  }
+
+  let targetKB = parseFloat(sizeInput.value);
+  if (!targetKB || targetKB <= 0) {
+    alert("Enter valid size");
+    return;
+  }
+
+  // 🔔 PDF Reality Check (50 KB)
+  if (targetKB < 50) {
+    openPdfRealityModal();
+    status.innerText = "";
+    return;
+  }
+
+  status.innerText = "Processing PDF…";
+
+  const file = fileInput.files[0];
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+  const { jsPDF } = window.jspdf;
+  let quality = 0.8;
+  let scale = 1;
+  let outputBlob = null;
+
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const newPdf = new jsPDF();
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale });
+
+      const canvas = document.getElementById("pdfCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      await page.render({ canvasContext: ctx, viewport }).promise;
+
+      const imgData = canvas.toDataURL("image/jpeg", quality);
+
+      if (i > 1) newPdf.addPage();
+      newPdf.addImage(
+        imgData,
+        "JPEG",
+        0,
+        0,
+        newPdf.internal.pageSize.getWidth(),
+        newPdf.internal.pageSize.getHeight()
+      );
+    }
+
+    outputBlob = newPdf.output("blob");
+    const sizeKB = outputBlob.size / 1024;
+
+    if (sizeKB <= targetKB) break;
+
+    quality -= 0.08;
+    scale -= 0.08;
+
+    if (quality < 0.3) quality = 0.3;
+    if (scale < 0.4) scale = 0.4;
+  }
+
+  if (!outputBlob || outputBlob.size / 1024 > targetKB) {
+    alert("PDF cannot be compressed cleanly to this size");
+    status.innerText = "";
+    return;
+  }
+
+  downloadBlob(outputBlob, "compressed.pdf", status);
+}
+     function openPdfRealityModal() {
+  document.getElementById("pdfRealityModal").style.display = "flex";
+}
+
+function closePdfRealityModal() {
+  document.getElementById("pdfRealityModal").style.display = "none";
+}
+     
+    </script>
+  <!-- Reality Check Modal -->
+<div id="realityModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>⚠️ Reality Check!</h2>
+    <p>
+      <strong>15 KB se kam mein image nahi…</strong><br>
+      yaadein compress hoti hain 😅
+    </p>
+    <p>
+      Is size mein image itni chhoti ho jaayegi<br>
+      ki insaan pehchaanna mushkil ho jaayega.
+    </p>
+    <p class="modal-tip">
+      👉 Best results ke liye <strong>20 KB+</strong> try karein.
+    </p>
+    <button onclick="closeRealityModal()">Got it 👍</button>
+  </div>
+</div>
+
+  <!-- PDF Reality Check Modal -->
+<div id="pdfRealityModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>⚠️ Reality Check!</h2>
+    <p>
+      <strong>50 KB se kam mein PDF nahi…</strong><br>
+      syllabus hi gayab ho jaata hai 😅
+    </p>
+    <p>
+      Itne chhote size mein text blur<br>
+      aur pages unreadable ho jaate hain.
+    </p>
+    <p class="modal-tip">
+      👉 Best results ke liye <strong>50–100 KB+</strong> try karein.
+    </p>
+    <button onclick="closePdfRealityModal()">Samjha 👍</button>
+  </div>
+</div>
+  
 </body>
 </html>
