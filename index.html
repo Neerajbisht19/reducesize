@@ -1060,52 +1060,7 @@ function closePdfRealityModal() {
   results.appendChild(div);
     } 
      
-window.addEventListener("DOMContentLoaded", () => {
 
-  
-  const uploadInput = document.getElementById("upload");
-
-uploadInput.addEventListener("change", handlePreview);
-uploadInput.addEventListener("input", handlePreview);
-
-function handlePreview(){
-
-  const preview = document.getElementById("preview");
-  preview.innerHTML = "";
-
-  const files = Array.from(this.files);
-
-  files.forEach((file) => {
-
-    const reader = new FileReader();
-
-    reader.onload = function(e){
-
-      const div = document.createElement("div");
-      div.className = "preview-item";
-
-      const img = document.createElement("img");
-      img.src = e.target.result;
-
-      const btn = document.createElement("button");
-      btn.innerText = "×";
-      btn.className = "remove-btn";
-
-      btn.onclick = (ev) => {
-        ev.stopPropagation();
-        div.remove();
-      };
-
-      div.appendChild(img);
-      div.appendChild(btn);
-
-      preview.appendChild(div);
-    };
-
-    reader.readAsDataURL(file);
-  });
-
-}
         
 
         
@@ -1117,6 +1072,45 @@ function handlePreview(){
 document.getElementById("previewModal").onclick = function(){
   this.style.display = "none";
 };
+     document.addEventListener("change", function(e){
+
+  if(e.target && e.target.id === "upload"){
+
+    const preview = document.getElementById("preview");
+    preview.innerHTML = "";
+
+    const files = Array.from(e.target.files);
+
+    files.forEach(file => {
+
+      const reader = new FileReader();
+
+      reader.onload = function(ev){
+
+        const div = document.createElement("div");
+        div.className = "preview-item";
+
+        const img = document.createElement("img");
+        img.src = ev.target.result;
+
+        const btn = document.createElement("button");
+        btn.innerText = "×";
+        btn.className = "remove-btn";
+
+        btn.onclick = () => div.remove();
+
+        div.appendChild(img);
+        div.appendChild(btn);
+
+        preview.appendChild(div);
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+  }
+
+});
     </script>
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
