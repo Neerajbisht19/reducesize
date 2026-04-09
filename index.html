@@ -1059,52 +1059,53 @@ function closePdfRealityModal() {
 
   results.appendChild(div);
     } 
-     window.addEventListener("DOMContentLoaded", () => {
+     
+window.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("upload").addEventListener("change", function(){
+  
+  const uploadInput = document.getElementById("upload");
 
-    const preview = document.getElementById("preview");
-    preview.innerHTML = "";
+uploadInput.addEventListener("change", handlePreview);
+uploadInput.addEventListener("input", handlePreview);
 
-    const files = Array.from(this.files);
+function handlePreview(){
 
-    files.forEach((file) => {
+  const preview = document.getElementById("preview");
+  preview.innerHTML = "";
 
-      const reader = new FileReader();
+  const files = Array.from(this.files);
 
-      reader.onload = function(e){
+  files.forEach((file) => {
 
-        const div = document.createElement("div");
-        div.className = "preview-item";
+    const reader = new FileReader();
 
-        const img = document.createElement("img");
-        img.src = e.target.result;
+    reader.onload = function(e){
 
-        img.onclick = () => openPreview(e.target.result);
+      const div = document.createElement("div");
+      div.className = "preview-item";
 
-        const btn = document.createElement("button");
-        btn.innerText = "×";
-        btn.className = "remove-btn";
+      const img = document.createElement("img");
+      img.src = e.target.result;
 
-        btn.onclick = (ev) => {
-          ev.stopPropagation();
-          div.remove();
-        };
+      const btn = document.createElement("button");
+      btn.innerText = "×";
+      btn.className = "remove-btn";
 
-        div.appendChild(img);
-        div.appendChild(btn);
-
-        preview.appendChild(div);
+      btn.onclick = (ev) => {
+        ev.stopPropagation();
+        div.remove();
       };
 
-      reader.readAsDataURL(file);
-    });
+      div.appendChild(img);
+      div.appendChild(btn);
 
+      preview.appendChild(div);
+    };
+
+    reader.readAsDataURL(file);
   });
 
-});
-  
-
+}
         
 
         
