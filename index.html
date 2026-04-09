@@ -1082,15 +1082,18 @@ function closePdfRealityModal() {
 document.getElementById("previewModal").onclick = function(){
   this.style.display = "none";
 };
-     const uploadInput = document.getElementById("upload");
-const previewBox = document.getElementById("preview");
+     window.addEventListener("load", function(){
 
-if(uploadInput){
-  uploadInput.onchange = function(){
+  const uploadInput = document.getElementById("upload");
+  const previewBox = document.getElementById("preview");
+
+  if(!uploadInput) return;
+
+  uploadInput.addEventListener("change", function(){
 
     previewBox.innerHTML = "";
 
-    const files = uploadInput.files;
+    const files = this.files;
 
     for(let i = 0; i < files.length; i++){
 
@@ -1122,8 +1125,10 @@ if(uploadInput){
 
       reader.readAsDataURL(file);
     }
-  };
-}
+
+  });
+
+});
     </script>
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
