@@ -1064,41 +1064,43 @@ document.getElementById("previewModal").onclick = function(){
   this.style.display = "none";
 };
      
+document.addEventListener("DOMContentLoaded", function () {
 
   const uploadInput = document.getElementById("upload");
-const previewBox = document.getElementById("preview");
+  const previewBox = document.getElementById("preview");
 
-uploadInput.addEventListener("change", function () {
-
-  previewBox.innerHTML = "";
-  previewBox.style.display = "grid";   // 🔥 show only when image selected
-
-  const files = this.files;
-
-  for (let i = 0; i < files.length; i++) {
-
-    const file = files[i];
-
-    if (!file.type.startsWith("image/")) continue;
-
-    const div = document.createElement("div");
-    div.className = "preview-item";
-
-    const img = document.createElement("img");
-    img.src = URL.createObjectURL(file);   // 🔥 DIRECT (FAST + RELIABLE)
-
-    const removeBtn = document.createElement("button");
-    removeBtn.innerText = "×";
-    removeBtn.className = "remove-btn";
-
-    removeBtn.onclick = () => div.remove();
-
-    div.appendChild(img);
-    div.appendChild(removeBtn);
-
-    previewBox.appendChild(div);
+  if (!uploadInput) {
+    console.log("Upload input not found ❌");
+    return;
   }
+
+  uploadInput.addEventListener("change", function () {
+
+    previewBox.innerHTML = "";
+    previewBox.style.display = "grid";
+
+    const files = this.files;
+
+    for (let i = 0; i < files.length; i++) {
+
+      const file = files[i];
+      
+      if (!file.type.startsWith("image/")) continue;
+
+      const div = document.createElement("div");
+      div.className = "preview-item";
+
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(file);
+
+      div.appendChild(img);
+      previewBox.appendChild(div);
+    }
+
+  });
+
 });
+  
     </script>
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
