@@ -521,14 +521,10 @@ button:hover::after{
   }
 }
   #preview {
-  display: grid !important;
+  display: none;   /* 🔥 IMPORTANT */
   grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   gap: 10px;
   margin-top: 12px;
-  min-height: 80px;   /* 🔥 IMPORTANT */
-  background: rgba(255,255,255,0.03); /* DEBUG ke liye */
-  padding: 8px;
-  border-radius: 10px;
   }
 </style>
   <!-- PDF.js -->
@@ -1090,6 +1086,7 @@ const previewBox = document.getElementById("preview");
 uploadInput.addEventListener("change", function () {
 
   previewBox.innerHTML = "";
+  previewBox.style.display = "grid";   // 🔥 show only when image selected
 
   const files = this.files;
 
