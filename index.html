@@ -506,8 +506,7 @@ button:hover::after{
   }
 }
   #preview {
-  display: block;        /* 🔥 change */
-  visibility: hidden;    /* 🔥 new add */
+  display: none;
   grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   gap: 10px;
   margin-top: 12px;
@@ -1070,33 +1069,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const uploadInput = document.getElementById("upload");
   const previewBox = document.getElementById("preview");
 
-  if (!uploadInput) {
-    console.log("Upload input not found ❌");
-    return;
-  }
-
   uploadInput.addEventListener("change", function () {
 
     previewBox.innerHTML = "";
 
-    previewBox.style.visibility = "visible";
-previewBox.style.display = "grid";
+    // 🔥 FORCE STYLE APPLY (IMPORTANT)
+    previewBox.style.display = "grid";
+    previewBox.style.setProperty("display", "grid", "important");
+
     const files = this.files;
 
     for (let i = 0; i < files.length; i++) {
 
       const file = files[i];
-      
       if (!file.type.startsWith("image/")) continue;
-
-      const div = document.createElement("div");
-      div.className = "preview-item";
 
       const img = document.createElement("img");
       img.src = URL.createObjectURL(file);
 
-      div.appendChild(img);
-      previewBox.appendChild(div);
+      previewBox.appendChild(img);
     }
 
   });
