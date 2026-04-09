@@ -1072,45 +1072,48 @@ function closePdfRealityModal() {
 document.getElementById("previewModal").onclick = function(){
   this.style.display = "none";
 };
-     document.addEventListener("change", function(e){
+     const uploadInput = document.getElementById("upload");
+const previewBox = document.getElementById("preview");
 
-  if(e.target && e.target.id === "upload"){
+if(uploadInput){
+  uploadInput.onchange = function(){
 
-    const preview = document.getElementById("preview");
-    preview.innerHTML = "";
+    previewBox.innerHTML = "";
 
-    const files = Array.from(e.target.files);
+    const files = uploadInput.files;
 
-    files.forEach(file => {
+    for(let i = 0; i < files.length; i++){
+
+      const file = files[i];
+
+      if(!file.type.startsWith("image/")) continue;
 
       const reader = new FileReader();
 
-      reader.onload = function(ev){
+      reader.onload = function(e){
 
         const div = document.createElement("div");
         div.className = "preview-item";
 
         const img = document.createElement("img");
-        img.src = ev.target.result;
+        img.src = e.target.result;
 
-        const btn = document.createElement("button");
-        btn.innerText = "×";
-        btn.className = "remove-btn";
+        const removeBtn = document.createElement("button");
+        removeBtn.innerText = "×";
+        removeBtn.className = "remove-btn";
 
-        btn.onclick = () => div.remove();
+        removeBtn.onclick = () => div.remove();
 
         div.appendChild(img);
-        div.appendChild(btn);
+        div.appendChild(removeBtn);
 
-        preview.appendChild(div);
+        previewBox.appendChild(div);
       };
 
       reader.readAsDataURL(file);
-    });
-
-  }
-
-});
+    }
+  };
+}
     </script>
   <!-- Reality Check Modal -->
 <div id="realityModal" class="modal-overlay">
