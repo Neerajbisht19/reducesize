@@ -1082,52 +1082,40 @@ function closePdfRealityModal() {
 document.getElementById("previewModal").onclick = function(){
   this.style.display = "none";
 };
-     window.addEventListener("DOMContentLoaded", function(){
+     
 
   const uploadInput = document.getElementById("upload");
-  const previewBox = document.getElementById("preview");
+const previewBox = document.getElementById("preview");
 
-  if(!uploadInput) return;
+uploadInput.addEventListener("change", function () {
 
-  uploadInput.addEventListener("change", function(){
+  previewBox.innerHTML = "";
 
-    previewBox.innerHTML = "";
+  const files = this.files;
 
-    const files = this.files;
+  for (let i = 0; i < files.length; i++) {
 
-    for(let i = 0; i < files.length; i++){
+    const file = files[i];
 
-      const file = files[i];
+    if (!file.type.startsWith("image/")) continue;
 
-      if(!file.type.startsWith("image/")) continue;
+    const div = document.createElement("div");
+    div.className = "preview-item";
 
-      const reader = new FileReader();
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);   // 🔥 DIRECT (FAST + RELIABLE)
 
-      reader.onload = function(e){
+    const removeBtn = document.createElement("button");
+    removeBtn.innerText = "×";
+    removeBtn.className = "remove-btn";
 
-        const div = document.createElement("div");
-        div.className = "preview-item";
+    removeBtn.onclick = () => div.remove();
 
-        const img = document.createElement("img");
-        img.src = e.target.result;
+    div.appendChild(img);
+    div.appendChild(removeBtn);
 
-        const removeBtn = document.createElement("button");
-        removeBtn.innerText = "×";
-        removeBtn.className = "remove-btn";
-
-        removeBtn.onclick = () => div.remove();
-
-        div.appendChild(img);
-        div.appendChild(removeBtn);
-
-        previewBox.appendChild(div);
-      };
-
-      reader.readAsDataURL(file);
-    }
-
-  });
-
+    previewBox.appendChild(div);
+  }
 });
     </script>
   <!-- Reality Check Modal -->
