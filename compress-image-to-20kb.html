@@ -3,95 +3,886 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compress Image to 20KB Online Free Tool</title>
-<meta name="description" content="Compress image to 20KB online free. Resize JPG, PNG, JPEG images to exact 20KB size for SSC, UPSC, Railway and job forms easily.">
+
+<title>Compress Image to 20KB Online Free (Photo & Signature)</title>
+
+<meta name="description" content="Compress image to 20KB online free. Reduce photo or signature size to 10KB easily for forms and applications. Fast, secure & no upload required.">
+  <style>
+/* ===== TAB BUTTONS ===== */
+.tab-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2a2a4a;
+  color: #aaa;
+  transition: 0.25s;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg,#6a5cff,#8f7bff);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(106,92,255,0.4);
+}
+  /* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== BODY ===== */
+body{
+  background: radial-gradient(circle at top,#1a1a2e,#0f0f18);
+  min-height:100vh;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* ===== MAIN WRAPPER ===== */
+.wrapper{
+  width:100%;
+  max-width:1100px;
+  gap:20px;
+  padding:10px;
+  margin: 0 auto;
+}
+
+/* ===== APP CARD ===== */
+.app{
+  width:100%;
+  background: rgba(20,20,35,0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:28px;
+  box-shadow: 
+  0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* ===== HEADER ===== */
+.app h1{
+  font-size:26px;
+  margin-bottom:6px;
+}
+.app p{
+  color:#aaa;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+/* ===== INPUTS ===== */
+input[type="file"]{
+  width:100%;
+  background:#1e1e32;
+  border:1px solid #2d2d4d;
+  padding:12px;
+  border-radius:10px;
+  color:#fff;
+}
+
+.size-row{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+.size-row input,
+.size-row select{
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #2d2d4d;
+  background:#1e1e32;
+  color:#fff;
+  font-size:16px;
+}
+
+/* ===== BUTTON ===== */
+button{
+  margin-top:18px;
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  background: linear-gradient(135deg,#6a5cff,#8f7bff);
+  color:#fff;
+  box-shadow:0 4px 12px rgba(106,92,255,0.25);
+  transition:0.25s;
+}
+
+button:active{
+  transform:scale(0.97);
+  background: linear-gradient(135deg,#8f7bff,#6a5cff);
+}
+
+/* ===== STATUS ===== */
+#status{
+  margin-top:12px;
+  font-size:14px;
+  color:#9fa3ff;
+}
+
+/* ===== DOWNLOAD ===== */
+#download{
+  display:none;
+  margin-top:14px;
+  text-align:center;
+  font-weight:600;
+  color:#6a5cff;
+  cursor:pointer;
+  
+}
+
+
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .wrapper{
+    flex-direction:column;
+    align-items:center;
+  }
+  .ad-box{
+    width:100%;
+  }
+}
+  
+  /* ===== PREMIUM DOWNLOAD BUTTON ===== */
+#download {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 0 0 rgba(34,197,94,0.0);
+  transform: scale(0.9);
+  opacity: 0;
+  animation: downloadPop 0.5s ease forwards;
+}
+
+/* Pop + glow animation */
+@keyframes downloadPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    box-shadow: 0 0 0 rgba(34,197,94,0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(34,197,94,0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgba(34,197,94,0.45);
+  }
+}
+
+/* Hover polish */
+#download:hover {
+  transform: scale(1.03);
+}
+  
+  /* ===== SEO CONTENT FINAL FIX ===== */
+.seo-content{
+  width:100%;
+  max-width:1100px;
+  margin: 60px auto;
+  padding: 24px;
+  color:#cfd3ff;
+  font-size:15px;
+  line-height:1.7;
+  display:block;
+  clear:both;
+}
+
+.seo-content h2,
+.seo-content h3{
+  color:#ffffff;
+  margin-top:28px;
+}
+
+@media (max-width:900px){
+  .seo-content{
+    margin:40px 0 0 0;
+    padding:18px;
+  }
+}
+.legal-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  color: #ddd;
+  line-height: 1.7;
+}
+
+.legal-page h2 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+  .site-footer {
+  width: 100%;
+  margin-top: 60px;
+  padding: 25px 15px;
+  text-align: center;
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #aaa;
+  text-decoration: none;
+  margin: 0 8px;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  color: #8b7bff;
+}
+
+.footer-text {
+  color: #777;
+  font-size: 13px;
+}
+  /* Reality Check Modal Style */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: linear-gradient(145deg, #1c1f3a, #14162b);
+  color: #eaeaff;
+  max-width: 320px;
+  width: 90%;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(120,90,255,0.35);
+  text-align: center;
+  animation: pop 0.25s ease;
+}
+
+.modal-box h2 {
+  margin-top: 0;
+  color: #ffcc70;
+}
+
+.modal-box p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modal-tip {
+  color: #b8b5ff;
+}
+
+.modal-box button {
+  margin-top: 14px;
+  background: linear-gradient(135deg, #7b6cff, #5a4bff);
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.modal-box button:hover {
+  opacity: 0.9;
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+  /* ===== MOBILE UX FIX (IMPORTANT) ===== */
+@media (max-width: 768px) {
+
+  /* Wrapper ko vertical kar do */
+  .wrapper {
+    flex-direction: column;
+  }
+
+  /* Intro content chhota & clean */
+  .intro-content {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .intro-content h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .intro-content p {
+    font-size: 15px;
+  }
+
+  /* Button full width & touch-friendly */
+  button {
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+  
+
+#results{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:15px;
+}
+
+.result-item{
+  width:30%;
+  min-width:120px;
+  text-align:center;
+  padding:8px;
+  background:#1e1e32;
+  border-radius:10px;
+}
+
+.result-item img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.result-item button{
+  width:100%;
+  padding:8px;
+  font-size:14px;
+  margin-top:6px;
+}
+
+.result-item p{
+  font-size:13px;
+  margin-top:4px;
+}
+  
+
+
+  #progressBox{
+  width:100%;
+  height:8px;
+  background:#2d2d4d;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+#progressBar{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,#6a5cff,#8f7bff);
+  transition: width 0.3s ease;
+}
+  button{
+  position: relative;
+  overflow: hidden;
+}
+
+button::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background: linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+  transition:0.5s;
+}
+
+button:hover::after{
+  left:100%;
+}
+  .result-item img{
+  transition:0.3s;
+}
+
+.result-item:hover img{
+  transform: scale(1.08);
+}
+ 
+  .footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.footer-links a {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ddd;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.25s ease;
+}
+
+.footer-links a:hover {
+  background: rgba(108, 99, 255, 0.15);
+  border: 1px solid rgba(108, 99, 255, 0.4);
+  color: white;
+  transform: translateY(-2px);
+}
+  
+
+
+/* Each image box */
+.preview-item{
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  background:#1e1e32;
+  animation: fadeIn 0.4s ease;
+}
+
+/* Image */
+.preview-item img{
+  width:100%;
+  height:70px;
+  object-fit:cover;
+  transition:0.3s;
+}
+
+/* Hover zoom */
+.preview-item:hover img{
+  transform: scale(1.1);
+}
+
+/* Remove button */
+.remove-btn{
+  position:absolute;
+  top:4px;
+  right:4px;
+  background: rgba(0,0,0,0.6);
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  width:18px;
+  height:18px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+/* Animation */
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform: scale(0.8);
+  }
+  to{
+    opacity:1;
+    transform: scale(1);
+  }
+}
+  #preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+  }
+  .tool-buttons a {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.tool-buttons a:hover {
+  background: #0056b3;
+}
+    #unit {
+  display: none;
+    }
+    .size-row {
+  justify-content: center;
+    }
+  </style>
 </head>
 
-<body style="background:#0f0f1a; color:white; font-family:sans-serif; padding:20px; line-height:1.7;">
+<body>
 
-<h1>Compress Image to 20KB Online</h1>
+<div class="wrapper">
+  <div class="app">
 
+    <h1>Compress Image to 20KB Online Free</h1>
+    <p>Reduce image size to exact 20KB easily.</p>
+
+    <div id="imageBox">
+
+  <input type="file" id="upload" accept="image/*" multiple>
+
+  <div id="preview"></div>
+
+  <div class="size-row">
+    
+    <input type="text" value="Fixed Size: 20KB" disabled>
+    
+      
+  </div>
+
+  <button onclick="start()">Compress & Download</button>
+<div id="status"></div>
+
+<div id="progressBox" style="display:none;">
+  <div id="progressBar"></div>
+</div>
+
+<div id="results"></div>
+</div>
+    </div>
+
+  </div>
+</div>
+<!-- 💣 IMAGE TOOL END -->
+  <div class="seo-content">
 <p>
-If you are looking to compress image to 20KB online, ReduceSize.online provides a fast and easy solution. Many online forms, especially government exams and job applications, require images under strict file size limits like 20KB. This tool helps you achieve the exact size without compromising quality.
+Need to compress image to 20KB? This free online tool helps you reduce image or signature size to exact 20KB quickly and easily. It is especially useful for forms that require very small file sizes.
 </p>
-
-<h2>Why 20KB Image Size is Required?</h2>
-<p>
-Many government portals such as SSC, UPSC, Railways, IBPS, and other recruitment platforms have strict guidelines for uploading images. If your file size exceeds even by 1KB, your application may get rejected. That’s why reducing image size to exactly 20KB becomes very important.
-</p>
+  
+<h2>Free Tool to Compress Image to 20KB</h2>
 
 <p>
-Traditional image compressors reduce file size randomly and do not guarantee exact output. ReduceSize.online solves this issue by allowing users to input a specific target size like 20KB.
+Some online forms require extremely small image sizes like 20KB, especially for signatures or low-resolution uploads. This tool helps you achieve that exact size without complicated editing.
 </p>
 
 <h2>How to Compress Image to 20KB?</h2>
+
 <ol>
-<li>Open ReduceSize.online homepage</li>
-<li>Click on “Choose Files”</li>
-<li>Select your image (JPG, PNG, JPEG)</li>
-<li>Enter target size as 20KB</li>
-<li>Click on “Compress & Download”</li>
-<li>Your image will be ready instantly</li>
+<li>Upload your image or signature</li>
+<li>Enter target size: 10KB</li>
+<li>Click on "Compress & Download"</li>
+<li>Your file will be ready instantly</li>
 </ol>
 
-<h2>Supported Formats</h2>
+<h2>Where is 10KB Image Used?</h2>
+
 <p>
-This tool supports all major image formats including JPG, JPEG, PNG, and WEBP. You can easily compress any image type to 20KB.
+10KB images are commonly used for signatures, small icons, or strict form uploads where very low file size is required.
+</p>
+
+<h2>Important Note About 10KB</h2>
+
+<p>
+Compressing an image to 10KB may reduce its quality significantly. This size is best for signatures or simple images, not for detailed photos.
 </p>
 
 <h2>Best Use Cases</h2>
+
 <ul>
-<li>SSC form photo resize (20KB limit)</li>
-<li>UPSC application image upload</li>
-<li>Railway exam forms</li>
-<li>College admission forms</li>
-<li>Passport size photo compression</li>
-<li>Signature resize under 20KB</li>
+<li>Signature upload (10KB)</li>
+<li>Government forms</li>
+<li>Online applications</li>
+<li>Low-size image requirements</li>
 </ul>
 
-<h2>Benefits of Using ReduceSize Tool</h2>
+<h2>Features of This Tool</h2>
+
 <ul>
-<li>Free to use</li>
+<li>Compress image to exact 10KB</li>
+<li>Supports JPG, PNG, WEBP</li>
+<li>Fast processing</li>
 <li>No login required</li>
-<li>Instant processing</li>
-<li>Exact size output</li>
-<li>Secure and private</li>
+<li>Secure (no upload)</li>
 </ul>
 
-<h2>Privacy and Security</h2>
-<p>
-Unlike other tools, ReduceSize.online works completely in your browser. Your images are not uploaded to any server. This ensures maximum privacy and security.
-</p>
+<h2>Tips for Better Results</h2>
 
-<h2>Tips for Better Compression</h2>
 <ul>
-<li>Use clear images for best results</li>
-<li>Avoid very large resolution images</li>
-<li>Try slightly higher size if quality drops</li>
+<li>Use simple images or signatures</li>
+<li>Crop unnecessary areas</li>
+<li>Use JPG format</li>
 </ul>
 
-<h2>Frequently Asked Questions</h2>
+<h2>Try Other Useful Tools</h2>
 
-<p><strong>Q: Can I compress image to exactly 20KB?</strong><br>
-Yes, our tool tries to match the exact file size as closely as possible.</p>
+<p>
+You may also need:
+<br>
+<a href="/compress-image-to-10kb.html">Compress Image to 20KB</a><br>
+<a href="/compress-image-to-30kb.html">Compress Image to 30KB</a><br>
+<a href="/compress-image-to-50kb.html">Compress Image to 50KB</a>
+</p>
+  
+<h2>Frequently Asked Questions (FAQs)</h2>
 
-<p><strong>Q: Will image quality reduce?</strong><br>
-The tool maintains the best possible quality while reducing size.</p>
+<p><strong>Q: Can I compress image to exactly 10KB?</strong><br>
+Yes, but quality may be reduced.</p>
 
 <p><strong>Q: Is this tool free?</strong><br>
-Yes, it is completely free.</p>
+Yes, completely free.</p>
 
-<p><strong>Q: Do I need to install anything?</strong><br>
-No, it works directly in your browser.</p>
+<p><strong>Q: Is it safe?</strong><br>
+Yes, files are processed locally.</p>
 
 <h2>Conclusion</h2>
-<p>
-Compressing images to 20KB is essential for many online applications. ReduceSize.online makes this process simple, fast, and accurate. Try it now and avoid form rejection due to incorrect file size.
-</p>
 
 <p>
-<a href="/">← Back to Home</a>
+If you need to compress image to 10KB, this tool makes the process simple and fast. Perfect for signatures and strict form requirements.
 </p>
+  </div>
+<script>
+document.getElementById("size").value = 10;
+</script>
+  
+<script>
 
+
+function showImage() {
+  document.title = "ReduceSize – Compress Image to Exact KB or MB";
+
+  document.getElementById("imageBox").style.display = "block";
+  document.getElementById("pdfBox").style.display = "none";
+
+  document.getElementById("imgTab").classList.add("active");
+  document.getElementById("pdfTab").classList.remove("active");
+
+  document.getElementById("mainTitle").innerText =
+    "ReduceSize – Compress Image to Exact KB or MB";
+}
+
+
+
+  
+</script>
+
+   
+
+
+
+
+   <script>
+/* ========= IMAGE + PDF COMPRESS (FINAL WORKING) ========= */
+
+async function start() {
+
+  const fileInput = document.getElementById("upload");
+  const sizeInput = document.getElementById("size");
+  
+  const status = document.getElementById("status");
+  const results = document.getElementById("results");
+
+  results.innerHTML = "";
+
+  if (!fileInput.files.length) {
+    alert("Select image first");
+    return;
+  }
+
+  let targetKB = 20;
+  if (!targetKB || targetKB <= 0) {
+    alert("Enter valid size");
+    return;
+  }
+
+  
+
+  let safeTargetKB = targetKB - 1;
+  if (safeTargetKB < 5) safeTargetKB = targetKB * 0.9;
+
+  const files = fileInput.files;
+
+  for (let i = 0; i < files.length; i++) {
+
+    const progressBox = document.getElementById("progressBox");
+const progressBar = document.getElementById("progressBar");
+
+progressBox.style.display = "block";
+
+let percent = ((i+1) / files.length) * 100;
+progressBar.style.width = percent + "%";
+
+status.innerText = `Processing ${i+1} / ${files.length}`;
+const blob = await compressImage(files[i], safeTargetKB);
+
+if (!blob) {
+  console.log("Failed for file:", i);
+  continue;
+}
+    
+    createResultUI(blob, i);
+  }
+
+  status.innerText = "Done ✅";
+progressBar.style.width = "100%";
+
+setTimeout(()=>{
+  progressBox.style.display = "none";
+}, 1500);
+}
+
+/* ========= IMAGE ========= */
+async function compressImage(file, targetKB) {
+
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  await img.decode();
+
+  let canvas = document.createElement("canvas");
+  let ctx = canvas.getContext("2d");
+
+  let scale = 1;
+  let best = null;
+
+  // 🔁 try multiple times (resize + quality)
+  for (let step = 0; step < 10; step++) {
+
+    canvas.width = img.width * scale;
+    canvas.height = img.height * scale;
+
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    let minQ = 0.05, maxQ = 0.95;
+
+    // 🔁 binary search quality
+    for (let i = 0; i < 25; i++) {
+
+      let q = (minQ + maxQ) / 2;
+
+      let blob = await new Promise(r =>
+        canvas.toBlob(r, "image/jpeg", q)
+      );
+
+      if (!blob) continue;
+
+      let sizeKB = blob.size / 1024;
+
+      if (sizeKB > targetKB) {
+        maxQ = q;
+      } else {
+        minQ = q;
+        best = blob;
+      }
+    }
+
+    // ✅ agar mil gaya → break
+    if (best && (best.size / 1024) <= targetKB) {
+      break;
+    }
+
+    // ❌ nahi mila → resize aur chhota
+    scale *= 0.85;
+  }
+
+  // 🔥 FINAL SAFETY
+  if (!best) {
+    best = await new Promise(r =>
+      canvas.toBlob(r, "image/jpeg", 0.5)
+    );
+  }
+
+  return best;
+}
+
+function downloadBlob(blob, name, status) {
+
+  const url = URL.createObjectURL(blob);
+
+  const btn = document.getElementById("download");
+  btn.style.display = "block";   // show button
+  btn.innerText = "⬇ Download (" + (blob.size / 1024).toFixed(2) + " KB)";
+
+  // store values for button click
+  btn.dataset.url = url;
+  btn.dataset.name = name;
+
+  status.innerText = "Ready — Click Download Button 👇";
+}
+
+     document.getElementById("download").onclick = function () {
+
+  const url = this.dataset.url;
+  const name = this.dataset.name || "compressed.jpg";
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  // hide download button
+  this.style.display = "none";
+
+  // 🔽 also hide "Ready — Click Download Button"
+  const status = document.getElementById("status");
+  status.innerText = "";
+  status.style.display = "none";
+
+  URL.revokeObjectURL(url);
+};
+
+     
+function openRealityModal() {
+  document.getElementById("realityModal").style.display = "flex";
+}
+
+function closeRealityModal() {
+  document.getElementById("realityModal").style.display = "none";
+}
+
+
+    
+
+  
+
+     
+
+function createResultUI(blob, index) {
+
+  const results = document.getElementById("results");
+
+  const url = URL.createObjectURL(blob);
+
+  const div = document.createElement("div");
+  div.className = "result-item";
+
+  div.innerHTML = `
+    <img src="${url}">
+    <p>${(blob.size / 1024).toFixed(2)} KB</p>
+    <button onclick="downloadImage('${url}', 'image_${index}.jpg')">Download</button>
+  `;
+
+  results.appendChild(div);
+}
+
+function downloadImage(url, name) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  a.click();
+}
+</script>
+  
+  
+                            
 </body>
 </html>
