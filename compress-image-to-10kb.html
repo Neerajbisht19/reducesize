@@ -13,7 +13,25 @@
 <body>
 
 <h1>Compress Image to 10KB Online Free</h1>
+<!-- 💣 IMAGE TOOL START -->
+<div id="imageBox">
 
+  <input type="file" id="upload" accept="image/*" multiple>
+
+  <div id="preview"></div>
+
+  <div class="size-row">
+    <input type="number" id="size" placeholder="Target size">
+    <select id="unit">
+      <option value="kb">KB</option>
+      <option value="mb">MB</option>
+    </select>
+  </div>
+
+  <button onclick="start()">Compress & Download</button>
+
+</div>
+<!-- 💣 IMAGE TOOL END -->
 <p>
 Need to compress image to 10KB? This free online tool helps you reduce image or signature size to exact 10KB quickly and easily. It is especially useful for forms that require very small file sizes.
 </p>
@@ -98,6 +116,8 @@ Yes, files are processed locally.</p>
 <p>
 If you need to compress image to 10KB, this tool makes the process simple and fast. Perfect for signatures and strict form requirements.
 </p>
-
+<script>
+document.getElementById("size").value = 10;
+</script>
 </body>
 </html>
