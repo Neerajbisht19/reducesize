@@ -686,7 +686,7 @@ async function start() {
 
   const fileInput = document.getElementById("upload");
   const sizeInput = document.getElementById("size");
-  const unit = document.getElementById("unit");
+  
   const status = document.getElementById("status");
   const results = document.getElementById("results");
 
@@ -703,7 +703,7 @@ async function start() {
     return;
   }
 
-  if (unit.value === "mb") targetKB *= 1024;
+  
 
   let safeTargetKB = targetKB - 1;
   if (safeTargetKB < 5) safeTargetKB = targetKB * 0.9;
