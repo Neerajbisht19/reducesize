@@ -276,7 +276,9 @@ button:active{
 
 .footer-text {
   color: #777;
-  font-size: 13px;
+  font-size: 12px;
+  max-width: 600px;
+  margin: 0 auto 8px;
 }
   /* Reality Check Modal Style */
 .modal-overlay {
@@ -443,12 +445,7 @@ button:hover::after{
   transform: scale(1.08);
 }
  
-  .footer-links {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 15px;
-}
+  
 
 .footer-links a {
   display: block;
@@ -539,6 +536,30 @@ button:hover::after{
 
 .tool-buttons a:hover {
   background: #0056b3;
+}
+  .footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.footer-links a {
+  display: block;
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  color: #bbb;
+  text-decoration: none;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: 0.2s;
+}
+
+.footer-links a:hover {
+  background: rgba(108, 99, 255, 0.12);
+  color: #fff;
 }
 </style>
   <!-- PDF.js -->
