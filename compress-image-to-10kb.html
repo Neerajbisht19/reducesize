@@ -531,24 +531,32 @@ button:hover::after{
   margin: 10px auto 15px;
   padding: 10px;
 }
-
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-  color: #fff;
-  text-decoration: none;
+.top-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0 10px;
 }
 
-.logo span {
-  color: #8f7bff;
+.logo-img {
+  width: 150px;
+  height: auto;
+  display: block;
 }
+
+/* optional glow (mast look) */
+.logo-img {
+  filter: drop-shadow(0 0 12px rgba(143,123,255,0.35));
+}
+
   </style>
 </head>
 
 <body>
-<div class="site-header">
-  <a href="/" class="logo">
-    Reduce<span>Size</span>
+<div class="top-header">
+  <a href="/">
+    <img src="/logo.svg" alt="ReduceSize Logo" class="logo-img">
   </a>
 </div>
 <div class="wrapper">
