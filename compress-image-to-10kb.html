@@ -568,12 +568,8 @@ button:hover::after{
   <div class="size-row">
     
     <input type="text" value="Fixed Size: 10KB" disabled>
-    </div>  <!-- app -->
-</div>  <!-- wrapper -->
-      
-  </div>
+    <button onclick="start()">Compress & Download</button>
 
-  <button onclick="start()">Compress & Download</button>
 <div id="status"></div>
 
 <div id="progressBox" style="display:none;">
@@ -581,11 +577,13 @@ button:hover::after{
 </div>
 
 <div id="results"></div>
-</div>
-    </div>
 
-  </div>
-</div>
+</div> <!-- imageBox -->
+
+</div> <!-- app -->
+
+</div> <!-- wrapper -->
+
 <!-- 💣 IMAGE TOOL END -->
   <div class="seo-content">
 <p>
@@ -673,7 +671,7 @@ If you need to compress image to 10KB, this tool makes the process simple and fa
 </p>
   </div>
 <script>
-document.getElementById("size").value = 10;
+
 </script>
   
 <script>
