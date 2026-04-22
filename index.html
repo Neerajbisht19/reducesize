@@ -1002,11 +1002,7 @@ function downloadBlob(blob, name, status) {
 
   const url = URL.createObjectURL(blob);
 
-const img = document.createElement("img");
-img.src = url;
 
-// ✅ correct place
-img.onload = () => URL.revokeObjectURL(url);
 
   const btn = document.getElementById("download");
    btn.classList.add("show");  // show button
