@@ -153,16 +153,15 @@ button:active{
 }
 
 /* ===== DOWNLOAD ===== */
+
 #download{
   display:none;
-  margin-top:14px;
-  text-align:center;
-  font-weight:600;
-  color:#6a5cff;
-  cursor:pointer;
-  
 }
 
+#download.show{
+  display:block;
+  animation: downloadPop 0.5s ease forwards;
+}
 
 
 /* ===== MOBILE ===== */
@@ -412,13 +411,14 @@ button:active{
   overflow:hidden;
   margin-top:10px;
 }
-
 #progressBar{
+  position: relative;
   height:100%;
   width:0%;
   background: linear-gradient(90deg,#6a5cff,#8f7bff);
   transition: width 0.3s ease;
 }
+
   button{
   position: relative;
   overflow: hidden;
@@ -651,6 +651,7 @@ Compress Image & PDF to Exact KB Online
 
     </div>
     <div id="status"></div>
+    <div id="download"></div>
     <div id="progressBox" style="display:none;">
   <div id="progressBar"></div>
     </div>
@@ -840,7 +841,7 @@ If you are looking for a fast, accurate, and secure way to compress images or PD
 
 
 
-  </section>
+  
   <footer class="site-footer">
     <p class="footer-text">
   ReduceSize is a free browser-based utility created to help students, job applicants,
@@ -1002,7 +1003,7 @@ function downloadBlob(blob, name, status) {
   const url = URL.createObjectURL(blob);
 
   const btn = document.getElementById("download");
-  btn.style.display = "block";   // show button
+   btn.classList.add("show");  // show button
   btn.innerText = "⬇ Download (" + (blob.size / 1024).toFixed(2) + " KB)";
 
   // store values for button click
@@ -1166,6 +1167,7 @@ function closePdfRealityModal() {
   const results = document.getElementById("results");
 
   const url = URL.createObjectURL(blob);
+      img.onload = () => URL.revokeObjectURL(url);
 
   const div = document.createElement("div");
   div.className = "result-item";
@@ -1219,7 +1221,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 🔥 FORCE STYLE APPLY (IMPORTANT)
     previewBox.style.display = "grid";
-    previewBox.style.setProperty("display", "grid", "important");
+    
 
     const files = this.files;
 
@@ -1230,6 +1232,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const img = document.createElement("img");
       img.src = URL.createObjectURL(file);
+      img.onload = () => URL.revokeObjectURL(img.src);
 img.style.width = "100%";
 img.style.height = "70px";
 img.style.objectFit = "cover";
