@@ -158,7 +158,19 @@ button:active{
   display:none;
 }
 
-#download.show{
+#download {
+  display:none;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 12px;
+  padding: 12px;
+  text-align:center;
+  cursor:pointer;
+}
+
+#download.show {
   display:block;
   animation: downloadPop 0.5s ease forwards;
 }
@@ -1002,6 +1014,12 @@ function downloadBlob(blob, name, status) {
 
   const url = URL.createObjectURL(blob);
 
+const img = document.createElement("img");
+img.src = url;
+
+// ✅ correct place
+img.onload = () => URL.revokeObjectURL(url);
+
   const btn = document.getElementById("download");
    btn.classList.add("show");  // show button
   btn.innerText = "⬇ Download (" + (blob.size / 1024).toFixed(2) + " KB)";
@@ -1027,12 +1045,8 @@ function downloadBlob(blob, name, status) {
 
   let current = 0;
 
-let interval = setInterval(()=>{
-  if(current < 80){
-    current += 2;  // fast start
-  } else if(current < 95){
-    current += 0.5; // slow end
-  }
+status.innerText = "Preparing download...";
+progressBar.style.width = "100%";
 
   progressBar.style.width = current + "%";
 }, 30);
