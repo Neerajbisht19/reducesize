@@ -448,17 +448,29 @@ button:hover::after{
  
   
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
 .footer-links a {
-  display: block;
-  text-align: center;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #ddd;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  color: #bbb;
   text-decoration: none;
-  font-size: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: all 0.25s ease;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.footer-links a:hover {
+  background: rgba(108, 99, 255, 0.15);
+  color: #fff;
 }
 
 .footer-links a:hover {
