@@ -922,6 +922,9 @@ if (!blob) {
 }
     
     createResultUI(blob, i);
+    if (files.length === 1) {
+  downloadBlob(blob, "compressed.jpg", status);
+    }
   }
 
   status.innerText = "Done ✅";
@@ -1016,7 +1019,8 @@ img.onload = () => URL.revokeObjectURL(url);
   status.innerText = "Ready — Click Download Button 👇";
 }
 
-     document.getElementById("download").onclick = function () {
+     
+document.getElementById("download").onclick = function () {
 
   const url = this.dataset.url;
   const name = this.dataset.name || "compressed.jpg";
@@ -1027,13 +1031,9 @@ img.onload = () => URL.revokeObjectURL(url);
 
   progressBox.style.display = "block";
   status.innerText = "Preparing download...";
+  progressBar.style.width = "100%";
 
-  
   setTimeout(()=>{
-
-    clearInterval(interval);
-    progressBar.style.width = "100%";
-    status.innerText = "Download ready ✅";
 
     const a = document.createElement("a");
     a.href = url;
@@ -1042,18 +1042,19 @@ img.onload = () => URL.revokeObjectURL(url);
     a.click();
     document.body.removeChild(a);
 
+    status.innerText = "Download ready ✅";
+
     setTimeout(()=>{
       progressBox.style.display = "none";
       progressBar.style.width = "0%";
       status.innerText = "";
-    }, 1000);
+    }, 800);
 
-    this.style.display = "none";
+    this.classList.remove("show");
     URL.revokeObjectURL(url);
 
-  }, 800);
+  }, 500);
 };
-
      
 function openRealityModal() {
   document.getElementById("realityModal").style.display = "flex";
@@ -1159,7 +1160,11 @@ function closePdfRealityModal() {
   const results = document.getElementById("results");
 
   const url = URL.createObjectURL(blob);
-      img.onload = () => URL.revokeObjectURL(url);
+
+const img = document.createElement("img");
+img.src = url;
+
+img.onload = () => URL.revokeObjectURL(url);
 
   const div = document.createElement("div");
   div.className = "result-item";
