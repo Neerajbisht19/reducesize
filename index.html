@@ -561,6 +561,31 @@ button:hover::after{
   background: rgba(108, 99, 255, 0.12);
   color: #fff;
 }
+
+  #progressBar{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,#6a5cff,#8f7bff);
+  position: relative;
+  overflow:hidden;
+}
+
+/* shine effect */
+#progressBar::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background: linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent);
+  animation: shine 1.2s infinite;
+}
+
+@keyframes shine{
+  0%{ left:-100%; }
+  100%{ left:100%; }
+}
 </style>
   <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -974,22 +999,45 @@ function downloadBlob(blob, name, status) {
   const url = this.dataset.url;
   const name = this.dataset.name || "compressed.jpg";
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = name;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  // hide download button
-  this.style.display = "none";
-
-  // 🔽 also hide "Ready — Click Download Button"
+  const progressBox = document.getElementById("progressBox");
+  const progressBar = document.getElementById("progressBar");
   const status = document.getElementById("status");
-  status.innerText = "";
-  status.style.display = "none";
 
-  URL.revokeObjectURL(url);
+  progressBox.style.display = "block";
+  status.innerText = "Preparing download...";
+
+  let current = 0;
+
+  let interval = setInterval(()=>{
+    if(current < 90){
+      current += 10;
+      progressBar.style.width = current + "%";
+    }
+  }, 100);
+
+  setTimeout(()=>{
+
+    clearInterval(interval);
+    progressBar.style.width = "100%";
+    status.innerText = "Download ready ✅";
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    setTimeout(()=>{
+      progressBox.style.display = "none";
+      progressBar.style.width = "0%";
+      status.innerText = "";
+    }, 1000);
+
+    this.style.display = "none";
+    URL.revokeObjectURL(url);
+
+  }, 800);
 };
 
      
