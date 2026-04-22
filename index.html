@@ -1043,14 +1043,7 @@ img.onload = () => URL.revokeObjectURL(url);
   progressBox.style.display = "block";
   status.innerText = "Preparing download...";
 
-  let current = 0;
-
-status.innerText = "Preparing download...";
-progressBar.style.width = "100%";
-
-  progressBar.style.width = current + "%";
-}, 30);
-
+  
   setTimeout(()=>{
 
     clearInterval(interval);
