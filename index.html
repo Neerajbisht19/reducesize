@@ -562,13 +562,14 @@ button:hover::after{
   color: #fff;
 }
 
-  #progressBar{
+#progressBar{
   height:100%;
   width:0%;
   background: linear-gradient(90deg,#6a5cff,#8f7bff);
-  position: relative;
-  overflow:hidden;
+  border-radius:10px;
+  transition: width 0.4s linear; /* 🔥 IMPORTANT */
 }
+
 
 /* shine effect */
 #progressBar::after{
@@ -1008,12 +1009,15 @@ function downloadBlob(blob, name, status) {
 
   let current = 0;
 
-  let interval = setInterval(()=>{
-    if(current < 90){
-      current += 10;
-      progressBar.style.width = current + "%";
-    }
-  }, 100);
+let interval = setInterval(()=>{
+  if(current < 80){
+    current += 2;  // fast start
+  } else if(current < 95){
+    current += 0.5; // slow end
+  }
+
+  progressBar.style.width = current + "%";
+}, 30);
 
   setTimeout(()=>{
 
