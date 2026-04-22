@@ -1151,16 +1151,13 @@ async function compressPDF() {
 function closePdfRealityModal() {
   document.getElementById("pdfRealityModal").style.display = "none";
 }
-    function createResultUI(blob, index) {
+    
+
+  
+     function createResultUI(blob, index) {
 
   const results = document.getElementById("results");
-
   const url = URL.createObjectURL(blob);
-
-const img = document.createElement("img");
-img.src = url;
-
-img.onload = () => URL.revokeObjectURL(url);
 
   const div = document.createElement("div");
   div.className = "result-item";
@@ -1168,7 +1165,12 @@ img.onload = () => URL.revokeObjectURL(url);
   const img = document.createElement("img");
   img.src = url;
 
-    img.onclick = () => openPreview(url);
+  // ❗ IMPORTANT: delay revoke (fix bug)
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+  }, 5000);
+
+  img.onclick = () => openPreview(url);
 
   const size = document.createElement("p");
   size.innerText = (blob.size / 1024).toFixed(2) + " KB";
@@ -1188,8 +1190,7 @@ img.onload = () => URL.revokeObjectURL(url);
   div.appendChild(btn);
 
   results.appendChild(div);
-    } 
-     
+     }
 
         
 
