@@ -614,8 +614,8 @@ button:hover::after{
   <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
     </div>
     <h2 id="subTitle">Compress Image to Exact KB or MB</h2>
-<p style="color:#aaa; margin-top:4px;">
-   Compress image and PDF to exact KB in seconds – fast, accurate and secure tool for students and professionals. No signup, no upload, no data storage.
+<p id="descText" style="color:#aaa; margin-top:4px;">
+Compress image to exact KB in seconds...
 </p>
 
     
@@ -679,6 +679,9 @@ function showImage() {
 
   document.getElementById("subTitle").innerText =
     "Compress Image to Exact KB or MB";
+
+  document.getElementById("descText").innerText =
+  "Compress image to exact KB in seconds – fast, accurate and secure.";
 }
 
 function showPDF() {
@@ -696,6 +699,9 @@ function showPDF() {
 
   document.getElementById("subTitle").innerText =
     "Compress PDF to Exact KB Online";
+
+  document.getElementById("descText").innerText =
+  "Compress PDF to exact KB in seconds – fast, accurate and secure.";
 }
 
    
