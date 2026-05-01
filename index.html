@@ -608,7 +608,7 @@ button:hover::after{
   
     </div>
     <h1 style="font-size:22px; margin-top:5px;">
-Compress Image & PDF to Exact KB in Seconds Online
+Resize Image to Exact KB Online
     </h1>
     
     <div style="display:flex; gap:10px; margin-bottom:18px;">
@@ -669,7 +669,8 @@ Compress Image & PDF to Exact KB in Seconds Online
 
 
 function showImage() {
-  document.title = "ReduceSize – Compress Image to Exact KB or MB";
+
+  document.title = "Resize Image to Exact KB Online";
 
   document.getElementById("imageBox").style.display = "block";
   document.getElementById("pdfBox").style.display = "none";
@@ -678,11 +679,13 @@ function showImage() {
   document.getElementById("pdfTab").classList.remove("active");
 
   document.getElementById("mainTitle").innerText =
-    "ReduceSize – Compress Image to Exact KB or MB";
+    "Resize Image to Exact KB Online";
 }
 
-function showPDF() {
-  document.title = "ReduceSize – Compress PDF to Exact KB";
+
+   function showPDF() {
+
+  document.title = "Compress PDF to Exact KB Online";
 
   document.getElementById("imageBox").style.display = "none";
   document.getElementById("pdfBox").style.display = "block";
@@ -691,9 +694,8 @@ function showPDF() {
   document.getElementById("imgTab").classList.remove("active");
 
   document.getElementById("mainTitle").innerText =
-    "ReduceSize – Compress PDF to Exact KB";
-}
-   
+    "Compress PDF to Exact KB Online";
+   }
 
   
 </script>
