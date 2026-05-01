@@ -607,9 +607,7 @@ button:hover::after{
      style="width:130px; margin-bottom:6px;">
   
     </div>
-    <h1 style="font-size:22px; margin-top:5px;">
-Resize Image to Exact KB Online
-    </h1>
+    <h1 id="mainTitle">Resize Image to Exact KB Online</h1>
     
     <div style="display:flex; gap:10px; margin-bottom:18px;">
   <button id="imgTab" onclick="showImage()" class="tab-btn active">🖼 Image</button>
@@ -690,9 +688,10 @@ function showImage() {
   document.getElementById("imageBox").style.display = "none";
   document.getElementById("pdfBox").style.display = "block";
 
-  document.getElementById("pdfTab").classList.add("active");
   document.getElementById("imgTab").classList.remove("active");
+  document.getElementById("pdfTab").classList.add("active");
 
+  // 🔥 MAIN FIX
   document.getElementById("mainTitle").innerText =
     "Compress PDF to Exact KB Online";
    }
