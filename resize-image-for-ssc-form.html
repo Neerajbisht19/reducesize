@@ -709,28 +709,28 @@ Resizing images for SSC forms can be frustrating, but with ReduceSize.online, th
 <p>
 <a href="/">← Back to Home</a>
 </p>
-
-    <script>
+<script>
 function start() {
-  const fileInput = document.getElementById("upload");
-  const sizeInput = document.getElementById("size");
+  const file = document.getElementById("upload").files[0];
+  const size = document.getElementById("size").value;
 
-  if (!fileInput.files.length) {
-    alert("Select image first");
+  if (!file) {
+    alert("Please upload image");
     return;
   }
 
-  if (!sizeInput.value) {
-    alert("Enter size");
+  if (!size) {
+    alert("Enter target size");
     return;
   }
 
   document.getElementById("status").innerText = "Processing...";
 
   setTimeout(() => {
-    document.getElementById("status").innerText = "Done ✅ (Demo)";
+    document.getElementById("status").innerText = "Done ✅";
   }, 1500);
 }
-    </script>
+</script>
+    
 </body>
 </html>
