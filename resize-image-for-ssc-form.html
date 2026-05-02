@@ -592,10 +592,10 @@ button:hover::after{
   <input type="file" id="upload" accept="image/*" multiple>
 <div id="preview"></div>
   <div class="size-row">
-    <input type="number" id="size" placeholder="Target size">
+    <input type="number" placeholder="Enter size (20KB - 50KB)">
     <select id="unit">
       <option value="kb">KB</option>
-      <option value="mb">MB</option>
+      
     </select>
   </div>
 
@@ -613,23 +613,8 @@ button:hover::after{
   
     <div id="results"></div>
   </div>
-  <script>
-
-
-function showImage() {
-
-  document.title = "Resize Image to Exact KB Online";
-
-  document.getElementById("imageBox").style.display = "block";
-  document.getElementById("pdfBox").style.display = "none";
-
-  document.getElementById("imgTab").classList.add("active");
-  document.getElementById("pdfTab").classList.remove("active");
-
-  document.getElementById("mainTitle").innerText =
-    "Resize Image to Exact KB Online";
-}
-  </script>
+  
+  
 
       
 <p>
@@ -725,5 +710,27 @@ Resizing images for SSC forms can be frustrating, but with ReduceSize.online, th
 <a href="/">← Back to Home</a>
 </p>
 
+    <script>
+function start() {
+  const fileInput = document.getElementById("upload");
+  const sizeInput = document.getElementById("size");
+
+  if (!fileInput.files.length) {
+    alert("Select image first");
+    return;
+  }
+
+  if (!sizeInput.value) {
+    alert("Enter size");
+    return;
+  }
+
+  document.getElementById("status").innerText = "Processing...";
+
+  setTimeout(() => {
+    document.getElementById("status").innerText = "Done ✅ (Demo)";
+  }, 1500);
+}
+    </script>
 </body>
 </html>
