@@ -15,7 +15,54 @@
 <body style="background:#0f0f1a; color:white; font-family:sans-serif; padding:20px; line-height:1.8;">
 
 <h1>Resize Image for SSC Form (20KB to 50KB)</h1>
+<div class="app">
+    <div style="
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  margin-bottom:6px;
+">
+  <img src="logo.svg"
+     alt="ReduceSize"
+     style="width:130px; margin-bottom:6px;">
+  
+    </div>
+    <h1 id="mainTitle">Resize Image to Exact KB Online</h1>
+    
+    <div style="display:flex; gap:10px; margin-bottom:18px;">
+  <button id="imgTab" onclick="showImage()" class="tab-btn active">🖼 Image</button>
+  <button id="pdfTab" onclick="showPDF()" class="tab-btn">📄 PDF</button>
+    </div>
+    
 
+    
+    <div id="imageBox">
+
+  <input type="file" id="upload" accept="image/*" multiple>
+<div id="preview"></div>
+  <div class="size-row">
+    <input type="number" id="size" placeholder="Target size">
+    <select id="unit">
+      <option value="kb">KB</option>
+      <option value="mb">MB</option>
+    </select>
+  </div>
+
+  <button onclick="start()">Compress & Download</button>
+
+    </div>
+    
+
+    </div>
+    <div id="status"></div>
+    <div id="download"></div>
+    <div id="progressBox" style="display:none;">
+  <div id="progressBar"></div>
+    </div>
+  
+    <div id="results"></div>
+  </div>
+  
 <p>
 If you are applying for SSC exams and facing issues with image upload, you are not alone. Many candidates struggle to resize their photo and signature to match SSC requirements. ReduceSize.online helps you resize your images to exact KB sizes like 20KB, 30KB, or 50KB easily.
 </p>
