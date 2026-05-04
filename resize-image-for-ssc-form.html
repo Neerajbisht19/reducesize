@@ -849,36 +849,8 @@ async function start() {
   results.appendChild(div);
     }
 
-    function createResultUI(blob, index) {
-
-  const results = document.getElementById("results");
-  const url = URL.createObjectURL(blob);
-
-  const div = document.createElement("div");
-  div.className = "result-item";
-
-  const img = document.createElement("img");
-  img.src = url;
-
-  const size = document.createElement("p");
-  size.innerText = (blob.size / 1024).toFixed(2) + " KB";
-
-  const btn = document.createElement("button");
-  btn.innerText = "Download";
-
-  btn.onclick = () => {
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `compressed_${index+1}.jpg`;
-    a.click();
-  };
-
-  div.appendChild(img);
-  div.appendChild(size);
-  div.appendChild(btn);
-
-  results.appendChild(div);
-    }
+    
+  
 
     document.getElementById("upload").addEventListener("change", function () {
 
