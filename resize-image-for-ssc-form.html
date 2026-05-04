@@ -592,7 +592,7 @@ button:hover::after{
   <input type="file" id="upload" accept="image/*" multiple>
 <div id="preview"></div>
   <div class="size-row">
-    <input type="number" placeholder="Enter size (20KB - 50KB)">
+    <input type="number" id="size" placeholder="Enter size (20KB - 50KB)">
     <select id="unit">
       <option value="kb">KB</option>
       
@@ -710,26 +710,74 @@ Resizing images for SSC forms can be frustrating, but with ReduceSize.online, th
 <a href="/">← Back to Home</a>
 </p>
 <script>
-function start() {
-  const file = document.getElementById("upload").files[0];
-  const size = document.getElementById("size").value;
+async function start() {
 
-  if (!file) {
-    alert("Please upload image");
+  const fileInput = document.getElementById("upload");
+  const sizeInput = document.getElementById("size");
+  const status = document.getElementById("status");
+
+  if (!fileInput.files.length) {
+    alert("Select image first");
     return;
   }
 
-  if (!size) {
-    alert("Enter target size");
+  let targetKB = parseFloat(sizeInput.value);
+  if (!targetKB || targetKB <= 0) {
+    alert("Enter valid size");
     return;
   }
 
-  document.getElementById("status").innerText = "Processing...";
+  status.innerText = "Processing...";
 
-  setTimeout(() => {
-    document.getElementById("status").innerText = "Done ✅";
-  }, 1500);
+  const blob = await compressImage(fileInput.files[0], targetKB);
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "compressed.jpg";
+  a.click();
+
+  status.innerText = "Done ✅";
 }
+
+    async function compressImage(file, targetKB) {
+
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
+  await img.decode();
+
+  let canvas = document.createElement("canvas");
+  let ctx = canvas.getContext("2d");
+
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  ctx.drawImage(img, 0, 0);
+
+  let minQ = 0.1, maxQ = 0.9;
+  let best = null;
+
+  for (let i = 0; i < 20; i++) {
+
+    let q = (minQ + maxQ) / 2;
+
+    let blob = await new Promise(r =>
+      canvas.toBlob(r, "image/jpeg", q)
+    );
+
+    let sizeKB = blob.size / 1024;
+
+    if (sizeKB > targetKB) {
+      maxQ = q;
+    } else {
+      minQ = q;
+      best = blob;
+    }
+  }
+
+  return best;
+    }
 </script>
     
 </body>
