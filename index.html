@@ -6,7 +6,8 @@
 <title>ReduceSize – Compress Image to Exact KB Online Free</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --bg: #06060f;
@@ -664,13 +665,69 @@ footer {
 
 /* ── MOBILE ── */
 @media(max-width: 600px) {
+  /* LOGO FIX: Mota (Bold) font */
+  .nav-logo { 
+    font-family: 'DM Sans', sans-serif !important; 
+    font-size: 22px !important; 
+    font-weight: 800 !important; 
+    letter-spacing: -0.5px !important;
+    white-space: nowrap; 
+  }
+  .nav-badge { font-size: 10px; padding: 4px 8px; white-space: nowrap; font-weight: 700; }
+
   .hero { padding: 40px 16px 28px; }
-  .stats-row { gap: 0; }
-  .stat-item { padding: 12px 18px; }
-  .stat-num { font-size: 20px; }
-  .tool-card { padding: 20px; border-radius: 20px; }
+  
+  /* HEADING FIX: Ekdum Bold aur Clean */
+  .hero h1 { 
+    font-family: 'DM Sans', sans-serif !important; 
+    font-size: 38px !important; 
+    font-weight: 800 !important; /* Yahan se aayega mota look */
+    letter-spacing: -1px !important; 
+    line-height: 1.15;
+  }
+  
+  .hero-sub {
+    font-size: 16px;
+    padding: 0 10px;
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  .trust-row { gap: 10px; margin-bottom: 40px; }
+  .trust-badge { font-size: 13px; padding: 8px 12px; font-weight: 600; }
+
+  /* STATS FIX: Numbers ko Extra Bold kiya */
+  .stats-row { 
+    display: flex !important;
+    flex-wrap: nowrap !important; 
+    justify-content: space-between;
+    gap: 0; 
+  }
+  .stat-item { 
+    flex: 1; 
+    padding: 12px 0; 
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  
+  .stat-num { 
+    font-family: 'DM Sans', sans-serif !important; 
+    font-size: 24px !important; 
+    font-weight: 800 !important; /* Yahan se numbers mote honge */
+    letter-spacing: 0px !important; 
+  }
+  .stat-label {
+    font-size: 11px; 
+    font-weight: 700; /* Labels ko bhi thoda bold kiya */
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .tool-card { padding: 24px 20px; border-radius: 20px; }
   nav { padding: 0 16px; }
 }
+
+
 
 /* ── MODAL ── */
 .modal-overlay {
@@ -1043,4 +1100,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-  </html>
+</html>
