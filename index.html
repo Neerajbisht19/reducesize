@@ -822,8 +822,9 @@ canvas#pdfCanvas { display: none; }
 
     <!-- IMAGE BOX -->
     <div id="imageBox">
-      <div class="upload-zone" onclick="document.getElementById('upload').click()">
-        <input type="file" id="upload" accept="image/*" multiple style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;">
+      <div class="upload-zone">
+  <input type="file" id="upload" accept="image/*" multiple>
+
         <div class="upload-icon">🖼</div>
         <div class="upload-title">Drop images here or <span style="color:var(--purple2);">browse</span></div>
         <div class="upload-sub">Supports <span>JPG, PNG, WEBP</span> · Multiple files OK</div>
