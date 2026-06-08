@@ -394,6 +394,50 @@ body::after{
       <div class="fs"><label class="fl">Unit</label><select id="unit"><option value="kb">KB</option><option value="mb">MB</option></select></div>
     </div>
     <button class="btn" onclick="start()">⚡&nbsp; Compress &amp; Download</button>
+    <!-- COMPRESSION ANIMATION -->
+<div id="ov" style="position:fixed;inset:0;background:rgba(2,2,12,.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(12px);">
+<div style="width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
+<div id="scene" style="width:220px;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+<div id="w1" style="position:absolute;border-radius:50%;border:2px solid rgba(62,207,142,.6);opacity:0;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;"></div>
+<div id="w2" style="position:absolute;border-radius:50%;border:2px solid rgba(62,207,142,.6);opacity:0;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;"></div>
+<div id="w3" style="position:absolute;border-radius:50%;border:2px solid rgba(62,207,142,.6);opacity:0;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;"></div>
+<div id="bigBlob" style="position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#8b6dff,#4a35cc);box-shadow:0 0 40px rgba(109,84,240,.5);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;z-index:2;">
+<span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.7);">ORIGINAL</span>
+<strong id="origLabel" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;">-</strong>
+</div>
+<div id="handL" style="position:absolute;top:50%;transform:translateY(-50%);font-size:32px;opacity:0;z-index:4;left:0;">🤜</div>
+<div id="handR" style="position:absolute;top:50%;transform:translateY(-50%) scaleX(-1);font-size:32px;opacity:0;z-index:4;right:0;">🤜</div>
+<div id="smallBlob" style="position:absolute;width:0;height:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#3ecf8e,#16a35a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;z-index:3;opacity:0;">
+<span id="sbLbl" style="font-size:9px;font-weight:700;color:rgba(255,255,255,.8);opacity:0;">COMPRESSED</span>
+<strong id="sbVal" style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;opacity:0;">-</strong>
+</div>
+</div>
+<div id="amsg" style="font-size:13px;color:#404068;margin-bottom:12px;opacity:0;transition:opacity .3s;font-weight:500;text-align:center;"></div>
+<div id="astats" style="display:flex;align-items:center;gap:10px;width:100%;margin-bottom:16px;opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s;">
+<div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;text-align:center;">
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#404068;margin-bottom:3px;">Pehle</div>
+<div id="asBefore" style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#ff6b6b;">-</div>
+</div>
+<div style="font-size:20px;color:#303060;">→</div>
+<div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;text-align:center;">
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#404068;margin-bottom:3px;">Baad</div>
+<div id="asAfter" style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#3ecf8e;">-</div>
+</div>
+</div>
+<div id="apct" style="margin-bottom:18px;opacity:0;transform:scale(.8);transition:opacity .4s,transform .4s;">
+<div style="display:inline-flex;align-items:center;gap:10px;background:rgba(62,207,142,.07);border:1px solid rgba(62,207,142,.2);border-radius:20px;padding:10px 20px;">
+<div id="apctNum" style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:#3ecf8e;line-height:1;">0%</div>
+<div style="font-size:12px;color:#3ecf8e;font-weight:600;line-height:1.4;">Size<br>Reduction</div>
+</div>
+</div>
+<button id="adlBtn" style="width:100%;padding:14px;border-radius:12px;border:none;background:#3ecf8e;color:#fff;font-size:15px;font-weight:700;font-family:'Manrope',sans-serif;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;margin-bottom:8px;"></button>
+<div id="ashr" style="display:flex;gap:8px;width:100%;opacity:0;transition:opacity .3s;">
+<button onclick="animShareWA()" style="flex:1;padding:9px;border-radius:9px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#6060a0;font-size:12px;font-weight:600;cursor:pointer;font-family:'Manrope',sans-serif;">📱 WhatsApp</button>
+<button id="animCpBtn" onclick="animCopy()" style="flex:1;padding:9px;border-radius:9px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#6060a0;font-size:12px;font-weight:600;cursor:pointer;font-family:'Manrope',sans-serif;">🔗 Copy Link</button>
+</div>
+<button onclick="closeAnim()" style="background:none;border:none;color:#303055;font-size:12px;cursor:pointer;margin-top:10px;font-family:'Manrope',sans-serif;">band karo ✕</button>
+</div>
+</div>
   </div>
   <div id="pdfBox" style="display:none">
     <div class="drop">
@@ -508,7 +552,7 @@ async function start(){
     const blob=await compressImg(files[i],safe);
     if(!blob)continue;
     addResult(blob,i);
-    if(files.length===1)setDl(blob,'compressed.jpg',st);
+    if(files.length===1)setDl(blob,'compressed.jpg',st,files[0].size/1024);
   }
   st.innerText='Done ✅';pb.style.width='100%';
   setTimeout(()=>{pw.style.display='none'},1500);
@@ -531,12 +575,10 @@ async function compressImg(file,tkb){
   if(!best)best=await new Promise(r=>{let c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);c.toBlob(r,'image/jpeg',.5)});
   return best;
 }
-function setDl(blob,name,st){
-  const url=URL.createObjectURL(blob),btn=document.getElementById('dlbtn');
-  btn.style.display='block';
-  btn.innerText='⬇  Download ('+( blob.size/1024).toFixed(1)+' KB)';
-  btn.onclick=()=>{dlUrl(url,name);btn.style.display='none';URL.revokeObjectURL(url)};
-  if(st)st.innerText='Ready — tap Download below';
+function setDl(blob,name,st,origKB){
+  var compKB=blob.size/1024;
+  showCompressAnim(origKB||compKB*50,compKB,blob,name||'compressed.jpg');
+  if(st)st.innerText='';
 }
 function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
 function addResult(blob,i){
@@ -600,4 +642,143 @@ document.addEventListener('DOMContentLoaded',()=>{
     dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');inp.files=e.dataTransfer.files;inp.dispatchEvent(new Event('change'))});
   }
 });
-</script></body></html>
+</script>
+  <script>
+(function(){
+var animBlob=null,animRunning=false;
+function ez(t){return t<.5?4*t*t*t:(t-1)*(2*t-2)*(2*t-2)+1}
+function lerp(a,b,t){return a+(b-a)*t}
+function anim(dur,fn,done){
+  var s=performance.now();
+  (function f(n){var t=Math.min((n-s)/dur,1);fn(ez(t),t);if(t<1)requestAnimationFrame(f);else if(done)done();})(s);
+}
+function wave(el,delay){
+  setTimeout(function(){
+    el.style.transition='none';el.style.opacity='.8';
+    el.style.transform='translate(-50%,-50%) scale(0)';
+    requestAnimationFrame(function(){
+      el.style.transition='all .6s ease-out';
+      el.style.transform='translate(-50%,-50%) scale(4)';
+      el.style.opacity='0';
+    });
+  },delay);
+}
+function particles(){
+  var scene=document.getElementById('scene');
+  var cols=['#6d54f0','#3ecf8e','#f6c343','#ff6b6b','#a78bfa','#20d9c0'];
+  for(var i=0;i<20;i++){
+    (function(i){
+      var p=document.createElement('div');
+      var angle=(Math.PI*2/20)*i+Math.random()*.3;
+      var dist=60+Math.random()*50;
+      var size=4+Math.random()*6;
+      p.style.cssText='position:absolute;border-radius:50%;width:'+size+'px;height:'+size+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:10;';
+      scene.appendChild(p);
+      anim(500+Math.random()*400,function(t){
+        p.style.transform='translate(calc(-50% + '+(Math.cos(angle)*dist*t)+'px),calc(-50% + '+(Math.sin(angle)*dist*t)+'px))';
+        p.style.opacity=1-t;
+      },function(){p.remove()});
+    })(i);
+  }
+}
+window.showCompressAnim=function(origKB,compKB,blob,fname){
+  if(animRunning)return;
+  animRunning=true;
+  animBlob={blob:blob,name:fname};
+  var origStr=origKB>1024?(origKB/1024).toFixed(1)+' MB':origKB.toFixed(0)+' KB';
+  var compStr=compKB.toFixed(1)+' KB';
+  var pct=Math.round((1-compKB/origKB)*100);
+  document.getElementById('origLabel').textContent=origStr;
+  document.getElementById('sbVal').textContent=compStr;
+  document.getElementById('asBefore').textContent=origStr;
+  document.getElementById('asAfter').textContent=compStr;
+  document.getElementById('amsg').textContent=pct+'% size kam kar diya! 🎉';
+  document.getElementById('apctNum').textContent='0%';
+  var dlBtn=document.getElementById('adlBtn');
+  dlBtn.textContent='⬇ Download ('+compStr+')';
+  dlBtn.style.opacity='0';dlBtn.style.transform='translateY(10px)';
+  dlBtn.onclick=function(){if(animBlob){var a=document.createElement('a');a.href=URL.createObjectURL(animBlob.blob);a.download=animBlob.name;a.click();}closeAnim();};
+  var bb=document.getElementById('bigBlob'),sb=document.getElementById('smallBlob');
+  var hL=document.getElementById('handL'),hR=document.getElementById('handR');
+  var stats=document.getElementById('astats'),apct=document.getElementById('apct');
+  var ashr=document.getElementById('ashr'),amsg=document.getElementById('amsg');
+  bb.style.cssText='position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#8b6dff,#4a35cc);box-shadow:0 0 40px rgba(109,84,240,.5);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;z-index:2;opacity:1;';
+  sb.style.cssText='position:absolute;width:0;height:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#3ecf8e,#16a35a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;z-index:3;opacity:0;';
+  document.getElementById('sbLbl').style.opacity=0;document.getElementById('sbVal').style.opacity=0;
+  hL.style.cssText='position:absolute;top:50%;transform:translateY(-50%);font-size:32px;opacity:0;z-index:4;left:0;';
+  hR.style.cssText='position:absolute;top:50%;transform:translateY(-50%) scaleX(-1);font-size:32px;opacity:0;z-index:4;right:0;';
+  stats.style.opacity='0';stats.style.transform='translateY(12px)';
+  apct.style.opacity='0';apct.style.transform='scale(.8)';
+  ashr.style.opacity='0';amsg.style.opacity='0';
+  var ov=document.getElementById('ov');
+  ov.style.opacity='1';ov.style.pointerEvents='all';
+  setTimeout(function(){
+    hL.style.transition='all .3s ease';hR.style.transition='all .3s ease';
+    hL.style.opacity='1';hR.style.opacity='1';
+  },300);
+  setTimeout(function(){
+    var prog=0;
+    var iv=setInterval(function(){
+      prog+=0.04;if(prog>=1){prog=1;clearInterval(iv);}
+      var e=ez(prog);
+      var hp=lerp(0,18,e);
+      hL.style.left=hp+'px';hR.style.right=hp+'px';
+      var mid=Math.sin(prog*Math.PI);
+      var bw=lerp(120,60,e)+mid*20;var bh=lerp(120,60,e)+mid*20;
+      bb.style.width=bw+'px';bb.style.height=bh+'px';
+      bb.style.opacity=lerp(1,0,e*e);
+    },16);
+  },800);
+  setTimeout(function(){
+    bb.style.opacity='0';
+    particles();
+    wave(document.getElementById('w1'),0);
+    wave(document.getElementById('w2'),150);
+    wave(document.getElementById('w3'),300);
+    hL.style.transition='all .4s cubic-bezier(.34,1.56,.64,1)';
+    hR.style.transition='all .4s cubic-bezier(.34,1.56,.64,1)';
+    hL.style.left='-20px';hR.style.right='-20px';
+    hL.style.opacity='0';hR.style.opacity='0';
+  },1600);
+  setTimeout(function(){
+    anim(600,function(t){
+      var sz=lerp(0,64,t);
+      sb.style.width=sz+'px';sb.style.height=sz+'px';
+      sb.style.opacity=t;
+      sb.style.boxShadow='0 0 '+lerp(0,30,t)+'px rgba(62,207,142,'+lerp(0,.6,t)+')';
+    },function(){
+      document.getElementById('sbLbl').style.transition='opacity .3s';
+      document.getElementById('sbVal').style.transition='opacity .3s';
+      document.getElementById('sbLbl').style.opacity=1;
+      document.getElementById('sbVal').style.opacity=1;
+    });
+  },1800);
+  setTimeout(function(){stats.style.opacity='1';stats.style.transform='translateY(0)';},2500);
+  setTimeout(function(){
+    apct.style.opacity='1';apct.style.transform='scale(1)';
+    var n=0,iv2=setInterval(function(){n+=2;document.getElementById('apctNum').textContent=Math.min(n,pct)+'%';if(n>=pct)clearInterval(iv2);},20);
+  },2800);
+  setTimeout(function(){amsg.style.opacity='1';},3400);
+  setTimeout(function(){
+    dlBtn.style.opacity='1';dlBtn.style.transform='translateY(0)';
+    ashr.style.opacity='1';
+    animRunning=false;
+  },3700);
+};
+window.closeAnim=function(){
+  var ov=document.getElementById('ov');
+  ov.style.opacity='0';ov.style.pointerEvents='none';
+  animRunning=false;
+};
+window.animShareWA=function(){window.open('https://wa.me/?text='+encodeURIComponent('Free image compressor:\nhttps://reducesize.online'),'_blank');};
+window.animCopy=function(){
+  navigator.clipboard.writeText('https://reducesize.online').then(function(){
+    var b=document.getElementById('animCpBtn');b.textContent='✅ Done!';
+    setTimeout(function(){b.textContent='🔗 Copy Link';},2000);
+  });
+};
+document.getElementById('ov').addEventListener('click',function(e){if(e.target===this)closeAnim();});
+})();
+  </script>
+</body>
+</html>
