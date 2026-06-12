@@ -335,16 +335,20 @@ body::after{
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How to compress image to 20KB?","acceptedAnswer":{"@type":"Answer","text":"Upload image, type 20, select KB, click Compress & Download. Done."}},
-{"@type":"Question","name":"Is my photo safe?","acceptedAnswer":{"@type":"Answer","text":"100% safe. Nothing is uploaded — everything happens in your browser."}}
+{"@type":"Question","name":"How do I resize an image to exactly 20KB?","acceptedAnswer":{"@type":"Answer","text":"Upload your image, type 20 in the target size field, make sure KB is selected, and click Compress & Download. The tool outputs the highest-quality version of your image within 20KB."}},
+{"@type":"Question","name":"Is my photo safe when using ReduceSize?","acceptedAnswer":{"@type":"Answer","text":"100% safe. Nothing is uploaded — all compression happens entirely inside your browser. Your files never leave your device."}},
+{"@type":"Question","name":"Does it work for SSC and UPSC government exam forms?","acceptedAnswer":{"@type":"Answer","text":"Yes. ReduceSize was built for this exact use case. Quick-select buttons cover the most common requirements: 10KB for signatures, 20KB for form photos, and 50KB for portrait photos."}},
+{"@type":"Question","name":"Can I compress multiple images at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select multiple files in the upload picker and all will be compressed to your target size in one batch. Each file can be downloaded individually from the results grid."}},
+{"@type":"Question","name":"Does ReduceSize work on mobile phones?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool is fully mobile-responsive and works on Android and iOS browsers. You can select images from your camera roll and download the compressed result directly to your device."}},
+{"@type":"Question","name":"Can I compress a PDF to a specific KB size?","acceptedAnswer":{"@type":"Answer","text":"Yes. Switch to the PDF tab, upload your file, enter a target size in KB, and click Compress. This works best for scanned or image-based PDFs."}}
 ]}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication",
 "name":"ReduceSize","url":"https://reducesize.online",
 "applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Free browser-based tool to compress images and PDFs to exact KB size. No upload. Works on mobile.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script></head><body><nav class="nav">
+"description":"Free browser-based tool to compress images and PDFs to an exact KB size. No upload required. Works on mobile and desktop. Perfect for SSC, UPSC, Railway, and government exam forms.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+"featureList":["No file upload required","Works entirely in browser","Supports JPG, PNG, WEBP","Batch image compression","PDF compression","Mobile friendly"]}</script></head><body><nav class="nav">
   <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
   <span class="nav-pill">✦ FREE FOREVER</span>
 </nav><div class="wrap">
@@ -415,12 +419,12 @@ body::after{
 <div id="amsg" style="font-size:13px;color:#404068;margin-bottom:12px;opacity:0;transition:opacity .3s;font-weight:500;text-align:center;"></div>
 <div id="astats" style="display:flex;align-items:center;gap:10px;width:100%;margin-bottom:16px;opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s;">
 <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;text-align:center;">
-<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#404068;margin-bottom:3px;">Pehle</div>
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#404068;margin-bottom:3px;">Before</div>
 <div id="asBefore" style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#ff6b6b;">-</div>
 </div>
 <div style="font-size:20px;color:#303060;">→</div>
 <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;text-align:center;">
-<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#404068;margin-bottom:3px;">Baad</div>
+<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#404068;margin-bottom:3px;">After</div>
 <div id="asAfter" style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#3ecf8e;">-</div>
 </div>
 </div>
@@ -435,7 +439,7 @@ body::after{
 <button onclick="animShareWA()" style="flex:1;padding:9px;border-radius:9px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#6060a0;font-size:12px;font-weight:600;cursor:pointer;font-family:'Manrope',sans-serif;">📱 WhatsApp</button>
 <button id="animCpBtn" onclick="animCopy()" style="flex:1;padding:9px;border-radius:9px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);color:#6060a0;font-size:12px;font-weight:600;cursor:pointer;font-family:'Manrope',sans-serif;">🔗 Copy Link</button>
 </div>
-<button onclick="closeAnim()" style="background:none;border:none;color:#303055;font-size:12px;cursor:pointer;margin-top:10px;font-family:'Manrope',sans-serif;">band karo ✕</button>
+<button onclick="closeAnim()" style="background:none;border:none;color:#303055;font-size:12px;cursor:pointer;margin-top:10px;font-family:'Manrope',sans-serif;">Close ✕</button>
 </div>
 </div>
   </div>
@@ -458,27 +462,54 @@ body::after{
 <div class="chips-hd">More Tools</div><div class="chips"><a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a><a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a><a href="/compress-image-to-30kb.html" class="chip"><span class="chip-i">📋</span><div class="chip-t"><strong>Compress to 30KB</strong><span>Exam portals</span></div></a><a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a><a href="/compress-image-to-100kb.html" class="chip"><span class="chip-i">🏷</span><div class="chip-t"><strong>Compress to 100KB</strong><span>High quality</span></div></a><a href="/compress-image-without-losing-quality.html" class="chip"><span class="chip-i">✨</span><div class="chip-t"><strong>No Quality Loss</strong><span>Smart compress</span></div></a><a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">📐</span><div class="chip-t"><strong>Reduce Size (KB)</strong><span>Any size</span></div></a><a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a><a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a><a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a><a href="/resize-image-for-police-form.html" class="chip"><span class="chip-i">👮</span><div class="chip-t"><strong>Police Form</strong><span>Constable · SI</span></div></a><a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">💻</span><div class="chip-t"><strong>Online Form</strong><span>Any portal</span></div></a></div>
 <section class="seo">
 <h2>Compress Image to Exact KB — Free &amp; Instant</h2>
-<p>ReduceSize.online lets you compress images and PDFs to a precise file size — whether that's 10KB, 20KB, 50KB, or 100KB — right inside your browser. Your files never leave your device, so there's no privacy risk and no waiting for uploads.</p>
-<p>Government exam portals, job applications, and college admissions often reject files that exceed their size limits. Even 1KB over the cap means rejection. ReduceSize uses smart binary-search compression to hit your exact target, every time.</p>
+<p>ReduceSize.online is a free, browser-based tool that lets you compress images and PDFs to a precise file size — whether that's 10KB, 20KB, 50KB, or 100KB — directly inside your browser. Your files never leave your device, so there is no privacy risk, no waiting for uploads, and no size limits imposed by a server.</p>
+<p>Government exam portals, job applications, and college admissions often reject files that exceed their size limits. Even 1KB over the cap means your form gets rejected. ReduceSize uses a smart binary-search compression algorithm to hit your exact target size every single time — no guessing, no manual retrying.</p>
+
 <h3>Why Exact KB Compression Matters</h3>
-<p>Most tools reduce size by percentage or to a rough estimate. ReduceSize adjusts both image quality and dimensions together until your file hits the exact number you enter. No guessing, no retrying, no frustration.</p>
+<p>Most image compression tools reduce file size by a fixed percentage or to a rough estimate. That approach works fine for casual use, but it fails completely when you need to meet a strict file size requirement — like the ones on SSC, UPSC, Railway, or banking exam portals.</p>
+<p>ReduceSize takes a different approach. It adjusts both image quality and dimensions together in a precise loop until your file lands exactly at or below the number you enter. The result is the highest possible image quality within your chosen size limit, delivered in seconds.</p>
+
 <h3>Who Uses This Tool</h3>
+<p>ReduceSize was originally built for students and job seekers in India who struggle with strict government portal requirements. Today it is used by a wide range of people:</p>
 <ul>
-<li>Students filling SSC CGL, CHSL, UPSC, Railway, Police forms</li>
-<li>Professionals sending email attachments with size caps</li>
-<li>Anyone uploading passport photos or ID scans to government portals</li>
+<li><strong>Students</strong> filling SSC CGL, SSC CHSL, UPSC Civil Services, Railway NTPC, Police Constable, and other government exam forms that require photos under 20KB or 50KB.</li>
+<li><strong>Professionals</strong> sending email attachments with size caps — many email clients block files over 1MB, and compressing images beforehand prevents delivery failures.</li>
+<li><strong>Freelancers and designers</strong> who need to optimize images for websites, apps, or client presentations without sacrificing too much visual quality.</li>
+<li><strong>Anyone</strong> uploading passport photos, ID card scans, or signature images to government portals, banking sites, or e-commerce platforms that enforce strict upload limits.</li>
 </ul>
-<h3>How to Use</h3>
+
+<h3>How to Compress an Image to an Exact KB Size</h3>
 <ol>
-<li>Select one or more images using the upload box above</li>
-<li>Enter your target size (e.g. 50) and choose KB or MB</li>
-<li>Click Compress &amp; Download — done in seconds</li>
+<li><strong>Select your file:</strong> Click the upload area or drag and drop one or more images. JPG, PNG, and WEBP formats are all supported. You can select multiple files at once.</li>
+<li><strong>Set your target size:</strong> Use one of the quick-select buttons (10KB, 20KB, 30KB, 50KB, 100KB, 200KB) or type any custom value in the input box. Switch between KB and MB as needed.</li>
+<li><strong>Compress and download:</strong> Click the Compress &amp; Download button. The tool processes everything locally in your browser and delivers the compressed file in seconds. No upload, no waiting.</li>
 </ol>
+
+<h3>How the Compression Algorithm Works</h3>
+<p>When you click Compress, ReduceSize runs a binary-search loop that adjusts JPEG quality and image dimensions simultaneously. It starts at a mid-range quality setting, checks the output file size, then narrows the range — increasing quality if the file is too small, decreasing it if too large. After up to 25 iterations per image, it converges on the highest quality setting that keeps the file at or below your target. If quality alone cannot reach the target, the image dimensions are also scaled down proportionally.</p>
+<p>This approach produces better results than simple quality sliders because it treats both quality and resolution as variables, finding the optimal combination for the exact size you need.</p>
+
+<h3>Privacy and Security</h3>
+<p>Many online tools upload your images to a remote server for processing. This creates privacy risks — your personal photos, ID scans, or passport images could be stored, logged, or accessed by third parties. ReduceSize processes everything entirely inside your web browser using JavaScript. Your files are never transmitted over the internet, and nothing is stored anywhere outside your own device. Once you close the browser tab, all data is gone.</p>
+
+<h3>Supported File Types</h3>
+<p>The image compressor supports JPEG, PNG, and WEBP input files and outputs optimized JPEG files. The PDF compressor works best with scanned or image-based PDFs — it re-renders each page at an adjusted quality level to meet your target size.</p>
+
+<h3>Common Use Cases by Exam Portal</h3>
+<p><strong>SSC CGL and CHSL:</strong> The Staff Selection Commission requires a passport-size photograph between 20KB and 50KB in JPEG format. ReduceSize lets you hit that range precisely without trial and error.</p>
+<p><strong>UPSC Civil Services:</strong> UPSC forms typically require a photo under 300KB and a signature under 20KB. Use the 20KB quick button for signatures and the 200KB button for photos to stay safely within limits.</p>
+<p><strong>Railway NTPC and Group D:</strong> Railway Recruitment Board portals usually cap photos at 50KB. Select the 50KB quick button for a one-click solution.</p>
+<p><strong>State Police and Constable Exams:</strong> Photo and signature requirements vary by state but typically fall in the 10KB–50KB range. ReduceSize covers all these requirements with its quick-select buttons and custom input.</p>
+
 <h3>Frequently Asked Questions</h3>
-<p><strong>How to resize an image to 20KB?</strong><br>Upload, type 20, select KB, click Compress. The tool handles the rest.</p>
-<p><strong>Does it work for SSC and UPSC forms?</strong><br>Yes — it was built exactly for this use case.</p>
-<p><strong>Can I compress multiple images at once?</strong><br>Yes, select as many as you want and all will be compressed together.</p>
-<p><strong>Will quality suffer?</strong><br>Quality is maximised for the size you choose. At very small sizes (below 20KB) some quality loss is unavoidable.</p>
+<p><strong>How do I resize an image to exactly 20KB?</strong><br>Upload your image, type 20 in the target size field, make sure KB is selected, and click Compress &amp; Download. The tool will output the highest-quality version of your image that fits within 20KB.</p>
+<p><strong>Does it work for SSC and UPSC government forms?</strong><br>Yes — the tool was specifically built for this use case. The quick-select buttons cover the most common government exam size requirements: 10KB for signatures, 20KB for form photos, 50KB for larger portrait photos.</p>
+<p><strong>Can I compress multiple images at once?</strong><br>Yes. Select as many images as you need in the file picker and all of them will be compressed to your target size in a single batch. Each file can be downloaded individually from the results grid.</p>
+<p><strong>Will my image quality suffer a lot?</strong><br>Quality is maximized for the size you choose. At very small sizes such as below 15KB, some quality loss is unavoidable because there is simply less data available to represent the image. For most government form requirements (20KB–100KB), the output quality is clear enough for official use.</p>
+<p><strong>Is there a file size limit for uploads?</strong><br>No server-side limit exists because your files never leave your browser. Very large source files (above 20MB) may take a few extra seconds to process depending on your device speed.</p>
+<p><strong>Does it work on mobile phones?</strong><br>Yes. The tool is fully mobile-responsive and works on Android and iOS browsers. You can select images directly from your phone's camera roll and download the compressed output to your device.</p>
+<p><strong>What is the difference between KB and MB compression?</strong><br>KB (kilobytes) is used for small files like form photos and signatures. MB (megabytes) is used for larger files like high-resolution photos or multi-page scanned documents. The unit selector lets you switch between both.</p>
+<p><strong>Can I compress a PDF to a specific KB size?</strong><br>Yes. Switch to the PDF tab, upload your PDF, enter a target size in KB, and click Compress. The tool renders each page as an image and rebuilds the PDF at the compressed quality. This works best for scanned documents.</p>
 </section>
 </div><footer class="footer">
   <a class="flogo" href="/"><em>Reduce</em>Size</a>
@@ -496,22 +527,22 @@ body::after{
     <a href="/terms-conditions.html">Terms</a>
     <a href="/disclaimer.html">Disclaimer</a>
   </nav>
-  <p class="fcopy">© 2025 ReduceSize.online — All rights reserved.</p>
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
   <div class="ftrust">
     <span>🔒 No upload</span><span>⚡ Instant</span><span>✅ Free</span><span>📱 Mobile OK</span>
   </div>
 </footer>
 <div id="mo1" class="mo"><div class="mb">
   <h2>⚠️ Heads up!</h2>
-  <p>15KB se kam mein image itni blur ho jaayegi ki pehchaana mushkil ho jaayega.</p>
-  <p class="tip">👉 Best results ke liye 20KB+ try karein.</p>
+  <p>Below 15KB, images may become too blurry to be recognizable.</p>
+  <p class="tip">👉 For best results, try 20KB or higher.</p>
   <button onclick="document.getElementById('mo1').style.display='none'">Got it 👍</button>
 </div></div>
 <div id="mo2" class="mo"><div class="mb">
   <h2>⚠️ Heads up!</h2>
-  <p>50KB se kam mein PDF pages unreadable ho jaate hain.</p>
-  <p class="tip">👉 50–100KB+ try karein for best results.</p>
-  <button onclick="document.getElementById('mo2').style.display='none'">Samjha 👍</button>
+  <p>Below 50KB, PDF pages may become unreadable.</p>
+  <p class="tip">👉 Try 50–100KB or higher for best results.</p>
+  <button onclick="document.getElementById('mo2').style.display='none'">Got it 👍</button>
 </div></div>
 <div id="pm" class="pm" onclick="this.style.display='none'"><img id="pmi" alt="Preview"></div>
 <canvas id="pdfCv" style="display:none"></canvas>
@@ -692,7 +723,7 @@ window.showCompressAnim=function(origKB,compKB,blob,fname){
   document.getElementById('sbVal').textContent=compStr;
   document.getElementById('asBefore').textContent=origStr;
   document.getElementById('asAfter').textContent=compStr;
-  document.getElementById('amsg').textContent=pct+'% size kam kar diya! 🎉';
+  document.getElementById('amsg').textContent=pct+'% size reduced! 🎉';
   document.getElementById('apctNum').textContent='0%';
   var dlBtn=document.getElementById('adlBtn');
   dlBtn.textContent='⬇ Download ('+compStr+')';
