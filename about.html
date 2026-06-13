@@ -334,22 +334,48 @@ body::after{
   <span class="nav-pill">✦ FREE FOREVER</span>
 </nav><div class="legal">
 <h1>About ReduceSize</h1>
-<p class="upd">A simple tool built for real people with real deadlines.</p>
+<p class="upd">A free, privacy-first image compression tool built for real people with real deadlines.</p>
 
-<p>ReduceSize.online was built because we kept seeing the same frustrating situation: someone fills out a government exam form, uploads their photo, and gets rejected because the file is 22KB instead of 20KB. No explanation. Just rejection.</p>
+<p>ReduceSize.online is a free browser-based tool that compresses images and PDFs to an exact file size — whether that is 10KB, 20KB, 50KB, or any custom target you set. Unlike most compression tools that give you a rough estimate, ReduceSize uses a precise binary-search algorithm to hit your exact number every time, without uploading your files to any server.</p>
 
-<p>Most image compressors online reduce file size roughly — they give you "smaller" but not "exactly this size." That's not useful when a portal requires exactly 20KB and your image is 23KB. You end up guessing, trying, failing, trying again.</p>
+<h2>Why We Built ReduceSize</h2>
+<p>The idea for ReduceSize came from a frustrating but very common problem in India: a student carefully fills out a government exam application form — SSC, UPSC, Railway, Police — spends time uploading their photo, and gets an error saying the file exceeds the size limit by a few kilobytes. The portal gives no guidance on how to fix it. The student has to find a tool, compress the image, hope it lands under the limit, and try again.</p>
 
-<h2>Why We Built This</h2>
-<p>We built ReduceSize to solve one specific problem: getting an image or PDF to an exact file size, first try, every time. The tool uses a binary-search compression algorithm that adjusts quality and dimensions together until your file hits the target you set.</p>
+<p>Most image compressors available online reduce size by a percentage or to a rough estimate. That works for casual use, but it completely fails when a portal requires a file to be under exactly 20KB. You could end up with 21KB or 18KB — both are problems. One gets rejected, the other sacrifices more quality than necessary.</p>
 
-<p>No server uploads. No accounts. No trial limits. Everything runs inside your browser using your device's own processing power. Your files never leave your phone or computer.</p>
+<p>We built ReduceSize to solve this single, specific problem: compress an image or PDF to an exact kilobyte target, first try, every time, without sending your files anywhere.</p>
+
+<h2>How the Tool Works</h2>
+<p>When you select an image and set a target size, ReduceSize runs a compression loop entirely inside your browser. It uses a binary-search approach — starting at a mid-range quality setting, checking the output file size, then narrowing in on the highest quality level that keeps the file at or below your target. If quality alone cannot reach the target, it also reduces the image dimensions proportionally. The result is the best possible image quality within your chosen size limit.</p>
+
+<p>Everything happens locally on your device using JavaScript. No file is ever transmitted to a server. No data is stored anywhere. When you close the browser tab, everything is gone. This makes ReduceSize one of the safest tools available for compressing sensitive documents like ID scans, passport photos, and signature images.</p>
 
 <h2>Who Uses ReduceSize</h2>
-<p>Students applying for SSC, UPSC, Railway, and Police exams. Professionals uploading documents to HR portals. Anyone who has ever been told their image is "too large" by an online form.</p>
+<p>ReduceSize was originally built for students and job seekers navigating India's government exam application process, but it is now used by a wide range of people across many situations:</p>
+<ul>
+<li><strong>Exam applicants</strong> — Students filling SSC CGL, SSC CHSL, UPSC Civil Services, Railway NTPC, RRB Group D, and State Police exam forms that require photos and signatures under strict KB limits.</li>
+<li><strong>College and university applicants</strong> — Many admission portals require passport photos under 50KB or 100KB. ReduceSize handles these requirements with one click.</li>
+<li><strong>Working professionals</strong> — HR portals, government employee systems, and banking applications often impose file size limits on document uploads. ReduceSize helps professionals meet those limits without quality loss.</li>
+<li><strong>Freelancers and small business owners</strong> — Anyone who regularly sends images via email or uploads product photos to e-commerce platforms benefits from fast, reliable compression.</li>
+<li><strong>General users</strong> — Anyone who has ever received a "file too large" error when trying to upload a photo online.</li>
+</ul>
 
-<h2>Our Promise</h2>
-<p>Free forever. No ads that slow you down. No data collection. No hidden fees. Just a tool that does exactly what it says.</p>
+<h2>What Makes ReduceSize Different</h2>
+<p>There are many image compression tools available online. Most of them share the same fundamental limitation: they compress by percentage or to a preset quality level, not to a specific file size. ReduceSize is designed from the ground up around the concept of exact-size output. You type the number you need, and the tool delivers a file that meets it.</p>
+<p>A few other things that set ReduceSize apart:</p>
+<ul>
+<li><strong>No uploads, ever</strong> — All processing happens in your browser. Your files never leave your device.</li>
+<li><strong>Batch compression</strong> — You can compress multiple images at once, all to the same target size.</li>
+<li><strong>PDF support</strong> — In addition to images, ReduceSize can compress scanned and image-based PDFs to a target KB size.</li>
+<li><strong>Mobile friendly</strong> — The tool works on Android and iOS browsers. You can select images from your phone's camera roll and download the result directly.</li>
+<li><strong>Always free</strong> — No free tier limits, no sign-up, no watermarks. ReduceSize is completely free for everyone.</li>
+</ul>
+
+<h2>Our Commitment to Privacy</h2>
+<p>Privacy is not a feature we added — it is the foundation of how ReduceSize works. Because all compression happens locally in your browser, we have no technical ability to access, store, or process your files even if we wanted to. We do not use analytics tools that track individual users. We do not sell data. We do not require an account or any personal information to use the tool.</p>
+
+<h2>Contact Us</h2>
+<p>If you have a question, found a bug, or want to suggest a feature, we would love to hear from you. Visit our <a href="/contact-us.html" style="color:var(--purple-l)">Contact page</a> to get in touch. We read every message and aim to respond within 48 hours.</p>
 </div><footer class="footer">
   <a class="flogo" href="/"><em>Reduce</em>Size</a>
   <nav class="fnav">
@@ -366,7 +392,7 @@ body::after{
     <a href="/terms-conditions.html">Terms</a>
     <a href="/disclaimer.html">Disclaimer</a>
   </nav>
-  <p class="fcopy">© 2025 ReduceSize.online — All rights reserved.</p>
+  <p class="fcopy">© 2025–2026 ReduceSize.online — All rights reserved.</p>
   <div class="ftrust">
     <span>🔒 No upload</span><span>⚡ Instant</span><span>✅ Free</span><span>📱 Mobile OK</span>
   </div>
