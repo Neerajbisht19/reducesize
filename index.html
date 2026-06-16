@@ -167,7 +167,16 @@ body::after{
   font-size:15px;font-family:'Manrope',sans-serif;font-weight:600;
   outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
 }
+.irow input::placeholder {color: rgba(255,255,255,0.2);}
 .irow input:focus,.irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
+
+/* Divider */
+.or-divider {
+  display:flex; align-items:center; text-align:center; color:var(--muted);
+  font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:16px;
+}
+.or-divider::before, .or-divider::after { content:''; flex:1; border-bottom:1px solid rgba(255,255,255,0.05); margin:0 10px; }
+
 /* BUTTONS */
 .btn{
   width:100%;padding:14px;border-radius:11px;border:none;
@@ -222,8 +231,7 @@ body::after{
 
 <div class="card">
   <div class="tabs">
-    <button class="tab on" onclick="showTab('imgBox', this)">🖼&nbsp; Size (KB)</button>
-    <button class="tab" onclick="showTab('resizeBox', this)">📏&nbsp; Dimensions</button>
+    <button class="tab on" onclick="showTab('imgBox', this)">🖼&nbsp; Image Tools</button>
     <button class="tab" onclick="showTab('pdfBox', this)">📄&nbsp; PDF</button>
   </div>
 
@@ -235,7 +243,8 @@ body::after{
       <div class="drop-hint">JPG · PNG · WEBP &nbsp;·&nbsp; Multiple files OK</div>
     </div>
     <div id="prev" class="prev-grid" style="display:none"></div>
-    <div class="ql">Quick sizes</div>
+    
+    <div class="ql">Quick Targets</div>
     <div class="qbtns">
       <button class="qb" onclick="qSet(10,this)">10 KB</button>
       <button class="qb" onclick="qSet(20,this)">20 KB</button>
@@ -243,22 +252,16 @@ body::after{
       <button class="qb" onclick="qSet(50,this)">50 KB</button>
       <button class="qb" onclick="qSet(100,this)">100 KB</button>
     </div>
+
     <div class="irow">
-      <div class="f"><label class="fl">Target Size</label><input type="number" id="size" placeholder="e.g. 50" min="1"></div>
+      <div class="f"><label class="fl">Target Size (Optional)</label><input type="number" id="size" placeholder="e.g. 50"></div>
       <div class="fs"><label class="fl">Unit</label><select id="unit"><option value="kb">KB</option><option value="mb">MB</option></select></div>
     </div>
-    <button class="btn" onclick="start()">⚡&nbsp; Compress &amp; Download</button>
-  </div>
 
-  <div id="resizeBox" class="tool-section" style="display:none">
-    <div class="drop">
-      <input type="file" id="resUp" accept="image/*">
-      <div class="drop-ico">📏</div>
-      <div class="drop-main">Drop image here or <span>browse</span></div>
-      <div class="drop-hint">Resize width & height in Pixels</div>
-    </div>
-    <div class="irow" style="margin-top:14px; align-items:flex-end;">
-      <div class="f"><label class="fl">Width (px)</label><input type="number" id="resW" placeholder="e.g. 1920"></div>
+    <div class="or-divider">And / Or</div>
+
+    <div class="irow" style="align-items:flex-end;">
+      <div class="f"><label class="fl">Width (px)</label><input type="number" id="resW" placeholder="Auto"></div>
       
       <div style="padding-bottom:12px; text-align:center;">
         <button id="lockBtn" onclick="toggleLock()" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--muted);cursor:pointer;padding:8px;border-radius:8px;transition:all 0.2s;display:flex;align-items:center;justify-content:center;" title="Toggle Aspect Ratio Lock">
@@ -269,9 +272,10 @@ body::after{
         </button>
       </div>
 
-      <div class="f"><label class="fl">Height (px)</label><input type="number" id="resH" placeholder="e.g. 1080"></div>
+      <div class="f"><label class="fl">Height (px)</label><input type="number" id="resH" placeholder="Auto"></div>
     </div>
-    <button class="btn" onclick="startResize()">📐&nbsp; Resize &amp; Download</button>
+
+    <button class="btn" onclick="startMaster()">⚡&nbsp; Process &amp; Download</button>
   </div>
 
   <div id="pdfBox" class="tool-section" style="display:none">
@@ -338,57 +342,10 @@ function showTab(tabId, btn) {
   btn.classList.add('on');
 }
 
-// --- KB COMPRESSOR LOGIC ---
-function qSet(v,btn){
-  document.getElementById('size').value=v;
-  document.querySelectorAll('.qb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-}
-async function start(){
-  const fi=document.getElementById('upload'),si=document.getElementById('size'),
-        un=document.getElementById('unit'),st=document.getElementById('status');
-  document.getElementById('rg').innerHTML='';
-  if(!fi.files.length){alert('Select image first');return}
-  let tk=parseFloat(si.value);
-  if(!tk||tk<=0){alert('Enter valid size');return}
-  if(un.value==='mb')tk*=1024;
-  
-  const files=fi.files,pw=document.getElementById('pbox'),pb=document.getElementById('pfill');
-  pw.style.display='block';
-  for(let i=0;i<files.length;i++){
-    pb.style.width=((i+1)/files.length*100)+'%';
-    st.innerText=`Processing ${i+1} / ${files.length}…`;
-    const blob=await compressImg(files[i],tk);
-    if(!blob)continue;
-    addResult(blob,i);
-    if(files.length===1) setDl(blob,'compressed.jpg',st,files[0].size/1024);
-  }
-  st.innerText='Done ✅';pb.style.width='100%';
-  setTimeout(()=>{pw.style.display='none'},1500);
-}
-async function compressImg(file,tkb){
-  const img=new Image();img.src=URL.createObjectURL(file);await img.decode();
-  let cv=document.createElement('canvas'),ctx=cv.getContext('2d'),scale=1,best=null;
-  for(let s=0;s<10;s++){
-    cv.width=img.width*scale;cv.height=img.height*scale;
-    ctx.drawImage(img,0,0,cv.width,cv.height);
-    let lo=.05,hi=.95;
-    for(let i=0;i<20;i++){
-      let q=(lo+hi)/2,b=await new Promise(r=>cv.toBlob(r,'image/jpeg',q));
-      if(!b)continue;
-      if(b.size/1024>tkb)hi=q; else{lo=q;best=b;}
-    }
-    if(best&&best.size/1024<=tkb)break;
-    scale*=.85;
-  }
-  return best;
-}
-
-// --- NEW: DIMENSION RESIZER LOGIC ---
+// --- MASTER IMAGE LOGIC (SIZE + DIMENSIONS) ---
 let aspectLocked = false;
 let origRatio = 1;
 
-// Define SVG strings for clean toggling
 const svgUnlocked = `<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path>`;
 const svgLocked = `<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>`;
 
@@ -396,83 +353,141 @@ function toggleLock() {
   aspectLocked = !aspectLocked;
   const btn = document.getElementById('lockBtn');
   const svg = document.getElementById('lockSvg');
-  
   if (aspectLocked) {
     svg.innerHTML = svgLocked;
-    btn.style.color = 'var(--purple-l)';
-    btn.style.background = 'rgba(109,84,240,0.15)';
-    btn.style.borderColor = 'rgba(109,84,240,0.4)';
+    btn.style.color = 'var(--purple-l)'; btn.style.background = 'rgba(109,84,240,0.15)'; btn.style.borderColor = 'rgba(109,84,240,0.4)';
   } else {
     svg.innerHTML = svgUnlocked;
-    btn.style.color = 'var(--muted)';
-    btn.style.background = 'rgba(255,255,255,0.04)';
-    btn.style.borderColor = 'rgba(255,255,255,0.1)';
+    btn.style.color = 'var(--muted)'; btn.style.background = 'rgba(255,255,255,0.04)'; btn.style.borderColor = 'rgba(255,255,255,0.1)';
   }
 }
 
-document.getElementById('resUp').addEventListener('change', function() {
-  if(!this.files.length) return;
-  const file = this.files[0];
-  const img = new Image();
-  img.onload = function() {
-    origRatio = img.width / img.height;
-    document.getElementById('resW').value = img.width;
-    document.getElementById('resH').value = img.height;
-    URL.revokeObjectURL(this.src);
+document.getElementById('upload').addEventListener('change', function() {
+  const prev = document.getElementById('prev');
+  prev.innerHTML = ''; 
+  if(!this.files.length) { prev.style.display='none'; return; }
+  
+  prev.style.display = 'grid';
+  for(const f of this.files) {
+    if(!f.type.startsWith('image/')) continue;
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(f);
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover';
+    const d = document.createElement('div'); d.className = 'prev-item'; d.appendChild(img);
+    prev.appendChild(d);
   }
-  img.src = URL.createObjectURL(file);
+
+  // Pre-fill dimensions based on the FIRST selected image
+  const firstFile = this.files[0];
+  if(firstFile.type.startsWith('image/')) {
+    const tempImg = new Image();
+    tempImg.onload = function() {
+      origRatio = tempImg.width / tempImg.height;
+      document.getElementById('resW').value = tempImg.width;
+      document.getElementById('resH').value = tempImg.height;
+      URL.revokeObjectURL(this.src);
+    }
+    tempImg.src = URL.createObjectURL(firstFile);
+  }
 });
 
 document.getElementById('resW').addEventListener('input', function() {
-  if(aspectLocked && this.value) {
-    document.getElementById('resH').value = Math.round(this.value / origRatio);
-  }
+  if(aspectLocked && this.value) { document.getElementById('resH').value = Math.round(this.value / origRatio); }
 });
-
 document.getElementById('resH').addEventListener('input', function() {
-  if(aspectLocked && this.value) {
-    document.getElementById('resW').value = Math.round(this.value * origRatio);
-  }
+  if(aspectLocked && this.value) { document.getElementById('resW').value = Math.round(this.value * origRatio); }
 });
 
-async function startResize() {
-  const fi = document.getElementById('resUp');
-  const w = parseInt(document.getElementById('resW').value);
-  const h = parseInt(document.getElementById('resH').value);
+function qSet(v,btn){
+  document.getElementById('size').value=v;
+  document.querySelectorAll('.qb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+async function startMaster(){
+  const fi=document.getElementById('upload'),si=document.getElementById('size'), un=document.getElementById('unit');
+  const wInp=document.getElementById('resW').value, hInp=document.getElementById('resH').value;
+  const st=document.getElementById('status');
+  document.getElementById('rg').innerHTML='';
   
-  if(!fi.files.length) { alert('Please select an image first.'); return; }
-  if(!w || !h) { alert('Please enter valid width and height.'); return; }
+  if(!fi.files.length){alert('Select image first');return}
   
-  const file = fi.files[0];
-  const img = new Image();
-  img.src = URL.createObjectURL(file);
-  await img.decode();
+  let tk=parseFloat(si.value);
+  if(tk && un.value==='mb') tk*=1024;
   
-  const cv = document.createElement('canvas');
-  cv.width = w; cv.height = h;
-  const ctx = cv.getContext('2d');
+  let w = parseInt(wInp), h = parseInt(hInp);
   
-  // Smooth resize algorithm
+  // Validation: User must enter either KB or Dimensions
+  if(!tk && (!w || !h)) {
+    alert('Please enter a Target Size (KB) OR dimensions (Width/Height) to proceed.');
+    return;
+  }
+
+  const files=fi.files,pw=document.getElementById('pbox'),pb=document.getElementById('pfill');
+  pw.style.display='block';
+  
+  for(let i=0;i<files.length;i++){
+    pb.style.width=((i+1)/files.length*100)+'%';
+    st.innerText=`Processing ${i+1} / ${files.length}…`;
+    
+    // Process image combining both requirements
+    const blob = await processMasterImg(files[i], tk, w, h);
+    if(!blob) continue;
+    
+    addResult(blob,i);
+    if(files.length===1) setDl(blob,'processed.jpg',st,files[0].size/1024);
+  }
+  st.innerText='Done ✅';pb.style.width='100%';
+  setTimeout(()=>{pw.style.display='none'},1500);
+}
+
+async function processMasterImg(file, tkb, targetW, targetH){
+  const img=new Image();img.src=URL.createObjectURL(file);await img.decode();
+  
+  let finalW = targetW || img.width;
+  let finalH = targetH || img.height;
+  
+  let cv=document.createElement('canvas'), ctx=cv.getContext('2d');
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
-  ctx.drawImage(img, 0, 0, w, h);
-  
-  cv.toBlob(function(blob) {
-    setDl(blob, `resized_${w}x${h}.jpg`, null, file.size/1024);
-  }, 'image/jpeg', 0.95);
+
+  // Scenario 1: Only Resizing (No Target KB)
+  if(!tkb) {
+    cv.width = finalW; cv.height = finalH;
+    ctx.drawImage(img, 0, 0, finalW, finalH);
+    return new Promise(r => cv.toBlob(r, 'image/jpeg', 0.95)); // High Quality output
+  }
+
+  // Scenario 2: Target KB is present (With or without W/H)
+  let scale = 1, best = null;
+  for(let s=0; s<10; s++){
+    cv.width = finalW * scale; cv.height = finalH * scale;
+    ctx.drawImage(img, 0, 0, cv.width, cv.height);
+    
+    let lo=0.05, hi=0.95;
+    for(let i=0; i<20; i++){
+      let q = (lo+hi)/2;
+      let b = await new Promise(r => cv.toBlob(r, 'image/jpeg', q));
+      if(!b) continue;
+      if(b.size/1024 > tkb) hi = q; else { lo = q; best = b; }
+    }
+    if(best && best.size/1024 <= tkb) break;
+    scale *= 0.85; // Drop scale if quality reduction wasn't enough
+  }
+  return best;
 }
 
 // --- UTILS & PDF (unchanged mainly) ---
 function setDl(blob,name,st,origKB){
   var compKB=blob.size/1024;
-  showCompressAnim(origKB||compKB*2,compKB,blob,name||'compressed.jpg');
+  showCompressAnim(origKB||compKB*2,compKB,blob,name||'processed.jpg');
   if(st)st.innerText='';
 }
 function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
 function addResult(blob,i){
   const url=URL.createObjectURL(blob),d=document.createElement('div');
   d.className='rc';
-  d.innerHTML=`<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(blob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','compressed_${i+1}.jpg')">⬇ Download</button></div>`;
+  d.innerHTML=`<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(blob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','processed_${i+1}.jpg')">⬇ Download</button></div>`;
   document.getElementById('rg').appendChild(d);
 }
 
@@ -504,7 +519,7 @@ window.showCompressAnim=function(origKB,compKB,blob,fname){
   document.getElementById('asAfter').textContent=compStr;
   
   var pct = Math.max(0, Math.round((1-compKB/origKB)*100));
-  document.getElementById('amsg').textContent= pct > 0 ? pct+'% size reduced! 🎉' : 'Image resized successfully! ✅';
+  document.getElementById('amsg').textContent= pct > 0 ? pct+'% size reduced! 🎉' : 'Image processed successfully! ✅';
   
   var dlBtn=document.getElementById('adlBtn');
   dlBtn.textContent='⬇ Download ('+compStr+')';
