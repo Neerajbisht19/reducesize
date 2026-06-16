@@ -221,14 +221,12 @@ body::after{
 </section>
 
 <div class="card">
-  <!-- NEW UNIFIED TAB SYSTEM -->
   <div class="tabs">
     <button class="tab on" onclick="showTab('imgBox', this)">🖼&nbsp; Size (KB)</button>
     <button class="tab" onclick="showTab('resizeBox', this)">📏&nbsp; Dimensions</button>
     <button class="tab" onclick="showTab('pdfBox', this)">📄&nbsp; PDF</button>
   </div>
 
-  <!-- TAB 1: COMPRESS TO KB -->
   <div id="imgBox" class="tool-section">
     <div class="drop">
       <input type="file" id="upload" accept="image/*" multiple>
@@ -252,7 +250,6 @@ body::after{
     <button class="btn" onclick="start()">⚡&nbsp; Compress &amp; Download</button>
   </div>
 
-  <!-- TAB 2: RESIZE DIMENSIONS (NEW) -->
   <div id="resizeBox" class="tool-section" style="display:none">
     <div class="drop">
       <input type="file" id="resUp" accept="image/*">
@@ -263,9 +260,8 @@ body::after{
     <div class="irow" style="margin-top:14px; align-items:flex-end;">
       <div class="f"><label class="fl">Width (px)</label><input type="number" id="resW" placeholder="e.g. 1920"></div>
       
-      <!-- Aspect Ratio Lock Toggle -->
       <div style="padding-bottom:12px; text-align:center;">
-        <button id="lockBtn" onclick="toggleLock()" style="background:none;border:none;color:var(--purple-l);cursor:pointer;font-size:20px;transition:0.2s;" title="Toggle Aspect Ratio Lock">🔒</button>
+        <button id="lockBtn" onclick="toggleLock()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;transition:0.2s;" title="Toggle Aspect Ratio Lock">🔓</button>
       </div>
 
       <div class="f"><label class="fl">Height (px)</label><input type="number" id="resH" placeholder="e.g. 1080"></div>
@@ -273,7 +269,6 @@ body::after{
     <button class="btn" onclick="startResize()">📐&nbsp; Resize &amp; Download</button>
   </div>
 
-  <!-- TAB 3: PDF COMPRESSOR -->
   <div id="pdfBox" class="tool-section" style="display:none">
     <div class="drop">
       <input type="file" id="pdfUp" accept="application/pdf">
@@ -291,7 +286,6 @@ body::after{
   <div id="rg" class="rg"></div>
 </div>
 
-<!-- COMPRESSION ANIMATION MODAL (Reused) -->
 <div id="ov" style="position:fixed;inset:0;background:rgba(2,2,12,.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(12px);">
     <div style="width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
       <div id="scene" style="width:220px;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
@@ -386,7 +380,7 @@ async function compressImg(file,tkb){
 }
 
 // --- NEW: DIMENSION RESIZER LOGIC ---
-let aspectLocked = true;
+let aspectLocked = false;
 let origRatio = 1;
 
 function toggleLock() {
