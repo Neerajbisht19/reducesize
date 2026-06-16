@@ -261,7 +261,12 @@ body::after{
       <div class="f"><label class="fl">Width (px)</label><input type="number" id="resW" placeholder="e.g. 1920"></div>
       
       <div style="padding-bottom:12px; text-align:center;">
-        <button id="lockBtn" onclick="toggleLock()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;transition:0.2s;" title="Toggle Aspect Ratio Lock">🔓</button>
+        <button id="lockBtn" onclick="toggleLock()" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--muted);cursor:pointer;padding:8px;border-radius:8px;transition:all 0.2s;display:flex;align-items:center;justify-content:center;" title="Toggle Aspect Ratio Lock">
+          <svg id="lockSvg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+          </svg>
+        </button>
       </div>
 
       <div class="f"><label class="fl">Height (px)</label><input type="number" id="resH" placeholder="e.g. 1080"></div>
@@ -383,11 +388,26 @@ async function compressImg(file,tkb){
 let aspectLocked = false;
 let origRatio = 1;
 
+// Define SVG strings for clean toggling
+const svgUnlocked = `<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path>`;
+const svgLocked = `<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>`;
+
 function toggleLock() {
   aspectLocked = !aspectLocked;
   const btn = document.getElementById('lockBtn');
-  btn.innerText = aspectLocked ? '🔒' : '🔓';
-  btn.style.color = aspectLocked ? 'var(--purple-l)' : 'var(--muted)';
+  const svg = document.getElementById('lockSvg');
+  
+  if (aspectLocked) {
+    svg.innerHTML = svgLocked;
+    btn.style.color = 'var(--purple-l)';
+    btn.style.background = 'rgba(109,84,240,0.15)';
+    btn.style.borderColor = 'rgba(109,84,240,0.4)';
+  } else {
+    svg.innerHTML = svgUnlocked;
+    btn.style.color = 'var(--muted)';
+    btn.style.background = 'rgba(255,255,255,0.04)';
+    btn.style.borderColor = 'rgba(255,255,255,0.1)';
+  }
 }
 
 document.getElementById('resUp').addEventListener('change', function() {
@@ -432,15 +452,14 @@ async function startResize() {
   cv.width = w; cv.height = h;
   const ctx = cv.getContext('2d');
   
-  // Smooth resize algorithm (client side default)
+  // Smooth resize algorithm
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
   ctx.drawImage(img, 0, 0, w, h);
   
   cv.toBlob(function(blob) {
-    // Reuse animation - looks cool and creates consistent UX
     setDl(blob, `resized_${w}x${h}.jpg`, null, file.size/1024);
-  }, 'image/jpeg', 0.95); // High quality for dimension resizing
+  }, 'image/jpeg', 0.95);
 }
 
 // --- UTILS & PDF (unchanged mainly) ---
@@ -457,7 +476,7 @@ function addResult(blob,i){
   document.getElementById('rg').appendChild(d);
 }
 
-// --- ANIMATION SCRIPT (Reused from your code) ---
+// --- ANIMATION SCRIPT ---
 (function(){
 var animBlob=null,animRunning=false;
 function ez(t){return t<.5?4*t*t*t:(t-1)*(2*t-2)*(2*t-2)+1}
@@ -484,7 +503,7 @@ window.showCompressAnim=function(origKB,compKB,blob,fname){
   document.getElementById('asBefore').textContent=origStr;
   document.getElementById('asAfter').textContent=compStr;
   
-  var pct = Math.max(0, Math.round((1-compKB/origKB)*100)); // Prevent negative pct on upscale
+  var pct = Math.max(0, Math.round((1-compKB/origKB)*100));
   document.getElementById('amsg').textContent= pct > 0 ? pct+'% size reduced! 🎉' : 'Image resized successfully! ✅';
   
   var dlBtn=document.getElementById('adlBtn');
