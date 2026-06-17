@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passport Photo Maker Online Free | Print Multiple Copies</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://reducesize.online/passport-photo-maker.html">
+<meta name="description" content="Make high-quality passport photos for printing. Auto-arrange multiple copies on A4 or 4x6 paper. Add cutting borders. 100% Free and High Resolution.">
+<meta name="keywords" content="passport photo maker, print passport size photo online, arrange passport photo on a4, 8 passport photo on 4x6, make passport photo free">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#6d54f0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+
+<style>
+:root{
+  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
+  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
+  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
+  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
+  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Manrope',sans-serif;font-size:15px;
+  line-height:1.6;min-height:100vh;overflow-x:hidden;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+/* NAV FIX FOR MOBILE */
+.nav{
+  position:sticky;top:0;z-index:200;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  background:rgba(7,7,18,.88);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
+  color:var(--text);text-decoration:none;letter-spacing:-.5px;
+}
+.nav-logo em{font-style:normal;color:var(--purple-l)}
+.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
+.nav-links a:hover{opacity:1;color:var(--purple-l);}
+.nav-pill{
+  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
+  background:rgba(62,207,142,.1);color:var(--green);
+  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
+  display:inline-block; white-space:nowrap;
+}
+@media(max-width: 480px){
+    .nav { padding: 0 12px; }
+    .nav-logo { font-size: 16px; }
+    .nav-links { gap: 10px; }
+    .nav-links a { font-size: 12px; }
+    .nav-pill { font-size: 9px; padding: 4px 8px; }
+}
+
+/* WRAP & SUB-HERO */
+.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
+.sub-hero{padding:40px 0 24px;text-align:center}
+.sub-hero .tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);background:rgba(32,217,192,.07);
+  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
+}
+.sub-hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
+  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
+}
+.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
+
+/* BADGES */
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
+}
+
+/* TOOL CARD */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:24px;margin-bottom:28px;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
+  opacity:.5;
+}
+
+/* UPLOAD */
+.drop{
+  position:relative;border:2px dashed rgba(109,84,240,.22);
+  border-radius:13px;padding:36px 14px;text-align:center;
+  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
+}
+.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-ico{
+  width:54px;height:54px;margin:0 auto 12px;
+  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
+  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
+.drop-main span{color:var(--purple-l)}
+.drop-hint{font-size:13px;color:var(--muted)}
+
+/* CROP AREA */
+.crop-wrap {
+  display:none; 
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:20px;
+  position:relative;
+  width: 100%;
+  height: 380px; 
+}
+.crop-wrap img {
+  max-width: 100%;
+  display: block;
+}
+
+/* INPUT SECTION */
+.u-box{
+  background:var(--surface2);border:1px solid rgba(109,84,240,.2);
+  border-radius:12px;padding:16px;margin-bottom:20px;
+}
+.u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+
+.irow{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.irow .f{flex:1;min-width:140px;}
+.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
+.irow input, .irow select{
+  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
+  padding:12px 14px;border-radius:10px;color:var(--text);
+  font-size:15px;font-family:'Manrope',sans-serif;font-weight:600;
+  outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
+}
+.irow input::placeholder {color: rgba(255,255,255,0.2);}
+.irow input:focus, .irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
+
+/* SMART WARNING */
+.warning-box {
+    display: none; background: rgba(255,107,107,0.1); border: 1px dashed rgba(255,107,107,0.4);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 16px;
+}
+.warning-text { font-size: 13px; font-weight: 600; color: var(--red); }
+
+/* BUTTONS */
+.btn{
+  width:100%;padding:14px;border-radius:11px;border:none;
+  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
+  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
+  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
+}
+.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
+.btn:active{transform:scale(.98)}
+
+/* PROGRESS */
+.pbox{display:none;margin-top:13px}
+.ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s;position:relative;overflow:hidden;}
+.plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
+
+/* RESULTS */
+.rg{display:grid;grid-template-columns:1fr;gap:10px;margin-top:16px}
+.rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;}
+.rc img{width:100%;height:auto;max-height:400px;object-fit:contain; border-bottom:1px solid var(--border); background:#fff; padding:10px;}
+.ri{padding:16px}
+.rsz{font-size:15px;font-weight:700;color:var(--green);margin-bottom:12px}
+.rb{
+  width:100%;padding:10px;border-radius:9px;border:none;
+  background:var(--purple);color:#fff;
+  font-size:14px;font-weight:700;cursor:pointer;
+  font-family:'Manrope',sans-serif;transition:.15s;
+}
+.rb:hover{background:#7b63f5; box-shadow:0 6px 20px rgba(109,84,240,.3);}
+
+/* SEO SECTION */
+.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
+.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
+.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
+.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
+.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
+.seo li{margin-bottom:6px}
+.seo strong{color:#eeeeff;font-weight:600}
+
+/* CHIPS */
+.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
+.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
+.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
+.chip-i{font-size:17px;flex-shrink:0}
+.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
+.chip-t span{font-size:11px;color:var(--muted)}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
+.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
+.flogo em{font-style:normal;color:var(--purple-l)}
+.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
+.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
+.fnav a:hover{color:var(--text);background:var(--card)}
+.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
+
+@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"Passport Photo Maker Online",
+"url":"https://reducesize.online/passport-photo-maker.html",
+"applicationCategory":"UtilityApplication","operatingSystem":"All",
+"description":"Make high-quality passport photos for printing. Auto-arrange up to 30 copies on A4 or 8 copies on 4x6 paper. Add cutting borders. 100% Free.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How can I print passport photos at home?","acceptedAnswer":{"@type":"Answer","text":"Simply upload your photo, select the number of copies you need, and choose your paper size (like A4 or 4x6). Our tool will arrange the photos in a grid with white borders for easy cutting. You can then print this single sheet at home or a local shop."}},
+{"@type":"Question","name":"Does this tool compress the photo quality?","acceptedAnswer":{"@type":"Answer","text":"No! Unlike our web compression tools, this Print Maker exports your final grid sheet at maximum 100% JPEG quality (300 DPI) to ensure your physical prints are sharp and crystal clear."}},
+{"@type":"Question","name":"How many passport photos fit on a 4x6 sheet?","acceptedAnswer":{"@type":"Answer","text":"A standard 4x6 inch photo paper can comfortably fit up to 8 passport photos (3.5x4.5cm each) with sufficient white borders left for scissor cutting."}}
+]}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <div class="nav-links">
+    <a href="/blog/">Blog</a>
+    <span class="nav-pill">✦ FREE FOREVER</span>
+  </div>
+</nav>
+
+<div class="wrap">
+<section class="sub-hero">
+  <div class="tag">✦ Print-Ready High Resolution</div>
+  <h1>Passport Photo Maker<br><span class="grad">for Fast Printing</span></h1>
+  <p>Create a grid of passport photos for cheap studio printing. Auto-arrange copies on A4 or 4x6 sheets with cutting borders. 100% Max Quality.</p>
+  <div class="badges">
+    <span class="badge">🖨️ 300 DPI Print Quality</span>
+    <span class="badge">✂️ Auto Cutting Borders</span>
+    <span class="badge">📄 A4 & 4x6 Supported</span>
+  </div>
+</section>
+
+<div class="card">
+  
+  <div class="drop" id="dropZone">
+    <input type="file" id="upload" accept="image/*">
+    <div class="drop-ico">📸</div>
+    <div class="drop-main">Upload a clear front-facing photo</div>
+    <div class="drop-hint">We recommend a plain background</div>
+  </div>
+  
+  <div id="cropWrap" class="crop-wrap">
+    <img id="imageToCrop">
+  </div>
+
+  <div class="u-box" id="settingsBox" style="display:none;">
+    <div class="u-title">Print Settings</div>
+    
+    <div class="irow">
+      <div class="f">
+        <label class="fl">Photo Width (CM)</label>
+        <input type="number" id="pWidth" value="3.5" step="0.1" onchange="calculateMax()">
+      </div>
+      <div class="f">
+        <label class="fl">Photo Height (CM)</label>
+        <input type="number" id="pHeight" value="4.5" step="0.1" onchange="calculateMax()">
+      </div>
+    </div>
+
+    <div class="irow">
+      <div class="f">
+        <label class="fl">Paper Size</label>
+        <select id="paperSize" onchange="calculateMax()">
+          <option value="a4">A4 Sheet (Most Common)</option>
+          <option value="4x6">4x6 Inch (Photo Lab Sheet)</option>
+        </select>
+      </div>
+      <div class="f">
+        <label class="fl">Number of Copies</label>
+        <input type="number" id="qty" value="8" oninput="calculateMax()">
+      </div>
+    </div>
+    
+    <div id="warnBox" class="warning-box">
+        <span class="warning-text" id="qtyWarn"></span>
+    </div>
+    
+    <p style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*No compression applied. Output will be large file size for crystal clear printing.</p>
+  </div>
+
+  <button class="btn" id="generateBtn" style="display:none;" onclick="generatePrintSheet()">🖨️&nbsp; Generate Print Sheet</button>
+
+  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <div id="rg" class="rg"></div>
+</div>
+
+<section class="seo">
+<h2>How to Print Your Own Passport Photos Cheaply</h2>
+<p>If you walk into a photo studio to get 8 passport photos, they will likely charge you upwards of ₹100. However, if you give them a ready-made 4x6 inch digital image that already contains your 8 photos, they will treat it as a standard single photo print, which costs just ₹10. <strong>ReduceSize.online Passport Maker</strong> allows you to create this exact sheet yourself in seconds.</p>
+
+<h3>The 300 DPI Print Standard</h3>
+<p>Unlike our other web-based image compressors that focus on making file sizes as small as possible (KB), this specific tool does the exact opposite. Printing requires a high density of pixels (Dots Per Inch). When you crop your face using this tool, we extract it at maximum resolution and generate your final grid sheet at <strong>100% JPEG Quality</strong>. The file size will be large, ensuring that when it hits the printer paper, there is absolutely no blurriness or pixelation.</p>
+
+<h3>Step-by-Step Instructions</h3>
+<ol>
+  <li><strong>Take a Good Photo:</strong> Stand against a plain white or light-colored wall. Ensure there is good lighting on your face without harsh shadows.</li>
+  <li><strong>Upload & Crop:</strong> Upload the photo here. Our cropping tool is locked to the standard Indian Passport size (3.5 cm x 4.5 cm). Drag your image so your face and shoulders are clearly visible.</li>
+  <li><strong>Select Print Settings:</strong> Decide if you are printing on an A4 sheet using a home printer, or a 4x6 sheet at a photo lab. Then, enter how many copies you need.</li>
+  <li><strong>Download your Sheet:</strong> Click generate. Our smart algorithm automatically arranges your photos mathematically on a pure white canvas, leaving necessary <strong>scissor-cutting borders</strong> between each photo. Download and print!</li>
+</ol>
+
+<h3>Smart Auto-Capping</h3>
+<p>To prevent printing errors, our tool calculates the physical dimensions of the paper. An A4 sheet can safely fit a maximum of 30 passport photos, while a 4x6 inch sheet can fit 8. If you accidentally type "50" for a 4x6 sheet, our system will warn you and automatically scale it down to the maximum safe limit, so your photos don't get cut off at the edges.</p>
+</section>
+
+<div class="chips-hd">More Tools</div>
+<div class="chips">
+  <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
+  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
+  <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
+  <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
+  <a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a>
+  <a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">🔧</span><div class="chip-t"><strong>Master Form Fixer</strong><span>Any portal</span></div></a>
+</div>
+</div>
+
+<footer class="footer">
+  <a class="flogo" href="/"><em>Reduce</em>Size</a>
+  <nav class="fnav">
+    <a href="/compress-image-to-10kb.html">10KB</a>
+    <a href="/compress-image-to-50kb.html">50KB</a>
+    <a href="/image-format-converter.html">Format Converter</a>
+    <a href="/resize-image-for-online-form.html">Form Fixer</a>
+  </nav>
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+<script>
+let currentFile = null;
+let cropper = null; 
+
+document.getElementById('upload').addEventListener('change', function() {
+  const cropWrap = document.getElementById('cropWrap');
+  const imageToCrop = document.getElementById('imageToCrop');
+  
+  if(!this.files.length) { 
+    cropWrap.style.display='none'; 
+    document.getElementById('settingsBox').style.display='none';
+    document.getElementById('generateBtn').style.display='none';
+    if(cropper) cropper.destroy(); 
+    currentFile = null; 
+    document.getElementById('dropZone').style.display = 'block';
+    return; 
+  }
+  
+  const f = this.files[0];
+  if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
+  currentFile = f;
+  
+  document.getElementById('dropZone').style.display = 'none';
+  cropWrap.style.display = 'block';
+  document.getElementById('settingsBox').style.display = 'block';
+  document.getElementById('generateBtn').style.display = 'block';
+  
+  imageToCrop.src = URL.createObjectURL(f);
+  
+  if(cropper) { cropper.destroy(); }
+
+  // Initial calculation to set Cropper Aspect Ratio
+  calculateMax();
+
+  const w_cm = parseFloat(document.getElementById('pWidth').value) || 3.5;
+  const h_cm = parseFloat(document.getElementById('pHeight').value) || 4.5;
+
+  cropper = new Cropper(imageToCrop, {
+      aspectRatio: w_cm / h_cm,
+      viewMode: 1, 
+      autoCropArea: 0.8, 
+      background: true, 
+      responsive: true
+  });
+});
+
+function calculateMax() {
+    let w_cm = parseFloat(document.getElementById('pWidth').value) || 3.5;
+    let h_cm = parseFloat(document.getElementById('pHeight').value) || 4.5;
+    let paper = document.getElementById('paperSize').value;
+    
+    // 300 DPI Math
+    let dpi = 300;
+    let w_px = Math.round((w_cm / 2.54) * dpi);
+    let h_px = Math.round((h_cm / 2.54) * dpi);
+    
+    // Update Cropper Ratio
+    if(cropper) {
+        cropper.setAspectRatio(w_px / h_px);
+    }
+
+    let pw, ph;
+    if(paper === 'a4') {
+        pw = 2480; ph = 3508; // A4 at 300 DPI
+    } else {
+        pw = 1800; ph = 1200; // 4x6 at 300 DPI (Landscape orientation for better fit)
+    }
+
+    let gap = 30; // ~0.1 inch cutting border
+    let cols = Math.floor((pw - gap) / (w_px + gap));
+    let rows = Math.floor((ph - gap) / (h_px + gap));
+    let maxPhotos = cols * rows;
+
+    let qtyInput = document.getElementById('qty');
+    let warnBox = document.getElementById('warnBox');
+    let warnText = document.getElementById('qtyWarn');
+    
+    let requested = parseInt(qtyInput.value) || 1;
+
+    if(requested > maxPhotos) {
+        warnBox.style.display = 'block';
+        warnText.innerText = `Max ${maxPhotos} photos fit on a ${paper.toUpperCase()} sheet. Auto-adjusted.`;
+        qtyInput.value = maxPhotos;
+    } else {
+        warnBox.style.display = 'none';
+    }
+    
+    return { w_px, h_px, pw, ph, gap, cols, rows };
+}
+
+async function generatePrintSheet() {
+  if(!cropper) { alert('Please upload and crop an image first.'); return; }
+  
+  let layout = calculateMax();
+  let requestedQty = parseInt(document.getElementById('qty').value) || 1;
+  
+  const btn = document.getElementById('generateBtn');
+  btn.innerText = 'Processing High-Res Image...';
+  document.getElementById('rg').innerHTML = '';
+
+  const pw = document.getElementById('pbox');
+  const pb = document.getElementById('pfill');
+  const st = document.getElementById('status');
+  pw.style.display = 'block';
+  pb.style.width = '20%';
+  st.innerText = 'Extracting High Quality Crop...';
+
+  try {
+    // Get cropped image data at exact 300 DPI pixels
+    const croppedCanvas = cropper.getCroppedCanvas({
+        width: layout.w_px,
+        height: layout.h_px,
+        fillColor: '#ffffff',
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high'
+    });
+
+    pb.style.width = '50%';
+    st.innerText = 'Arranging Print Grid...';
+
+    // Create Master Canvas
+    const masterCanvas = document.createElement('canvas');
+    masterCanvas.width = layout.pw;
+    masterCanvas.height = layout.ph;
+    const ctx = masterCanvas.getContext('2d');
+
+    // Fill white paper background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, layout.pw, layout.ph);
+
+    // Calculate centering offsets
+    let totalGridWidth = (layout.cols * layout.w_px) + ((layout.cols - 1) * layout.gap);
+    let totalGridHeight = (layout.rows * layout.h_px) + ((layout.rows - 1) * layout.gap);
+    
+    let startX = (layout.pw - totalGridWidth) / 2;
+    let startY = (layout.ph - totalGridHeight) / 2;
+
+    // Draw photos in grid
+    let drawn = 0;
+    for(let r = 0; r < layout.rows; r++) {
+        for(let c = 0; c < layout.cols; c++) {
+            if(drawn >= requestedQty) break;
+            
+            let x = startX + (c * (layout.w_px + layout.gap));
+            let y = startY + (r * (layout.h_px + layout.gap));
+            
+            ctx.drawImage(croppedCanvas, x, y, layout.w_px, layout.h_px);
+            
+            // Add a very thin subtle border to the photo to guide cutting
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, layout.w_px, layout.h_px);
+            
+            drawn++;
+        }
+        if(drawn >= requestedQty) break;
+    }
+
+    pb.style.width = '80%';
+    st.innerText = 'Generating 100% Quality Output...';
+
+    // Export as high quality JPG
+    let blob = await new Promise(r => masterCanvas.toBlob(r, 'image/jpeg', 1.0));
+
+    pb.style.width = '100%';
+    st.innerText = 'Ready to Print ✅';
+    setTimeout(()=>{pw.style.display='none'}, 1000);
+
+    // Show result
+    const url = URL.createObjectURL(blob);
+    const d = document.createElement('div');
+    d.className = 'rc';
+    // Use an inline style for max-height to let user see the grid
+    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">Print Ready Sheet (${(blob.size/1024/1024).toFixed(2)} MB)</div><button class="rb" onclick="dlUrl('${url}','passport_print_sheet.jpg')">🖨️ Download for Printing</button></div>`;
+    document.getElementById('rg').appendChild(d);
+
+  } catch(e) {
+    alert('Error generating print sheet. Try again.');
+    pw.style.display = 'none';
+  } finally {
+    btn.innerHTML = '🖨️&nbsp; Generate Print Sheet';
+  }
+}
+
+function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+</script>
+</body>
+</html>
