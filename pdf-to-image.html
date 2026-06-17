@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to Image Converter Online | Extract PDF Pages to JPG</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://reducesize.online/pdf-to-image.html">
+<meta name="description" content="Convert PDF to JPG/PNG images online for free. Extract all pages from a PDF document in High Quality. 100% secure, offline browser-based tool.">
+<meta name="keywords" content="pdf to image, pdf to jpg, extract pdf pages, convert pdf to images, pdf to png online, free pdf to jpg converter">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#6d54f0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
+  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
+  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
+  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
+  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Manrope',sans-serif;font-size:15px;
+  line-height:1.6;min-height:100vh;overflow-x:hidden;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:200;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  background:rgba(7,7,18,.88);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
+  color:var(--text);text-decoration:none;letter-spacing:-.5px;
+}
+.nav-logo em{font-style:normal;color:var(--purple-l)}
+.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
+.nav-links a:hover{opacity:1;color:var(--purple-l);}
+.nav-pill{
+  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
+  background:rgba(62,207,142,.1);color:var(--green);
+  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
+  display:inline-block; white-space:nowrap;
+}
+@media(max-width: 480px){
+    .nav { padding: 0 12px; }
+    .nav-logo { font-size: 16px; }
+    .nav-links { gap: 10px; }
+    .nav-links a { font-size: 12px; }
+    .nav-pill { display:none; }
+}
+
+/* WRAP & SUB-HERO */
+.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
+.sub-hero{padding:40px 0 24px;text-align:center}
+.sub-hero .tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);background:rgba(32,217,192,.07);
+  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
+}
+.sub-hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
+  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
+}
+.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
+
+/* BADGES */
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
+}
+
+/* TOOL CARD */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:24px;margin-bottom:28px;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
+  opacity:.5;
+}
+
+/* UPLOAD */
+.drop{
+  position:relative;border:2px dashed rgba(109,84,240,.22);
+  border-radius:13px;padding:36px 14px;text-align:center;
+  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
+}
+.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-ico{
+  width:54px;height:54px;margin:0 auto 12px;
+  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
+  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
+.drop-main span{color:var(--purple-l)}
+.drop-hint{font-size:13px;color:var(--muted)}
+
+/* SETTINGS ROW */
+.irow{display:flex;gap:10px;margin-bottom:16px; align-items: center;}
+.irow .f{flex:1;}
+.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
+.irow select{
+  width:100%;background:var(--surface2);border:1px solid rgba(255,255,255,.08);
+  padding:12px 14px;border-radius:10px;color:var(--text);
+  font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
+  outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
+}
+.irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
+
+/* BUTTONS */
+.btn{
+  width:100%;padding:14px;border-radius:11px;border:none;
+  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
+  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
+  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
+}
+.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
+.btn:active{transform:scale(.98)}
+
+.btn-zip { background: var(--green); color: #000; box-shadow:0 6px 20px rgba(62,207,142,.3); display: none; margin-bottom: 20px; }
+.btn-zip:hover { background: #2eb872; box-shadow:0 10px 28px rgba(62,207,142,.42); }
+
+/* PROGRESS */
+.pbox{display:none;margin-top:16px}
+.ptrack{height:6px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s ease;position:relative;}
+.plabel{font-size:13px;color:var(--purple-l);margin-top:10px;text-align:center;font-weight:600}
+
+/* RESULTS GRID */
+.rg{display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:12px;}
+.rc{background:var(--surface2);border:1px solid rgba(255,255,255,0.05);border-radius:11px;overflow:hidden; display: flex; flex-direction: column;}
+.rc img{width:100%; height:200px; object-fit:contain; background:#fff; padding:5px; border-bottom: 1px solid rgba(255,255,255,0.05);}
+.ri{padding:12px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: flex-end;}
+.rsz{font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px}
+.rb{
+  width:100%;padding:8px;border-radius:7px;border:none;
+  background:rgba(109,84,240,.15);color:var(--purple-l);
+  font-size:13px;font-weight:700;cursor:pointer;
+  font-family:'Manrope',sans-serif;transition:.15s;
+}
+.rb:hover{background:rgba(109,84,240,.3); color: #fff;}
+
+/* SEO SECTION */
+.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
+.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
+.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
+.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
+.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
+.seo li{margin-bottom:6px}
+.seo strong{color:#eeeeff;font-weight:600}
+
+/* CHIPS */
+.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
+.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
+.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
+.chip-i{font-size:17px;flex-shrink:0}
+.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
+.chip-t span{font-size:11px;color:var(--muted)}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
+.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
+.flogo em{font-style:normal;color:var(--purple-l)}
+.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
+.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
+.fnav a:hover{color:var(--text);background:var(--card)}
+.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
+
+@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"PDF to Image Converter Online",
+"url":"https://reducesize.online/pdf-to-image.html",
+"applicationCategory":"UtilityApplication","operatingSystem":"All",
+"description":"Extract pages from PDF to high-quality JPG or PNG images online. 100% Free, secure, and works directly in your browser. Download all as ZIP.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <div class="nav-links">
+    <a href="/blog/">Blog</a>
+    <span class="nav-pill">✦ FREE FOREVER</span>
+  </div>
+</nav>
+
+<div class="wrap">
+<section class="sub-hero">
+  <div class="tag">✦ High Quality Extraction</div>
+  <h1>PDF to Images<br><span class="grad">Extract Every Page</span></h1>
+  <p>Convert your PDF files into individual JPG images. Download specific pages or get them all instantly in a single ZIP file. 100% Secure.</p>
+  <div class="badges">
+    <span class="badge">🖼️ High Resolution JPG</span>
+    <span class="badge">📦 Download as ZIP</span>
+    <span class="badge">🔒 Offline Processing</span>
+  </div>
+</section>
+
+<div class="card">
+  
+  <div class="drop" id="dropZone">
+    <input type="file" id="upload" accept="application/pdf">
+    <div class="drop-ico" id="dropIco">📄</div>
+    <div class="drop-main" id="dropMain">Drop a PDF here or <span>browse</span></div>
+    <div class="drop-hint" id="dropHint">Max pages: Unlimited</div>
+  </div>
+
+  <div id="settingsArea" style="display:none;">
+      <div class="irow">
+          <div class="f">
+              <label class="fl">Image Quality</label>
+              <select id="imgQuality">
+                  <option value="2.0">HD Quality (Best for printing)</option>
+                  <option value="1.5">Standard (Good balance)</option>
+                  <option value="1.0">Web Quality (Smallest size)</option>
+              </select>
+          </div>
+      </div>
+      <button class="btn" id="extractBtn" onclick="extractImages()">🖼️&nbsp; Extract Images Now</button>
+  </div>
+
+  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  
+  <button class="btn btn-zip" id="zipBtn" onclick="downloadZip()">📦&nbsp; Download All as ZIP</button>
+  
+  <div id="rg" class="rg"></div>
+</div>
+
+<section class="seo">
+<h2>How to Convert PDF to JPG Securely</h2>
+<p>If you have an eBook, a scanned document, or an assignment in PDF format and you need to upload its individual pages as images (JPG) to a portal, you need a PDF to Image extractor. <strong>ReduceSize PDF Extractor</strong> allows you to split your PDF and download every single page as a high-quality picture in seconds.</p>
+
+<h3>100% Private (No Uploading)</h3>
+<p>Most online PDF to JPG converters ask you to upload your sensitive files to their servers. We built our PDF tools using advanced client-side JavaScript. This means your PDF is processed <strong>entirely inside your own browser (offline)</strong>. We never see, store, or upload your data. It is the safest way to convert documents online.</p>
+
+<h3>The "Download as ZIP" Advantage</h3>
+<p>If you upload a 50-page PDF, downloading 50 images one by one is extremely frustrating. Our tool includes an advanced <strong>Download All as ZIP</strong> feature. With just one click, all extracted pages are packaged into a single ZIP folder directly in your browser, saving you a massive amount of time.</p>
+
+<h3>Step-by-Step Instructions</h3>
+<ol>
+  <li><strong>Upload PDF:</strong> Click the upload box and select the PDF file you want to convert.</li>
+  <li><strong>Select Quality:</strong> Choose whether you want HD quality (best for printing and zoom) or Standard quality (best for web uploads).</li>
+  <li><strong>Extract:</strong> Click the "Extract Images" button. Our engine will read the PDF and render each page into an image.</li>
+  <li><strong>Download:</strong> Scroll through the preview grid to download individual pages, or click the green ZIP button to download them all at once.</li>
+</ol>
+</section>
+
+<div class="chips-hd">More PDF Tools</div>
+<div class="chips">
+  <a href="/" class="chip"><span class="chip-i">🗜️</span><div class="chip-t"><strong>Compress PDF</strong><span>Reduce file size</span></div></a>
+  <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
+  <a href="/unlock-pdf.html" class="chip"><span class="chip-i">🔓</span><div class="chip-t"><strong>Unlock PDF</strong><span>Remove password</span></div></a>
+  <a href="/protect-pdf.html" class="chip"><span class="chip-i">🔒</span><div class="chip-t"><strong>Protect PDF</strong><span>Add password</span></div></a>
+</div>
+</div>
+
+<footer class="footer">
+  <a class="flogo" href="/"><em>Reduce</em>Size</a>
+  <nav class="fnav">
+    <a href="/compress-image-to-10kb.html">10KB</a>
+    <a href="/compress-image-to-50kb.html">50KB</a>
+    <a href="/image-format-converter.html">Format Converter</a>
+    <a href="/">PDF Compressor</a>
+  </nav>
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script>
+// Set worker path for PDF.js
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+let currentPdfFile = null;
+let extractedImages = []; // Stores objects {name, blob, url}
+let pdfBaseName = "Document";
+
+document.getElementById('upload').addEventListener('change', function(e) {
+    if(this.files.length === 0) return;
+    
+    currentPdfFile = this.files[0];
+    if(currentPdfFile.type !== 'application/pdf') {
+        alert("Please select a valid PDF file.");
+        return;
+    }
+    
+    pdfBaseName = currentPdfFile.name.replace(/\.[^/.]+$/, ""); // Remove .pdf extension
+
+    // Update UI
+    document.getElementById('dropMain').innerHTML = `<span style="color:var(--green)">${currentPdfFile.name}</span>`;
+    let sizeStr = (currentPdfFile.size / 1024).toFixed(1) + ' KB';
+    if(currentPdfFile.size > 1024 * 1024) sizeStr = (currentPdfFile.size / (1024*1024)).toFixed(2) + ' MB';
+    document.getElementById('dropHint').innerText = `File Size: ${sizeStr}`;
+    
+    const dropIco = document.getElementById('dropIco');
+    dropIco.innerHTML = '✅';
+    dropIco.style.background = 'rgba(62,207,142,.1)';
+    dropIco.style.borderColor = 'rgba(62,207,142,.3)';
+    
+    document.getElementById('settingsArea').style.display = 'block';
+    
+    // Reset previous results
+    document.getElementById('rg').innerHTML = '';
+    document.getElementById('zipBtn').style.display = 'none';
+    extractedImages = [];
+});
+
+async function extractImages() {
+    if(!currentPdfFile) return;
+
+    const scaleVal = parseFloat(document.getElementById('imgQuality').value);
+    const btn = document.getElementById('extractBtn');
+    const pw = document.getElementById('pbox');
+    const pb = document.getElementById('pfill');
+    const st = document.getElementById('status');
+    const rg = document.getElementById('rg');
+    
+    btn.style.display = 'none';
+    rg.innerHTML = '';
+    pw.style.display = 'block';
+    document.getElementById('zipBtn').style.display = 'none';
+    extractedImages = [];
+
+    try {
+        pb.style.width = '10%';
+        st.innerText = 'Reading PDF Document...';
+        
+        const arrayBuffer = await currentPdfFile.arrayBuffer();
+        
+        // Load PDF document
+        const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+        const totalPages = pdf.numPages;
+        
+        for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+            // Update progress
+            let progress = 10 + ((pageNum / totalPages) * 85);
+            pb.style.width = `${progress}%`;
+            st.innerText = `Extracting Page ${pageNum} of ${totalPages}...`;
+            
+            const page = await pdf.getPage(pageNum);
+            const viewport = page.getViewport({ scale: scaleVal });
+            
+            // Create hidden canvas to render page
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            
+            // Render page on canvas
+            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+            
+            // Convert canvas to Blob (JPG)
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.95));
+            const imgUrl = URL.createObjectURL(blob);
+            
+            // Save to array for ZIP
+            const imgName = `${pdfBaseName}_page_${pageNum}.jpg`;
+            extractedImages.push({
+                name: imgName,
+                blob: blob,
+                url: imgUrl
+            });
+            
+            // Render to Grid Live
+            renderSingleResult(imgName, imgUrl, blob.size, pageNum);
+        }
+        
+        pb.style.width = '100%';
+        st.innerText = 'Extraction Complete! ✅';
+        
+        setTimeout(() => {
+            pw.style.display = 'none';
+            btn.style.display = 'block';
+            btn.innerText = '🔄 Extract Another File';
+            
+            // Show ZIP button if more than 1 page
+            if(totalPages > 1) {
+                document.getElementById('zipBtn').style.display = 'block';
+            }
+        }, 1000);
+
+    } catch (error) {
+        if(error.message && error.message.includes('Password')) {
+            alert("This PDF is password protected! Please use the 'Unlock PDF' tool first.");
+        } else {
+            alert("Error extracting images. The PDF might be corrupted.");
+        }
+        pw.style.display = 'none';
+        btn.style.display = 'block';
+    }
+}
+
+function renderSingleResult(name, url, sizeBytes, pageNum) {
+    const rg = document.getElementById('rg');
+    const sizeKb = (sizeBytes / 1024).toFixed(1) + ' KB';
+    
+    const d = document.createElement('div');
+    d.className = 'rc';
+    d.innerHTML = `
+        <img src="${url}" loading="lazy">
+        <div class="ri">
+            <div class="rsz">Page ${pageNum}</div>
+            <div style="font-size:11px; color:var(--muted); margin-bottom:8px;">${sizeKb}</div>
+            <button class="rb" onclick="dlUrl('${url}','${name}')">⬇ Download</button>
+        </div>
+    `;
+    rg.appendChild(d);
+}
+
+// Download individual URL
+function dlUrl(url, name) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// Generate and Download ZIP
+async function downloadZip() {
+    if(extractedImages.length === 0) return;
+    
+    const zipBtn = document.getElementById('zipBtn');
+    const origText = zipBtn.innerHTML;
+    zipBtn.innerText = '⏳ Zipping files... Please wait';
+    zipBtn.style.opacity = '0.7';
+    zipBtn.style.pointerEvents = 'none';
+    
+    try {
+        const zip = new JSZip();
+        
+        // Add all blobs to zip
+        extractedImages.forEach((img) => {
+            zip.file(img.name, img.blob);
+        });
+        
+        // Generate Zip Blob
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        const zipUrl = URL.createObjectURL(zipBlob);
+        
+        // Download Zip
+        dlUrl(zipUrl, `${pdfBaseName}_Pages.zip`);
+        
+    } catch(e) {
+        alert("Error creating ZIP file.");
+    } finally {
+        zipBtn.innerHTML = origText;
+        zipBtn.style.opacity = '1';
+        zipBtn.style.pointerEvents = 'all';
+    }
+}
+</script>
+</body>
+</html>
