@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Online Document Scanner | Magic Filter, Crop & PDF Maker</title>
+<title>Online Document Scanner | Colour Scan, B&W & PDF Maker</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/document-scanner-online.html">
-<meta name="description" content="Scan documents and signatures online for free. Control filter intensity, remove shadows, perfectly crop, and download as clean JPG or PDF for form uploads.">
-<meta name="keywords" content="online document scanner, image to pdf scanner, signature scanner online, remove shadow from photo, magic scan filter online, rotate and crop document">
+<meta name="description" content="Scan documents and signatures online for free. Control filter intensity, remove shadows, perfectly crop, and download as clean PDF or JPG.">
+<meta name="keywords" content="online document scanner, image to pdf scanner, signature scanner online, colour scan, b&w scan, magic scan filter online">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,9 +122,8 @@ body::after{
 .drop-main span{color:var(--purple-l)}
 .drop-hint{font-size:13px;color:var(--muted)}
 
-/* CROP AREA */
+/* CROP AREA FIX */
 .crop-wrap {
-  display:none; 
   background:var(--surface2);
   border:1px solid var(--border);
   border-radius:12px;
@@ -158,7 +157,7 @@ input[type=range]::-webkit-slider-thumb {
 
 /* FILTER SECTION */
 .filter-box {
-    display: none; background: var(--surface2); border: 1px solid rgba(109,84,240,.2);
+    background: var(--surface2); border: 1px solid rgba(109,84,240,.2);
     border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: center;
 }
 .f-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom:16px;}
@@ -174,8 +173,8 @@ input[type=range]::-webkit-slider-thumb {
 
 /* LIVE PREVIEW CANVAS */
 #previewCanvas {
-    display: none; max-width: 100%; height: auto; max-height: 500px; object-fit: contain; border-radius: 8px;
-    border: 1px solid var(--border); background: #fff; margin: 0 auto 20px;
+    max-width: 100%; height: auto; max-height: 500px; object-fit: contain; border-radius: 8px;
+    border: 1px solid var(--border); background: #fff; margin: 0 auto 20px; display:block;
 }
 
 /* BUTTONS */
@@ -249,10 +248,10 @@ input[type=range]::-webkit-slider-thumb {
 <section class="sub-hero">
   <div class="tag">✦ Pro Cam Scanner Alternative</div>
   <h1>Scan Documents &<br><span class="grad">Signatures Online</span></h1>
-  <p>Remove dark shadows and straighten mobile photos. Adjust scan intensity, apply Magic Color filters, and export to PDF safely.</p>
+  <p>Remove dark shadows and straighten mobile photos. Adjust scan intensity, apply Colour or B&W filters, and export to PDF safely.</p>
   <div class="badges">
-    <span class="badge">🪄 Custom Scan Intensity</span>
-    <span class="badge">🔄 360° Rotation Fix</span>
+    <span class="badge">🪄 Colour Scan Mode</span>
+    <span class="badge">⚫ B&W Scan Mode</span>
     <span class="badge">📄 Export to PDF</span>
   </div>
 </section>
@@ -274,14 +273,14 @@ input[type=range]::-webkit-slider-thumb {
               <span class="sl-val" id="rotVal">0°</span>
           </div>
           <input type="range" id="rotSlider" min="-45" max="45" value="0" oninput="rotateImage()">
-          <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;">Slide to fix tilted photos</p>
+          <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;">Slide left or right to fix tilted photos</p>
       </div>
 
       <div id="cropWrap" class="crop-wrap">
         <img id="imageToCrop">
       </div>
       
-      <p style="font-size:12px;color:var(--yellow);margin-bottom:12px;text-align:center;">Drag the corners (blue boxes) to select your document.</p>
+      <p style="font-size:12px;color:var(--yellow);margin-bottom:12px;text-align:center;">Drag the corners or move the box to select your document.</p>
       
       <button class="btn" id="cropBtn" onclick="startScanProcess()">✂️&nbsp; Crop & Proceed</button>
   </div>
@@ -293,16 +292,16 @@ input[type=range]::-webkit-slider-thumb {
       <canvas id="previewCanvas"></canvas>
 
       <div class="filter-box" id="filterBox">
-        <div class="f-title">Enhance Scan Quality</div>
+        <div class="f-title">Select Scan Mode</div>
         <div class="f-grid">
           <div class="f-btn" id="btnFilterOrig" onclick="setFilter('original', this)">
-              <strong>Original</strong><span>No filters</span>
+              <strong>Original</strong><span>Raw Photo</span>
           </div>
-          <div class="f-btn active" id="btnFilterMagic" onclick="setFilter('magic', this)">
-              <strong>🪄 Magic Color</strong><span>Removes shadows</span>
+          <div class="f-btn active" id="btnFilterColor" onclick="setFilter('colour', this)">
+              <strong>🪄 Colour Scan</strong><span>Removes Shadows</span>
           </div>
           <div class="f-btn" id="btnFilterBW" onclick="setFilter('bw', this)">
-              <strong>⚫ Pure B&W</strong><span>Best for Signatures</span>
+              <strong>⚫ B&W Scan</strong><span>Best for Signatures</span>
           </div>
         </div>
 
@@ -312,7 +311,7 @@ input[type=range]::-webkit-slider-thumb {
                 <span class="sl-val" id="intVal">50%</span>
             </div>
             <input type="range" id="intensitySlider" min="0" max="100" value="50" oninput="applyFilterToCanvas()">
-            <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;">Decrease intensity if the text gets too light.</p>
+            <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;">Adjust slider to make text darker or background whiter.</p>
         </div>
       </div>
 
@@ -330,10 +329,14 @@ input[type=range]::-webkit-slider-thumb {
 <p><strong>ReduceSize.online Document Scanner</strong> is a 100% free, browser-based alternative to heavy apps like CamScanner. It uses advanced pixel-manipulation algorithms to instantly clean up your mobile photos without adding any annoying watermarks.</p>
 
 <h3>Flawless Cropping & Straightening</h3>
-<p>Unlike basic tools, our cropper is designed specifically for documents. The crop-box is <strong>locked in place</strong> so you won't accidentally move it while trying to adjust the edges. Additionally, if you took the photo at an angle, you can use our <strong>360° Straighten Slider</strong> to perfectly align the document before cropping.</p>
+<p>Unlike basic tools, our cropper is designed specifically for documents. You can easily drag the corners to crop out the table or background. Additionally, if you took the photo at an angle, you can use our <strong>360° Straighten Slider</strong> to perfectly align the document before applying filters.</p>
 
-<h3>Customizable Magic Scan Intensity</h3>
-<p>A common issue with document scanners is that they make the image "too white," causing light pen strokes to disappear. We solved this by giving you full control. After applying the <strong>🪄 Magic Color</strong> or <strong>⚫ Pure B&W</strong> filter, you can slide the <em>Filter Intensity</em> bar left or right. This allows you to find the perfect balance between a bright white background and bold, readable text.</p>
+<h3>Colour Scan vs B&W Scan</h3>
+<p>A common issue with document scanners is that they make the image "too white," causing light pen strokes to disappear. We solved this by giving you full control with our <em>Filter Intensity</em> slider.</p>
+<ul>
+    <li><strong>Colour Scan:</strong> Perfect for marksheets or documents that have colored stamps, signatures, or photos. It blasts away the dark shadows while preserving the original colors of the text.</li>
+    <li><strong>B&W Scan:</strong> Converts the image into strict Black & White. The background becomes blindingly white, and your pen strokes become solid black. This guarantees that your handwritten signature will stand out clearly.</li>
+</ul>
 
 <h3>100% Privacy & Security</h3>
 <p>Because documents often contain sensitive personal information (Aadhar cards, PAN cards, Bank details), we built this tool to run entirely <em>Client-Side</em>. This means your images are processed directly inside your own web browser. Your private documents are <strong>never uploaded to our servers</strong>, ensuring complete data privacy.</p>
@@ -367,7 +370,7 @@ input[type=range]::-webkit-slider-thumb {
 <script>
 let cropper = null; 
 let rawCroppedCanvas = null; 
-let currentFilter = 'magic'; // default
+let currentFilter = 'colour'; // default
 
 document.getElementById('upload').addEventListener('change', function() {
   const imageToCrop = document.getElementById('imageToCrop');
@@ -392,16 +395,13 @@ document.getElementById('upload').addEventListener('change', function() {
   
   if(cropper) { cropper.destroy(); }
 
-  // PRO CROPPER: Box is fixed, you can drag the image behind it, or drag the edges.
+  // Restored Natural Drag & Crop
   cropper = new Cropper(imageToCrop, {
       aspectRatio: NaN, 
       viewMode: 1, 
       autoCropArea: 0.95, 
       background: true, 
-      responsive: true,
-      dragMode: 'move', // Panning image instead of drawing new crop boxes
-      cropBoxMovable: false, // Prevents moving the crop box by clicking inside
-      toggleDragModeOnDblclick: false // Prevents accidental mode switches
+      responsive: true
   });
 });
 
@@ -443,15 +443,15 @@ function startScanProcess() {
         });
         
         pb.style.width = '100%';
-        st.innerText = 'Applying Magic Filter...';
+        st.innerText = 'Applying Filter...';
         
         setTimeout(() => {
             pw.style.display = 'none';
             document.getElementById('step2').style.display = 'block';
             
-            // Set default intensity & apply
+            // Set default intensity & apply Colour Filter
             document.getElementById('intensitySlider').value = 50;
-            setFilter('magic', document.getElementById('btnFilterMagic'));
+            setFilter('colour', document.getElementById('btnFilterColor'));
             
         }, 500);
     }, 100);
@@ -509,8 +509,8 @@ function applyFilterToCanvas() {
             data[i] = data[i+1] = data[i+2] = val;
         }
     } 
-    else if (currentFilter === 'magic') {
-        // Magic Scan: Boost contrast and blast whites to remove shadows
+    else if (currentFilter === 'colour') {
+        // Colour Scan: Boost contrast and blast whites to remove shadows
         // Intensity 0 = No whitening, Intensity 100 = Aggressive whitening
         let whiteThreshold = 255 - intensityVal; 
         
