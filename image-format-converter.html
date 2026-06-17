@@ -53,13 +53,6 @@ body::after{
 .nav-links{display:flex;gap:20px;align-items:center;}
 .nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
 .nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none;
-}
-@media(min-width:600px){ .nav-pill{display:inline-block;} }
 
 /* WRAP & SUB-HERO */
 .wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
@@ -77,42 +70,72 @@ body::after{
 .grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
 
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
+/* TOOL CARDS GRID (The New Menu) */
+.tool-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+    margin-bottom: 30px;
+}
+.tool-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 24px; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden;
+}
+.tool-card:hover {
+    transform: translateY(-4px); border-color: rgba(109,84,240,.4); background: rgba(109,84,240,.04);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.tc-icon {
+    width: 48px; height: 48px; border-radius: 12px; background: rgba(109,84,240,.1);
+    display: flex; align-items: center; justify-content: center; font-size: 24px;
+    border: 1px solid rgba(109,84,240,.2); color: var(--purple-l);
+}
+.tc-title {
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: #fff;
+}
+.tc-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.5;
 }
 
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
+/* ACTIVE TOOL INTERFACE (Hidden by default) */
+.active-tool-wrap { display: none; animation: fadeIn 0.4s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.back-btn {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700;
+    color: var(--muted); background: var(--surface); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-bottom: 20px; transition: 0.2s;
 }
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
+.back-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+
+.tool-box {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+    padding: 24px; position: relative; overflow: hidden;
 }
+.tool-box::before {
+    content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+    background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent); opacity:.5;
+}
+
+.at-header { margin-bottom: 20px; text-align: center; }
+.at-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.at-desc { font-size: 14px; color: var(--muted); }
 
 /* UPLOAD */
 .drop{
   position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:28px 14px;text-align:center;
+  border-radius:13px;padding:36px 14px;text-align:center;
   background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
 }
 .drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
 .drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .drop-ico{
-  width:46px;height:46px;margin:0 auto 10px;
+  width:54px;height:54px;margin:0 auto 12px;
   background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
+  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
 }
-.drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
+.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
 .drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:12px;color:var(--muted)}
+.drop-hint{font-size:13px;color:var(--muted)}
 
 /* PREVIEW */
 .prev-grid{
@@ -121,25 +144,6 @@ body::after{
 }
 .prev-item{border-radius:8px;overflow:hidden;background:var(--surface2);aspect-ratio:1;border:1px solid var(--border);}
 .prev-item img{width:100%;height:100%;object-fit:cover}
-
-/* CONTROLS */
-.u-box{
-  background:var(--surface2);border:1px solid rgba(109,84,240,.2);
-  border-radius:12px;padding:16px;margin-bottom:20px;
-}
-.u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
-.u-title::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%}
-
-.irow{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
-.irow .f{flex:1;min-width:140px;}
-.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow select{
-  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
-  padding:12px 14px;border-radius:10px;color:var(--text);
-  font-size:15px;font-family:'Manrope',sans-serif;font-weight:600;
-  outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none; cursor:pointer;
-}
-.irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
 
 /* BUTTONS */
 .btn{
@@ -151,21 +155,21 @@ body::after{
 .btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
 .btn:active{transform:scale(.98)}
 
-/* EXPORT ACTION BUTTONS */
-.export-actions {
-    display: none; gap: 10px; margin-top: 20px; flex-wrap: wrap;
-    background: rgba(32,217,192,.05); border: 1px solid rgba(32,217,192,.2);
-    border-radius: 12px; padding: 16px;
-}
-.ea-title { width:100%; font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;}
-.btn-zip { background: #3182ce; flex:1; min-width:140px;}
-.btn-zip:hover { background: #2b6cb0; box-shadow:0 10px 28px rgba(49,130,206,.42); }
-
 /* PROGRESS */
 .pbox{display:none;margin-top:13px}
 .ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
 .pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s;position:relative;overflow:hidden;}
 .plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
+
+/* EXPORT ACTION BUTTONS */
+.export-actions {
+    display: none; gap: 10px; margin-top: 20px; flex-wrap: wrap;
+    background: rgba(32,217,192,.05); border: 1px solid rgba(32,217,192,.2);
+    border-radius: 12px; padding: 16px; text-align: center;
+}
+.ea-title { width:100%; font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.btn-zip { background: #3182ce; width:100%;}
+.btn-zip:hover { background: #2b6cb0; box-shadow:0 10px 28px rgba(49,130,206,.42); }
 
 /* RESULTS */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
@@ -173,7 +177,7 @@ body::after{
 .rc img{width:100%;height:100px;object-fit:cover;cursor:zoom-in; border-bottom:1px solid var(--border);}
 .ri{padding:10px}
 .rsn{font-size:11px;color:var(--muted);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.rsf{display:inline-block; font-size:10px; font-weight:700; color:#fff; background:var(--purple); padding:2px 6px; border-radius:4px; margin-bottom:6px;}
+.rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
 .rb{
   width:100%;padding:7px;border-radius:7px;border:none;
   background:rgba(109,84,240,.12);color:var(--purple-l);
@@ -208,25 +212,17 @@ body::after{
 .fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
 .fnav a:hover{color:var(--text);background:var(--card)}
 .fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-.ftrust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;color:#383858;font-weight:600}
 
 @media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
 </style>
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication",
-"name":"Universal Image Converter Online",
+"name":"Universal Image Format Converter Online",
 "url":"https://reducesize.online/image-format-converter.html",
 "applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Convert any image format online. Change WebP to JPG, PNG to JPG, or JPG to PNG instantly. Batch convert multiple images and download as ZIP.",
+"description":"Convert images to JPG, PNG, WebP, BMP online. Bulk convert WebP to JPG or PNG to JPG securely in your browser and download as ZIP.",
 "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How do I convert WebP to JPG for free?","acceptedAnswer":{"@type":"Answer","text":"Simply drag and drop your WebP images into our tool, select 'JPG' from the 'Convert To' dropdown, and click convert. Your images will be instantly converted to standard JPEG format."}},
-{"@type":"Question","name":"Will my transparent PNG have a black background if converted to JPG?","acceptedAnswer":{"@type":"Answer","text":"No! Our smart converter automatically detects transparent areas in PNGs and fills them with a clean white background before converting to JPG, ensuring your images look perfect."}},
-{"@type":"Question","name":"Can I convert multiple images at once?","acceptedAnswer":{"@type":"Answer","text":"Yes, our tool supports batch conversion. You can upload 50+ images of mixed formats, select your desired output format, and download all converted files in a single ZIP folder."}}
-]}
 </script>
 </head>
 <body>
@@ -240,82 +236,100 @@ body::after{
 
 <div class="wrap">
 <section class="sub-hero">
-  <div class="tag">✦ Universal Image Converter</div>
-  <h1>Convert Image Format<br><span class="grad">Online Instantly</span></h1>
-  <p>Convert WebP to JPG, PNG to JPG, or any format to WebP. Smart background fill, bulk batch conversion, and ZIP download support.</p>
-  <div class="badges">
-    <span class="badge">🔄 WebP ↔ JPG ↔ PNG</span>
-    <span class="badge">📂 Bulk Convert</span>
-    <span class="badge">🎨 Smart Background Fix</span>
-  </div>
+  <div class="tag">✦ Universal Conversion Tools</div>
+  <h1>Convert Images<br><span class="grad">in Bulk Format</span></h1>
+  <p>Select the tool you need below. Convert WebP, PNG, or GIF to standard JPG, or vice-versa. Secure, fast, and entirely free.</p>
 </section>
 
-<div class="card">
-  
-  <div class="drop">
-    <input type="file" id="upload" accept="image/*" multiple>
-    <div class="drop-ico">🔄</div>
-    <div class="drop-main">Drop images to Convert</div>
-    <div class="drop-hint">JPG, PNG, WEBP, GIF, BMP supported</div>
-  </div>
-  
-  <div id="prev" class="prev-grid" style="display:none"></div>
-
-  <div class="u-box">
-    <div class="u-title">Conversion Settings</div>
-    <div class="irow">
-      <div class="f">
-        <label class="fl">Convert All Images To:</label>
-        <select id="targetFormat">
-          <option value="jpeg">JPG / JPEG (Standard Format)</option>
-          <option value="png">PNG (High Quality / Transparent)</option>
-          <option value="webp">WebP (Next-Gen Web Format)</option>
-          <option value="bmp">BMP (Uncompressed Bitmap)</option>
-          <option value="gif">GIF (Static Image)</option>
-        </select>
-      </div>
+<div id="gridMenu" class="tool-grid">
+    
+    <div class="tool-card" onclick="openTool('jpeg', 'Convert to JPG', 'Turn PNG, WEBP, or GIF images into universally accepted Standard JPGs. Auto-fixes transparent backgrounds.')">
+        <div class="tc-icon">🖼️</div>
+        <div>
+            <div class="tc-title">Convert to JPG</div>
+            <div class="tc-desc">Turn PNG, WEBP, or GIF into standard JPG format. Best for form uploads.</div>
+        </div>
     </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:2px;margin-bottom:0">*Note: Converting a transparent image to JPG/BMP will add a solid white background.</p>
-  </div>
 
-  <button class="btn" onclick="startConversion()">⚡&nbsp; Convert Images Now</button>
+    <div class="tool-card" onclick="openTool('png', 'Convert to PNG', 'Turn your JPGs or WEBP images into high-quality, lossless PNG format.')">
+        <div class="tc-icon">✨</div>
+        <div>
+            <div class="tc-title">Convert to PNG</div>
+            <div class="tc-desc">Turn JPG, WEBP into high-quality PNG images instantly.</div>
+        </div>
+    </div>
 
-  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
-  
-  <div id="exportActions" class="export-actions">
-      <div class="ea-title">🎉 Conversion Complete!</div>
-      <button class="btn btn-zip" onclick="downloadZIP()">🗂️ Download All as ZIP</button>
-  </div>
+    <div class="tool-card" onclick="openTool('webp', 'Convert to WebP', 'Compress your JPG or PNG images heavily by turning them into Next-Gen WebP format.')">
+        <div class="tc-icon">🌐</div>
+        <div>
+            <div class="tc-title">Convert to WebP</div>
+            <div class="tc-desc">Convert JPG/PNG to WebP to save massive space for websites.</div>
+        </div>
+    </div>
 
-  <div id="rg" class="rg"></div>
+    <div class="tool-card" onclick="openTool('bmp', 'Convert to BMP', 'Convert images to uncompressed Bitmap (BMP) format for specific software needs.')">
+        <div class="tc-icon">🎨</div>
+        <div>
+            <div class="tc-title">Convert to BMP</div>
+            <div class="tc-desc">Turn standard images into uncompressed Windows Bitmap (BMP) files.</div>
+        </div>
+    </div>
+
+</div>
+
+<div id="activeToolWrap" class="active-tool-wrap">
+    <button class="back-btn" onclick="closeTool()">⬅ Back to All Tools</button>
+    
+    <div class="tool-box">
+        <div class="at-header">
+            <div id="atTitle" class="at-title">Convert to JPG</div>
+            <div id="atDesc" class="at-desc">Upload your files below to start batch conversion.</div>
+        </div>
+
+        <div class="drop">
+            <input type="file" id="upload" accept="image/*" multiple>
+            <div class="drop-ico">📥</div>
+            <div class="drop-main">Select images to convert</div>
+            <div class="drop-hint">Drop multiple files here (JPG, PNG, WEBP, GIF)</div>
+        </div>
+        
+        <div id="prev" class="prev-grid" style="display:none"></div>
+
+        <input type="hidden" id="targetFormat" value="">
+
+        <button class="btn" id="convertBtn" onclick="startConversion()">⚡&nbsp; Convert Images Now</button>
+
+        <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+        
+        <div id="exportActions" class="export-actions">
+            <div class="ea-title">🎉 Conversion Complete!</div>
+            <button class="btn btn-zip" onclick="downloadZIP()">🗂️ Download All as ZIP</button>
+        </div>
+
+        <div id="rg" class="rg"></div>
+    </div>
 </div>
 
 <section class="seo">
 <h2>The Ultimate Image Format Converter</h2>
 <p>In today's digital world, dealing with different image formats can be frustrating. You might download an image from Google only to realize it's a <strong>.WebP</strong> file that your Photoshop or video editor refuses to open. Or perhaps a government portal is strictly asking for a <strong>.JPG</strong> file, but your scanned document is in <strong>.PNG</strong> format.</p>
-<p><strong>ReduceSize.online Universal Converter</strong> is built to solve these exact headaches. We support seamless cross-conversion between all major image types including JPG, PNG, WebP, BMP, and GIF, right inside your web browser without downloading any software.</p>
+<p><strong>ReduceSize.online Universal Converter</strong> is built to solve these exact headaches. We support seamless cross-conversion between all major image types including JPG, PNG, WebP, and BMP right inside your web browser.</p>
 
 <h3>Smart Background Fix for PNG to JPG</h3>
 <p>A common problem when converting a logo or transparent PNG into a JPG is that the transparent areas turn pitch black, ruining the image. Our converter features a <strong>Smart Canvas Fill</strong>. If you convert a transparent image to a format that doesn't support transparency (like JPG or BMP), we automatically apply a clean, solid white background behind your image before converting it. It looks perfect every single time.</p>
 
 <h3>Batch Conversion for Professionals</h3>
-<p>If you have 50 WebP images downloaded from a website that you need to convert to JPG, doing it one by one is a waste of time. Our tool supports full <strong>Bulk Batch Conversion</strong>. Simply drag and drop all your images into the upload box, select your target format, and let the tool process them all in seconds. You can then download all the converted files neatly packed in a single ZIP folder.</p>
-
-<h3>Frequently Asked Questions (FAQs)</h3>
-<p><strong>How do I convert WebP to JPG for free?</strong><br>Simply drag and drop your WebP images into our tool, select 'JPG' from the 'Convert To' dropdown, and click convert. Your images will be instantly converted to standard JPEG format.</p>
-<p><strong>Will my transparent PNG have a black background if converted to JPG?</strong><br>No! Our smart converter automatically detects transparent areas in PNGs and fills them with a clean white background before converting to JPG, ensuring your images look perfect.</p>
-<p><strong>Can I convert multiple images at once?</strong><br>Yes, our tool supports batch conversion. You can upload 50+ images of mixed formats, select your desired output format, and download all converted files in a single ZIP folder.</p>
-<p><strong>Is my data safe during conversion?</strong><br>100% safe. The conversion process relies on your browser's internal engine (HTML5 Canvas). Your personal images are never uploaded to any remote server; everything happens locally on your own device.</p>
+<p>If you have 50 WebP images downloaded from a website that you need to convert to JPG, doing it one by one is a waste of time. Our tool supports full <strong>Bulk Batch Conversion</strong>. Select your tool from the dashboard, drop all your images into the upload box, and let the tool process them all in seconds. You can then download all the converted files neatly packed in a single ZIP folder.</p>
 </section>
 
 <div class="chips-hd">More Tools</div>
 <div class="chips">
   <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
   <a href="/compress-image-without-losing-quality.html" class="chip"><span class="chip-i">✨</span><div class="chip-t"><strong>Lossless Compress</strong><span>WebP Optimizer</span></div></a>
-  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
   <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
   <a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a>
   <a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">🔧</span><div class="chip-t"><strong>Master Form Fixer</strong><span>Any portal</span></div></a>
+  <a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a>
 </div>
 </div>
 
@@ -323,9 +337,7 @@ body::after{
   <a class="flogo" href="/"><em>Reduce</em>Size</a>
   <nav class="fnav">
     <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-20kb.html">20KB</a>
     <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/compress-image-to-100kb.html">100KB</a>
     <a href="/resize-image-for-online-form.html">Form Fixer</a>
     <a href="/reduce-image-size-for-email.html">Email</a>
   </nav>
@@ -337,6 +349,37 @@ body::after{
 <script>
 let convertedFilesArray = [];
 
+// UI Navigation Logic
+function openTool(format, title, desc) {
+    document.getElementById('gridMenu').style.display = 'none';
+    document.getElementById('activeToolWrap').style.display = 'block';
+    
+    // Set text and target
+    document.getElementById('atTitle').innerText = title;
+    document.getElementById('atDesc').innerText = desc;
+    document.getElementById('targetFormat').value = format;
+    
+    // Reset previous state
+    resetUploader();
+}
+
+function closeTool() {
+    document.getElementById('activeToolWrap').style.display = 'none';
+    document.getElementById('gridMenu').style.display = 'grid';
+    resetUploader();
+}
+
+function resetUploader() {
+    document.getElementById('upload').value = '';
+    document.getElementById('prev').innerHTML = '';
+    document.getElementById('prev').style.display = 'none';
+    document.getElementById('rg').innerHTML = '';
+    document.getElementById('exportActions').style.display = 'none';
+    document.getElementById('pbox').style.display = 'none';
+    convertedFilesArray = [];
+}
+
+// File Upload Logic
 document.getElementById('upload').addEventListener('change', function() {
   const prev = document.getElementById('prev');
   prev.innerHTML = ''; 
@@ -359,16 +402,17 @@ document.getElementById('upload').addEventListener('change', function() {
   }
 });
 
+// Conversion Logic
 async function startConversion(){
   const fi = document.getElementById('upload');
-  const targetFormat = document.getElementById('targetFormat').value;
+  const targetFormat = document.getElementById('targetFormat').value; // Get from hidden input
   const st = document.getElementById('status');
   
   document.getElementById('rg').innerHTML='';
   document.getElementById('exportActions').style.display = 'none';
   convertedFilesArray = [];
   
-  if(!fi.files.length){alert('Select images first');return}
+  if(!fi.files.length){alert('Please select images to convert first.');return}
 
   const files = fi.files;
   const pw = document.getElementById('pbox');
@@ -426,7 +470,7 @@ async function convertImage(file, format){
   ctx.imageSmoothingQuality = 'high';
   ctx.drawImage(img, 0, 0, cv.width, cv.height);
   
-  // High quality conversion (0.95 for formats that support it)
+  // High quality conversion
   return new Promise(r => cv.toBlob(r, mime, 0.95));
 }
 
@@ -436,7 +480,10 @@ function addResult(blob, name, badgeText){
   d.className = 'rc';
   d.innerHTML = `<img src="${url}" loading="lazy">
                  <div class="ri">
-                    <div class="rsf">${badgeText}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                        <span style="font-size:10px; font-weight:700; color:#fff; background:var(--green); color:#000; padding:2px 6px; border-radius:4px;">${badgeText}</span>
+                        <span class="rsz" style="margin:0;">${(blob.size/1024).toFixed(1)} KB</span>
+                    </div>
                     <div class="rsn" title="${name}">${name}</div>
                     <button class="rb" onclick="dlUrl('${url}','${name}')">⬇ Download</button>
                  </div>`;
@@ -454,7 +501,7 @@ async function downloadZIP() {
     if(convertedFilesArray.length === 0) return;
     const btn = document.querySelector('.btn-zip');
     const origText = btn.innerText;
-    btn.innerText = 'Zipping...';
+    btn.innerText = 'Zipping files...';
     
     try {
         const zip = new JSZip();
