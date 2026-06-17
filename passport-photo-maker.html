@@ -132,7 +132,7 @@ body::after{
   margin-bottom:20px;
   position:relative;
   width: 100%;
-  height: 380px; 
+  height: 400px; 
 }
 .crop-wrap img {
   max-width: 100%;
@@ -201,15 +201,6 @@ body::after{
   font-family:'Manrope',sans-serif;transition:.15s;
 }
 .rb:hover{background:#7b63f5; box-shadow:0 6px 20px rgba(109,84,240,.3);}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
 
 /* CHIPS */
 .chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
@@ -417,7 +408,6 @@ function calculateMax() {
     let w_px = Math.round((w_cm / 2.54) * dpi);
     let total_h_px = Math.round((h_cm / 2.54) * dpi);
     
-    // Check if Strip is enabled. Allocate space immediately to prevent typing jump.
     let addText = document.getElementById('addTextCb').checked;
     let strip_h_px = 0;
     
@@ -429,14 +419,22 @@ function calculateMax() {
     let newRatio = w_px / face_h_px;
 
     // SMART UPDATE: Only change cropper if ratio ACTUALLY changed.
-    // Also, save old box position and restore it so it doesn't jump.
+    // By re-initializing the cropper with exact previous data, it CANNOT jump.
     if(cropper && lastRatio !== newRatio) {
         let oldData = cropper.getData();
-        cropper.setAspectRatio(newRatio);
-        cropper.setData({
-            x: oldData.x,
-            y: oldData.y,
-            width: oldData.width // Lock width, let height adjust to new ratio naturally
+        cropper.destroy();
+        
+        cropper = new Cropper(document.getElementById('imageToCrop'), {
+            aspectRatio: newRatio,
+            viewMode: 1,
+            background: true,
+            responsive: true,
+            data: {
+                x: oldData.x,
+                y: oldData.y,
+                width: oldData.width,
+                height: oldData.width / newRatio
+            }
         });
         lastRatio = newRatio;
     }
