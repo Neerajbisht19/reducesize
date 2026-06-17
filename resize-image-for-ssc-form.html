@@ -3,29 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resize Image for SSC Form Online Free | 10KB 20KB 50KB – ReduceSize</title>
+<title>Resize Image for SSC Form Free | CGL, CHSL Photo & Signature</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/resize-image-for-ssc-form.html">
-<meta name="description" content="Resize image for SSC CGL CHSL form online free. Get photo and signature in exact KB size. Instant, no upload required.">
-<meta name="keywords" content="resize image for ssc form, ssc photo size compress, ssc signature 10kb 20kb, image resize ssc cgl chsl">
+<meta name="description" content="Resize your photo to 3.5cm x 4.5cm (50KB) and signature to 20KB for SSC CGL, CHSL, MTS online forms. Free, instant, live crop, and mobile-friendly.">
+<meta name="keywords" content="resize image for ssc form, ssc photo resize 50kb, ssc signature 20kb, 3.5 cm x 4.5 cm photo maker, ssc cgl photo compressor">
 <meta name="robots" content="index, follow">
-<meta name="author" content="ReduceSize">
 <meta name="theme-color" content="#6d54f0">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Resize Image for SSC Form Online Free | 10KB 20KB 50KB – ReduceSize">
-<meta property="og:description" content="Resize image for SSC CGL CHSL form online free. Get photo and signature in exact KB size. Instant, no upload required.">
-<meta property="og:url" content="https://reducesize.online/resize-image-for-ssc-form.html">
-<meta property="og:site_name" content="ReduceSize.online">
-<meta property="og:image" content="https://reducesize.online/favicon.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Resize Image for SSC Form Online Free | 10KB 20KB 50KB – ReduceSize">
-<meta name="twitter:description" content="Resize image for SSC CGL CHSL form online free. Get photo and signature in exact KB size. Instant, no upload required.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<style>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+
+<style>
 :root{
   --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
   --border:rgba(255,255,255,0.07);--purple:#6d54f0;
@@ -61,39 +52,33 @@ body::after{
   color:var(--text);text-decoration:none;letter-spacing:-.5px;
 }
 .nav-logo em{font-style:normal;color:var(--purple-l)}
+.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
+.nav-links a:hover{opacity:1;color:var(--purple-l);}
 .nav-pill{
   font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
   background:rgba(62,207,142,.1);color:var(--green);
   border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
+  display:none;
 }
-/* WRAP */
+@media(min-width:600px){ .nav-pill{display:inline-block;} }
+
+/* WRAP & SUB-HERO */
 .wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-/* HERO */
-.hero{text-align:center;padding:50px 0 32px}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--purple-l);background:rgba(109,84,240,.08);
-  border:1px solid rgba(109,84,240,.2);padding:6px 16px;
-  border-radius:30px;margin-bottom:20px;
+.sub-hero{padding:40px 0 24px;text-align:center}
+.sub-hero .tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);background:rgba(32,217,192,.07);
+  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
 }
-.eyebrow::before{
-  content:'';width:5px;height:5px;border-radius:50%;
-  background:var(--purple-l);box-shadow:0 0 8px var(--purple-l);
-  animation:blink 2s ease infinite;
+.sub-hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
+  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
 }
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.hero-h1{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(30px,7vw,52px);
-  font-weight:800;line-height:1.12;
-  letter-spacing:-1.5px;margin-bottom:14px;
-}
-.grad{
-  background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-sub{font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 26px;line-height:1.7}
+.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
+
 /* BADGES */
 .badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
 .badge{
@@ -101,20 +86,7 @@ body::after{
   font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
   background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
 }
-/* STATS */
-.stats{
-  display:flex;justify-content:center;margin-bottom:40px;
-  border:1px solid var(--border);border-radius:var(--rs);overflow:hidden;
-  background:var(--card);
-}
-.stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border)}
-.stat:last-child{border-right:none}
-.stat-n{
-  font-family:'Syne',sans-serif;font-size:22px;font-weight:800;
-  background:linear-gradient(120deg,#fff 0%,var(--purple-l) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.stat-l{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+
 /* TOOL CARD */
 .card{
   background:var(--surface);border:1px solid var(--border);
@@ -126,19 +98,20 @@ body::after{
   background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
   opacity:.5;
 }
-/* TABS */
-.tabs{
-  display:flex;gap:6px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:11px;padding:4px;margin-bottom:22px;
+
+/* QUICK SSC TARGETS */
+.ssc-tabs {
+  display:flex; gap:10px; margin-bottom:20px;
 }
-.tab{
-  flex:1;padding:10px;border-radius:8px;border:none;
-  font-size:14px;font-weight:700;cursor:pointer;
-  background:transparent;color:var(--muted);transition:.2s;
-  font-family:'Manrope',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:6px;
+.ssc-tab {
+  flex:1; padding:12px; border-radius:10px; border:1px solid var(--border);
+  background:var(--surface2); color:var(--muted); font-size:14px; font-weight:700;
+  text-align:center; cursor:pointer; transition:all 0.2s; font-family:'Manrope',sans-serif;
 }
-.tab.on{background:var(--purple);color:#fff;box-shadow:0 3px 14px rgba(109,84,240,.4)}
+.ssc-tab.active {
+  background:rgba(109,84,240,.15); border-color:var(--purple); color:var(--purple-l);
+}
+
 /* UPLOAD */
 .drop{
   position:relative;border:2px dashed rgba(109,84,240,.22);
@@ -155,34 +128,45 @@ body::after{
 .drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
 .drop-main span{color:var(--purple-l)}
 .drop-hint{font-size:12px;color:var(--muted)}
-/* PREVIEW */
-.prev-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(66px,1fr));
-  gap:7px;margin-bottom:14px;
+
+/* CROP AREA */
+.crop-wrap {
+  display:none; 
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:20px;
+  position:relative;
+  width: 100%;
+  height: 380px; 
 }
-.prev-item{border-radius:8px;overflow:hidden;background:var(--surface2);aspect-ratio:1}
-.prev-item img{width:100%;height:100%;object-fit:cover}
-/* QUICK */
-.ql{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:7px}
-.qbtns{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
-.qb{
-  padding:7px 13px;border-radius:7px;border:1px solid var(--border);
-  background:rgba(255,255,255,.02);color:#9090b8;
-  font-size:12px;font-weight:700;cursor:pointer;transition:.18s;
-  font-family:'Manrope',sans-serif;
+.crop-wrap img {
+  max-width: 100%;
+  display: block;
 }
-.qb:hover,.qb.on{background:rgba(109,84,240,.12);border-color:rgba(109,84,240,.4);color:var(--purple-l)}
+
+/* SSC SPECIFIC CONTROLS */
+.u-box{
+  background:var(--surface2);border:1px solid rgba(109,84,240,.2);
+  border-radius:12px;padding:16px;margin-bottom:20px;
+}
+.u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+.u-title::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%}
+
 /* INPUT ROW */
-.irow{display:flex;gap:10px;margin-bottom:16px}
-.irow .f{flex:1}.irow .fs{flex:0 0 96px}
+.irow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.irow .f{flex:1;min-width:120px;}
 .fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input,.irow select{
-  width:100%;background:var(--surface2);border:1px solid rgba(255,255,255,.08);
+.irow input{
+  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
   padding:12px 14px;border-radius:10px;color:var(--text);
-  font-size:15px;font-family:'Manrope',sans-serif;font-weight:600;
+  font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
   outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
 }
-.irow input:focus,.irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
+.irow input::placeholder {color: rgba(255,255,255,0.2);}
+.irow input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
+
 /* BUTTONS */
 .btn{
   width:100%;padding:14px;border-radius:11px;border:none;
@@ -192,11 +176,7 @@ body::after{
 }
 .btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
 .btn:active{transform:scale(.98)}
-.btn::after{
-  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.14),transparent);transition:.5s;
-}
-.btn:hover::after{left:100%}
+
 /* PROGRESS */
 .pbox{display:none;margin-top:13px}
 .ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
@@ -204,43 +184,31 @@ body::after{
   height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));
   border-radius:10px;transition:width .3s;position:relative;overflow:hidden;
 }
-.pfill::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
-  animation:shine 1.2s linear infinite;
-}
-@keyframes shine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 .plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
-/* DOWNLOAD */
-.btn-dl{
-  display:none;width:100%;margin-top:13px;padding:14px;border-radius:11px;border:none;
-  background:var(--green);color:#fff;font-size:15px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;
-  box-shadow:0 6px 20px rgba(62,207,142,.22);
-  animation:pop .3s ease;
-}
-@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+
 /* RESULTS */
-.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
-.rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden}
-.rc img{width:100%;height:88px;object-fit:cover;cursor:zoom-in}
-.ri{padding:9px 10px}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
+.rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;display:flex;flex-direction:column;}
+.rc img{width:100%;height:auto;max-height:280px;object-fit:cover;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
+.ri{padding:12px 10px}
 .rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
 .rb{
-  width:100%;padding:7px;border-radius:7px;border:none;
+  width:100%;padding:9px;border-radius:7px;border:none;
   background:rgba(109,84,240,.12);color:var(--purple-l);
-  font-size:12px;font-weight:700;cursor:pointer;
+  font-size:13px;font-weight:700;cursor:pointer;
   font-family:'Manrope',sans-serif;transition:.15s;
 }
 .rb:hover{background:rgba(109,84,240,.24)}
-/* SEO */
-.seo{margin-top:44px;padding-top:32px;border-top:1px solid var(--border)}
-.seo h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin:24px 0 8px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin:18px 0 6px}
-.seo p{color:#8080a8;font-size:14px;line-height:1.78;margin-bottom:10px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:10px}
-.seo li{color:#8080a8;font-size:14px;line-height:1.78;margin-bottom:3px}
-.seo strong{color:#a0a0c8;font-weight:600}
+
+/* SEO SECTION */
+.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
+.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
+.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
+.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
+.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
+.seo li{margin-bottom:6px}
+.seo strong{color:#eeeeff;font-weight:600}
+
 /* CHIPS */
 .chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
 .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
@@ -253,19 +221,7 @@ body::after{
 .chip-i{font-size:17px;flex-shrink:0}
 .chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
 .chip-t span{font-size:11px;color:var(--muted)}
-/* SUB-PAGE HERO (for 10kb, 20kb etc) */
-.sub-hero{padding:36px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
-}
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(24px,6vw,40px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:10px;
-}
-.sub-hero p{font-size:14px;color:var(--muted);max-width:440px;margin:0 auto 22px;line-height:1.65}
+
 /* FOOTER */
 .footer{
   position:relative;z-index:1;border-top:1px solid var(--border);
@@ -284,135 +240,138 @@ body::after{
 .fnav a:hover{color:var(--text);background:var(--card)}
 .fcopy{font-size:12px;color:#383858;margin-bottom:10px}
 .ftrust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;color:#383858;font-weight:600}
-/* MODAL */
-.mo{
-  position:fixed;inset:0;background:rgba(0,0,0,.78);
-  display:none;align-items:center;justify-content:center;
-  z-index:9999;backdrop-filter:blur(6px);
-}
-.mb{
-  background:var(--surface);border:1px solid var(--border);
-  max-width:308px;width:90%;padding:24px;border-radius:16px;
-  text-align:center;box-shadow:0 0 60px rgba(109,84,240,.12);
-  animation:pop .25s ease;
-}
-.mb h2{font-family:'Syne',sans-serif;font-size:17px;color:var(--yellow);margin-bottom:8px}
-.mb p{font-size:13px;color:#8080a8;line-height:1.6;margin-bottom:5px}
-.mb .tip{color:var(--purple-l);font-weight:600;font-size:13px;margin-top:6px}
-.mb button{
-  margin-top:14px;background:var(--purple);border:none;color:#fff;
-  padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;
-  font-family:'Manrope',sans-serif;
-}
-/* IMG PREVIEW MODAL */
-.pm{
-  position:fixed;inset:0;background:rgba(0,0,0,.88);
-  display:none;align-items:center;justify-content:center;
-  z-index:9999;cursor:zoom-out;backdrop-filter:blur(8px);
-}
-.pm img{max-width:92%;max-height:88vh;border-radius:13px}
-/* LEGAL */
-.legal{max-width:700px;margin:32px auto;padding:0 16px 80px;position:relative;z-index:1}
-.legal h1{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:6px}
-.legal .upd{font-size:12px;color:var(--muted);margin-bottom:24px}
-.legal h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin:20px 0 7px}
-.legal p{font-size:14px;color:#8080a0;line-height:1.78;margin-bottom:9px}
+
 /* MOBILE */
 @media(max-width:600px){
-  .hero{padding:32px 0 20px}
-  .hero-h1{letter-spacing:-1px}
+  .sub-hero{padding:32px 0 20px}
   .card{padding:16px;border-radius:15px}
-  .stats{border-radius:10px}
-  .stat{padding:12px 4px}
-  .stat-n{font-size:18px}
   .chips{grid-template-columns:1fr 1fr}
-  .nav{padding:0 14px}
-  .sub-hero{padding:28px 0 18px}
 }
-</style><script type="application/ld+json">
+</style>
+
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication",
-"name":"Resize Image for SSC Form Online Free","url":"https://reducesize.online/resize-image-for-ssc-form.html",
+"name":"Resize Image for SSC Form Free",
+"url":"https://reducesize.online/resize-image-for-ssc-form.html",
 "applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Resize image for SSC CGL CHSL form online free. Get photo and signature in exact KB size. Instant, no upload required.",
+"description":"Resize photo and signature for SSC CGL, CHSL, MTS forms. Auto-crop to 3.5cm x 4.5cm and compress under 50KB or 20KB for signatures.",
 "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size is required for SSC CGL photo?","acceptedAnswer":{"@type":"Answer","text":"Typically 20KB to 50KB for the photo and 10KB to 20KB for the signature. Check the official notification to confirm."}},
-{"@type":"Question","name":"Can I use PNG for SSC forms?","acceptedAnswer":{"@type":"Answer","text":"Most SSC forms require JPEG/JPG. This tool outputs JPEG, so you're covered."}},
-{"@type":"Question","name":"What if my photo is being rejected by SSC portal?","acceptedAnswer":{"@type":"Answer","text":"Make sure the file is under the stated limit and in JPEG format. Use this tool to compress to 20KB and try again."}}]}</script></head><body><nav class="nav">
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the exact photo size required for SSC forms?","acceptedAnswer":{"@type":"Answer","text":"SSC requires a passport size photograph of dimensions 3.5 cm (width) x 4.5 cm (height). The file size must be strictly between 20 KB and 50 KB."}},
+{"@type":"Question","name":"What are the signature size requirements for SSC?","acceptedAnswer":{"@type":"Answer","text":"Your signature should have dimensions around 4.0 cm (width) x 2.0 cm (height) and the file size must be between 10 KB and 20 KB. Sign in black or blue ink on white paper."}},
+{"@type":"Question","name":"Why was my SSC form rejected because of the photo?","acceptedAnswer":{"@type":"Answer","text":"The most common reasons for SSC photo rejection are: wearing spectacles or caps, unclear or blurred images, both ears not being visible, or the photo being too old or not following the 3.5cm x 4.5cm aspect ratio."}},
+{"@type":"Question","name":"Does this tool convert cm to pixels automatically?","acceptedAnswer":{"@type":"Answer","text":"Yes! A 3.5cm x 4.5cm dimension translates roughly to 413x531 pixels. Our SSC tool pre-fills these exact pixels and locks the crop ratio so your image matches the official guidelines perfectly."}}
+]}
+</script>
+</head>
+<body>
+<nav class="nav">
   <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
-  <span class="nav-pill">✦ FREE FOREVER</span>
-</nav><div class="wrap">
+  <div class="nav-links">
+    <a href="/blog/">Blog</a>
+    <span class="nav-pill">✦ FREE FOREVER</span>
+  </div>
+</nav>
+
+<div class="wrap">
 <section class="sub-hero">
-  <div class="tag">✦ SSC Form Ready</div>
-  <h1>Resize Image for<br><span class="grad">SSC Form</span></h1>
-  <p>Compress your photo and signature to the exact KB required by SSC CGL, CHSL, MTS, and other SSC exams. One click, no upload.</p>
+  <div class="tag">✦ Auto 3.5cm x 4.5cm Ratio</div>
+  <h1>Resize Image for<br><span class="grad">SSC Online Forms</span></h1>
+  <p>Live crop your Photo (50KB) or Signature (20KB) for SSC CGL, CHSL, MTS, and GD forms. Perfectly meets official Staff Selection Commission rules.</p>
   <div class="badges">
-    <span class="badge">🔒 No upload</span>
-    <span class="badge">⚡ Instant</span>
-    <span class="badge">📱 Mobile OK</span>
-    <span class="badge">🆓 Free</span>
+    <span class="badge">📏 3.5cm x 4.5cm</span>
+    <span class="badge">📸 Max 50KB Photo</span>
+    <span class="badge">✍️ Max 20KB Sign</span>
   </div>
 </section>
+
 <div class="card">
-  <div class="tabs">
-    <button class="tab on" onclick="showImg(this)">🖼&nbsp; Image</button>
-    <button class="tab" onclick="showPdf(this)">📄&nbsp; PDF</button>
+  
+  <div class="ssc-tabs">
+    <div class="ssc-tab active" id="modePhoto" onclick="setMode('photo')">📸 Photo (50KB)</div>
+    <div class="ssc-tab" id="modeSign" onclick="setMode('sign')">✍️ Signature (20KB)</div>
   </div>
-  <div id="imgBox">
-    <div class="drop">
-      <input type="file" id="upload" accept="image/*" multiple>
-      <div class="drop-ico">🖼</div>
-      <div class="drop-main">Drop images here or <span>browse files</span></div>
-      <div class="drop-hint">JPG · PNG · WEBP &nbsp;·&nbsp; Multiple files OK</div>
-    </div>
-    <div id="prev" class="prev-grid" style="display:none"></div>
-    <div class="ql">Quick sizes</div>
-    <div class="qbtns">
-      <button class="qb" onclick="qSet(10,this)">10 KB</button>
-      <button class="qb" onclick="qSet(20,this)">20 KB</button>
-      <button class="qb" onclick="qSet(30,this)">30 KB</button>
-      <button class="qb" onclick="qSet(50,this)">50 KB</button>
-      <button class="qb" onclick="qSet(100,this)">100 KB</button>
-      <button class="qb" onclick="qSet(200,this)">200 KB</button>
-    </div>
+
+  <div class="drop" id="dropZone">
+    <input type="file" id="upload" accept="image/*">
+    <div class="drop-ico">📥</div>
+    <div class="drop-main" id="dropText">Upload Photo or Signature here</div>
+    <div class="drop-hint">JPG or PNG formats accepted</div>
+  </div>
+  
+  <div id="cropWrap" class="crop-wrap">
+    <img id="imageToCrop">
+  </div>
+
+  <div class="u-box">
+    <div class="u-title">Final Dimensions & Size</div>
     <div class="irow">
-      <div class="f"><label class="fl">Target Size</label><input type="number" id="size" placeholder="e.g. 50" min="1"></div>
-      <div class="fs"><label class="fl">Unit</label><select id="unit"><option value="kb">KB</option><option value="mb">MB</option></select></div>
+      <div class="f"><label class="fl">Width (Pixels)</label><input type="number" id="resW" value="413"></div>
+      <div class="f"><label class="fl">Height (Pixels)</label><input type="number" id="resH" value="531"></div>
     </div>
-    <button class="btn" onclick="start()">⚡&nbsp; Compress &amp; Download</button>
+    <div class="irow" style="margin-bottom:0">
+      <div class="f"><label class="fl">Max File Size (KB)</label><input type="number" id="size" value="48"></div>
+    </div>
+    <p id="hintText" style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*413x531 px equals 3.5 x 4.5 cm. SSC limit is 50KB.</p>
   </div>
-  <div id="pdfBox" style="display:none">
-    <div class="drop">
-      <input type="file" id="pdfUp" accept="application/pdf">
-      <div class="drop-ico">📄</div>
-      <div class="drop-main">Drop PDF here or <span>browse</span></div>
-      <div class="drop-hint">Works best with scanned / image-based PDFs</div>
-    </div>
-    <div class="irow" style="margin-top:14px">
-      <div class="f"><label class="fl">Target Size (KB)</label><input type="number" id="pdfSz" placeholder="e.g. 200" min="50"></div>
-    </div>
-    <button class="btn" onclick="compressPDF()">⚡&nbsp; Compress PDF</button>
-  </div>
+
+  <button class="btn" onclick="processSSC()">⚡&nbsp; Generate SSC Ready Image</button>
+
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
-  <button id="dlbtn" class="btn-dl"></button>
   <div id="rg" class="rg"></div>
 </div>
-<script>window.addEventListener("load",()=>{document.getElementById("size").value=20;})</script><section class="seo">
-<h2>Resize Image for SSC Form — Exact KB Size</h2>
-<p>SSC (Staff Selection Commission) forms are strict about file sizes. CGL and CHSL typically require a photo under 50KB and a signature under 10–20KB. Uploading the wrong size gets your form rejected on the spot.</p>
-<p>ReduceSize lets you hit these exact requirements without any guesswork. Select SSC-ready presets (10KB or 20KB) from the quick buttons and compress in one click.</p>
-<h3>SSC Form Image Requirements (General)</h3>
+
+<section class="seo">
+<h2>Complete Guide to SSC Photo & Signature Resizing</h2>
+<p>Every year, the Staff Selection Commission (SSC) conducts massive exams like CGL, CHSL, MTS, and GD Constable. While studying is the hard part, thousands of students face heartbreak when their application is rejected simply because of a bad photograph or signature upload. SSC’s servers are strictly programmed to reject files that do not meet their specific dimensions (cm) and file size (KB).</p>
+<p><strong>ReduceSize.online</strong> takes the guesswork out of this process. We have hardcoded the exact rules required by the SSC into this tool. Whether you select the Photo mode or the Signature mode, the tool automatically adjusts the cropping ratio, pixel dimensions, and KB limits to match official guidelines.</p>
+
+<h3>Official SSC Image Guidelines (2025-2026)</h3>
+<p>Before you hit the compress button, make sure your raw photograph adheres to these strict visual rules to avoid rejection:</p>
 <ul>
-<li>Photo: 20KB to 50KB, JPEG format</li>
-<li>Signature: 10KB to 20KB, JPEG format</li>
-<li>Dimensions: 3.5cm × 4.5cm recommended</li>
+  <li><strong>No Spectacles & Caps:</strong> SSC explicitly rejects photos where the candidate is wearing spectacles (even prescription glasses), caps, or dark glasses.</li>
+  <li><strong>Background:</strong> The photo must be taken against a plain, light-colored background (preferably white).</li>
+  <li><strong>Face Visibility:</strong> Your face should cover 70-80% of the photograph. Look straight at the camera, ensuring both ears are clearly visible.</li>
+  <li><strong>Photo Age:</strong> The photograph should not be more than three months old from the date of publication of the Notice of Examination.</li>
 </ul>
-<p><strong>Note:</strong> Always verify the exact requirements on the official SSC notification for your exam, as these can change.</p>
-<h3>Frequently Asked Questions</h3>
-<p><strong>What size is required for SSC CGL photo?</strong><br>Typically 20KB to 50KB for the photo and 10KB to 20KB for the signature. Check the official notification to confirm.</p>
-<p><strong>Can I use PNG for SSC forms?</strong><br>Most SSC forms require JPEG/JPG. This tool outputs JPEG, so you're covered.</p>
-<p><strong>What if my photo is being rejected by SSC portal?</strong><br>Make sure the file is under the stated limit and in JPEG format. Use this tool to compress to 20KB and try again.</p>
+
+<h3>SSC Photo & Signature Specifications</h3>
+<p>Our tool automatically sets these, but for your reference, here are the technical limits:</p>
+<ol>
+  <li><strong>Photograph:</strong> Allowed file size is <strong>20 KB to 50 KB</strong>. The required format is JPEG/JPG. The exact physical dimensions mandated are <strong>3.5 cm (width) x 4.5 cm (height)</strong>, which roughly translates to 413 x 531 pixels digitally.</li>
+  <li><strong>Signature:</strong> Allowed file size is <strong>10 KB to 20 KB</strong>. Sign with a black or blue pen on white paper. The required dimensions are <strong>4.0 cm (width) x 2.0 cm (height)</strong>, translating to roughly 472 x 236 pixels.</li>
+</ol>
+
+<h3>How to Use This SSC Resizer</h3>
+<p>It is incredibly fast and works directly on your mobile browser:</p>
+<ol>
+  <li><strong>Select Mode:</strong> At the top of the tool, click "Photo (50KB)" or "Signature (20KB)". The tool will instantly adjust its settings and cropping ratio.</li>
+  <li><strong>Upload:</strong> Drop your image or select it from your gallery.</li>
+  <li><strong>Live Crop:</strong> A cropping box will appear. It is locked to the official SSC aspect ratio. Drag the box so your face (or signature) fits perfectly in the center.</li>
+  <li><strong>Download:</strong> Click "Generate". Our algorithm extracts the cropped area and compresses it to the exact KB required without making it blurry.</li>
+</ol>
+
+<h3>Frequently Asked Questions (FAQs)</h3>
+<p><strong>What is the exact photo size required for SSC forms?</strong><br>SSC requires a passport size photograph of dimensions 3.5 cm (width) x 4.5 cm (height). The file size must be strictly between 20 KB and 50 KB.</p>
+<p><strong>What are the signature size requirements for SSC?</strong><br>Your signature should have dimensions around 4.0 cm (width) x 2.0 cm (height) and the file size must be between 10 KB and 20 KB. Make sure to crop close to the ink before compressing.</p>
+<p><strong>Why was my SSC form rejected because of the photo?</strong><br>The most common reasons for SSC photo rejection are: wearing spectacles or caps, unclear or blurred images, both ears not being visible, or the photo being too old or not following the 3.5cm x 4.5cm aspect ratio.</p>
+<p><strong>Does this tool convert cm to pixels automatically?</strong><br>Yes! A 3.5cm x 4.5cm dimension translates roughly to 413x531 pixels. Our SSC tool pre-fills these exact pixels and locks the crop ratio so your image matches the official guidelines perfectly.</p>
 </section>
-<div class="chips-hd">More Tools</div><div class="chips"><a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a><a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a><a href="/compress-image-to-30kb.html" class="chip"><span class="chip-i">📋</span><div class="chip-t"><strong>Compress to 30KB</strong><span>Exam portals</span></div></a><a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a><a href="/compress-image-to-100kb.html" class="chip"><span class="chip-i">🏷</span><div class="chip-t"><strong>Compress to 100KB</strong><span>High quality</span></div></a><a href="/compress-image-without-losing-quality.html" class="chip"><span class="chip-i">✨</span><div class="chip-t"><strong>No Quality Loss</strong><span>Smart compress</span></div></a><a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">📐</span><div class="chip-t"><strong>Reduce Size (KB)</strong><span>Any size</span></div></a><a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a><a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a><a href="/resize-image-for-police-form.html" class="chip"><span class="chip-i">👮</span><div class="chip-t"><strong>Police Form</strong><span>Constable · SI</span></div></a><a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">💻</span><div class="chip-t"><strong>Online Form</strong><span>Any portal</span></div></a></div></div><footer class="footer">
+
+<div class="chips-hd">More Tools</div>
+<div class="chips">
+  <a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a>
+  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
+  <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
+  <a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a>
+  <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">📐</span><div class="chip-t"><strong>Reduce Size (KB)</strong><span>Any size</span></div></a>
+  <a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a>
+</div>
+</div>
+
+<footer class="footer">
   <a class="flogo" href="/"><em>Reduce</em>Size</a>
   <nav class="fnav">
     <a href="/compress-image-to-10kb.html">10KB</a>
@@ -422,158 +381,152 @@ body::after{
     <a href="/resize-image-for-ssc-form.html">SSC</a>
     <a href="/resize-image-for-upsc-form.html">UPSC</a>
     <a href="/reduce-image-size-for-email.html">Email</a>
-    <a href="/about.html">About</a>
-    <a href="/contact-us.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy</a>
-    <a href="/terms-conditions.html">Terms</a>
-    <a href="/disclaimer.html">Disclaimer</a>
+    <a href="/blog/">Blog</a>
   </nav>
-  <p class="fcopy">© 2025 ReduceSize.online — All rights reserved.</p>
-  <div class="ftrust">
-    <span>🔒 No upload</span><span>⚡ Instant</span><span>✅ Free</span><span>📱 Mobile OK</span>
-  </div>
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
 </footer>
-<div id="mo1" class="mo"><div class="mb">
-  <h2>⚠️ Heads up!</h2>
-  <p>15KB se kam mein image itni blur ho jaayegi ki pehchaana mushkil ho jaayega.</p>
-  <p class="tip">👉 Best results ke liye 20KB+ try karein.</p>
-  <button onclick="document.getElementById('mo1').style.display='none'">Got it 👍</button>
-</div></div>
-<div id="mo2" class="mo"><div class="mb">
-  <h2>⚠️ Heads up!</h2>
-  <p>50KB se kam mein PDF pages unreadable ho jaate hain.</p>
-  <p class="tip">👉 50–100KB+ try karein for best results.</p>
-  <button onclick="document.getElementById('mo2').style.display='none'">Samjha 👍</button>
-</div></div>
-<div id="pm" class="pm" onclick="this.style.display='none'"><img id="pmi" alt="Preview"></div>
-<canvas id="pdfCv" style="display:none"></canvas>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script><script>
-function qSet(v,btn){
-  document.getElementById('size').value=v;
-  document.querySelectorAll('.qb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-}
-function showImg(btn){
-  document.getElementById('imgBox').style.display='block';
-  document.getElementById('pdfBox').style.display='none';
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  btn.classList.add('on');
-}
-function showPdf(btn){
-  document.getElementById('imgBox').style.display='none';
-  document.getElementById('pdfBox').style.display='block';
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  btn.classList.add('on');
-}
-async function start(){
-  const fi=document.getElementById('upload'),si=document.getElementById('size'),
-        un=document.getElementById('unit'),st=document.getElementById('status');
-  document.getElementById('rg').innerHTML='';
-  if(!fi.files.length){alert('Select image first');return}
-  let tk=parseFloat(si.value);
-  if(!tk||tk<=0){alert('Enter valid size');return}
-  if(un.value==='mb')tk*=1024;
-  if(tk<15){document.getElementById('mo1').style.display='flex';return}
-  let safe=tk-1; if(safe<5)safe=tk*.9;
-  const files=fi.files,pw=document.getElementById('pbox'),pb=document.getElementById('pfill');
-  pw.style.display='block';
-  for(let i=0;i<files.length;i++){
-    pb.style.width=((i+1)/files.length*100)+'%';
-    st.innerText=`Processing ${i+1} / ${files.length}…`;
-    const blob=await compressImg(files[i],safe);
-    if(!blob)continue;
-    addResult(blob,i);
-    if(files.length===1)setDl(blob,'compressed.jpg',st);
-  }
-  st.innerText='Done ✅';pb.style.width='100%';
-  setTimeout(()=>{pw.style.display='none'},1500);
-}
-async function compressImg(file,tkb){
-  const img=new Image();img.src=URL.createObjectURL(file);await img.decode();
-  let cv=document.createElement('canvas'),ctx=cv.getContext('2d'),scale=1,best=null;
-  for(let s=0;s<10;s++){
-    cv.width=img.width*scale;cv.height=img.height*scale;
-    ctx.drawImage(img,0,0,cv.width,cv.height);
-    let lo=.05,hi=.95;
-    for(let i=0;i<25;i++){
-      let q=(lo+hi)/2,b=await new Promise(r=>cv.toBlob(r,'image/jpeg',q));
-      if(!b)continue;
-      if(b.size/1024>tkb)hi=q; else{lo=q;best=b;}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+<script>
+let currentFile = null;
+let cropper = null; 
+let currentMode = 'photo'; // 'photo' or 'sign'
+
+function setMode(mode) {
+    currentMode = mode;
+    document.getElementById('modePhoto').classList.remove('active');
+    document.getElementById('modeSign').classList.remove('active');
+    
+    if(mode === 'photo') {
+        document.getElementById('modePhoto').classList.add('active');
+        document.getElementById('resW').value = 413; // 3.5cm
+        document.getElementById('resH').value = 531; // 4.5cm
+        document.getElementById('size').value = 48;  // Max 50KB
+        document.getElementById('hintText').innerText = "*413x531 px equals 3.5 x 4.5 cm. SSC limit is 50KB.";
+    } else {
+        document.getElementById('modeSign').classList.add('active');
+        document.getElementById('resW').value = 472; // 4.0cm
+        document.getElementById('resH').value = 236; // 2.0cm
+        document.getElementById('size').value = 18;  // Max 20KB
+        document.getElementById('hintText').innerText = "*472x236 px equals 4.0 x 2.0 cm. SSC limit is 20KB.";
     }
-    if(best&&best.size/1024<=tkb)break;
-    scale*=.85;
+    updateAspectRatio();
+}
+
+document.getElementById('upload').addEventListener('change', function() {
+  const cropWrap = document.getElementById('cropWrap');
+  const imageToCrop = document.getElementById('imageToCrop');
+  
+  if(!this.files.length) { 
+    cropWrap.style.display='none'; 
+    if(cropper) cropper.destroy(); 
+    currentFile = null; 
+    document.getElementById('dropZone').style.display = 'block';
+    return; 
   }
-  if(!best)best=await new Promise(r=>{let c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);c.toBlob(r,'image/jpeg',.5)});
-  return best;
-}
-function setDl(blob,name,st){
-  const url=URL.createObjectURL(blob),btn=document.getElementById('dlbtn');
-  btn.style.display='block';
-  btn.innerText='⬇  Download ('+( blob.size/1024).toFixed(1)+' KB)';
-  btn.onclick=()=>{dlUrl(url,name);btn.style.display='none';URL.revokeObjectURL(url)};
-  if(st)st.innerText='Ready — tap Download below';
-}
-function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
-function addResult(blob,i){
-  const url=URL.createObjectURL(blob),d=document.createElement('div');
-  d.className='rc';
-  d.innerHTML=`<img src="${url}" loading="lazy" alt="Compressed image" onclick="openPM('${url}')">
-  <div class="ri"><div class="rsz">${(blob.size/1024).toFixed(1)} KB</div>
-  <button class="rb" onclick="dlUrl('${url}','compressed_${i+1}.jpg')">⬇ Download</button></div>`;
-  document.getElementById('rg').appendChild(d);
-}
-function openPM(src){document.getElementById('pm').style.display='flex';document.getElementById('pmi').src=src}
-async function compressPDF(){
-  const fi=document.getElementById('pdfUp'),si=document.getElementById('pdfSz'),st=document.getElementById('status');
-  if(!fi.files.length){alert('Select PDF first');return}
-  let tk=parseFloat(si.value);
-  if(!tk||tk<=0){alert('Enter valid size');return}
-  if(tk<50){document.getElementById('mo2').style.display='flex';st.innerText='';return}
-  st.innerText='Processing PDF…';
-  const file=fi.files[0],ab=await file.arrayBuffer();
-  const pdf=await pdfjsLib.getDocument({data:ab}).promise;
-  const {jsPDF}=window.jspdf;
-  let q=.8,scale=1,out=null;
-  for(let a=0;a<20;a++){
-    const np=new jsPDF();
-    for(let i=1;i<=pdf.numPages;i++){
-      const pg=await pdf.getPage(i),vp=pg.getViewport({scale}),
-            cv=document.getElementById('pdfCv'),ctx=cv.getContext('2d');
-      cv.width=vp.width;cv.height=vp.height;
-      await pg.render({canvasContext:ctx,viewport:vp}).promise;
-      const id=cv.toDataURL('image/jpeg',q);
-      if(i>1)np.addPage();
-      np.addImage(id,'JPEG',0,0,np.internal.pageSize.getWidth(),np.internal.pageSize.getHeight());
-    }
-    out=np.output('blob');
-    if(out.size/1024<=tk)break;
-    q-=.08;scale-=.08;
-    if(q<.3)q=.3;if(scale<.4)scale=.4;
-  }
-  if(!out||out.size/1024>tk){alert('Cannot compress PDF to this size');st.innerText='';return}
-  setDl(out,'compressed.pdf',st);
-}
-document.addEventListener('DOMContentLoaded',()=>{
-  const inp=document.getElementById('upload'),prev=document.getElementById('prev');
-  if(!inp)return;
-  inp.addEventListener('change',function(){
-    prev.innerHTML='';prev.style.display='grid';
-    for(const f of this.files){
-      if(!f.type.startsWith('image/'))continue;
-      const img=document.createElement('img');
-      img.src=URL.createObjectURL(f);img.onload=()=>URL.revokeObjectURL(img.src);
-      img.style.cssText='width:100%;height:100%;object-fit:cover';
-      const d=document.createElement('div');d.className='prev-item';
-      d.appendChild(img);prev.appendChild(d);
-    }
+  
+  const f = this.files[0];
+  if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
+  currentFile = f;
+  
+  // Show Crop Area & Hide Drop Zone to save space
+  document.getElementById('dropZone').style.display = 'none';
+  cropWrap.style.display = 'block';
+  imageToCrop.src = URL.createObjectURL(f);
+  
+  if(cropper) { cropper.destroy(); }
+
+  // Initialize Cropper 
+  const w = parseInt(document.getElementById('resW').value) || 413;
+  const h = parseInt(document.getElementById('resH').value) || 531;
+
+  cropper = new Cropper(imageToCrop, {
+      aspectRatio: w / h,
+      viewMode: 1, 
+      autoCropArea: 0.9, 
+      background: true, 
+      responsive: true,
+      guides: true
   });
-  // drag-drop
-  const dz=document.querySelector('.drop');
-  if(dz){
-    dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over')});
-    dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-    dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');inp.files=e.dataTransfer.files;inp.dispatchEvent(new Event('change'))});
-  }
 });
-</script></body></html>
+
+function updateAspectRatio() {
+    if(cropper) {
+        const w = parseInt(document.getElementById('resW').value) || 413;
+        const h = parseInt(document.getElementById('resH').value) || 531;
+        cropper.setAspectRatio(w / h);
+    }
+}
+
+document.getElementById('resW').addEventListener('input', updateAspectRatio);
+document.getElementById('resH').addEventListener('input', updateAspectRatio);
+
+async function processSSC() {
+  if(!cropper) { alert('Please upload an image first.'); return; }
+  
+  const w = parseInt(document.getElementById('resW').value);
+  const h = parseInt(document.getElementById('resH').value);
+  const tkb = parseFloat(document.getElementById('size').value);
+  
+  if(!w || !h) { alert('Please enter valid width and height.'); return; }
+  if(!tkb) { alert('Please enter target KB size.'); return; }
+
+  const btn = document.querySelector('.btn');
+  btn.innerText = 'Processing...';
+  document.getElementById('rg').innerHTML = '';
+
+  const pw = document.getElementById('pbox');
+  const pb = document.getElementById('pfill');
+  const st = document.getElementById('status');
+  pw.style.display = 'block';
+  pb.style.width = '20%';
+  st.innerText = 'Extracting Cropped Area...';
+
+  try {
+    // Get strictly cropped image data from Cropper.js at EXACT required dimensions
+    const croppedCanvas = cropper.getCroppedCanvas({
+        width: w,
+        height: h,
+        fillColor: '#ffffff'
+    });
+
+    pb.style.width = '60%';
+    st.innerText = 'Compressing to exact KB...';
+
+    // Binary search for exact KB compression
+    let lo = 0.1, hi = 1.0, bestBlob = null;
+    for(let i=0; i<15; i++) {
+      let q = (lo+hi)/2;
+      let blob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', q));
+      if(blob.size/1024 > tkb) { hi = q; } 
+      else { lo = q; bestBlob = blob; }
+    }
+
+    if(!bestBlob) {
+        bestBlob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', 0.1));
+    }
+
+    pb.style.width = '100%';
+    st.innerText = 'Done ✅';
+    setTimeout(()=>{pw.style.display='none'}, 1000);
+
+    // Show result
+    const url = URL.createObjectURL(bestBlob);
+    const d = document.createElement('div');
+    d.className = 'rc';
+    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','ssc_ready.jpg')">⬇ Download</button></div>`;
+    document.getElementById('rg').appendChild(d);
+
+  } catch(e) {
+    alert('Error processing image. Try again.');
+    pw.style.display = 'none';
+  } finally {
+    btn.innerHTML = '⚡&nbsp; Generate SSC Ready Image';
+  }
+}
+
+function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+</script>
+</body>
+</html>
