@@ -333,13 +333,11 @@ body::after{
 </section>
 
 <div class="card">
-  <!-- UNIFIED TABS -->
   <div class="tabs">
     <button class="tab on" onclick="showTab('imgBox', this)">🖼&nbsp; Image Tools</button>
     <button class="tab" onclick="showTab('pdfBox', this)">📄&nbsp; PDF</button>
   </div>
 
-  <!-- MASTER IMAGE TAB -->
   <div id="imgBox" class="tool-section">
     <div class="drop">
       <input type="file" id="upload" accept="image/*" multiple>
@@ -358,7 +356,6 @@ body::after{
       <button class="qb" onclick="qSet(100,this)">100 KB</button>
     </div>
 
-    <!-- TARGET SIZE (KB) -->
     <div class="irow">
       <div class="f"><label class="fl">Target Size (Optional)</label><input type="number" id="size" placeholder="e.g. 50"></div>
       <div class="fs"><label class="fl">Unit</label><select id="unit"><option value="kb">KB</option><option value="mb">MB</option></select></div>
@@ -366,11 +363,9 @@ body::after{
 
     <div class="or-divider">And / Or</div>
 
-    <!-- TARGET DIMENSIONS (PX) -->
     <div class="irow" style="align-items:flex-end;">
       <div class="f"><label class="fl">Width (px)</label><input type="number" id="resW" placeholder="Auto"></div>
       
-      <!-- Aspect Ratio Lock Toggle -->
       <div style="padding-bottom:12px; text-align:center;">
         <button id="lockBtn" onclick="toggleLock()" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--muted);cursor:pointer;padding:8px;border-radius:8px;transition:all 0.2s;display:flex;align-items:center;justify-content:center;" title="Toggle Aspect Ratio Lock">
           <svg id="lockSvg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -386,7 +381,6 @@ body::after{
     <button class="btn" onclick="startMaster()">⚡&nbsp; Process &amp; Download</button>
   </div>
 
-  <!-- PDF COMPRESSOR -->
   <div id="pdfBox" class="tool-section" style="display:none">
     <div class="drop">
       <input type="file" id="pdfUp" accept="application/pdf">
@@ -404,14 +398,14 @@ body::after{
   <div id="rg" class="rg"></div>
 </div>
 
-<!-- CHIPS (MORE TOOLS) -->
-<div class="chips-hd">More Tools</div>
-<div class="chips">
+<div class="chips-hd" id="moreToolsHd">More Image Tools</div>
+
+<div class="chips" id="chips-img">
   <a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a>
   <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
   <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
   <a href="/compress-image-to-100kb.html" class="chip"><span class="chip-i">🏷</span><div class="chip-t"><strong>Compress to 100KB</strong><span>High quality</span></div></a>
-    <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
+  <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
   <a href="/document-scanner-online.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Document Scanner</strong><span>Magic Filter</span></div></a>
   <a href="/passport-photo-maker.html" class="chip"><span class="chip-i">📸</span><div class="chip-t"><strong>Passport Photo</strong><span>Print Maker</span></div></a>
   <a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a>
@@ -421,7 +415,13 @@ body::after{
   <a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">💻</span><div class="chip-t"><strong>Online Form</strong><span>Any portal</span></div></a>
 </div>
 
-<!-- SEO SECTION -->
+<div class="chips" id="chips-pdf" style="display:none;">
+  <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
+  <a href="/pdf-to-image.html" class="chip"><span class="chip-i">🖼️</span><div class="chip-t"><strong>PDF to Images</strong><span>Extract pages</span></div></a>
+  <a href="/unlock-pdf.html" class="chip"><span class="chip-i">🔓</span><div class="chip-t"><strong>Unlock PDF</strong><span>Remove password</span></div></a>
+  <a href="/protect-pdf.html" class="chip"><span class="chip-i">🔒</span><div class="chip-t"><strong>Protect PDF</strong><span>Add password</span></div></a>
+</div>
+
 <section class="seo">
 <h2>Compress Image to Exact KB — Free &amp; Instant</h2>
 <p>ReduceSize.online is a free, browser-based tool that lets you compress images and PDFs to a precise file size — whether that's 10KB, 20KB, 50KB, or 100KB — directly inside your browser. Your files never leave your device, so there is no privacy risk, no waiting for uploads, and no size limits imposed by a server.</p>
@@ -475,7 +475,6 @@ body::after{
 </section>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <a class="flogo" href="/"><em>Reduce</em>Size</a>
   <nav class="fnav">
@@ -499,7 +498,6 @@ body::after{
   </div>
 </footer>
 
-<!-- MODALS -->
 <div id="mo1" class="mo"><div class="mb">
   <h2>⚠️ Heads up!</h2>
   <p>Below 15KB, images may become too blurry to be recognizable.</p>
@@ -514,7 +512,6 @@ body::after{
 </div></div>
 <div id="pm" class="pm" onclick="this.style.display='none'"><img id="pmi" alt="Preview"></div>
 
-<!-- COMPRESSION ANIMATION MODAL -->
 <div id="ov" style="position:fixed;inset:0;background:rgba(2,2,12,.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(12px);">
     <div style="width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
       <div id="scene" style="width:220px;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
@@ -555,10 +552,26 @@ body::after{
 <script>
 // --- TABS LOGIC ---
 function showTab(tabId, btn) {
+  // Hide all sections
   document.querySelectorAll('.tool-section').forEach(el => el.style.display = 'none');
+  
+  // Show selected section
   document.getElementById(tabId).style.display = 'block';
+  
+  // Update Tab buttons styling
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
   btn.classList.add('on');
+  
+  // Update Chips (More Tools) grid
+  if (tabId === 'imgBox') {
+      document.getElementById('chips-img').style.display = 'grid';
+      document.getElementById('chips-pdf').style.display = 'none';
+      document.getElementById('moreToolsHd').innerText = 'More Image Tools';
+  } else {
+      document.getElementById('chips-img').style.display = 'none';
+      document.getElementById('chips-pdf').style.display = 'grid';
+      document.getElementById('moreToolsHd').innerText = 'More PDF Tools';
+  }
 }
 
 // --- MASTER IMAGE LOGIC (SIZE + DIMENSIONS) ---
