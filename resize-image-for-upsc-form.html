@@ -111,12 +111,11 @@ body::after{
 .drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
 .drop-main span{color:var(--purple-l)}
 .drop-hint{font-size:12px;color:var(--muted)}
-/* PREVIEW */
+/* PREVIEW (Fixed White Space) */
 .prev-grid{
   display:flex;justify-content:center;margin-bottom:20px;
 }
 .prev-item{border-radius:8px;overflow:hidden;background:var(--surface2);width:150px;height:150px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
-/* Updated object-fit to cover so no white bars in preview */
 .prev-item img{width:100%;height:100%;object-fit:cover;}
 
 /* UPSC SPECIFIC CONTROLS */
@@ -157,11 +156,19 @@ body::after{
 .btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
 .btn:active{transform:scale(.98)}
 
-/* RESULTS */
+/* PROGRESS */
+.pbox{display:none;margin-top:13px}
+.ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.pfill{
+  height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));
+  border-radius:10px;transition:width .3s;position:relative;overflow:hidden;
+}
+.plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
+
+/* RESULTS (Fixed White Space) */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
 .rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center}
-/* Updated so downloaded photo preview doesn't show artificial white padding */
-.rc img{width:100%;height:auto;object-fit:cover;background:#fff;cursor:zoom-in}
+.rc img{width:100%;height:160px;object-fit:cover;cursor:zoom-in}
 .ri{padding:12px 10px}
 .rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
 .rb{
@@ -232,9 +239,9 @@ body::after{
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"What are the exact pixel dimensions required for UPSC photos?","acceptedAnswer":{"@type":"Answer","text":"UPSC mandates that both your photograph and signature must have a minimum resolution of 350 x 350 pixels and a maximum resolution of 1000 x 1000 pixels. The file size must be between 20KB and 300KB."}},
-{"@type":"Question","name":"How do I add my name and date to the UPSC photo?","acceptedAnswer":{"@type":"Answer","text":"Our dedicated UPSC tool has an 'Add Name & Date' feature. Simply check the box, enter your name and the date the photo was taken. The tool will automatically generate a white strip at the bottom of your photo and print the details clearly before resizing it."}},
+{"@type":"Question","name":"How do I add my name and date to the UPSC photo?","acceptedAnswer":{"@type":"Answer","text":"Our dedicated UPSC tool has an 'Add Name & Date' feature. Simply check the box, enter your name and the date the photo was taken. The tool will automatically generate a strip at the bottom of your photo and print the details clearly before resizing it."}},
 {"@type":"Question","name":"Will adding text ruin the 300KB limit?","acceptedAnswer":{"@type":"Answer","text":"No. Our algorithm adds the text, resizes the image to your chosen dimensions (like 350x350), and then compresses the final combined image to ensure it strictly stays under the 300KB maximum limit."}},
-{"@type":"Question","name":"Can I use this for the UPSC signature upload as well?","acceptedAnswer":{"@type":"Answer","text":"Yes. For the signature, simply leave the 'Add Name & Date' box unchecked, enter 350 in both Width and Height, and set the target size to around 50KB. The tool will resize your signature perfectly for the portal."}}
+{"@type":"Question","name":"Can I use this for the UPSC signature upload as well?","acceptedAnswer":{"@type":"Answer","text":"Yes. For the signature, simply leave the 'Add Text' box unchecked, enter 350 in both Width and Height, and set the target size to around 50KB. The tool will resize your signature perfectly for the portal."}}
 ]}
 </script>
 </head>
@@ -271,7 +278,7 @@ body::after{
   <div id="prev" class="prev-grid" style="display:none"></div>
 
   <div class="u-box">
-    <div class="u-title">1. Set Dimensions (Pixels) & Size</div>
+    <div class="u-title">1. Set Final Dimensions (Pixels) & Size</div>
     <div class="irow">
       <div class="f"><label class="fl">Width (Min 350px)</label><input type="number" id="resW" value="350"></div>
       <div class="f"><label class="fl">Height (Min 350px)</label><input type="number" id="resH" value="350"></div>
@@ -283,10 +290,10 @@ body::after{
   </div>
 
   <div class="u-box">
-    <div class="u-title">2. Add Name & Date (Optional)</div>
+    <div class="u-title">2. Add Name / Date (Optional)</div>
     <div class="cb-row">
       <input type="checkbox" id="addTextCb" onchange="toggleTextInputs()">
-      <label for="addTextCb" class="cb-label">Print Text on Photo (Name/Date)</label>
+      <label for="addTextCb" class="cb-label">Print Text on Photo</label>
     </div>
     
     <div id="textInputs" style="display:none;margin-top:12px;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px">
@@ -309,10 +316,10 @@ body::after{
         <div class="f">
           <label class="fl">Font Style</label>
           <select id="fontStyle">
-            <option value="Arial, sans-serif">Arial (Clean & Modern)</option>
-            <option value="'Times New Roman', serif">Times New Roman (Formal)</option>
-            <option value="Impact, fantasy">Impact (Bold)</option>
-            <option value="'Courier New', monospace">Courier (Typewriter)</option>
+            <option value="Arial, Helvetica, sans-serif">Arial (Clean & Standard)</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman (Formal Serif)</option>
+            <option value="Verdana, Geneva, sans-serif">Verdana (Wide & Clear)</option>
+            <option value="'Courier New', Courier, monospace">Courier (Typewriter Mono)</option>
           </select>
         </div>
       </div>
@@ -443,6 +450,13 @@ async function processUPSC() {
   btn.innerText = 'Processing...';
   document.getElementById('rg').innerHTML = '';
 
+  const pw = document.getElementById('pbox');
+  const pb = document.getElementById('pfill');
+  const st = document.getElementById('status');
+  pw.style.display = 'block';
+  pb.style.width = '10%';
+  st.innerText = 'Applying Magic...';
+
   try {
     const img = new Image();
     img.src = URL.createObjectURL(currentFile);
@@ -460,7 +474,8 @@ async function processUPSC() {
     // Calculate layout
     let stripHeight = 0;
     if (addText && (cName || pDate)) {
-      stripHeight = Math.max(h * 0.15, 50); // Use 15% of height for strip
+      // Made strip EXACTLY half of previous thickness (8% of height, min 24px)
+      stripHeight = Math.max(h * 0.08, 24); 
     }
     const photoHeight = h - stripHeight;
 
@@ -484,7 +499,6 @@ async function processUPSC() {
       ctx.fillRect(0, photoHeight, w, stripHeight);
       
       // Determine Text Color (Light strip = Black text, Dark strip = White text)
-      // Yellow (#ffff00) and White (#ffffff) get black text. Rest get white.
       if(stripColor === '#ffffff' || stripColor === '#ffff00') {
           ctx.fillStyle = '#000000';
       } else {
@@ -494,23 +508,26 @@ async function processUPSC() {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       
-      // Setup Text Lines
+      // Setup Text Lines (Works with just 1 or both)
       let lines = [];
       if(cName) lines.push(cName.toUpperCase());
       if(pDate) lines.push(pDate);
 
-      // Adjust Font Size based on number of lines
-      let fontMultiplier = lines.length === 2 ? 0.35 : 0.45;
+      // Adjust Font Size to look perfect inside the new thinner strip
+      let fontMultiplier = lines.length === 2 ? 0.38 : 0.60;
       let fontSize = Math.floor(stripHeight * fontMultiplier);
       ctx.font = `bold ${fontSize}px ${fontStyle}`;
       
       if(lines.length === 2) {
-          ctx.fillText(lines[0], w/2, photoHeight + (stripHeight * 0.32));
-          ctx.fillText(lines[1], w/2, photoHeight + (stripHeight * 0.72));
+          ctx.fillText(lines[0], w/2, photoHeight + (stripHeight * 0.30));
+          ctx.fillText(lines[1], w/2, photoHeight + (stripHeight * 0.75));
       } else if (lines.length === 1) {
-          ctx.fillText(lines[0], w/2, photoHeight + (stripHeight * 0.52));
+          ctx.fillText(lines[0], w/2, photoHeight + (stripHeight * 0.55));
       }
     }
+
+    pb.style.width = '40%';
+    st.innerText = 'Compressing KB...';
 
     // Binary search for exact KB
     let lo = 0.1, hi = 1.0, bestBlob = null;
@@ -525,6 +542,10 @@ async function processUPSC() {
         bestBlob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.1));
     }
 
+    pb.style.width = '100%';
+    st.innerText = 'Done ✅';
+    setTimeout(()=>{pw.style.display='none'}, 1000);
+
     // Show result
     const url = URL.createObjectURL(bestBlob);
     const d = document.createElement('div');
@@ -534,6 +555,7 @@ async function processUPSC() {
 
   } catch(e) {
     alert('Error processing image. Try another file.');
+    pw.style.display = 'none';
   } finally {
     btn.innerHTML = '⚡&nbsp; Generate UPSC Ready Image';
   }
