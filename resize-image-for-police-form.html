@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resize Image for Police Form Online Free | Auto State Presets</title>
+<title>Resize Image for Police Form Online Free | Constable & SI</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/resize-image-for-police-form.html">
-<meta name="description" content="Resize photo and signature for State Police (UP, Delhi, Bihar, Rajasthan) Constable & SI forms. Auto-crop, exact KB sizing, and free instant download.">
-<meta name="keywords" content="resize image for police form, up police photo size, delhi police constable photo, bihar police photo compress 25kb, police form image resize">
+<meta name="description" content="Resize photo and signature for State Police (UP, Delhi, Bihar) Constable & SI forms. Auto-crop, exact KB sizing, and free instant download.">
+<meta name="keywords" content="resize image for police form, up police photo size, delhi police constable photo, bihar police photo compress, police form image resize">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,13 +55,6 @@ body::after{
 .nav-links{display:flex;gap:16px;align-items:center;}
 .nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
 .nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none;
-}
-@media(min-width:600px){ .nav-pill{display:inline-block;} }
 
 /* WRAP & SUB-HERO */
 .wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
@@ -79,14 +72,6 @@ body::after{
 .grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
 
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
 /* TOOL CARD */
 .card{
   background:var(--surface);border:1px solid var(--border);
@@ -97,15 +82,6 @@ body::after{
   content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
   opacity:.5;
-}
-
-/* SMART PRESET SELECTOR */
-.preset-box {
-  background: rgba(32,217,192,.05); border: 1px solid rgba(32,217,192,.2);
-  border-radius: 12px; padding: 16px; margin-bottom: 20px;
-}
-.preset-title {
-  font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;
 }
 
 /* QUICK TARGET TABS */
@@ -155,7 +131,7 @@ body::after{
   display: block;
 }
 
-/* POLICE SPECIFIC CONTROLS */
+/* INPUT SECTION */
 .u-box{
   background:var(--surface2);border:1px solid rgba(109,84,240,.2);
   border-radius:12px;padding:16px;margin-bottom:20px;
@@ -167,14 +143,13 @@ body::after{
 .irow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
 .irow .f{flex:1;min-width:120px;}
 .fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input, .irow select{
+.irow input {
   width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
   padding:12px 14px;border-radius:10px;color:var(--text);
   font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
   outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
 }
-.irow input::placeholder {color: rgba(255,255,255,0.2);}
-.irow input:focus, .irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
+.irow input:focus {border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
 
 /* BUTTONS */
 .btn{
@@ -195,10 +170,30 @@ body::after{
 }
 .plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
 
+/* GREETING CARD (The Secret Sauce) */
+.greeting-card {
+    display: none;
+    background: linear-gradient(145deg, rgba(109,84,240,0.08) 0%, rgba(32,217,192,0.08) 100%);
+    border: 1px dashed rgba(62,207,142,0.4);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    margin-top: 16px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes popIn { 
+    0% { opacity: 0; transform: translateY(15px) scale(0.95); } 
+    100% { opacity: 1; transform: translateY(0) scale(1); } 
+}
+.g-icon { font-size: 28px; margin-bottom: 8px; }
+.g-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.g-text { font-size: 14px; color: #a0a0c8; line-height: 1.6; }
+.g-love { font-size: 13px; font-weight: 700; color: var(--purple-l); margin-top: 10px; display: inline-block; padding: 4px 12px; background: rgba(109,84,240,0.1); border-radius: 20px;}
+
 /* RESULTS */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
 .rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;display:flex;flex-direction:column;}
-.rc img{width:100%;height:auto;max-height:280px;object-fit:cover;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
+.rc img{width:100%;height:auto;max-height:280px;object-fit:contain;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
 .ri{padding:12px 10px}
 .rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
 .rb{
@@ -258,21 +253,6 @@ body::after{
 }
 </style>
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Resize Image for Police Form Online Free",
-"url":"https://reducesize.online/resize-image-for-police-form.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Resize photo and signature for State Police (UP, Delhi, Bihar, Rajasthan) Constable & SI forms. Auto-crop, exact KB sizing, and free instant download.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is the required photo size for UP Police Constable?","acceptedAnswer":{"@type":"Answer","text":"UP Police usually requires your photograph to be between 20KB and 50KB, and your signature between 5KB and 20KB. Select 'UP Police' in our tool to auto-set these rules."}},
-{"@type":"Question","name":"Why do police application forms reject photos?","acceptedAnswer":{"@type":"Answer","text":"State police applications are very strict. The most common rejection reasons are: wearing a cap or dark glasses, invisible ears, having a dark or busy background instead of plain white/grey, or uploading a blurry image under 10KB."}},
-{"@type":"Question","name":"Is Bihar Police photo size different from Delhi Police?","acceptedAnswer":{"@type":"Answer","text":"Yes! Bihar Police is much stricter, often asking for photos under 25KB and signatures under 15KB. Delhi Police typically allows up to 50KB for photos. Our tool adjusts the limits automatically based on the state you select."}}
-]}
-</script>
 </head>
 <body>
 <nav class="nav">
@@ -285,33 +265,21 @@ body::after{
 
 <div class="wrap">
 <section class="sub-hero">
-  <div class="tag">✦ Auto State-Rules Application</div>
+  <div class="tag">✦ Perfect for All State Police</div>
   <h1>Resize Image for<br><span class="grad">Police Online Forms</span></h1>
-  <p>Every State has different rules. Just select your Police Exam (UP, Delhi, Bihar) and our tool will auto-crop and compress your Photo & Signature to exact official limits.</p>
+  <p>Live crop your Photo & Signature for UP Police, Delhi Police, Bihar Police Constable and SI exams. Set custom dimensions instantly.</p>
   <div class="badges">
-    <span class="badge">🚓 State Presets</span>
+    <span class="badge">🚓 State Police Exams</span>
     <span class="badge">✂ Live Crop & Drag</span>
-    <span class="badge">⚖️ Smart KB Limits</span>
+    <span class="badge">⚖️ Custom KB Limits</span>
   </div>
 </section>
 
 <div class="card">
   
-  <div class="preset-box">
-    <div class="preset-title">🚨 Step 1: Select Your State Police Exam</div>
-    <select id="statePreset" onchange="applyPreset()" style="width:100%;background:var(--surface);border:1px solid rgba(32,217,192,.3);padding:12px;border-radius:8px;color:var(--text);font-family:'Manrope',sans-serif;font-weight:600;font-size:15px;outline:none;cursor:pointer;">
-      <option value="up">UP Police (Constable / SI)</option>
-      <option value="delhi">Delhi Police</option>
-      <option value="bihar">Bihar Police (Constable / SI)</option>
-      <option value="raj">Rajasthan Police</option>
-      <option value="mp">MP Police (ESB)</option>
-      <option value="custom">Custom Dimensions (Manual)</option>
-    </select>
-  </div>
-
   <div class="ssc-tabs">
-    <div class="ssc-tab active" id="modePhoto" onclick="setMode('photo')">📸 Photo</div>
-    <div class="ssc-tab" id="modeSign" onclick="setMode('sign')">✍️ Signature</div>
+    <div class="ssc-tab active" id="modePhoto" onclick="setMode('photo')">📸 Photo (Max 50KB)</div>
+    <div class="ssc-tab" id="modeSign" onclick="setMode('sign')">✍️ Signature (Max 20KB)</div>
   </div>
 
   <div class="drop" id="dropZone">
@@ -326,27 +294,35 @@ body::after{
   </div>
 
   <div class="u-box">
-    <div class="u-title">Step 2: Verify Dimensions & Size</div>
+    <div class="u-title">Verify Dimensions & Size</div>
     <div class="irow">
-      <div class="f"><label class="fl">Width (Pixels)</label><input type="number" id="resW"></div>
-      <div class="f"><label class="fl">Height (Pixels)</label><input type="number" id="resH"></div>
+      <div class="f"><label class="fl">Width (Pixels)</label><input type="number" id="resW" value="413"></div>
+      <div class="f"><label class="fl">Height (Pixels)</label><input type="number" id="resH" value="531"></div>
     </div>
     <div class="irow" style="margin-bottom:0">
-      <div class="f"><label class="fl">Max File Size (KB)</label><input type="number" id="size"></div>
+      <div class="f"><label class="fl">Max File Size (KB)</label><input type="number" id="size" value="48"></div>
     </div>
-    <p id="hintText" style="font-size:11px;color:var(--accent);margin-top:6px;margin-bottom:0;font-weight:600;">*Values auto-set for UP Police. Feel free to adjust.</p>
+    <p id="hintText" style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*You can change dimensions and KB size as per your specific State Police notification.</p>
   </div>
 
   <button class="btn" onclick="processPolice()">⚡&nbsp; Generate Form Ready Image</button>
 
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  
+  <div id="greetingCard" class="greeting-card">
+    <div class="g-icon">🌟👮‍♂️</div>
+    <div class="g-title">All the Best for your Exam!</div>
+    <div class="g-text">Humari dil se dua hai ki aap is saal zaroor select hon aur uniform pehnein. Aapke ujjwal bhavishya (bright future) ke liye dher saari shubhkaamnayein! ✨</div>
+    <span class="g-love">Lots of love, ReduceSize.online ❤️</span>
+  </div>
+
   <div id="rg" class="rg"></div>
 </div>
 
 <section class="seo">
 <h2>Complete Guide to Police Recruitment Form Photos</h2>
 <p>State Police recruitment boards are notorious for rejecting applications due to small errors in photograph and signature uploads. Each state has a different portal (like UPPRPB for UP Police, or CSBC for Bihar Police), and every portal enforces a completely different set of image dimensions and KB sizes.</p>
-<p>Using a standard image compressor often leaves you with an image that is either too large (rejected by the portal) or too blurry (rejected during document verification). <strong>ReduceSize.online</strong> simplifies this by using our unique <strong>State-Wise Smart Presets</strong>. You simply select the police force you are applying for, and we lock in the required pixel dimensions and maximum KB size automatically.</p>
+<p>Using a standard image compressor often leaves you with an image that is either too large (rejected by the portal) or too blurry (rejected during document verification). <strong>ReduceSize.online</strong> simplifies this by offering precise manual control over your pixels and file size. You simply check your notification, enter the width/height, and our tool does the rest.</p>
 
 <h3>General Photo Rules for All Police Exams</h3>
 <p>No matter which state you are applying to, ensure your original photo follows these ground rules before you crop it here:</p>
@@ -357,27 +333,19 @@ body::after{
   <li><strong>Signature Ink:</strong> Most police boards explicitly mandate that the signature should be done on a blank white paper using a <strong>Black ink pen</strong>. Blue ink is sometimes rejected.</li>
 </ul>
 
-<h3>How Our State Presets Work</h3>
-<p>We constantly monitor recruitment notifications. When you select a state from the dropdown, our tool loads the rules. For example:</p>
-<ol>
-  <li><strong>UP Police (Constable / SI):</strong> Requires photos between 20KB and 50KB, and signatures between 5KB and 20KB. The tool pre-sets the target to 48KB and 18KB respectively to ensure safe, high-quality uploads.</li>
-  <li><strong>Bihar Police (CSBC):</strong> Extremely strict limits. Photos must be under 25KB, and signatures must be under 15KB. Our tool dynamically adjusts the cropper and compression loop to hit these micro-limits without destroying the image.</li>
-  <li><strong>Delhi Police (via SSC):</strong> Delhi Police exams are usually conducted by SSC, so they follow the standard 3.5x4.5 cm (50KB) photo and 20KB signature rules.</li>
-</ol>
-
 <h3>How to Crop Your Police Photo Perfectly</h3>
 <ol>
-  <li>Select your State Police exam from the dropdown list.</li>
-  <li>Select whether you are uploading a "Photo" or a "Signature".</li>
+  <li>Select whether you are uploading a "Photo" or a "Signature" using the tabs above.</li>
+  <li>Enter the exact Width and Height in pixels as requested in your State Police Notification (e.g., 413x531 is standard).</li>
   <li>Upload your image. Our <strong>Live Cropping Tool</strong> will appear.</li>
   <li>Drag your image and zoom in/out. Align your face so both ears are visible and the image covers down to your chest.</li>
   <li>Click Generate. The tool will cut the exact area, resize it to the correct pixels, and use binary-compression to give you a file that is 100% form-ready.</li>
 </ol>
 
 <h3>Frequently Asked Questions (FAQs)</h3>
-<p><strong>What is the required photo size for UP Police Constable?</strong><br>UP Police usually requires your photograph to be between 20KB and 50KB, and your signature between 5KB and 20KB. Select 'UP Police' in our tool to auto-set these rules.</p>
+<p><strong>What is the required photo size for UP Police Constable?</strong><br>UP Police usually requires your photograph to be between 20KB and 50KB, and your signature between 5KB and 20KB. You can manually enter 48KB in our tool to stay safely within limits.</p>
 <p><strong>Why do police application forms reject photos?</strong><br>State police applications are very strict. The most common rejection reasons are: wearing a cap or dark glasses, invisible ears, having a dark or busy background instead of plain white/grey, or uploading a blurry image under 10KB.</p>
-<p><strong>Is Bihar Police photo size different from Delhi Police?</strong><br>Yes! Bihar Police is much stricter, often asking for photos under 25KB and signatures under 15KB. Delhi Police typically allows up to 50KB for photos. Our tool adjusts the limits automatically based on the state you select.</p>
+<p><strong>Is Bihar Police photo size different from Delhi Police?</strong><br>Yes! Bihar Police is much stricter, often asking for photos under 25KB and signatures under 15KB. Delhi Police typically allows up to 50KB for photos.</p>
 </section>
 
 <div class="chips-hd">More Tools</div>
@@ -411,43 +379,7 @@ body::after{
 <script>
 let currentFile = null;
 let cropper = null; 
-let currentMode = 'photo'; // 'photo' or 'sign'
-
-// Smart Preset Data Structure
-// p_w, p_h, p_kb = Photo Width, Height, KB
-// s_w, s_h, s_kb = Signature Width, Height, KB
-const presetData = {
-    'up': { p_w: 413, p_h: 531, p_kb: 48, s_w: 472, s_h: 236, s_kb: 18, name: "UP Police" },
-    'delhi': { p_w: 413, p_h: 531, p_kb: 48, s_w: 472, s_h: 236, s_kb: 18, name: "Delhi Police" },
-    'bihar': { p_w: 413, p_h: 531, p_kb: 24, s_w: 472, s_h: 236, s_kb: 14, name: "Bihar Police" },
-    'raj': { p_w: 413, p_h: 531, p_kb: 95, s_w: 472, s_h: 236, s_kb: 45, name: "Rajasthan Police" },
-    'mp': { p_w: 413, p_h: 531, p_kb: 45, s_w: 472, s_h: 236, s_kb: 18, name: "MP Police" },
-    'custom': { p_w: 413, p_h: 531, p_kb: 50, s_w: 472, s_h: 236, s_kb: 20, name: "Custom" }
-};
-
-function applyPreset() {
-    const state = document.getElementById('statePreset').value;
-    const data = presetData[state];
-    
-    if(currentMode === 'photo') {
-        document.getElementById('resW').value = data.p_w;
-        document.getElementById('resH').value = data.p_h;
-        document.getElementById('size').value = data.p_kb;
-    } else {
-        document.getElementById('resW').value = data.s_w;
-        document.getElementById('resH').value = data.s_h;
-        document.getElementById('size').value = data.s_kb;
-    }
-    
-    if(state === 'custom') {
-        document.getElementById('hintText').innerText = "*Custom Mode: You can change the values manually.";
-        document.getElementById('hintText').style.color = "var(--muted)";
-    } else {
-        document.getElementById('hintText').innerText = `*Values auto-set for ${data.name}. Ready for upload.`;
-        document.getElementById('hintText').style.color = "var(--accent)";
-    }
-    updateAspectRatio();
-}
+let currentMode = 'photo'; 
 
 function setMode(mode) {
     currentMode = mode;
@@ -456,19 +388,23 @@ function setMode(mode) {
     
     if(mode === 'photo') {
         document.getElementById('modePhoto').classList.add('active');
+        document.getElementById('resW').value = 413;
+        document.getElementById('resH').value = 531;
+        document.getElementById('size').value = 48;
     } else {
         document.getElementById('modeSign').classList.add('active');
+        document.getElementById('resW').value = 472;
+        document.getElementById('resH').value = 236;
+        document.getElementById('size').value = 18;
     }
-    // Re-apply preset to update fields
-    applyPreset();
+    updateAspectRatio();
 }
-
-// Initial Call to set default UP Police values
-applyPreset();
 
 document.getElementById('upload').addEventListener('change', function() {
   const cropWrap = document.getElementById('cropWrap');
   const imageToCrop = document.getElementById('imageToCrop');
+  document.getElementById('greetingCard').style.display = 'none'; // Hide greeting on new upload
+  document.getElementById('rg').innerHTML = ''; // clear results
   
   if(!this.files.length) { 
     cropWrap.style.display='none'; 
@@ -527,6 +463,7 @@ async function processPolice() {
   const btn = document.querySelector('.btn');
   btn.innerText = 'Processing...';
   document.getElementById('rg').innerHTML = '';
+  document.getElementById('greetingCard').style.display = 'none'; // Hide if previously shown
 
   const pw = document.getElementById('pbox');
   const pb = document.getElementById('pfill');
@@ -536,7 +473,6 @@ async function processPolice() {
   st.innerText = 'Extracting Cropped Area...';
 
   try {
-    // Get strictly cropped image data from Cropper.js at EXACT required dimensions
     const croppedCanvas = cropper.getCroppedCanvas({
         width: w,
         height: h,
@@ -561,7 +497,12 @@ async function processPolice() {
 
     pb.style.width = '100%';
     st.innerText = 'Done ✅';
-    setTimeout(()=>{pw.style.display='none'}, 1000);
+    
+    setTimeout(()=>{
+        pw.style.display='none';
+        // SHOW CUTE GREETING CARD HERE
+        document.getElementById('greetingCard').style.display = 'block';
+    }, 800);
 
     // Show result
     const url = URL.createObjectURL(bestBlob);
