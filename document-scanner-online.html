@@ -122,7 +122,7 @@ body::after{
 .drop-main span{color:var(--purple-l)}
 .drop-hint{font-size:13px;color:var(--muted)}
 
-/* CROP AREA FIX */
+/* CROP AREA (Perfect Fix) */
 .crop-wrap {
   background:var(--surface2);
   border:1px solid var(--border);
@@ -131,7 +131,7 @@ body::after{
   margin-bottom:20px;
   position:relative;
   width: 100%;
-  height: 450px; 
+  height: 480px; 
 }
 .crop-wrap img { max-width: 100%; display: block; }
 
@@ -192,15 +192,6 @@ input[type=range]::-webkit-slider-thumb {
 .pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s;position:relative;overflow:hidden;}
 .plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
 
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
 /* CHIPS */
 .chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
 .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
@@ -221,6 +212,15 @@ input[type=range]::-webkit-slider-thumb {
 
 @media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
 </style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"Online Document & Signature Scanner",
+"url":"https://reducesize.online/document-scanner-online.html",
+"applicationCategory":"UtilityApplication","operatingSystem":"All",
+"description":"Scan documents and signatures online for free. Pro shadow removal, strict B&W, and easy cropping. Download as clean PDF or JPG.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 </head>
 <body>
 <nav class="nav">
@@ -233,12 +233,12 @@ input[type=range]::-webkit-slider-thumb {
 
 <div class="wrap">
 <section class="sub-hero">
-  <div class="tag">✦ Pro Cam Scanner Alternative</div>
+  <div class="tag">✦ Pro Cam Scanner Engine</div>
   <h1>Scan Documents &<br><span class="grad">Signatures Online</span></h1>
-  <p>Remove dark shadows easily. Adjust scan intensity, apply Colour or B&W filters, and export to PDF safely.</p>
+  <p>Our Pro Engine completely deletes dark shadows from mobile photos. Get crystal clear pure-white paper with bold dark ink. Download as PDF safely.</p>
   <div class="badges">
-    <span class="badge">🪄 Colour Scan Mode</span>
-    <span class="badge">⚫ B&W Scan Mode</span>
+    <span class="badge">🪄 Pro Shadow Remover</span>
+    <span class="badge">⚫ Pure B&W Mode</span>
     <span class="badge">📄 Export to PDF</span>
   </div>
 </section>
@@ -258,9 +258,9 @@ input[type=range]::-webkit-slider-thumb {
         <img id="imageToCrop">
       </div>
       
-      <p style="font-size:12px;color:var(--yellow);margin-bottom:12px;text-align:center;">Drag the edges to select your document. (Safe Crop Enabled)</p>
+      <p style="font-size:12px;color:var(--yellow);margin-bottom:12px;text-align:center;">Box is fixed! Drag the edges/corners (blue blocks) to select the document safely.</p>
       
-      <button class="btn" id="cropBtn" onclick="startScanProcess()">✂️&nbsp; Crop & Proceed</button>
+      <button class="btn" id="cropBtn" onclick="startScanProcess()">✂️&nbsp; Crop & Process Filter</button>
   </div>
 
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
@@ -270,13 +270,13 @@ input[type=range]::-webkit-slider-thumb {
       <canvas id="previewCanvas"></canvas>
 
       <div class="filter-box" id="filterBox">
-        <div class="f-title">Select Scan Mode</div>
+        <div class="f-title">Select Pro Scan Mode</div>
         <div class="f-grid">
           <div class="f-btn" id="btnFilterOrig" onclick="setFilter('original', this)">
               <strong>Original</strong><span>Raw Photo</span>
           </div>
           <div class="f-btn active" id="btnFilterColor" onclick="setFilter('colour', this)">
-              <strong>🪄 Colour Scan</strong><span>Removes Shadows</span>
+              <strong>🪄 Magic Scan</strong><span>Pro Shadow Delete</span>
           </div>
           <div class="f-btn" id="btnFilterBW" onclick="setFilter('bw', this)">
               <strong>⚫ B&W Scan</strong><span>Best for Signatures</span>
@@ -285,37 +285,21 @@ input[type=range]::-webkit-slider-thumb {
 
         <div id="intensityContainer">
             <div class="sl-header" style="margin-top:10px;">
-                <span class="sl-title">🎚️ Filter Intensity</span>
+                <span class="sl-title">🎚️ Ink / Text Darkness</span>
                 <span class="sl-val" id="intVal">50%</span>
             </div>
             <input type="range" id="intensitySlider" min="0" max="100" value="50" oninput="applyFilterToCanvas()">
-            <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;">Adjust slider to make text darker or background whiter.</p>
+            <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;">Increase slider to make faded text darker and bolder.</p>
         </div>
       </div>
 
       <div id="downloadSection">
         <button class="btn" onclick="downloadImage()">🖼️&nbsp; Download as JPG</button>
-        <button class="btn btn-pdf" onclick="downloadPDF()">📄&nbsp; Download as PDF (Best Quality)</button>
+        <button class="btn btn-pdf" onclick="downloadPDF()">📄&nbsp; Download as PDF (Recommended)</button>
       </div>
   </div>
 
 </div>
-
-<section class="seo">
-<h2>Turn Your Phone Photos into Professional Scans</h2>
-<p>When you take a photo of a document, a handwritten assignment, or a signature on a piece of paper, the result is rarely perfect. The lighting causes dark gray shadows, the text looks dull, and the background is never purely white. If you upload these raw photos to official portals, they are often rejected for being unreadable.</p>
-<p><strong>ReduceSize.online Document Scanner</strong> is a 100% free, browser-based alternative to heavy apps like CamScanner. It uses advanced pixel-manipulation algorithms to instantly clean up your mobile photos without adding any annoying watermarks.</p>
-
-<h3>Flawless, Frustration-Free Cropping</h3>
-<p>Unlike basic tools, our cropper is designed specifically for documents. We have disabled accidental crop-drawing. You can comfortably drag the edges and corners to crop out the table or background without the box jumping around.</p>
-
-<h3>Colour Scan vs B&W Scan</h3>
-<p>A common issue with document scanners is that they make the image "too white," causing light pen strokes to disappear. We solved this by giving you full control with our <em>Filter Intensity</em> slider.</p>
-<ul>
-    <li><strong>Colour Scan:</strong> Perfect for marksheets or documents that have colored stamps, signatures, or photos. It blasts away the dark shadows while preserving the original colors of the text.</li>
-    <li><strong>B&W Scan:</strong> Converts the image into strict Black & White. The background becomes blindingly white, and your pen strokes become solid black. This guarantees that your handwritten signature will stand out clearly.</li>
-</ul>
-</section>
 
 <div class="chips-hd">More Tools</div>
 <div class="chips">
@@ -345,6 +329,7 @@ input[type=range]::-webkit-slider-thumb {
 <script>
 let cropper = null; 
 let rawCroppedCanvas = null; 
+let flatCanvas = null; // Store shadow-removed canvas for super fast slider updates
 let currentFilter = 'colour'; 
 
 document.getElementById('upload').addEventListener('change', function() {
@@ -366,14 +351,18 @@ document.getElementById('upload').addEventListener('change', function() {
   
   if(cropper) { cropper.destroy(); }
 
-  // FIX: dragMode: 'none' ensures clicking outside does not start a new crop.
+  // 100% FIXED CROPPER: 
+  // dragMode: 'none' -> Background me touch se box nahi banega
+  // cropBoxMovable: false -> Box ka center click karke poora box nahi khiskega
+  // Sirf aur sirf edges/corners kaam karenge.
   cropper = new Cropper(imageToCrop, {
       aspectRatio: NaN, 
       viewMode: 1, 
-      autoCropArea: 0.95, 
+      autoCropArea: 0.90, 
       background: true, 
       responsive: true,
       dragMode: 'none', 
+      cropBoxMovable: false, 
       toggleDragModeOnDblclick: false 
   });
 });
@@ -383,6 +372,7 @@ function resetUI() {
     document.getElementById('step2').style.display='none';
     if(cropper) cropper.destroy(); 
     rawCroppedCanvas = null;
+    flatCanvas = null;
     document.getElementById('dropZone').style.display = 'block';
 }
 
@@ -396,8 +386,8 @@ function startScanProcess() {
     document.getElementById('step1').style.display = 'none';
     pw.style.display = 'block';
     
-    pb.style.width = '50%';
-    st.innerText = 'Extracting High Quality Document...';
+    pb.style.width = '30%';
+    st.innerText = 'Analyzing Document Shadows...';
     
     setTimeout(() => {
         rawCroppedCanvas = cropper.getCroppedCanvas({
@@ -406,17 +396,43 @@ function startScanProcess() {
             imageSmoothingQuality: 'high'
         });
         
-        pb.style.width = '100%';
-        st.innerText = 'Applying Filter...';
+        pb.style.width = '60%';
+        st.innerText = 'Running Pro Scanner Engine...';
         
         setTimeout(() => {
-            pw.style.display = 'none';
-            document.getElementById('step2').style.display = 'block';
             
-            document.getElementById('intensitySlider').value = 50;
-            setFilter('colour', document.getElementById('btnFilterColor'));
+            // PRO ENGINE: We calculate the flattened (shadow-free) image ONCE.
+            // This makes the slider butter smooth later.
+            flatCanvas = document.createElement('canvas');
+            flatCanvas.width = rawCroppedCanvas.width;
+            flatCanvas.height = rawCroppedCanvas.height;
+            const fCtx = flatCanvas.getContext('2d');
             
-        }, 500);
+            // Draw original
+            fCtx.drawImage(rawCroppedCanvas, 0, 0);
+            
+            // CamScanner Secret: Divide Original by a Heavily Blurred Background to remove shadows
+            let blurRadius = Math.floor(Math.max(flatCanvas.width, flatCanvas.height) * 0.025);
+            fCtx.globalCompositeOperation = 'color-dodge';
+            fCtx.filter = `blur(${blurRadius}px) invert(100%)`;
+            fCtx.drawImage(rawCroppedCanvas, 0, 0);
+            
+            // Reset
+            fCtx.filter = 'none';
+            fCtx.globalCompositeOperation = 'source-over';
+            
+            pb.style.width = '100%';
+            st.innerText = 'Ready!';
+            
+            setTimeout(() => {
+                pw.style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+                
+                document.getElementById('intensitySlider').value = 50;
+                setFilter('colour', document.getElementById('btnFilterColor'));
+            }, 300);
+            
+        }, 100);
     }, 100);
 }
 
@@ -436,56 +452,58 @@ function setFilter(type, btnElement) {
 }
 
 function applyFilterToCanvas() {
-    if(!rawCroppedCanvas) return;
+    if(!rawCroppedCanvas || !flatCanvas) return;
     
     const canvas = document.getElementById('previewCanvas');
     const ctx = canvas.getContext('2d');
     
-    let intensitySlider = parseInt(document.getElementById('intensitySlider').value); // 0 to 100
-    document.getElementById('intVal').innerText = intensitySlider + "%";
+    let intensityVal = parseInt(document.getElementById('intensitySlider').value); // 0 to 100
+    document.getElementById('intVal').innerText = intensityVal + "%";
     
     canvas.width = rawCroppedCanvas.width;
     canvas.height = rawCroppedCanvas.height;
     
-    ctx.drawImage(rawCroppedCanvas, 0, 0);
+    if (currentFilter === 'original') {
+        ctx.drawImage(rawCroppedCanvas, 0, 0);
+        return;
+    }
     
-    if (currentFilter === 'original') return;
+    // For Magic/B&W, we start with the perfectly lit flatCanvas
+    ctx.drawImage(flatCanvas, 0, 0);
     
+    // Pixel loop to adjust contrast/black levels instantly
     let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let data = imgData.data;
     
-    // Pro Algorithm: Normalization (Levels Adjustment)
-    let intensity = intensitySlider / 100; // 0.0 to 1.0
-    let whiteClip = 255 - (intensity * 120); // 135 to 255
-    let blackClip = intensity * 100; // 0 to 100
-    
-    for (let i = 0; i < data.length; i += 4) {
-        let r = data[i], g = data[i+1], b = data[i+2];
-        
-        if (currentFilter === 'bw') {
-            // Grayscale
-            let lum = 0.3 * r + 0.59 * g + 0.11 * b;
-            let val = ((lum - blackClip) / (whiteClip - blackClip)) * 255;
-            
-            val = Math.max(0, Math.min(255, val));
-            data[i] = data[i+1] = data[i+2] = val;
-            
-        } else if (currentFilter === 'colour') {
-            // Levels Adjustment
-            r = ((r - blackClip) / (whiteClip - blackClip)) * 255;
-            g = ((g - blackClip) / (whiteClip - blackClip)) * 255;
-            b = ((b - blackClip) / (whiteClip - blackClip)) * 255;
-            
-            // Saturation Boost (Makes ink/stamps pop)
-            let lum = 0.3 * r + 0.59 * g + 0.11 * b;
-            let satBoost = 1.3;
-            r = lum + satBoost * (r - lum);
-            g = lum + satBoost * (g - lum);
-            b = lum + satBoost * (b - lum);
-            
-            data[i] = Math.max(0, Math.min(255, r));
-            data[i+1] = Math.max(0, Math.min(255, g));
-            data[i+2] = Math.max(0, Math.min(255, b));
+    if (currentFilter === 'bw') {
+        // Pure B&W Threshold
+        let threshold = 255 - (intensityVal * 1.5); 
+        for(let i=0; i<data.length; i+=4) {
+             let lum = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
+             let val = lum > threshold ? 255 : 0;
+             data[i] = data[i+1] = data[i+2] = val;
+        }
+    } else if (currentFilter === 'colour') {
+        // Levels adjustment: Make ink darker based on slider
+        let blackPoint = intensityVal * 1.5; // 0 to 150
+        for(let i=0; i<data.length; i+=4) {
+             let r = data[i], g = data[i+1], b = data[i+2];
+             
+             // Contrast Stretch
+             r = Math.max(0, ((r - blackPoint) / (255 - blackPoint)) * 255);
+             g = Math.max(0, ((g - blackPoint) / (255 - blackPoint)) * 255);
+             b = Math.max(0, ((b - blackPoint) / (255 - blackPoint)) * 255);
+
+             // Slight Saturation Boost to make ink pop
+             let lum = 0.299 * r + 0.587 * g + 0.114 * b;
+             let sat = 1.3;
+             r = lum + sat * (r - lum);
+             g = lum + sat * (g - lum);
+             b = lum + sat * (b - lum);
+             
+             data[i] = Math.max(0, Math.min(255, r));
+             data[i+1] = Math.max(0, Math.min(255, g));
+             data[i+2] = Math.max(0, Math.min(255, b));
         }
     }
     
@@ -509,16 +527,25 @@ function downloadPDF() {
     const canvas = document.getElementById('previewCanvas');
     const imgData = canvas.toDataURL('image/jpeg', 0.95);
     
-    try {
-        const { jsPDF } = window.jspdf;
-        let orientation = canvas.width > canvas.height ? 'landscape' : 'portrait';
-        const pdf = new jsPDF({ orientation: orientation, unit: 'px', format: [canvas.width, canvas.height] });
-        
-        pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
-        pdf.save("Scanned_Document.pdf");
-    } catch(e) {
-        alert("Error creating PDF. Please try downloading as JPG instead.");
-    }
+    // Temporarily change button text
+    const btn = document.querySelector('.btn-pdf');
+    const origText = btn.innerText;
+    btn.innerText = '📄 Generating PDF...';
+    
+    setTimeout(() => {
+        try {
+            const { jsPDF } = window.jspdf;
+            let orientation = canvas.width > canvas.height ? 'landscape' : 'portrait';
+            const pdf = new jsPDF({ orientation: orientation, unit: 'px', format: [canvas.width, canvas.height] });
+            
+            pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
+            pdf.save("Scanned_Document.pdf");
+        } catch(e) {
+            alert("Error creating PDF. Please try downloading as JPG instead.");
+        } finally {
+            btn.innerText = origText;
+        }
+    }, 100);
 }
 </script>
 </body>
