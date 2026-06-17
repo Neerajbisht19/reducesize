@@ -85,6 +85,14 @@ body::after{
 .grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
 
+/* BADGES */
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
+}
+
 /* TOOL CARD */
 .card{
   background:var(--surface);border:1px solid var(--border);
@@ -194,6 +202,15 @@ body::after{
 }
 .rb:hover{background:#7b63f5; box-shadow:0 6px 20px rgba(109,84,240,.3);}
 
+/* SEO SECTION */
+.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
+.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
+.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
+.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
+.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
+.seo li{margin-bottom:6px}
+.seo strong{color:#eeeeff;font-weight:600}
+
 /* CHIPS */
 .chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
 .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
@@ -214,6 +231,15 @@ body::after{
 
 @media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
 </style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"Passport Photo Maker Online",
+"url":"https://reducesize.online/passport-photo-maker.html",
+"applicationCategory":"UtilityApplication","operatingSystem":"All",
+"description":"Make high-quality passport photos for printing. Auto-arrange up to 30 copies on A4 or 8 copies on 4x6 paper. Add Name/Date and cutting borders. 100% Free.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 </head>
 <body>
 <nav class="nav">
@@ -228,10 +254,10 @@ body::after{
 <section class="sub-hero">
   <div class="tag">✦ Print-Ready Portrait Sheets</div>
   <h1>Passport Photo Maker<br><span class="grad">for Fast Printing</span></h1>
-  <p>Create a portrait grid of passport photos for cheap studio printing. Add optional Name/Date strip. High quality 300-DPI extraction.</p>
+  <p>Create a portrait grid of passport photos for cheap studio printing. Add optional Name/Date strip without losing your crop. High quality 300-DPI extraction.</p>
   <div class="badges">
     <span class="badge">🖨️ 300 DPI Quality</span>
-    <span class="badge">📝 Name/Date Strip</span>
+    <span class="badge">📝 Auto Name Strip</span>
     <span class="badge">📄 Portrait A4 & 4x6</span>
   </div>
 </section>
@@ -291,8 +317,8 @@ body::after{
     
     <div id="textInputs" style="display:none;margin-top:12px;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px">
       <div class="irow">
-        <div class="f"><label class="fl">Name (Optional)</label><input type="text" id="candName" placeholder="e.g. RAHUL KUMAR" oninput="calculateMax()"></div>
-        <div class="f"><label class="fl">Date (Optional)</label><input type="text" id="photoDate" placeholder="e.g. 15/06/2026" oninput="calculateMax()"></div>
+        <div class="f"><label class="fl">Name (Optional)</label><input type="text" id="candName" placeholder="e.g. RAHUL KUMAR"></div>
+        <div class="f"><label class="fl">Date (Optional)</label><input type="text" id="photoDate" placeholder="e.g. 15/06/2026"></div>
       </div>
       <p style="font-size:11px;color:var(--yellow);margin-top:2px;margin-bottom:0">Note: The white text strip is kept extremely thin to ensure the face area remains large and clear.</p>
     </div>
@@ -331,6 +357,7 @@ body::after{
 <script>
 let currentFile = null;
 let cropper = null; 
+let lastRatio = null;
 
 document.getElementById('upload').addEventListener('change', function() {
   const cropWrap = document.getElementById('cropWrap');
@@ -343,6 +370,7 @@ document.getElementById('upload').addEventListener('change', function() {
     document.getElementById('generateBtn').style.display='none';
     if(cropper) cropper.destroy(); 
     currentFile = null; 
+    lastRatio = null;
     document.getElementById('dropZone').style.display = 'block';
     return; 
   }
@@ -361,11 +389,11 @@ document.getElementById('upload').addEventListener('change', function() {
   
   if(cropper) { cropper.destroy(); }
 
-  // Initial calculation
   let layout = calculateMax();
+  lastRatio = layout.w_px / layout.face_h_px;
 
   cropper = new Cropper(imageToCrop, {
-      aspectRatio: layout.w_px / layout.face_h_px,
+      aspectRatio: lastRatio,
       viewMode: 1, 
       autoCropArea: 0.8, 
       background: true, 
@@ -377,7 +405,7 @@ function toggleTextInputs() {
   const cb = document.getElementById('addTextCb');
   const box = document.getElementById('textInputs');
   box.style.display = cb.checked ? 'block' : 'none';
-  calculateMax(); // Re-adjust cropper ratio
+  calculateMax(); // Re-adjust cropper ratio ONCE when toggled
 }
 
 function calculateMax() {
@@ -385,34 +413,40 @@ function calculateMax() {
     let h_cm = parseFloat(document.getElementById('pHeight').value) || 4.5;
     let paper = document.getElementById('paperSize').value;
     
-    // 300 DPI Math
     let dpi = 300;
     let w_px = Math.round((w_cm / 2.54) * dpi);
     let total_h_px = Math.round((h_cm / 2.54) * dpi);
     
-    // Calculate Thin Text Strip Height if enabled
+    // Check if Strip is enabled. Allocate space immediately to prevent typing jump.
     let addText = document.getElementById('addTextCb').checked;
-    let cName = document.getElementById('candName').value.trim();
-    let pDate = document.getElementById('photoDate').value.trim();
-    
     let strip_h_px = 0;
-    if (addText && (cName || pDate)) {
+    
+    if (addText) {
         strip_h_px = Math.round(total_h_px * 0.12); // Very thin 12% strip
     }
     
     let face_h_px = total_h_px - strip_h_px;
-    
-    // Update Cropper Ratio based purely on the face area
-    if(cropper) {
-        cropper.setAspectRatio(w_px / face_h_px);
+    let newRatio = w_px / face_h_px;
+
+    // SMART UPDATE: Only change cropper if ratio ACTUALLY changed.
+    // Also, save old box position and restore it so it doesn't jump.
+    if(cropper && lastRatio !== newRatio) {
+        let oldData = cropper.getData();
+        cropper.setAspectRatio(newRatio);
+        cropper.setData({
+            x: oldData.x,
+            y: oldData.y,
+            width: oldData.width // Lock width, let height adjust to new ratio naturally
+        });
+        lastRatio = newRatio;
     }
 
     // STRICT PORTRAIT PAPER ORIENTATION
     let pw, ph;
     if(paper === 'a4') {
-        pw = 2480; ph = 3508; // Portrait A4 at 300 DPI
+        pw = 2480; ph = 3508; 
     } else {
-        pw = 1200; ph = 1800; // Portrait 4x6 at 300 DPI
+        pw = 1200; ph = 1800; 
     }
 
     let gap = 30; // Cutting border margin
@@ -484,7 +518,7 @@ async function generatePrintSheet() {
     sCtx.drawImage(faceCanvas, 0, 0, layout.w_px, layout.face_h_px);
     
     // Draw text strip if needed
-    if (layout.strip_h_px > 0) {
+    if (layout.strip_h_px > 0 && (cName || pDate)) {
         sCtx.fillStyle = '#ffffff';
         sCtx.fillRect(0, layout.face_h_px, layout.w_px, layout.strip_h_px);
         
