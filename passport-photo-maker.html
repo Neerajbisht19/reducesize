@@ -6,8 +6,8 @@
 <title>Passport Photo Maker Online Free | Print Multiple Copies</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/passport-photo-maker.html">
-<meta name="description" content="Make high-quality passport photos for printing. Auto-arrange multiple copies on A4 or 4x6 paper. Add cutting borders. 100% Free and High Resolution.">
-<meta name="keywords" content="passport photo maker, print passport size photo online, arrange passport photo on a4, 8 passport photo on 4x6, make passport photo free">
+<meta name="description" content="Make high-quality passport photos for printing. Auto-arrange multiple copies on A4 or 4x6 paper. Add Name/Date and cutting borders. 100% Free and High Res.">
+<meta name="keywords" content="passport photo maker, print passport size photo online, arrange passport photo on a4, add name date to passport photo, make passport photo free">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@ body::after{
     radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
   pointer-events:none;z-index:0;
 }
-/* NAV FIX FOR MOBILE */
+/* NAV */
 .nav{
   position:sticky;top:0;z-index:200;height:60px;
   display:flex;align-items:center;justify-content:space-between;
@@ -66,7 +66,7 @@ body::after{
     .nav-logo { font-size: 16px; }
     .nav-links { gap: 10px; }
     .nav-links a { font-size: 12px; }
-    .nav-pill { font-size: 9px; padding: 4px 8px; }
+    .nav-pill { display:none; }
 }
 
 /* WRAP & SUB-HERO */
@@ -84,14 +84,6 @@ body::after{
 }
 .grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
 
 /* TOOL CARD */
 .card{
@@ -146,17 +138,24 @@ body::after{
 }
 .u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
 
-.irow{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
-.irow .f{flex:1;min-width:140px;}
+.irow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.irow .f{flex:1;min-width:120px;}
 .fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
 .irow input, .irow select{
   width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
   padding:12px 14px;border-radius:10px;color:var(--text);
-  font-size:15px;font-family:'Manrope',sans-serif;font-weight:600;
+  font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
   outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
 }
 .irow input::placeholder {color: rgba(255,255,255,0.2);}
 .irow input:focus, .irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
+
+/* CHECKBOX */
+.cb-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.cb-row input[type="checkbox"]{
+  width:18px;height:18px;accent-color:var(--purple);cursor:pointer;
+}
+.cb-label{font-size:14px;font-weight:600;color:var(--text);cursor:pointer;}
 
 /* SMART WARNING */
 .warning-box {
@@ -184,25 +183,16 @@ body::after{
 /* RESULTS */
 .rg{display:grid;grid-template-columns:1fr;gap:10px;margin-top:16px}
 .rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;}
-.rc img{width:100%;height:auto;max-height:400px;object-fit:contain; border-bottom:1px solid var(--border); background:#fff; padding:10px;}
+.rc img{width:100%;height:auto;max-height:600px;object-fit:contain; border-bottom:1px solid var(--border); background:#fff; padding:10px;}
 .ri{padding:16px}
 .rsz{font-size:15px;font-weight:700;color:var(--green);margin-bottom:12px}
 .rb{
-  width:100%;padding:10px;border-radius:9px;border:none;
+  width:100%;padding:12px;border-radius:9px;border:none;
   background:var(--purple);color:#fff;
-  font-size:14px;font-weight:700;cursor:pointer;
+  font-size:15px;font-weight:700;cursor:pointer;
   font-family:'Manrope',sans-serif;transition:.15s;
 }
 .rb:hover{background:#7b63f5; box-shadow:0 6px 20px rgba(109,84,240,.3);}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
 
 /* CHIPS */
 .chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
@@ -224,22 +214,6 @@ body::after{
 
 @media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
 </style>
-
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Passport Photo Maker Online",
-"url":"https://reducesize.online/passport-photo-maker.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Make high-quality passport photos for printing. Auto-arrange up to 30 copies on A4 or 8 copies on 4x6 paper. Add cutting borders. 100% Free.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How can I print passport photos at home?","acceptedAnswer":{"@type":"Answer","text":"Simply upload your photo, select the number of copies you need, and choose your paper size (like A4 or 4x6). Our tool will arrange the photos in a grid with white borders for easy cutting. You can then print this single sheet at home or a local shop."}},
-{"@type":"Question","name":"Does this tool compress the photo quality?","acceptedAnswer":{"@type":"Answer","text":"No! Unlike our web compression tools, this Print Maker exports your final grid sheet at maximum 100% JPEG quality (300 DPI) to ensure your physical prints are sharp and crystal clear."}},
-{"@type":"Question","name":"How many passport photos fit on a 4x6 sheet?","acceptedAnswer":{"@type":"Answer","text":"A standard 4x6 inch photo paper can comfortably fit up to 8 passport photos (3.5x4.5cm each) with sufficient white borders left for scissor cutting."}}
-]}
-</script>
 </head>
 <body>
 <nav class="nav">
@@ -252,13 +226,13 @@ body::after{
 
 <div class="wrap">
 <section class="sub-hero">
-  <div class="tag">✦ Print-Ready High Resolution</div>
+  <div class="tag">✦ Print-Ready Portrait Sheets</div>
   <h1>Passport Photo Maker<br><span class="grad">for Fast Printing</span></h1>
-  <p>Create a grid of passport photos for cheap studio printing. Auto-arrange copies on A4 or 4x6 sheets with cutting borders. 100% Max Quality.</p>
+  <p>Create a portrait grid of passport photos for cheap studio printing. Add optional Name/Date strip. High quality 300-DPI extraction.</p>
   <div class="badges">
-    <span class="badge">🖨️ 300 DPI Print Quality</span>
-    <span class="badge">✂️ Auto Cutting Borders</span>
-    <span class="badge">📄 A4 & 4x6 Supported</span>
+    <span class="badge">🖨️ 300 DPI Quality</span>
+    <span class="badge">📝 Name/Date Strip</span>
+    <span class="badge">📄 Portrait A4 & 4x6</span>
   </div>
 </section>
 
@@ -276,7 +250,7 @@ body::after{
   </div>
 
   <div class="u-box" id="settingsBox" style="display:none;">
-    <div class="u-title">Print Settings</div>
+    <div class="u-title">1. Print Layout Settings</div>
     
     <div class="irow">
       <div class="f">
@@ -291,14 +265,14 @@ body::after{
 
     <div class="irow">
       <div class="f">
-        <label class="fl">Paper Size</label>
+        <label class="fl">Paper Size (Portrait)</label>
         <select id="paperSize" onchange="calculateMax()">
-          <option value="a4">A4 Sheet (Most Common)</option>
-          <option value="4x6">4x6 Inch (Photo Lab Sheet)</option>
+          <option value="a4">A4 Sheet (210x297 mm)</option>
+          <option value="4x6">4x6 Inch (Small Photo Paper)</option>
         </select>
       </div>
       <div class="f">
-        <label class="fl">Number of Copies</label>
+        <label class="fl">Total Copies Needed</label>
         <input type="number" id="qty" value="8" oninput="calculateMax()">
       </div>
     </div>
@@ -306,8 +280,22 @@ body::after{
     <div id="warnBox" class="warning-box">
         <span class="warning-text" id="qtyWarn"></span>
     </div>
+  </div>
+
+  <div class="u-box" id="textSettingsBox" style="display:none;">
+    <div class="u-title">2. Add Name / Date (Optional)</div>
+    <div class="cb-row">
+      <input type="checkbox" id="addTextCb" onchange="toggleTextInputs()">
+      <label for="addTextCb" class="cb-label">Add Thin Text Strip at Bottom</label>
+    </div>
     
-    <p style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*No compression applied. Output will be large file size for crystal clear printing.</p>
+    <div id="textInputs" style="display:none;margin-top:12px;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px">
+      <div class="irow">
+        <div class="f"><label class="fl">Name (Optional)</label><input type="text" id="candName" placeholder="e.g. RAHUL KUMAR" oninput="calculateMax()"></div>
+        <div class="f"><label class="fl">Date (Optional)</label><input type="text" id="photoDate" placeholder="e.g. 15/06/2026" oninput="calculateMax()"></div>
+      </div>
+      <p style="font-size:11px;color:var(--yellow);margin-top:2px;margin-bottom:0">Note: The white text strip is kept extremely thin to ensure the face area remains large and clear.</p>
+    </div>
   </div>
 
   <button class="btn" id="generateBtn" style="display:none;" onclick="generatePrintSheet()">🖨️&nbsp; Generate Print Sheet</button>
@@ -315,25 +303,6 @@ body::after{
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
   <div id="rg" class="rg"></div>
 </div>
-
-<section class="seo">
-<h2>How to Print Your Own Passport Photos Cheaply</h2>
-<p>If you walk into a photo studio to get 8 passport photos, they will likely charge you upwards of ₹100. However, if you give them a ready-made 4x6 inch digital image that already contains your 8 photos, they will treat it as a standard single photo print, which costs just ₹10. <strong>ReduceSize.online Passport Maker</strong> allows you to create this exact sheet yourself in seconds.</p>
-
-<h3>The 300 DPI Print Standard</h3>
-<p>Unlike our other web-based image compressors that focus on making file sizes as small as possible (KB), this specific tool does the exact opposite. Printing requires a high density of pixels (Dots Per Inch). When you crop your face using this tool, we extract it at maximum resolution and generate your final grid sheet at <strong>100% JPEG Quality</strong>. The file size will be large, ensuring that when it hits the printer paper, there is absolutely no blurriness or pixelation.</p>
-
-<h3>Step-by-Step Instructions</h3>
-<ol>
-  <li><strong>Take a Good Photo:</strong> Stand against a plain white or light-colored wall. Ensure there is good lighting on your face without harsh shadows.</li>
-  <li><strong>Upload & Crop:</strong> Upload the photo here. Our cropping tool is locked to the standard Indian Passport size (3.5 cm x 4.5 cm). Drag your image so your face and shoulders are clearly visible.</li>
-  <li><strong>Select Print Settings:</strong> Decide if you are printing on an A4 sheet using a home printer, or a 4x6 sheet at a photo lab. Then, enter how many copies you need.</li>
-  <li><strong>Download your Sheet:</strong> Click generate. Our smart algorithm automatically arranges your photos mathematically on a pure white canvas, leaving necessary <strong>scissor-cutting borders</strong> between each photo. Download and print!</li>
-</ol>
-
-<h3>Smart Auto-Capping</h3>
-<p>To prevent printing errors, our tool calculates the physical dimensions of the paper. An A4 sheet can safely fit a maximum of 30 passport photos, while a 4x6 inch sheet can fit 8. If you accidentally type "50" for a 4x6 sheet, our system will warn you and automatically scale it down to the maximum safe limit, so your photos don't get cut off at the edges.</p>
-</section>
 
 <div class="chips-hd">More Tools</div>
 <div class="chips">
@@ -370,6 +339,7 @@ document.getElementById('upload').addEventListener('change', function() {
   if(!this.files.length) { 
     cropWrap.style.display='none'; 
     document.getElementById('settingsBox').style.display='none';
+    document.getElementById('textSettingsBox').style.display='none';
     document.getElementById('generateBtn').style.display='none';
     if(cropper) cropper.destroy(); 
     currentFile = null; 
@@ -384,26 +354,31 @@ document.getElementById('upload').addEventListener('change', function() {
   document.getElementById('dropZone').style.display = 'none';
   cropWrap.style.display = 'block';
   document.getElementById('settingsBox').style.display = 'block';
+  document.getElementById('textSettingsBox').style.display = 'block';
   document.getElementById('generateBtn').style.display = 'block';
   
   imageToCrop.src = URL.createObjectURL(f);
   
   if(cropper) { cropper.destroy(); }
 
-  // Initial calculation to set Cropper Aspect Ratio
-  calculateMax();
-
-  const w_cm = parseFloat(document.getElementById('pWidth').value) || 3.5;
-  const h_cm = parseFloat(document.getElementById('pHeight').value) || 4.5;
+  // Initial calculation
+  let layout = calculateMax();
 
   cropper = new Cropper(imageToCrop, {
-      aspectRatio: w_cm / h_cm,
+      aspectRatio: layout.w_px / layout.face_h_px,
       viewMode: 1, 
       autoCropArea: 0.8, 
       background: true, 
       responsive: true
   });
 });
+
+function toggleTextInputs() {
+  const cb = document.getElementById('addTextCb');
+  const box = document.getElementById('textInputs');
+  box.style.display = cb.checked ? 'block' : 'none';
+  calculateMax(); // Re-adjust cropper ratio
+}
 
 function calculateMax() {
     let w_cm = parseFloat(document.getElementById('pWidth').value) || 3.5;
@@ -413,23 +388,36 @@ function calculateMax() {
     // 300 DPI Math
     let dpi = 300;
     let w_px = Math.round((w_cm / 2.54) * dpi);
-    let h_px = Math.round((h_cm / 2.54) * dpi);
+    let total_h_px = Math.round((h_cm / 2.54) * dpi);
     
-    // Update Cropper Ratio
+    // Calculate Thin Text Strip Height if enabled
+    let addText = document.getElementById('addTextCb').checked;
+    let cName = document.getElementById('candName').value.trim();
+    let pDate = document.getElementById('photoDate').value.trim();
+    
+    let strip_h_px = 0;
+    if (addText && (cName || pDate)) {
+        strip_h_px = Math.round(total_h_px * 0.12); // Very thin 12% strip
+    }
+    
+    let face_h_px = total_h_px - strip_h_px;
+    
+    // Update Cropper Ratio based purely on the face area
     if(cropper) {
-        cropper.setAspectRatio(w_px / h_px);
+        cropper.setAspectRatio(w_px / face_h_px);
     }
 
+    // STRICT PORTRAIT PAPER ORIENTATION
     let pw, ph;
     if(paper === 'a4') {
-        pw = 2480; ph = 3508; // A4 at 300 DPI
+        pw = 2480; ph = 3508; // Portrait A4 at 300 DPI
     } else {
-        pw = 1800; ph = 1200; // 4x6 at 300 DPI (Landscape orientation for better fit)
+        pw = 1200; ph = 1800; // Portrait 4x6 at 300 DPI
     }
 
-    let gap = 30; // ~0.1 inch cutting border
+    let gap = 30; // Cutting border margin
     let cols = Math.floor((pw - gap) / (w_px + gap));
-    let rows = Math.floor((ph - gap) / (h_px + gap));
+    let rows = Math.floor((ph - gap) / (total_h_px + gap));
     let maxPhotos = cols * rows;
 
     let qtyInput = document.getElementById('qty');
@@ -440,13 +428,13 @@ function calculateMax() {
 
     if(requested > maxPhotos) {
         warnBox.style.display = 'block';
-        warnText.innerText = `Max ${maxPhotos} photos fit on a ${paper.toUpperCase()} sheet. Auto-adjusted.`;
+        warnText.innerText = `Max ${maxPhotos} photos fit on a Portrait ${paper.toUpperCase()} sheet. Auto-adjusted.`;
         qtyInput.value = maxPhotos;
     } else {
         warnBox.style.display = 'none';
     }
     
-    return { w_px, h_px, pw, ph, gap, cols, rows };
+    return { w_px, total_h_px, face_h_px, strip_h_px, pw, ph, gap, cols, rows };
 }
 
 async function generatePrintSheet() {
@@ -454,6 +442,9 @@ async function generatePrintSheet() {
   
   let layout = calculateMax();
   let requestedQty = parseInt(document.getElementById('qty').value) || 1;
+  let addText = document.getElementById('addTextCb').checked;
+  let cName = document.getElementById('candName').value.trim();
+  let pDate = document.getElementById('photoDate').value.trim();
   
   const btn = document.getElementById('generateBtn');
   btn.innerText = 'Processing High-Res Image...';
@@ -467,19 +458,60 @@ async function generatePrintSheet() {
   st.innerText = 'Extracting High Quality Crop...';
 
   try {
-    // Get cropped image data at exact 300 DPI pixels
-    const croppedCanvas = cropper.getCroppedCanvas({
+    // 1. Get cropped face at exact 300 DPI
+    const faceCanvas = cropper.getCroppedCanvas({
         width: layout.w_px,
-        height: layout.h_px,
+        height: layout.face_h_px,
         fillColor: '#ffffff',
         imageSmoothingEnabled: true,
         imageSmoothingQuality: 'high'
     });
 
-    pb.style.width = '50%';
+    pb.style.width = '40%';
+    st.innerText = 'Adding Strip...';
+
+    // 2. Create the Single Photo Canvas (Face + Strip)
+    const singleCanvas = document.createElement('canvas');
+    singleCanvas.width = layout.w_px;
+    singleCanvas.height = layout.total_h_px;
+    const sCtx = singleCanvas.getContext('2d');
+    
+    // Fill background white to prevent alpha issues
+    sCtx.fillStyle = '#ffffff';
+    sCtx.fillRect(0, 0, layout.w_px, layout.total_h_px);
+    
+    // Draw face
+    sCtx.drawImage(faceCanvas, 0, 0, layout.w_px, layout.face_h_px);
+    
+    // Draw text strip if needed
+    if (layout.strip_h_px > 0) {
+        sCtx.fillStyle = '#ffffff';
+        sCtx.fillRect(0, layout.face_h_px, layout.w_px, layout.strip_h_px);
+        
+        sCtx.fillStyle = '#000000';
+        sCtx.textAlign = 'center';
+        sCtx.textBaseline = 'middle';
+        
+        let lines = [];
+        if(cName) lines.push(cName.toUpperCase());
+        if(pDate) lines.push(pDate);
+
+        let fontMultiplier = lines.length === 2 ? 0.38 : 0.60;
+        let fontSize = Math.floor(layout.strip_h_px * fontMultiplier);
+        sCtx.font = `bold ${fontSize}px Arial, sans-serif`;
+        
+        if(lines.length === 2) {
+            sCtx.fillText(lines[0], layout.w_px/2, layout.face_h_px + (layout.strip_h_px * 0.30));
+            sCtx.fillText(lines[1], layout.w_px/2, layout.face_h_px + (layout.strip_h_px * 0.75));
+        } else if (lines.length === 1) {
+            sCtx.fillText(lines[0], layout.w_px/2, layout.face_h_px + (layout.strip_h_px * 0.55));
+        }
+    }
+
+    pb.style.width = '60%';
     st.innerText = 'Arranging Print Grid...';
 
-    // Create Master Canvas
+    // 3. Create Master Grid Canvas
     const masterCanvas = document.createElement('canvas');
     masterCanvas.width = layout.pw;
     masterCanvas.height = layout.ph;
@@ -489,28 +521,29 @@ async function generatePrintSheet() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, layout.pw, layout.ph);
 
-    // Calculate centering offsets
+    // Calculate centering offsets for grid
     let totalGridWidth = (layout.cols * layout.w_px) + ((layout.cols - 1) * layout.gap);
-    let totalGridHeight = (layout.rows * layout.h_px) + ((layout.rows - 1) * layout.gap);
+    let totalGridHeight = (layout.rows * layout.total_h_px) + ((layout.rows - 1) * layout.gap);
     
     let startX = (layout.pw - totalGridWidth) / 2;
     let startY = (layout.ph - totalGridHeight) / 2;
 
-    // Draw photos in grid
+    // Draw grid
     let drawn = 0;
     for(let r = 0; r < layout.rows; r++) {
         for(let c = 0; c < layout.cols; c++) {
             if(drawn >= requestedQty) break;
             
             let x = startX + (c * (layout.w_px + layout.gap));
-            let y = startY + (r * (layout.h_px + layout.gap));
+            let y = startY + (r * (layout.total_h_px + layout.gap));
             
-            ctx.drawImage(croppedCanvas, x, y, layout.w_px, layout.h_px);
+            // Draw the single completed photo
+            ctx.drawImage(singleCanvas, x, y, layout.w_px, layout.total_h_px);
             
-            // Add a very thin subtle border to the photo to guide cutting
+            // Draw cutting guide border
             ctx.strokeStyle = '#e0e0e0';
             ctx.lineWidth = 2;
-            ctx.strokeRect(x, y, layout.w_px, layout.h_px);
+            ctx.strokeRect(x, y, layout.w_px, layout.total_h_px);
             
             drawn++;
         }
@@ -520,19 +553,24 @@ async function generatePrintSheet() {
     pb.style.width = '80%';
     st.innerText = 'Generating 100% Quality Output...';
 
-    // Export as high quality JPG
+    // Strict Anti-Reject Standard JPEG
     let blob = await new Promise(r => masterCanvas.toBlob(r, 'image/jpeg', 1.0));
 
     pb.style.width = '100%';
     st.innerText = 'Ready to Print ✅';
     setTimeout(()=>{pw.style.display='none'}, 1000);
 
-    // Show result
+    // Show visual result card
     const url = URL.createObjectURL(blob);
     const d = document.createElement('div');
     d.className = 'rc';
-    // Use an inline style for max-height to let user see the grid
-    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">Print Ready Sheet (${(blob.size/1024/1024).toFixed(2)} MB)</div><button class="rb" onclick="dlUrl('${url}','passport_print_sheet.jpg')">🖨️ Download for Printing</button></div>`;
+    d.innerHTML = `
+      <img src="${url}" loading="lazy">
+      <div class="ri">
+        <div class="rsz">Portrait Sheet Ready! (${(blob.size/1024/1024).toFixed(2)} MB)</div>
+        <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">High Quality 300 DPI for perfect printing.</p>
+        <button class="rb" onclick="dlUrl('${url}','passport_portrait_sheet.jpg')">🖨️ Download Sheet</button>
+      </div>`;
     document.getElementById('rg').appendChild(d);
 
   } catch(e) {
