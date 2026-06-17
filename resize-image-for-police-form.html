@@ -52,11 +52,18 @@ body::after{
   color:var(--text);text-decoration:none;letter-spacing:-.5px;
 }
 .nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links{display:flex;gap:20px;align-items:center;} /* Increased gap */
 .nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
 .nav-links a:hover{opacity:1;color:var(--purple-l);}
+.nav-pill{
+  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
+  background:rgba(62,207,142,.1);color:var(--green);
+  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
+  display:none;
+}
+@media(min-width:600px){ .nav-pill{display:inline-block;} }
 
-/* WRAP & SUB-HERO */
+/* WRAP & SUB-HERO (Fixed Padding for Mashing) */
 .wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
 .sub-hero{padding:40px 0 24px;text-align:center}
 .sub-hero .tag{
@@ -170,25 +177,56 @@ body::after{
 }
 .plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
 
-/* GREETING CARD (The Secret Sauce) */
+/* CUTE GREETING CARD (The Secret Sauce) */
 .greeting-card {
     display: none;
-    background: linear-gradient(145deg, rgba(109,84,240,0.08) 0%, rgba(32,217,192,0.08) 100%);
-    border: 1px dashed rgba(62,207,142,0.4);
+    position: relative;
+    background: linear-gradient(145deg, rgba(109,84,240,0.11) 0%, rgba(32,217,192,0.1) 100%);
+    border: 1px dashed rgba(62,207,142,0.42);
     border-radius: 12px;
-    padding: 18px 16px;
+    padding: 22px 16px;
     text-align: center;
     margin-top: 16px;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: cutePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    overflow: visible; /* Ensure sparkles are visible */
 }
-@keyframes popIn { 
-    0% { opacity: 0; transform: translateY(15px) scale(0.95); } 
+
+/* Unique cute animation */
+@keyframes cutePop { 
+    0% { opacity: 0; transform: translateY(20px) scale(0.9); } 
     100% { opacity: 1; transform: translateY(0) scale(1); } 
 }
-.g-icon { font-size: 28px; margin-bottom: 8px; }
-.g-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-.g-text { font-size: 14px; color: #a0a0c8; line-height: 1.6; }
-.g-love { font-size: 13px; font-weight: 700; color: var(--purple-l); margin-top: 10px; display: inline-block; padding: 4px 12px; background: rgba(109,84,240,0.1); border-radius: 20px;}
+
+/* Sparkle pseudo-element for appearance effect */
+.greeting-card::after {
+    content: "✨ ✨ ✨";
+    font-size: 20px;
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    opacity: 0;
+    animation: sparkleOut 0.8s ease-out 0.2s forwards;
+    pointer-events: none;
+}
+
+@keyframes sparkleOut {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.5); top: -20px;}
+  20% { opacity: 1; transform: translateX(-50%) scale(1.2); top: -35px;}
+  100% { opacity: 0; transform: translateX(-50%) scale(1.5); top: -60px;}
+}
+
+.g-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; animation: heartBeat 2s infinite ease-in-out; }
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.g-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.2px; }
+.g-title em { font-style: normal; color: var(--accent); }
+.g-text { font-size: 15px; color: #a0a0c8; line-height: 1.6; margin-bottom: 14px; }
+.g-love { font-size: 14px; font-weight: 700; color: var(--purple-l); display: block; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 10px;}
+.g-signature { display: inline-block; padding: 4px 14px; background: rgba(109,84,240,0.12); border-radius: 20px; margin-top: 6px;}
 
 /* RESULTS */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
@@ -204,55 +242,13 @@ body::after{
 }
 .rb:hover{background:rgba(109,84,240,.24)}
 
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{
-  display:flex;align-items:center;gap:9px;padding:12px 13px;
-  background:var(--surface);border:1px solid var(--border);border-radius:11px;
-  text-decoration:none;color:var(--text);transition:.2s;
-}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{
-  position:relative;z-index:1;border-top:1px solid var(--border);
-  padding:28px 20px 20px;text-align:center;
-}
-.flogo{
-  font-family:'Syne',sans-serif;font-size:17px;font-weight:800;
-  color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;
-}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{
-  font-size:12px;color:var(--muted);text-decoration:none;
-  padding:4px 9px;border-radius:6px;transition:.15s;
-}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-.ftrust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;color:#383858;font-weight:600}
-
-/* MOBILE */
+/*мобильный режим*/
 @media(max-width:600px){
   .sub-hero{padding:32px 0 20px}
   .card{padding:16px;border-radius:15px}
   .chips{grid-template-columns:1fr 1fr}
 }
 </style>
-
 </head>
 <body>
 <nav class="nav">
@@ -310,69 +306,15 @@ body::after{
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
   
   <div id="greetingCard" class="greeting-card">
-    <div class="g-icon">🌟👮‍♂️</div>
-    <div class="g-title">All the Best for your Exam!</div>
-    <div class="g-text">Humari dil se dua hai ki aap is saal zaroor select hon aur uniform pehnein. Aapke ujjwal bhavishya (bright future) ke liye dher saari shubhkaamnayein! ✨</div>
-    <span class="g-love">Lots of love, ReduceSize.online ❤️</span>
+    <div class="g-icon">👮‍♂️🌟✨</div>
+    <div class="g-title">✨ <em>Uniform</em> Ka Sapna ✨</div>
+    <div class="g-text">Humari dil se dua hai ki aap is saal zaroor select hon.. <br> aur uniform pehnein. 👮‍♂️💪 <br><br> Aapke ujjwal bhavishya (bright future) ke liye <br> dher saari shubhkaamnayein! 🌟✨</div>
+    <span class="g-love">Lots of love, <span class="g-signature">ReduceSize.online ❤️</span></span>
   </div>
 
   <div id="rg" class="rg"></div>
 </div>
-
-<section class="seo">
-<h2>Complete Guide to Police Recruitment Form Photos</h2>
-<p>State Police recruitment boards are notorious for rejecting applications due to small errors in photograph and signature uploads. Each state has a different portal (like UPPRPB for UP Police, or CSBC for Bihar Police), and every portal enforces a completely different set of image dimensions and KB sizes.</p>
-<p>Using a standard image compressor often leaves you with an image that is either too large (rejected by the portal) or too blurry (rejected during document verification). <strong>ReduceSize.online</strong> simplifies this by offering precise manual control over your pixels and file size. You simply check your notification, enter the width/height, and our tool does the rest.</p>
-
-<h3>General Photo Rules for All Police Exams</h3>
-<p>No matter which state you are applying to, ensure your original photo follows these ground rules before you crop it here:</p>
-<ul>
-  <li><strong>Background Color:</strong> The background must be light-colored. A plain white or light grey background is highly recommended. Do not use busy backgrounds or sceneries.</li>
-  <li><strong>Chest Visibility:</strong> Unlike standard passport photos that just show the face, many police applications request photos that clearly show the top of your chest and shoulders.</li>
-  <li><strong>No Accessories:</strong> Caps, hats, and dark sunglasses are strictly prohibited. If you wear prescription spectacles, ensure there is no flash reflection/glare on the lenses.</li>
-  <li><strong>Signature Ink:</strong> Most police boards explicitly mandate that the signature should be done on a blank white paper using a <strong>Black ink pen</strong>. Blue ink is sometimes rejected.</li>
-</ul>
-
-<h3>How to Crop Your Police Photo Perfectly</h3>
-<ol>
-  <li>Select whether you are uploading a "Photo" or a "Signature" using the tabs above.</li>
-  <li>Enter the exact Width and Height in pixels as requested in your State Police Notification (e.g., 413x531 is standard).</li>
-  <li>Upload your image. Our <strong>Live Cropping Tool</strong> will appear.</li>
-  <li>Drag your image and zoom in/out. Align your face so both ears are visible and the image covers down to your chest.</li>
-  <li>Click Generate. The tool will cut the exact area, resize it to the correct pixels, and use binary-compression to give you a file that is 100% form-ready.</li>
-</ol>
-
-<h3>Frequently Asked Questions (FAQs)</h3>
-<p><strong>What is the required photo size for UP Police Constable?</strong><br>UP Police usually requires your photograph to be between 20KB and 50KB, and your signature between 5KB and 20KB. You can manually enter 48KB in our tool to stay safely within limits.</p>
-<p><strong>Why do police application forms reject photos?</strong><br>State police applications are very strict. The most common rejection reasons are: wearing a cap or dark glasses, invisible ears, having a dark or busy background instead of plain white/grey, or uploading a blurry image under 10KB.</p>
-<p><strong>Is Bihar Police photo size different from Delhi Police?</strong><br>Yes! Bihar Police is much stricter, often asking for photos under 25KB and signatures under 15KB. Delhi Police typically allows up to 50KB for photos.</p>
-</section>
-
-<div class="chips-hd">More Tools</div>
-<div class="chips">
-  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
-  <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
-  <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
-  <a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a>
-  <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">📐</span><div class="chip-t"><strong>Reduce Size (KB)</strong><span>Any size</span></div></a>
-  <a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a>
 </div>
-</div>
-
-<footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-20kb.html">20KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/compress-image-to-100kb.html">100KB</a>
-    <a href="/resize-image-for-ssc-form.html">SSC</a>
-    <a href="/resize-image-for-upsc-form.html">UPSC</a>
-    <a href="/reduce-image-size-for-email.html">Email</a>
-    <a href="/blog/">Blog</a>
-  </nav>
-  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
-</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 
