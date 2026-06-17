@@ -52,7 +52,7 @@ body::after{
   color:var(--text);text-decoration:none;letter-spacing:-.5px;
 }
 .nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links{display:flex;gap:20px;align-items:center;} /* Increased gap to prevent mashing */
 .nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
 .nav-links a:hover{opacity:1;color:var(--purple-l);}
 .nav-pill{
@@ -63,7 +63,7 @@ body::after{
 }
 @media(min-width:600px){ .nav-pill{display:inline-block;} }
 
-/* WRAP & SUB-HERO (Fixed Padding) */
+/* WRAP & SUB-HERO */
 .wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
 .sub-hero{padding:40px 0 24px;text-align:center}
 .sub-hero .tag{
@@ -180,10 +180,55 @@ body::after{
 }
 .plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
 
-/* RESULTS (Fixed Preview White Space) */
+/* CUTE GREETING CARD */
+.greeting-card {
+    display: none;
+    position: relative;
+    background: linear-gradient(145deg, rgba(109,84,240,0.11) 0%, rgba(32,217,192,0.1) 100%);
+    border: 1px dashed rgba(62,207,142,0.42);
+    border-radius: 12px;
+    padding: 22px 16px;
+    text-align: center;
+    margin-top: 16px;
+    animation: cutePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    overflow: visible;
+}
+@keyframes cutePop { 
+    0% { opacity: 0; transform: translateY(20px) scale(0.9); } 
+    100% { opacity: 1; transform: translateY(0) scale(1); } 
+}
+.greeting-card::after {
+    content: "✨ ✨ ✨";
+    font-size: 20px;
+    position: absolute;
+    top: -20px; left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    opacity: 0;
+    animation: sparkleOut 0.8s ease-out 0.2s forwards;
+    pointer-events: none;
+}
+@keyframes sparkleOut {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.5); top: -20px;}
+  20% { opacity: 1; transform: translateX(-50%) scale(1.2); top: -35px;}
+  100% { opacity: 0; transform: translateX(-50%) scale(1.5); top: -60px;}
+}
+.g-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; animation: heartBeat 2s infinite ease-in-out; }
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.g-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.2px; }
+.g-title em { font-style: normal; color: var(--accent); }
+.g-text { font-size: 15px; color: #a0a0c8; line-height: 1.6; margin-bottom: 14px; }
+.g-love { font-size: 14px; font-weight: 700; color: var(--purple-l); display: block; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 10px;}
+.g-signature { display: inline-block; padding: 4px 14px; background: rgba(109,84,240,0.12); border-radius: 20px; margin-top: 6px;}
+
+
+/* RESULTS */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
 .rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;display:flex;flex-direction:column;}
-.rc img{width:100%;height:auto;max-height:280px;object-fit:contain;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
+.rc img{width:100%;height:auto;max-height:280px;object-fit:cover;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
 .ri{padding:12px 10px}
 .rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
 .rb{
@@ -349,6 +394,14 @@ body::after{
   <button class="btn" onclick="processUPSC()">⚡&nbsp; Generate UPSC Ready Image</button>
 
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  
+  <div id="greetingCard" class="greeting-card">
+    <div class="g-icon">🏛🇮🇳</div>
+    <div class="g-title">✨ <em>LBSNAA / IAS</em> Ka Sapna ✨</div>
+    <div class="g-text">Humari dil se dua hai ki aap is saal UPSC Civil Services crack karein.. <br> aur Lal Bahadur Shastri National Academy (LBSNAA) jayein! 🇮🇳✍️ <br><br> Desh ki seva aur aapke ujjwal bhavishya ke liye <br> dher saari shubhkaamnayein! 🌟✨</div>
+    <span class="g-love">Lots of love, <span class="g-signature">ReduceSize.online ❤️</span></span>
+  </div>
+
   <div id="rg" class="rg"></div>
 </div>
 
@@ -420,6 +473,8 @@ let cropper = null;
 document.getElementById('upload').addEventListener('change', function() {
   const cropWrap = document.getElementById('cropWrap');
   const imageToCrop = document.getElementById('imageToCrop');
+  document.getElementById('greetingCard').style.display = 'none'; // Hide greeting on new upload
+  document.getElementById('rg').innerHTML = ''; // clear results
   
   if(!this.files.length) { 
     cropWrap.style.display='none'; 
@@ -433,7 +488,7 @@ document.getElementById('upload').addEventListener('change', function() {
   if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
   currentFile = f;
   
-  // Show Crop Area & Hide Drop Text to save space
+  // Show Crop Area & Hide Drop Zone to save space
   document.getElementById('dropZone').style.display = 'none';
   cropWrap.style.display = 'block';
   imageToCrop.src = URL.createObjectURL(f);
@@ -514,6 +569,7 @@ async function processUPSC() {
   const btn = document.querySelector('.btn');
   btn.innerText = 'Processing...';
   document.getElementById('rg').innerHTML = '';
+  document.getElementById('greetingCard').style.display = 'none'; // Hide if previously shown
 
   const pw = document.getElementById('pbox');
   const pb = document.getElementById('pfill');
@@ -596,13 +652,18 @@ async function processUPSC() {
 
     pb.style.width = '100%';
     st.innerText = 'Done ✅';
-    setTimeout(()=>{pw.style.display='none'}, 1000);
+    
+    // Show Greeting Card for UPSC
+    setTimeout(()=>{
+        pw.style.display='none';
+        document.getElementById('greetingCard').style.display = 'block';
+    }, 800);
 
     // Show result
     const url = URL.createObjectURL(bestBlob);
     const d = document.createElement('div');
     d.className = 'rc';
-    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','upsc_ready.jpg')">⬇ Download</button></div>`;
+    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class=\"rb\" onclick=\"dlUrl('${url}','upsc_ready.jpg')\">⬇ Download</button></div>`;
     document.getElementById('rg').appendChild(d);
 
   } catch(e) {
