@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Converter Online Free | Convert to JPG, PNG, WebP</title>
+<title>Image Format Converter Online | WebP to JPG, HEIC, PDF</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/image-format-converter.html">
-<meta name="description" content="Convert any image format online. Change WebP to JPG, PNG to JPG, or JPG to PNG instantly. Batch convert multiple images and download as ZIP. 100% Free.">
-<meta name="keywords" content="image converter online, webp to jpg, png to jpg converter, convert image to png, bulk image format converter free">
+<meta name="description" content="Convert any image format instantly. Change HEIC to JPG, WebP to JPG, PNG to JPG, or combine Images to PDF. Secure, bulk batch processing, 100% Free.">
+<meta name="keywords" content="image converter online, webp to jpg, png to jpg, heic to jpg converter, images to pdf, bulk image format converter">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +36,7 @@ body::after{
     radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
   pointer-events:none;z-index:0;
 }
-/* NAV */
+/* NAV FIX FOR MOBILE */
 .nav{
   position:sticky;top:0;z-index:200;height:60px;
   display:flex;align-items:center;justify-content:space-between;
@@ -50,12 +50,25 @@ body::after{
   color:var(--text);text-decoration:none;letter-spacing:-.5px;
 }
 .nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:20px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
+.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
 .nav-links a:hover{opacity:1;color:var(--purple-l);}
+.nav-pill{
+  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
+  background:rgba(62,207,142,.1);color:var(--green);
+  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
+  display:inline-block; white-space:nowrap;
+}
+@media(max-width: 480px){
+    .nav { padding: 0 12px; }
+    .nav-logo { font-size: 16px; }
+    .nav-links { gap: 10px; }
+    .nav-links a { font-size: 12px; }
+    .nav-pill { font-size: 9px; padding: 4px 8px; }
+}
 
 /* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
+.wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 16px 80px}
 .sub-hero{padding:40px 0 24px;text-align:center}
 .sub-hero .tag{
   display:inline-flex;align-items:center;gap:6px;
@@ -68,16 +81,16 @@ body::after{
   font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
 }
 .grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
+.sub-hero p{font-size:15px;color:var(--muted);max-width:550px;margin:0 auto 22px;line-height:1.65}
 
-/* TOOL CARDS GRID (The New Menu) */
+/* TOOL CARDS GRID (The Popular Conversions Menu) */
 .tool-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
-    margin-bottom: 30px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;
+    margin-bottom: 40px;
 }
 .tool-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-    padding: 24px; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    padding: 22px; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden;
 }
 .tool-card:hover {
@@ -109,7 +122,7 @@ body::after{
 
 .tool-box {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
-    padding: 24px; position: relative; overflow: hidden;
+    padding: 24px; position: relative; overflow: hidden; margin-bottom: 28px;
 }
 .tool-box::before {
     content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
@@ -117,7 +130,7 @@ body::after{
 }
 
 .at-header { margin-bottom: 20px; text-align: center; }
-.at-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.at-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; color: var(--purple-l); margin-bottom: 6px; }
 .at-desc { font-size: 14px; color: var(--muted); }
 
 /* UPLOAD */
@@ -170,6 +183,8 @@ body::after{
 .ea-title { width:100%; font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
 .btn-zip { background: #3182ce; width:100%;}
 .btn-zip:hover { background: #2b6cb0; box-shadow:0 10px 28px rgba(49,130,206,.42); }
+.btn-pdf { background: #e53e3e; width:100%;}
+.btn-pdf:hover { background: #c53030; box-shadow:0 10px 28px rgba(229,62,62,.42); }
 
 /* RESULTS */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
@@ -213,7 +228,7 @@ body::after{
 .fnav a:hover{color:var(--text);background:var(--card)}
 .fcopy{font-size:12px;color:#383858;margin-bottom:10px}
 
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .tool-box{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
 </style>
 
 <script type="application/ld+json">
@@ -221,8 +236,15 @@ body::after{
 "name":"Universal Image Format Converter Online",
 "url":"https://reducesize.online/image-format-converter.html",
 "applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Convert images to JPG, PNG, WebP, BMP online. Bulk convert WebP to JPG or PNG to JPG securely in your browser and download as ZIP.",
+"description":"Convert images to JPG, PNG, WebP, BMP online. Bulk convert WebP to JPG or HEIC to JPG securely in your browser.",
 "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I convert an iPhone HEIC photo to JPG?","acceptedAnswer":{"@type":"Answer","text":"Select the 'HEIC to JPG' tool from our menu, upload your iPhone photos, and we will instantly decode and convert them to standard JPEG format right in your browser."}},
+{"@type":"Question","name":"Will my transparent PNG have a black background if converted to JPG?","acceptedAnswer":{"@type":"Answer","text":"No! Our smart converter automatically detects transparent areas in PNGs and fills them with a clean white background before converting to JPG, ensuring your images look perfect."}},
+{"@type":"Question","name":"Can I compile my photos into a single PDF document?","acceptedAnswer":{"@type":"Answer","text":"Yes, choose the 'Images to PDF' tool. Upload your photos in bulk, and we will merge them into a single, clean PDF file ready for sharing or emailing."}}
+]}
 </script>
 </head>
 <body>
@@ -236,42 +258,58 @@ body::after{
 
 <div class="wrap">
 <section class="sub-hero">
-  <div class="tag">✦ Universal Conversion Tools</div>
-  <h1>Convert Images<br><span class="grad">in Bulk Format</span></h1>
-  <p>Select the tool you need below. Convert WebP, PNG, or GIF to standard JPG, or vice-versa. Secure, fast, and entirely free.</p>
+  <div class="tag">✦ Universal Conversion Hub</div>
+  <h1>Most Popular Image<br><span class="grad">Conversions Free</span></h1>
+  <p>Select your conversion need below. Convert unsupported WebP, iPhone HEIC, or standard PNG files directly in your browser securely.</p>
 </section>
 
 <div id="gridMenu" class="tool-grid">
     
-    <div class="tool-card" onclick="openTool('jpeg', 'Convert to JPG', 'Turn PNG, WEBP, or GIF images into universally accepted Standard JPGs. Auto-fixes transparent backgrounds.')">
+    <div class="tool-card" onclick="openTool('jpeg', 'HEIC to JPG', 'Convert iPhone HEIC photos into standard JPEGs so you can upload them to any form or website.')">
+        <div class="tc-icon">📱</div>
+        <div>
+            <div class="tc-title">HEIC to JPG</div>
+            <div class="tc-desc">Convert iPhone/Apple photos to universally accepted JPG format instantly.</div>
+        </div>
+    </div>
+
+    <div class="tool-card" onclick="openTool('jpeg', 'WebP to JPG', 'Downloaded an image that won\'t open? Convert lightweight WebP images into standard JPG files.')">
+        <div class="tc-icon">🔄</div>
+        <div>
+            <div class="tc-title">WebP to JPG</div>
+            <div class="tc-desc">Fix unsupported downloaded images by converting WebP to JPG.</div>
+        </div>
+    </div>
+
+    <div class="tool-card" onclick="openTool('jpeg', 'PNG to JPG', 'Remove transparency and reduce file size by converting heavy PNG files into standard JPGs.')">
         <div class="tc-icon">🖼️</div>
         <div>
-            <div class="tc-title">Convert to JPG</div>
-            <div class="tc-desc">Turn PNG, WEBP, or GIF into standard JPG format. Best for form uploads.</div>
+            <div class="tc-title">PNG to JPG</div>
+            <div class="tc-desc">Convert transparent PNGs to JPG with auto-white background fix.</div>
         </div>
     </div>
 
-    <div class="tool-card" onclick="openTool('png', 'Convert to PNG', 'Turn your JPGs or WEBP images into high-quality, lossless PNG format.')">
+    <div class="tool-card" onclick="openTool('pdf', 'Images to PDF', 'Compile multiple photos, bills, or scanned documents into one single PDF file for easy emailing.')">
+        <div class="tc-icon">📄</div>
+        <div>
+            <div class="tc-title">Images to PDF</div>
+            <div class="tc-desc">Merge multiple JPG or PNG photos into a single, clean PDF document.</div>
+        </div>
+    </div>
+
+    <div class="tool-card" onclick="openTool('png', 'JPG to PNG', 'Turn your compressed JPG images into high-quality, lossless PNG format for editing.')">
         <div class="tc-icon">✨</div>
         <div>
-            <div class="tc-title">Convert to PNG</div>
-            <div class="tc-desc">Turn JPG, WEBP into high-quality PNG images instantly.</div>
+            <div class="tc-title">JPG to PNG</div>
+            <div class="tc-desc">Convert standard images into high-quality PNG format.</div>
         </div>
     </div>
 
-    <div class="tool-card" onclick="openTool('webp', 'Convert to WebP', 'Compress your JPG or PNG images heavily by turning them into Next-Gen WebP format.')">
+    <div class="tool-card" onclick="openTool('webp', 'Any to WebP', 'Optimize your website speed by turning heavy images into Google\'s ultra-light WebP format.')">
         <div class="tc-icon">🌐</div>
         <div>
-            <div class="tc-title">Convert to WebP</div>
-            <div class="tc-desc">Convert JPG/PNG to WebP to save massive space for websites.</div>
-        </div>
-    </div>
-
-    <div class="tool-card" onclick="openTool('bmp', 'Convert to BMP', 'Convert images to uncompressed Bitmap (BMP) format for specific software needs.')">
-        <div class="tc-icon">🎨</div>
-        <div>
-            <div class="tc-title">Convert to BMP</div>
-            <div class="tc-desc">Turn standard images into uncompressed Windows Bitmap (BMP) files.</div>
+            <div class="tc-title">Any to WebP</div>
+            <div class="tc-desc">Optimize images for your website. Convert JPG/PNG to lightweight WebP.</div>
         </div>
     </div>
 
@@ -287,23 +325,24 @@ body::after{
         </div>
 
         <div class="drop">
-            <input type="file" id="upload" accept="image/*" multiple>
+            <input type="file" id="upload" accept="image/*,.heic" multiple>
             <div class="drop-ico">📥</div>
-            <div class="drop-main">Select images to convert</div>
-            <div class="drop-hint">Drop multiple files here (JPG, PNG, WEBP, GIF)</div>
+            <div class="drop-main">Select images to process</div>
+            <div class="drop-hint">Drop multiple files here (HEIC, JPG, PNG, WEBP)</div>
         </div>
         
         <div id="prev" class="prev-grid" style="display:none"></div>
 
         <input type="hidden" id="targetFormat" value="">
 
-        <button class="btn" id="convertBtn" onclick="startConversion()">⚡&nbsp; Convert Images Now</button>
+        <button class="btn" id="convertBtn" onclick="startConversion()">⚡&nbsp; Convert Now</button>
 
         <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
         
         <div id="exportActions" class="export-actions">
-            <div class="ea-title">🎉 Conversion Complete!</div>
-            <button class="btn btn-zip" onclick="downloadZIP()">🗂️ Download All as ZIP</button>
+            <div class="ea-title">🎉 Processing Complete!</div>
+            <button id="zipBtn" class="btn btn-zip" onclick="downloadZIP()" style="display:none;">🗂️ Download All as ZIP</button>
+            <button id="pdfBtn" class="btn btn-pdf" onclick="downloadPDF()" style="display:none;">📄 Download PDF Document</button>
         </div>
 
         <div id="rg" class="rg"></div>
@@ -311,15 +350,18 @@ body::after{
 </div>
 
 <section class="seo">
-<h2>The Ultimate Image Format Converter</h2>
-<p>In today's digital world, dealing with different image formats can be frustrating. You might download an image from Google only to realize it's a <strong>.WebP</strong> file that your Photoshop or video editor refuses to open. Or perhaps a government portal is strictly asking for a <strong>.JPG</strong> file, but your scanned document is in <strong>.PNG</strong> format.</p>
-<p><strong>ReduceSize.online Universal Converter</strong> is built to solve these exact headaches. We support seamless cross-conversion between all major image types including JPG, PNG, WebP, and BMP right inside your web browser.</p>
+<h2>Your Go-To Universal Image Converter</h2>
+<p>In today's digital world, dealing with different image formats can be frustrating. You might download an image from Google only to realize it's a <strong>.WebP</strong> file that your Photoshop or video editor refuses to open. Or you snap a picture on your iPhone, and your Windows PC or an application portal rejects the <strong>.HEIC</strong> format.</p>
+<p><strong>ReduceSize.online Master Converter</strong> is built to solve these exact headaches. We support seamless cross-conversion between all major image types, completely locally within your web browser, ensuring your private photos never hit a remote server.</p>
+
+<h3>iPhone HEIC to JPG Conversions</h3>
+<p>Apple devices capture photos in High-Efficiency Image Container (HEIC) format. While this saves space on your phone, almost no government portal, university application, or Windows machine supports it. Select our "HEIC to JPG" tool, drop your iPhone photos, and our internal decoder will instantly parse and convert them to standard JPEGs ready for upload.</p>
 
 <h3>Smart Background Fix for PNG to JPG</h3>
-<p>A common problem when converting a logo or transparent PNG into a JPG is that the transparent areas turn pitch black, ruining the image. Our converter features a <strong>Smart Canvas Fill</strong>. If you convert a transparent image to a format that doesn't support transparency (like JPG or BMP), we automatically apply a clean, solid white background behind your image before converting it. It looks perfect every single time.</p>
+<p>A common problem when converting a logo, signature, or transparent PNG into a JPG is that the transparent areas turn pitch black, ruining the image. Our converter features a <strong>Smart Canvas Fill</strong>. If you convert a transparent image to a format that doesn't support transparency (like JPG), we automatically apply a clean, solid white background behind your image before converting it. It looks perfect every single time.</p>
 
-<h3>Batch Conversion for Professionals</h3>
-<p>If you have 50 WebP images downloaded from a website that you need to convert to JPG, doing it one by one is a waste of time. Our tool supports full <strong>Bulk Batch Conversion</strong>. Select your tool from the dashboard, drop all your images into the upload box, and let the tool process them all in seconds. You can then download all the converted files neatly packed in a single ZIP folder.</p>
+<h3>Images to PDF Compiler</h3>
+<p>Sending multiple photos via email or WhatsApp looks messy. Use our "Images to PDF" tool to upload multiple documents, receipts, or photos. The tool will perfectly align and merge them into one single professional PDF document that is incredibly easy to share and print.</p>
 </section>
 
 <div class="chips-hd">More Tools</div>
@@ -345,6 +387,8 @@ body::after{
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
 
 <script>
 let convertedFilesArray = [];
@@ -354,12 +398,10 @@ function openTool(format, title, desc) {
     document.getElementById('gridMenu').style.display = 'none';
     document.getElementById('activeToolWrap').style.display = 'block';
     
-    // Set text and target
     document.getElementById('atTitle').innerText = title;
     document.getElementById('atDesc').innerText = desc;
     document.getElementById('targetFormat').value = format;
     
-    // Reset previous state
     resetUploader();
 }
 
@@ -376,10 +418,12 @@ function resetUploader() {
     document.getElementById('rg').innerHTML = '';
     document.getElementById('exportActions').style.display = 'none';
     document.getElementById('pbox').style.display = 'none';
+    document.getElementById('zipBtn').style.display = 'none';
+    document.getElementById('pdfBtn').style.display = 'none';
     convertedFilesArray = [];
 }
 
-// File Upload Logic
+// File Upload Preview
 document.getElementById('upload').addEventListener('change', function() {
   const prev = document.getElementById('prev');
   prev.innerHTML = ''; 
@@ -394,7 +438,8 @@ document.getElementById('upload').addEventListener('change', function() {
   
   prev.style.display = 'grid';
   for(const f of this.files) {
-    if(!f.type.startsWith('image/')) continue;
+    // Basic check, allow HEIC too
+    if(!f.type.startsWith('image/') && !f.name.toLowerCase().endsWith('.heic')) continue;
     const img = document.createElement('img');
     img.src = URL.createObjectURL(f);
     const d = document.createElement('div'); d.className = 'prev-item'; d.appendChild(img);
@@ -402,17 +447,19 @@ document.getElementById('upload').addEventListener('change', function() {
   }
 });
 
-// Conversion Logic
+// Main Process
 async function startConversion(){
   const fi = document.getElementById('upload');
-  const targetFormat = document.getElementById('targetFormat').value; // Get from hidden input
+  const targetFormat = document.getElementById('targetFormat').value; // 'jpeg', 'png', 'webp', or 'pdf'
   const st = document.getElementById('status');
   
   document.getElementById('rg').innerHTML='';
   document.getElementById('exportActions').style.display = 'none';
+  document.getElementById('zipBtn').style.display = 'none';
+  document.getElementById('pdfBtn').style.display = 'none';
   convertedFilesArray = [];
   
-  if(!fi.files.length){alert('Please select images to convert first.');return}
+  if(!fi.files.length){alert('Please select images first.');return}
 
   const files = fi.files;
   const pw = document.getElementById('pbox');
@@ -421,47 +468,72 @@ async function startConversion(){
   pw.style.display='block';
   
   for(let i=0; i<files.length; i++){
-    if(!files[i].type.startsWith('image/')) continue;
+    let currentFile = files[i];
+    if(!currentFile.type.startsWith('image/') && !currentFile.name.toLowerCase().endsWith('.heic')) continue;
     
     pb.style.width = ((i+1)/files.length*100)+'%';
-    st.innerText = `Converting ${i+1} / ${files.length}…`;
+    st.innerText = `Processing ${i+1} / ${files.length}…`;
     
-    const blob = await convertImage(files[i], targetFormat);
+    // HEIC Parsing Check
+    if(currentFile.name.toLowerCase().endsWith('.heic')) {
+        st.innerText = `Decoding iPhone photo ${i+1}...`;
+        try {
+            let conversionResult = await heic2any({ blob: currentFile, toType: "image/jpeg" });
+            if(Array.isArray(conversionResult)) conversionResult = conversionResult[0]; // If sequence
+            currentFile = conversionResult; // Treat the decoded jpeg as the working file
+        } catch(err) {
+            console.error("HEIC conversion failed for", currentFile.name);
+            continue;
+        }
+    }
+    
+    // If goal is PDF, we still convert to JPEG first to feed jsPDF
+    let procFormat = targetFormat === 'pdf' ? 'jpeg' : targetFormat;
+    
+    const blob = await convertImageToFormat(currentFile, procFormat);
     if(!blob) continue;
     
-    let ext = targetFormat === 'jpeg' ? 'jpg' : targetFormat;
-    // Get original filename without extension
+    let ext = procFormat === 'jpeg' ? 'jpg' : procFormat;
     let baseName = files[i].name.replace(/\.[^/.]+$/, "");
     let finalName = `${baseName}_converted.${ext}`;
     
     convertedFilesArray.push({ blob: blob, name: finalName });
-    addResult(blob, finalName, ext.toUpperCase());
+    
+    // If not PDF, show individual downloads
+    if(targetFormat !== 'pdf') {
+        addResult(blob, finalName, ext.toUpperCase());
+    }
   }
   
-  st.innerText = 'Conversion Complete ✅';
+  st.innerText = 'Process Complete ✅';
   pb.style.width = '100%';
   setTimeout(()=>{pw.style.display='none'}, 1500);
 
   if(convertedFilesArray.length > 0) {
       document.getElementById('exportActions').style.display = 'flex';
+      if(targetFormat === 'pdf') {
+          document.getElementById('pdfBtn').style.display = 'block';
+          // Auto trigger PDF download
+          downloadPDF();
+      } else {
+          document.getElementById('zipBtn').style.display = 'block';
+      }
   }
 }
 
-async function convertImage(file, format){
+async function convertImageToFormat(file, format){
   const img = new Image();
   img.src = URL.createObjectURL(file);
   await img.decode();
   
   let cv = document.createElement('canvas'); 
   let ctx = cv.getContext('2d');
-  
-  cv.width = img.width; 
-  cv.height = img.height;
+  cv.width = img.width; cv.height = img.height;
   
   let mime = `image/${format}`;
   
   // Smart Background Fix for formats that don't support transparency
-  if(mime === 'image/jpeg' || mime === 'image/bmp') {
+  if(mime === 'image/jpeg') {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0,0,cv.width,cv.height);
   }
@@ -470,7 +542,6 @@ async function convertImage(file, format){
   ctx.imageSmoothingQuality = 'high';
   ctx.drawImage(img, 0, 0, cv.width, cv.height);
   
-  // High quality conversion
   return new Promise(r => cv.toBlob(r, mime, 0.95));
 }
 
@@ -481,7 +552,7 @@ function addResult(blob, name, badgeText){
   d.innerHTML = `<img src="${url}" loading="lazy">
                  <div class="ri">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                        <span style="font-size:10px; font-weight:700; color:#fff; background:var(--green); color:#000; padding:2px 6px; border-radius:4px;">${badgeText}</span>
+                        <span style="font-size:10px; font-weight:700; color:#000; background:var(--green); padding:2px 6px; border-radius:4px;">${badgeText}</span>
                         <span class="rsz" style="margin:0;">${(blob.size/1024).toFixed(1)} KB</span>
                     </div>
                     <div class="rsn" title="${name}">${name}</div>
@@ -496,10 +567,47 @@ function dlUrl(url, name){
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
+// PDF EXPORT
+async function downloadPDF() {
+    if(convertedFilesArray.length === 0) return;
+    const btn = document.getElementById('pdfBtn');
+    const origText = btn.innerText;
+    btn.innerText = 'Creating PDF...';
+    
+    try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        
+        for(let i=0; i<convertedFilesArray.length; i++) {
+            if(i > 0) pdf.addPage();
+            const f = convertedFilesArray[i];
+            
+            const base64 = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.readAsDataURL(f.blob);
+            });
+
+            const imgProps = pdf.getImageProperties(base64);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            
+            pdf.addImage(base64, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        }
+        
+        pdf.save("Compiled_Documents.pdf");
+        
+    } catch(e) {
+        alert("Error creating PDF.");
+    } finally {
+        btn.innerText = origText;
+    }
+}
+
 // ZIP EXPORT
 async function downloadZIP() {
     if(convertedFilesArray.length === 0) return;
-    const btn = document.querySelector('.btn-zip');
+    const btn = document.getElementById('zipBtn');
     const origText = btn.innerText;
     btn.innerText = 'Zipping files...';
     
