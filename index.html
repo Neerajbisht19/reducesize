@@ -56,7 +56,7 @@ body::after{
   font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
   background:rgba(62,207,142,.1);color:var(--green);
   border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none; /* Hidden on small mobile */
+  display:none;
 }
 @media(min-width:600px){ .nav-pill{display:inline-block;} }
 
@@ -147,8 +147,9 @@ body::after{
   width:46px;height:46px;margin:0 auto 10px;
   background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
   border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
+  transition: 0.3s;
 }
-.drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
+.drop-main{font-size:14px;font-weight:700;margin-bottom:3px; word-break: break-all;}
 .drop-main span{color:var(--purple-l)}
 .drop-hint{font-size:12px;color:var(--muted)}
 /* PREVIEW */
@@ -335,7 +336,7 @@ body::after{
 <div class="card">
   <div class="tabs">
     <button class="tab on" onclick="showTab('imgBox', this)">🖼&nbsp; Image Tools</button>
-    <button class="tab" onclick="showTab('pdfBox', this)">📄&nbsp; PDF</button>
+    <button class="tab" onclick="showTab('pdfBox', this)">📄&nbsp; PDF Tools</button>
   </div>
 
   <div id="imgBox" class="tool-section">
@@ -382,11 +383,11 @@ body::after{
   </div>
 
   <div id="pdfBox" class="tool-section" style="display:none">
-    <div class="drop">
+    <div class="drop" id="pdfDropZone">
       <input type="file" id="pdfUp" accept="application/pdf">
-      <div class="drop-ico">📄</div>
-      <div class="drop-main">Drop PDF here or <span>browse</span></div>
-      <div class="drop-hint">Works best with scanned / image-based PDFs</div>
+      <div class="drop-ico" id="pdfDropIco">📄</div>
+      <div class="drop-main" id="pdfDropMain">Drop PDF here or <span>browse</span></div>
+      <div class="drop-hint" id="pdfDropHint">Works best with scanned / image-based PDFs</div>
     </div>
     <div class="irow" style="margin-top:14px">
       <div class="f"><label class="fl">Target Size (KB)</label><input type="number" id="pdfSz" placeholder="e.g. 200" min="50"></div>
@@ -574,6 +575,29 @@ function showTab(tabId, btn) {
   }
 }
 
+// --- PDF UPLOAD UI UPDATE ---
+document.getElementById('pdfUp').addEventListener('change', function() {
+    const dropMain = document.getElementById('pdfDropMain');
+    const dropHint = document.getElementById('pdfDropHint');
+    const dropIco = document.getElementById('pdfDropIco');
+
+    if(this.files.length > 0) {
+        dropMain.innerHTML = `<span style="color:var(--green)">${this.files[0].name}</span>`;
+        let sizeStr = (this.files[0].size / 1024).toFixed(1) + ' KB';
+        if(this.files[0].size > 1024 * 1024) sizeStr = (this.files[0].size / (1024*1024)).toFixed(2) + ' MB';
+        dropHint.innerText = `Selected Size: ${sizeStr}`;
+        dropIco.innerHTML = '✅';
+        dropIco.style.background = 'rgba(62,207,142,.1)';
+        dropIco.style.borderColor = 'rgba(62,207,142,.3)';
+    } else {
+        dropMain.innerHTML = `Drop PDF here or <span>browse</span>`;
+        dropHint.innerText = `Works best with scanned / image-based PDFs`;
+        dropIco.innerHTML = '📄';
+        dropIco.style.background = 'rgba(109,84,240,.12)';
+        dropIco.style.borderColor = 'rgba(109,84,240,.2)';
+    }
+});
+
 // --- MASTER IMAGE LOGIC (SIZE + DIMENSIONS) ---
 let aspectLocked = false;
 let origRatio = 1;
@@ -646,7 +670,6 @@ async function startMaster(){
   let tk=parseFloat(si.value);
   if(tk && un.value==='mb') tk*=1024;
   
-  // Modals for tiny targets
   if(tk && tk<15){document.getElementById('mo1').style.display='flex';return}
   
   let w = parseInt(wInp), h = parseInt(hInp);
