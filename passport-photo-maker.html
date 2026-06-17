@@ -6,8 +6,8 @@
 <title>Passport Photo Maker Online Free | Print Multiple Copies</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/passport-photo-maker.html">
-<meta name="description" content="Make high-quality passport photos for printing. Auto-arrange multiple copies on A4 or 4x6 paper. Add Name/Date and cutting borders. 100% Free and High Res.">
-<meta name="keywords" content="passport photo maker, print passport size photo online, arrange passport photo on a4, add name date to passport photo, make passport photo free">
+<meta name="description" content="Make high-quality passport photos for printing. Auto-arrange multiple copies on A4 or 4x6 paper. Download as PDF to avoid quality loss. 100% Free.">
+<meta name="keywords" content="passport photo maker, print passport size photo online, arrange passport photo on a4, download passport photo pdf, make passport photo free">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -202,6 +202,20 @@ body::after{
 }
 .rb:hover{background:#7b63f5; box-shadow:0 6px 20px rgba(109,84,240,.3);}
 
+.rb-pdf{
+  background: #e53e3e; margin-top: 8px;
+}
+.rb-pdf:hover{background:#c53030; box-shadow:0 6px 20px rgba(229,62,62,.3);}
+
+/* SEO SECTION */
+.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
+.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
+.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
+.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
+.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
+.seo li{margin-bottom:6px}
+.seo strong{color:#eeeeff;font-weight:600}
+
 /* CHIPS */
 .chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
 .chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
@@ -228,7 +242,7 @@ body::after{
 "name":"Passport Photo Maker Online",
 "url":"https://reducesize.online/passport-photo-maker.html",
 "applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Make high-quality passport photos for printing. Auto-arrange up to 30 copies on A4 or 8 copies on 4x6 paper. Add Name/Date and cutting borders. 100% Free.",
+"description":"Make high-quality passport photos for printing. Download as PDF to avoid WhatsApp compression. Auto-arrange up to 30 copies on A4 paper. 100% Free.",
 "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 </head>
@@ -245,11 +259,11 @@ body::after{
 <section class="sub-hero">
   <div class="tag">✦ Print-Ready Portrait Sheets</div>
   <h1>Passport Photo Maker<br><span class="grad">for Fast Printing</span></h1>
-  <p>Create a portrait grid of passport photos for cheap studio printing. Add optional Name/Date strip without losing your crop. High quality 300-DPI extraction.</p>
+  <p>Create a portrait grid of passport photos. Download as PDF to avoid quality loss when sharing via WhatsApp to a print shop. 100% Free.</p>
   <div class="badges">
+    <span class="badge">📄 PDF Download (No Loss)</span>
     <span class="badge">🖨️ 300 DPI Quality</span>
     <span class="badge">📝 Auto Name Strip</span>
-    <span class="badge">📄 Portrait A4 & 4x6</span>
   </div>
 </section>
 
@@ -344,11 +358,13 @@ body::after{
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 let currentFile = null;
 let cropper = null; 
 let lastRatio = null;
+let masterCanvasForPDF = null; // Store canvas globally for PDF export
 
 document.getElementById('upload').addEventListener('change', function() {
   const cropWrap = document.getElementById('cropWrap');
@@ -362,6 +378,7 @@ document.getElementById('upload').addEventListener('change', function() {
     if(cropper) cropper.destroy(); 
     currentFile = null; 
     lastRatio = null;
+    masterCanvasForPDF = null;
     document.getElementById('dropZone').style.display = 'block';
     return; 
   }
@@ -418,8 +435,7 @@ function calculateMax() {
     let face_h_px = total_h_px - strip_h_px;
     let newRatio = w_px / face_h_px;
 
-    // SMART UPDATE: Only change cropper if ratio ACTUALLY changed.
-    // By re-initializing the cropper with exact previous data, it CANNOT jump.
+    // SMART UPDATE: Prevent jump when clicking checkbox
     if(cropper && lastRatio !== newRatio) {
         let oldData = cropper.getData();
         cropper.destroy();
@@ -466,7 +482,7 @@ function calculateMax() {
         warnBox.style.display = 'none';
     }
     
-    return { w_px, total_h_px, face_h_px, strip_h_px, pw, ph, gap, cols, rows };
+    return { w_px, total_h_px, face_h_px, strip_h_px, pw, ph, gap, cols, rows, paper };
 }
 
 async function generatePrintSheet() {
@@ -549,6 +565,9 @@ async function generatePrintSheet() {
     masterCanvas.height = layout.ph;
     const ctx = masterCanvas.getContext('2d');
 
+    // Store global for PDF export
+    masterCanvasForPDF = masterCanvas; 
+
     // Fill white paper background
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, layout.pw, layout.ph);
@@ -592,16 +611,19 @@ async function generatePrintSheet() {
     st.innerText = 'Ready to Print ✅';
     setTimeout(()=>{pw.style.display='none'}, 1000);
 
-    // Show visual result card
+    // Show visual result card with BOTH buttons
     const url = URL.createObjectURL(blob);
     const d = document.createElement('div');
     d.className = 'rc';
     d.innerHTML = `
       <img src="${url}" loading="lazy">
       <div class="ri">
-        <div class="rsz">Portrait Sheet Ready! (${(blob.size/1024/1024).toFixed(2)} MB)</div>
-        <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">High Quality 300 DPI for perfect printing.</p>
-        <button class="rb" onclick="dlUrl('${url}','passport_portrait_sheet.jpg')">🖨️ Download Sheet</button>
+        <div class="rsz">Portrait Sheet Ready!</div>
+        <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Send as PDF on WhatsApp to avoid quality loss.</p>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <button class="rb" onclick="dlUrl('${url}','passport_portrait_sheet.jpg')">🖼️ Download as JPG</button>
+            <button class="rb rb-pdf" onclick="downloadPrintPDF('${layout.paper}')">📄 Download as PDF (Best)</button>
+        </div>
       </div>`;
     document.getElementById('rg').appendChild(d);
 
@@ -611,6 +633,44 @@ async function generatePrintSheet() {
   } finally {
     btn.innerHTML = '🖨️&nbsp; Generate Print Sheet';
   }
+}
+
+// PDF EXPORT FUNCTION
+function downloadPrintPDF(paperType) {
+    if(!masterCanvasForPDF) return;
+    
+    // Change button text temporarily
+    const pdfBtn = document.querySelector('.rb-pdf');
+    const origText = pdfBtn.innerText;
+    pdfBtn.innerText = 'Generating PDF...';
+    
+    try {
+        const { jsPDF } = window.jspdf;
+        let pdf;
+        let pdfWidth, pdfHeight;
+
+        // Create PDF with exact physical dimensions based on user selection
+        if(paperType === 'a4') {
+            pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+            pdfWidth = 210; // A4 width in mm
+            pdfHeight = 297; // A4 height in mm
+        } else {
+            pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: [4, 6] });
+            pdfWidth = 4; // 4 inches
+            pdfHeight = 6; // 6 inches
+        }
+
+        const imgData = masterCanvasForPDF.toDataURL('image/jpeg', 1.0);
+        
+        // Add image strictly scaled to fit the exact physical bounds of the PDF paper
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("passport_print_sheet.pdf");
+        
+    } catch(e) {
+        alert("Error creating PDF document.");
+    } finally {
+        pdfBtn.innerText = origText;
+    }
 }
 
 function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
