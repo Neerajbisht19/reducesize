@@ -212,8 +212,9 @@ body::after{
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
 .rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden}
 .rc img{width:100%;height:88px;object-fit:cover;cursor:zoom-in}
+.rc-pdf-icon{width:100%;height:88px;display:flex;align-items:center;justify-content:center;font-size:40px;background:#1a1a2e;}
 .ri{padding:9px 10px}
-.rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
+.rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px;word-break:break-all;}
 .rb{
   width:100%;padding:7px;border-radius:7px;border:none;
   background:rgba(109,84,240,.12);color:var(--purple-l);
@@ -384,10 +385,10 @@ body::after{
 
   <div id="pdfBox" class="tool-section" style="display:none">
     <div class="drop" id="pdfDropZone">
-      <input type="file" id="pdfUp" accept="application/pdf">
+      <input type="file" id="pdfUp" accept="application/pdf" multiple>
       <div class="drop-ico" id="pdfDropIco">📄</div>
-      <div class="drop-main" id="pdfDropMain">Drop PDF here or <span>browse</span></div>
-      <div class="drop-hint" id="pdfDropHint">Works best with scanned / image-based PDFs</div>
+      <div class="drop-main" id="pdfDropMain">Drop PDFs here or <span>browse</span></div>
+      <div class="drop-hint" id="pdfDropHint">Select one or multiple PDF files</div>
     </div>
     <div class="irow" style="margin-top:14px">
       <div class="f"><label class="fl">Target Size (KB)</label><input type="number" id="pdfSz" placeholder="e.g. 200" min="50"></div>
@@ -553,17 +554,12 @@ body::after{
 <script>
 // --- TABS LOGIC ---
 function showTab(tabId, btn) {
-  // Hide all sections
   document.querySelectorAll('.tool-section').forEach(el => el.style.display = 'none');
-  
-  // Show selected section
   document.getElementById(tabId).style.display = 'block';
   
-  // Update Tab buttons styling
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
   btn.classList.add('on');
   
-  // Update Chips (More Tools) grid
   if (tabId === 'imgBox') {
       document.getElementById('chips-img').style.display = 'grid';
       document.getElementById('chips-pdf').style.display = 'none';
@@ -582,16 +578,24 @@ document.getElementById('pdfUp').addEventListener('change', function() {
     const dropIco = document.getElementById('pdfDropIco');
 
     if(this.files.length > 0) {
-        dropMain.innerHTML = `<span style="color:var(--green)">${this.files[0].name}</span>`;
-        let sizeStr = (this.files[0].size / 1024).toFixed(1) + ' KB';
-        if(this.files[0].size > 1024 * 1024) sizeStr = (this.files[0].size / (1024*1024)).toFixed(2) + ' MB';
-        dropHint.innerText = `Selected Size: ${sizeStr}`;
+        if(this.files.length === 1) {
+            dropMain.innerHTML = `<span style="color:var(--green)">${this.files[0].name}</span>`;
+            let sizeStr = (this.files[0].size / 1024).toFixed(1) + ' KB';
+            if(this.files[0].size > 1024 * 1024) sizeStr = (this.files[0].size / (1024*1024)).toFixed(2) + ' MB';
+            dropHint.innerText = `Selected Size: ${sizeStr}`;
+        } else {
+            dropMain.innerHTML = `<span style="color:var(--green)">${this.files.length} PDFs Selected</span>`;
+            let totalSize = Array.from(this.files).reduce((acc, f) => acc + f.size, 0);
+            let sizeStr = (totalSize / 1024).toFixed(1) + ' KB';
+            if(totalSize > 1024 * 1024) sizeStr = (totalSize / (1024*1024)).toFixed(2) + ' MB';
+            dropHint.innerText = `Total Size: ${sizeStr}`;
+        }
         dropIco.innerHTML = '✅';
         dropIco.style.background = 'rgba(62,207,142,.1)';
         dropIco.style.borderColor = 'rgba(62,207,142,.3)';
     } else {
-        dropMain.innerHTML = `Drop PDF here or <span>browse</span>`;
-        dropHint.innerText = `Works best with scanned / image-based PDFs`;
+        dropMain.innerHTML = `Drop PDFs here or <span>browse</span>`;
+        dropHint.innerText = `Select one or multiple PDF files`;
         dropIco.innerHTML = '📄';
         dropIco.style.background = 'rgba(109,84,240,.12)';
         dropIco.style.borderColor = 'rgba(109,84,240,.2)';
@@ -684,13 +688,16 @@ async function startMaster(){
   
   for(let i=0;i<files.length;i++){
     pb.style.width=((i+1)/files.length*100)+'%';
-    st.innerText=`Processing ${i+1} / ${files.length}…`;
+    st.innerText=`Processing Image ${i+1} / ${files.length}…`;
     
     const blob = await processMasterImg(files[i], tk, w, h);
     if(!blob) continue;
     
-    addResult(blob,i);
-    if(files.length===1) setDl(blob,'processed.jpg',st,files[0].size/1024);
+    // Add result using generic addResult function (false = is not PDF)
+    let dlName = files[i].name.replace(/\.[^/.]+$/, "") + "_compressed.jpg";
+    addResult(blob, i, false, dlName);
+    
+    if(files.length===1) setDl(blob, dlName, st, files[0].size/1024);
   }
   st.innerText='Done ✅';pb.style.width='100%';
   setTimeout(()=>{pw.style.display='none'},1500);
@@ -725,36 +732,66 @@ async function processMasterImg(file, tkb, targetW, targetH){
   return best;
 }
 
-// --- PDF LOGIC ---
+// --- PDF COMPRESSOR WITH MULTIPLE FILES LOGIC ---
 async function compressPDF(){
-  const fi=document.getElementById('pdfUp'),si=document.getElementById('pdfSz'),st=document.getElementById('status');
+  const fi=document.getElementById('pdfUp'), si=document.getElementById('pdfSz'), st=document.getElementById('status');
   if(!fi.files.length){alert('Select PDF first');return}
   let tk=parseFloat(si.value);
   if(!tk||tk<=0){alert('Enter valid size');return}
   if(tk<50){document.getElementById('mo2').style.display='flex';st.innerText='';return}
-  st.innerText='Processing PDF…';
-  const file=fi.files[0],ab=await file.arrayBuffer();
-  const pdf=await pdfjsLib.getDocument({data:ab}).promise;
-  const {jsPDF}=window.jspdf;
-  let q=.8,scale=1,out=null;
-  for(let a=0;a<20;a++){
-    const np=new jsPDF();
-    for(let i=1;i<=pdf.numPages;i++){
-      const pg=await pdf.getPage(i),vp=pg.getViewport({scale}),
-            cv=document.getElementById('pdfCv'),ctx=cv.getContext('2d');
-      cv.width=vp.width;cv.height=vp.height;
-      await pg.render({canvasContext:ctx,viewport:vp}).promise;
-      const id=cv.toDataURL('image/jpeg',q);
-      if(i>1)np.addPage();
-      np.addImage(id,'JPEG',0,0,np.internal.pageSize.getWidth(),np.internal.pageSize.getHeight());
-    }
-    out=np.output('blob');
-    if(out.size/1024<=tk)break;
-    q-=.08;scale-=.08;
-    if(q<.3)q=.3;if(scale<.4)scale=.4;
+  
+  const files = fi.files;
+  const pw = document.getElementById('pbox');
+  const pb = document.getElementById('pfill');
+  
+  pw.style.display = 'block';
+  document.getElementById('rg').innerHTML = ''; // Clear results grid
+  
+  for(let fIdx = 0; fIdx < files.length; fIdx++){
+      pb.style.width = ((fIdx) / files.length * 100) + '%';
+      st.innerText = `Processing PDF ${fIdx + 1} / ${files.length}…`;
+      
+      const file = files[fIdx];
+      const ab = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({data:ab}).promise;
+      const {jsPDF} = window.jspdf;
+      
+      let q=.8, scale=1, out=null;
+      for(let a=0;a<20;a++){
+        const np=new jsPDF();
+        for(let i=1;i<=pdf.numPages;i++){
+          const pg=await pdf.getPage(i), vp=pg.getViewport({scale}),
+                cv=document.getElementById('pdfCv'), ctx=cv.getContext('2d');
+          cv.width=vp.width; cv.height=vp.height;
+          await pg.render({canvasContext:ctx, viewport:vp}).promise;
+          const id=cv.toDataURL('image/jpeg',q);
+          if(i>1) np.addPage();
+          np.addImage(id,'JPEG',0,0,np.internal.pageSize.getWidth(),np.internal.pageSize.getHeight());
+        }
+        out=np.output('blob');
+        if(out.size/1024 <= tk) break;
+        q-=.08; scale-=.08;
+        if(q<.3) q=.3; if(scale<.4) scale=.4;
+      }
+      
+      if(!out || out.size/1024 > tk){
+          if (files.length === 1) {
+              alert(`Cannot compress PDF exactly to ${tk}KB, but outputting best effort.`);
+          }
+      }
+      
+      // Add result using generic addResult function (true = is PDF)
+      let dlName = file.name.replace(/\.[^/.]+$/, "") + "_compressed.pdf";
+      addResult(out, fIdx, true, dlName);
+      
+      if(files.length === 1) setDl(out, dlName, st, file.size/1024);
+      
+      pb.style.width = ((fIdx + 1) / files.length * 100) + '%';
   }
-  if(!out||out.size/1024>tk){alert('Cannot compress PDF to this size');st.innerText='';return}
-  setDl(out,'compressed.pdf',st);
+  
+  st.innerText = 'All PDFs Processed ✅';
+  pb.style.width = '100%';
+  setTimeout(() => { pw.style.display = 'none'; }, 1500);
 }
 
 // --- UTILS ---
@@ -764,12 +801,29 @@ function setDl(blob,name,st,origKB){
   if(st)st.innerText='';
 }
 function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
-function addResult(blob,i){
-  const url=URL.createObjectURL(blob),d=document.createElement('div');
-  d.className='rc';
-  d.innerHTML=`<img src="${url}" loading="lazy" onclick="openPM('${url}')"><div class="ri"><div class="rsz">${(blob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','processed_${i+1}.jpg')">⬇ Download</button></div>`;
+
+// Unified function to handle both Images and PDFs in the result grid
+function addResult(blob, i, isPdf=false, downloadName=''){
+  const url = URL.createObjectURL(blob);
+  const d = document.createElement('div');
+  d.className = 'rc';
+  
+  let previewHtml = isPdf 
+    ? `<div class="rc-pdf-icon" title="PDF Document">📄</div>` 
+    : `<img src="${url}" loading="lazy" onclick="openPM('${url}')">`;
+    
+  let dlName = downloadName || (isPdf ? `processed_${i+1}.pdf` : `processed_${i+1}.jpg`);
+  
+  d.innerHTML=`
+    ${previewHtml}
+    <div class="ri">
+        <div class="rsz" title="${dlName}">${(blob.size/1024).toFixed(1)} KB</div>
+        <button class="rb" onclick="dlUrl('${url}','${dlName}')">⬇ Download</button>
+    </div>
+  `;
   document.getElementById('rg').appendChild(d);
 }
+
 function openPM(src){document.getElementById('pm').style.display='flex';document.getElementById('pmi').src=src}
 
 // --- ANIMATION SCRIPT ---
@@ -800,7 +854,7 @@ window.showCompressAnim=function(origKB,compKB,blob,fname){
   document.getElementById('asAfter').textContent=compStr;
   
   var pct = Math.max(0, Math.round((1-compKB/origKB)*100));
-  document.getElementById('amsg').textContent= pct > 0 ? pct+'% size reduced! 🎉' : 'Image processed successfully! ✅';
+  document.getElementById('amsg').textContent= pct > 0 ? pct+'% size reduced! 🎉' : 'File processed successfully! ✅';
   
   var dlBtn=document.getElementById('adlBtn');
   dlBtn.textContent='⬇ Download ('+compStr+')';
