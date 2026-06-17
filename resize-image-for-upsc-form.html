@@ -55,16 +55,9 @@ body::after{
 .nav-links{display:flex;gap:16px;align-items:center;}
 .nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
 .nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none;
-}
-@media(min-width:600px){ .nav-pill{display:inline-block;} }
 
 /* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 166px 80px}
+.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
 .sub-hero{padding:40px 0 24px;text-align:center}
 .sub-hero .tag{
   display:inline-flex;align-items:center;gap:6px;
@@ -98,6 +91,7 @@ body::after{
   background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
   opacity:.5;
 }
+
 /* UPLOAD */
 .drop{
   position:relative;border:2px dashed rgba(109,84,240,.22);
@@ -115,7 +109,7 @@ body::after{
 .drop-main span{color:var(--purple-l)}
 .drop-hint{font-size:12px;color:var(--muted)}
 
-/* CROP AREA (Cropper.js Container) */
+/* CROP AREA */
 .crop-wrap {
   display:none; 
   background:var(--surface2);
@@ -124,8 +118,8 @@ body::after{
   overflow:hidden;
   margin-bottom:20px;
   position:relative;
-  /* Set max height so it doesn't expand too much on mobile */
-  max-height: 400px; 
+  width: 100%;
+  height: 380px; /* FIXED HEIGHT: Ensures Cropper UI doesn't break */
 }
 .crop-wrap img {
   max-width: 100%;
@@ -179,11 +173,10 @@ body::after{
 }
 .plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
 
-/* RESULTS (Edge-to-Edge) */
+/* RESULTS */
 .rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
 .rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center}
-/* Preview shows cropped result exactly */
-.rc img{width:100%;height:auto;object-fit:cover;background:#fff;cursor:zoom-in}
+.rc img{width:100%;height:auto;max-height:220px;object-fit:contain;background:#fff;cursor:zoom-in}
 .ri{padding:12px 10px}
 .rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
 .rb{
@@ -251,15 +244,6 @@ body::after{
 "description":"Resize photo and signature for UPSC Civil Services form. Crop and drag your photo perfectly. Add Name & Date automatically. Set exactly to 350x350 pixels.",
 "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What are the exact pixel dimensions required for UPSC photos?","acceptedAnswer":{"@type":"Answer","text":"UPSC mandates that both your photograph and signature must have a minimum resolution of 350 x 350 pixels and a maximum resolution of 1000 x 1000 pixels. The file size must be between 20KB and 300KB."}},
-{"@type":"Question","name":"How do I add my name and date to the UPSC photo?","acceptedAnswer":{"@type":"Answer","text":"Our dedicated UPSC tool has an 'Add Name & Date' feature. Simply check the box, enter your name and the date the photo was taken. The tool will automatically generate a strip at the bottom of your photo and print the details clearly before resizing it."}},
-{"@type":"Question","name":"Will adding text ruin the 300KB limit?","acceptedAnswer":{"@type":"Answer","text":"No. Our algorithm adds the text, resizes the image to your chosen dimensions (like 350x350), and then compresses the final combined image to ensure it strictly stays under the 300KB maximum limit."}},
-{"@type":"Question","name":"Can I use this for the UPSC signature upload as well?","acceptedAnswer":{"@type":"Answer","text":"Yes. For the signature, simply leave the 'Add Text' box unchecked, enter 350 in both Width and Height, and set the target size to around 50KB. The tool will resize your signature perfectly for the portal."}},
-{"@type":"Question","name":"How does the cropping feature work?","acceptedAnswer":{"@type":"Answer","text":"When you upload an image, a dynamic cropping box appears. You can drag and zoom your photo inside the box to select exactly which part you want to keep. The aspect ratio of the box automatically matches your required dimensions."}}
-]}
-</script>
 </head>
 <body>
 <nav class="nav">
@@ -284,10 +268,10 @@ body::after{
 </section>
 
 <div class="card">
-  <div class="drop">
+  <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="image/*">
     <div class="drop-ico">📸</div>
-    <div class="drop-main">Drop UPSC Photo or Signature here</div>
+    <div class="drop-main" id="dropText">Drop UPSC Photo or Signature here</div>
     <div class="drop-hint">JPG or PNG (Only 1 file at a time for live cropping)</div>
   </div>
   
@@ -323,7 +307,7 @@ body::after{
       <div class="irow">
         <div class="f">
           <label class="fl">Strip Background Color</label>
-          <select id="stripColor">
+          <select id="stripColor" onchange="updateAspectRatio()">
             <option value="#ffffff">White (Standard)</option>
             <option value="#000000">Black</option>
             <option value="#1a365d">Navy Blue</option>
@@ -360,15 +344,6 @@ body::after{
 <h3>Live Cropping & Aspect Ratio Management</h3>
 <p>The most important part of a passport photo is ensuring your face is centered and prominent. Standard resizing tools often stretch your photo or leave ugly white bars. Our new <strong>Live Cropping</strong> feature lets you upload your raw photo and then visually drag, zoom, and select exactly which part you want to keep. The cropping box is intelligently locked to the aspect ratio derived from your Width and Height inputs (e.g., 350x350 ensures a perfect square crop), so your final image is never distorted.</p>
 
-<h3>Official UPSC Photo & Signature Guidelines (2026)</h3>
-<p>Before you upload, ensure you understand the exact requirements laid out by the commission:</p>
-<ul>
-  <li><strong>File Size limits:</strong> Both the photograph and the signature must be between <strong>20 KB and 300 KB</strong>.</li>
-  <li><strong>Pixel Dimensions:</strong> The width and height must be a minimum of <strong>350 x 350 pixels</strong> and a maximum of <strong>1000 x 1000 pixels</strong>.</li>
-  <li><strong>Format:</strong> Only .JPG or .JPEG files are accepted.</li>
-  <li><strong>The "Name and Date" Rule:</strong> Recent UPSC notifications mandate that the candidate's name and the date on which the photograph was taken must be clearly printed at the bottom of the photo. The date must not be older than 10 days from the application start date.</li>
-</ul>
-
 <h3>How Our Advanced UPSC Tool Works</h3>
 <p>Our tool integrates live cropping, text stamping, resizing, and compression directly in your browser:</p>
 <ol>
@@ -380,16 +355,8 @@ body::after{
   <li><strong>Download:</strong> Click generate. The final image will be precisely cropped to your dimensions, have your details printed, and weigh exactly as requested.</li>
 </ol>
 
-<h3>What about the UPSC Signature?</h3>
-<p>For your signature, the process is simple. Upload a cropped photo of your signature (signed in black ink on white paper). Use the live cropper to select only the signature area. <strong>Leave the Text box unchecked.</strong> Keep the dimensions at 350x350 pixels and the size at 250KB. Click generate. The portal will accept it on the first try.</p>
-
-<h3>Privacy Guarantee for Civil Services Aspirants</h3>
-<p>We know how sensitive your personal data, signatures, and photographs are. That is why this tool is built using purely client-side JavaScript. When you add your name, crop the photo, or compress the size, <strong>all processing happens directly inside your phone or computer's memory.</strong> Your image is never uploaded to any remote server, guaranteeing 100% data privacy.</p>
-
 <h3>Frequently Asked Questions (FAQs)</h3>
-<p><strong>What are the exact pixel dimensions required for UPSC photos?</strong><br>UPSC mandates that both your photograph and signature must have a minimum resolution of 350 x 350 pixels and a maximum resolution of 1000 x 1000 pixels.</p>
 <p><strong>How do I add my name and date to the UPSC photo?</strong><br>Our dedicated UPSC tool has an text feature. Simply check the box, enter your name and the date. The tool will automatically generate a strip at the bottom of your photo and print the details clearly before resizing it. You can choose to enter only your name or only the date as well!</p>
-<p><strong>Will adding text ruin the 300KB limit?</strong><br>No. Our algorithm adds the text, resizes the image to your chosen dimensions (like 350x350), and then compresses the final combined image to ensure it strictly stays under the 300KB maximum limit.</p>
 <p><strong>Does the cropping tool work on mobile phones?</strong><br>Yes, the tool uses Cropper.js, which is fully touch-responsive. You can use your fingers to drag the photo and pinch-to-zoom directly on your smartphone.</p>
 </section>
 
@@ -417,28 +384,23 @@ body::after{
     <a href="/blog/">Blog</a>
   </nav>
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
-  <div class="ftrust">
-    <span>🔒 No upload</span><span>⚡ Instant</span><span>✅ Free</span><span>📱 Mobile OK</span>
-  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 
 <script>
 let currentFile = null;
-let cropper = null; // Global variable to hold the Cropper instance
+let cropper = null; 
 
 document.getElementById('upload').addEventListener('change', function() {
   const cropWrap = document.getElementById('cropWrap');
   const imageToCrop = document.getElementById('imageToCrop');
-  const prevGrid = document.getElementById('prev'); // Old preview if present
-  
-  if(prevGrid) prevGrid.innerHTML = ''; // Clear old preview
   
   if(!this.files.length) { 
     cropWrap.style.display='none'; 
-    if(cropper) cropper.destroy(); // Remove old cropper
+    if(cropper) cropper.destroy(); 
     currentFile = null; 
+    document.getElementById('dropText').innerText = "Drop UPSC Photo or Signature here";
     return; 
   }
   
@@ -446,46 +408,61 @@ document.getElementById('upload').addEventListener('change', function() {
   if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
   currentFile = f;
   
-  // Show Crop Area
+  // Show Crop Area & Hide Drop Text to save space
+  document.getElementById('dropZone').style.display = 'none';
   cropWrap.style.display = 'block';
   imageToCrop.src = URL.createObjectURL(f);
   
-  // Destroy old cropper if re-uploading
-  if(cropper) {
-      cropper.destroy();
-  }
+  if(cropper) { cropper.destroy(); }
 
-  // Calculate Aspect Ratio from inputs (defaults to 1 for 350x350)
-  const initialW = parseInt(document.getElementById('resW').value) || 350;
-  const initialH = parseInt(document.getElementById('resH').value) || 350;
+  // Initialize Cropper 
+  const w = parseInt(document.getElementById('resW').value) || 350;
+  const photoHeight = getPhotoHeight(); // Smart calculate crop area height without strip
 
-  // Initialize Cropper.js
   cropper = new Cropper(imageToCrop, {
-      aspectRatio: initialW / initialH,
-      viewMode: 1, // Restricts crop box within image
-      autoCropArea: 0.8, // Start with 80% selection
-      background: false, // Transparent background for cropper
+      aspectRatio: w / photoHeight,
+      viewMode: 1, 
+      autoCropArea: 0.9, 
+      background: true, 
       responsive: true,
-      restore: false,
-    });
+      guides: true
+  });
 });
 
-// Update Cropper Aspect Ratio if inputs change
+// Calculate how much height is for photo and how much is for the text strip
+function getPhotoHeight() {
+    const w = parseInt(document.getElementById('resW').value) || 350;
+    const h = parseInt(document.getElementById('resH').value) || 350;
+    const addText = document.getElementById('addTextCb').checked;
+    const cName = document.getElementById('candName').value.trim();
+    const pDate = document.getElementById('photoDate').value.trim();
+    
+    let stripHeight = 0;
+    if (addText && (cName || pDate)) {
+        stripHeight = Math.max(h * 0.08, 24); // EXACTLY HALF of previous: 8% of total height
+    }
+    return h - stripHeight;
+}
+
+// Update Cropper Box Ratio when inputs change
 function updateAspectRatio() {
     if(cropper) {
         const w = parseInt(document.getElementById('resW').value) || 350;
-        const h = parseInt(document.getElementById('resH').value) || 350;
-        cropper.setAspectRatio(w / h);
+        const photoHeight = getPhotoHeight();
+        cropper.setAspectRatio(w / photoHeight);
     }
 }
+
 document.getElementById('resW').addEventListener('input', updateAspectRatio);
 document.getElementById('resH').addEventListener('input', updateAspectRatio);
-
+document.getElementById('candName').addEventListener('change', updateAspectRatio);
+document.getElementById('photoDate').addEventListener('change', updateAspectRatio);
 
 function toggleTextInputs() {
   const cb = document.getElementById('addTextCb');
   const box = document.getElementById('textInputs');
   box.style.display = cb.checked ? 'block' : 'none';
+  updateAspectRatio();
 }
 
 async function processUPSC() {
@@ -505,7 +482,7 @@ async function processUPSC() {
   const fontStyle = document.getElementById('fontStyle').value;
 
   if(addText && (!cName && !pDate)) {
-    alert('Please enter a Name or Date, or uncheck the text box if resizing a signature.');
+    alert('Please enter a Name or Date, or uncheck the text box if resizing a simple signature.');
     return;
   }
 
@@ -518,39 +495,34 @@ async function processUPSC() {
   const st = document.getElementById('status');
   pw.style.display = 'block';
   pb.style.width = '10%';
-  st.innerText = 'Extracting Cropped Image...';
+  st.innerText = 'Extracting Cropped Area...';
 
   try {
-    // 1. Get the cropped canvas data from Cropper.js (high-res crop)
-    const croppedCanvas = cropper.getCroppedCanvas();
+    const photoHeight = getPhotoHeight();
+    const stripHeight = h - photoHeight;
 
-    // 2. Setup Final Canvas (resW x resH)
+    // Get strictly cropped image data from Cropper.js at EXACT required dimensions
+    const croppedCanvas = cropper.getCroppedCanvas({
+        width: w,
+        height: photoHeight,
+        fillColor: '#ffffff'
+    });
+
+    // Create final Master Canvas (w x h)
     const cv = document.createElement('canvas');
     const ctx = cv.getContext('2d');
     cv.width = w;
     cv.height = h;
 
-    // Background fill (white)
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, w, h);
-
-    // Calculate layout
-    let stripHeight = 0;
-    if (addText && (cName || pDate)) {
-      // Made strip EXACTLY half of previous thickness (8% of height, min 24px)
-      stripHeight = Math.max(h * 0.08, 24); 
-    }
-    const photoHeight = h - stripHeight;
-
-    // Draw the Cropped Canvas onto the final canvas (Stretch to fit the photo area)
+    // Draw the Cropped Canvas on top directly! No stretching math needed!
     ctx.drawImage(croppedCanvas, 0, 0, w, photoHeight);
 
-    // 3. Draw Strip & Text
+    // Draw Strip & Text
     if (stripHeight > 0) {
       ctx.fillStyle = stripColor;
       ctx.fillRect(0, photoHeight, w, stripHeight);
       
-      // Determine Text Color (Light strip = Black text, Dark strip = White text)
+      // Smart Font Color
       if(stripColor === '#ffffff' || stripColor === '#ffff00') {
           ctx.fillStyle = '#000000';
       } else {
@@ -560,13 +532,12 @@ async function processUPSC() {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       
-      // Setup Text Lines (Works with just 1 or both)
       let lines = [];
       if(cName) lines.push(cName.toUpperCase());
       if(pDate) lines.push(pDate);
 
-      // Adjust Font Size to look perfect inside the new thinner strip
-      let fontMultiplier = lines.length === 2 ? 0.38 : 0.60;
+      // Adjust Font Size for Thinner Strip
+      let fontMultiplier = lines.length === 2 ? 0.40 : 0.65;
       let fontSize = Math.floor(stripHeight * fontMultiplier);
       ctx.font = `bold ${fontSize}px ${fontStyle}`;
       
@@ -578,10 +549,10 @@ async function processUPSC() {
       }
     }
 
-    pb.style.width = '40%';
+    pb.style.width = '60%';
     st.innerText = 'Compressing to KB...';
 
-    // 4. Binary search for exact KB compression
+    // Binary search for exact KB compression
     let lo = 0.1, hi = 1.0, bestBlob = null;
     for(let i=0; i<15; i++) {
       let q = (lo+hi)/2;
@@ -598,7 +569,7 @@ async function processUPSC() {
     st.innerText = 'Done ✅';
     setTimeout(()=>{pw.style.display='none'}, 1000);
 
-    // 5. Show result
+    // Show result
     const url = URL.createObjectURL(bestBlob);
     const d = document.createElement('div');
     d.className = 'rc';
@@ -606,7 +577,7 @@ async function processUPSC() {
     document.getElementById('rg').appendChild(d);
 
   } catch(e) {
-    alert('Error processing image. Try another file.');
+    alert('Error processing image. Try again.');
     pw.style.display = 'none';
   } finally {
     btn.innerHTML = '⚡&nbsp; Generate UPSC Ready Image';
