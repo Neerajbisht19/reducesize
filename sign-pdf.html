@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign PDF Online Free | Self-Attest Documents Instantly</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://reducesize.online/sign-pdf.html">
+<meta name="description" content="Digitally sign your PDF documents online for free. Automatically remove white background from your signature. 100% secure, offline browser-based tool.">
+<meta name="keywords" content="sign pdf online, self attest pdf, digital signature pdf, add signature to pdf, remove background signature">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#6d54f0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
+  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
+  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
+  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
+  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Manrope',sans-serif;font-size:15px;
+  line-height:1.6;min-height:100vh;overflow-x:hidden;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:200;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  background:rgba(7,7,18,.88);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
+  color:var(--text);text-decoration:none;letter-spacing:-.5px;
+}
+.nav-logo em{font-style:normal;color:var(--purple-l)}
+.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
+.nav-links a:hover{opacity:1;color:var(--purple-l);}
+.nav-pill{
+  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
+  background:rgba(62,207,142,.1);color:var(--green);
+  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
+  display:inline-block; white-space:nowrap;
+}
+@media(max-width: 480px){
+    .nav { padding: 0 12px; }
+    .nav-logo { font-size: 16px; }
+    .nav-links { gap: 10px; }
+    .nav-links a { font-size: 12px; }
+    .nav-pill { display:none; }
+}
+
+/* WRAP & SUB-HERO */
+.wrap{position:relative;z-index:1;max-width:840px;margin:0 auto;padding:0 16px 80px}
+.sub-hero{padding:40px 0 24px;text-align:center}
+.sub-hero .tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);background:rgba(32,217,192,.07);
+  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
+}
+.sub-hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
+  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
+}
+.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
+
+/* BADGES */
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
+}
+
+/* TOOL CARD */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:24px;margin-bottom:28px;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
+  opacity:.5;
+}
+
+/* UPLOADS */
+.drop{
+  position:relative;border:2px dashed rgba(109,84,240,.22);
+  border-radius:13px;padding:24px 14px;text-align:center;
+  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
+}
+.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-ico{
+  width:44px;height:44px;margin:0 auto 8px;
+  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
+  border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.drop-main{font-size:14px;font-weight:700;margin-bottom:2px}
+.drop-main span{color:var(--purple-l)}
+.drop-hint{font-size:12px;color:var(--muted)}
+
+/* PDF VIEWER AND SIGNATURE */
+.pdf-viewer-wrap {
+    display: none; background: #e0e0e0; border-radius: 12px; 
+    border: 1px solid var(--border); overflow: hidden; margin-bottom: 20px;
+}
+.pdf-controls {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--surface2); padding: 12px 16px; border-bottom: 1px solid var(--border);
+}
+.pdf-btn {
+    background: rgba(255,255,255,0.05); color: var(--text); border: none;
+    padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: 'Manrope', sans-serif;
+    font-weight: 600; font-size: 13px; transition: 0.2s;
+}
+.pdf-btn:hover { background: var(--purple); color: #fff; }
+.pdf-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.page-info { font-size: 14px; font-weight: 700; color: var(--text); }
+
+.pdf-canvas-container {
+    position: relative; width: 100%; display: flex; justify-content: center;
+    overflow: auto; max-height: 60vh; padding: 20px; box-sizing: border-box;
+}
+.pdf-canvas-container canvas {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); max-width: 100%; height: auto; display: block;
+}
+
+/* DRAGGABLE SIGNATURE BOX */
+.sig-box {
+    position: absolute; top: 50px; left: 50px; border: 2px dashed var(--purple);
+    background: rgba(109,84,240,0.1); cursor: grab; display: none; z-index: 10;
+}
+.sig-box:active { cursor: grabbing; }
+.sig-box img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.resize-handle {
+    position: absolute; bottom: -6px; right: -6px; width: 16px; height: 16px;
+    background: var(--accent); border-radius: 50%; cursor: nwse-resize;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5); z-index: 11;
+}
+
+/* BUTTONS */
+.btn{
+  width:100%;padding:14px;border-radius:11px;border:none;
+  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
+  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
+  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3); margin-top: 10px;
+}
+.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
+.btn:active{transform:scale(.98)}
+
+/* PROGRESS */
+.pbox{display:none;margin-top:16px}
+.ptrack{height:6px;background:var(--surface2);border-radius:10px;overflow:hidden}
+.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s ease;position:relative;}
+.plabel{font-size:13px;color:var(--purple-l);margin-top:10px;text-align:center;font-weight:600}
+
+/* RESULTS */
+.rg{display:flex; flex-direction:column; gap:10px; margin-top:16px}
+.rc{background:var(--surface2);border:1px solid rgba(62,207,142,.3);border-radius:11px;overflow:hidden; padding: 20px; text-align: center;}
+.rsz{font-size:16px;font-weight:700;color:var(--green);margin-bottom:6px}
+.rb{
+  width:100%;padding:12px;border-radius:9px;border:none;margin-top:12px;
+  background:var(--green);color:#000;
+  font-size:15px;font-weight:800;cursor:pointer;
+  font-family:'Manrope',sans-serif;transition:.15s;
+}
+.rb:hover{background:#2eb872; box-shadow:0 6px 20px rgba(62,207,142,.3);}
+
+/* SEO SECTION */
+.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
+.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
+.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
+.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
+.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
+.seo li{margin-bottom:6px}
+.seo strong{color:#eeeeff;font-weight:600}
+
+/* CHIPS */
+.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
+.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
+.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
+.chip-i{font-size:17px;flex-shrink:0}
+.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
+.chip-t span{font-size:11px;color:var(--muted)}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
+.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
+.flogo em{font-style:normal;color:var(--purple-l)}
+.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
+.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
+.fnav a:hover{color:var(--text);background:var(--card)}
+.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
+
+@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} .pdf-canvas-container{padding:10px;} }
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication",
+"name":"Sign PDF & Self-Attest Online",
+"url":"https://reducesize.online/sign-pdf.html",
+"applicationCategory":"UtilityApplication","operatingSystem":"All",
+"description":"Add a signature to your PDF document instantly. Automatically removes white backgrounds from signature photos. Drag, drop, and download. 100% private.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <div class="nav-links">
+    <a href="/blog/">Blog</a>
+    <span class="nav-pill">✦ FREE FOREVER</span>
+  </div>
+</nav>
+
+<div class="wrap">
+<section class="sub-hero">
+  <div class="tag">✦ Smart Background Remover</div>
+  <h1>Sign & Self-Attest<br><span class="grad">PDF Documents</span></h1>
+  <p>Stop printing documents just to sign them! Upload your PDF, upload a photo of your signature, and place it anywhere. We automatically remove the white background.</p>
+  <div class="badges">
+    <span class="badge">🪄 Auto Background Remove</span>
+    <span class="badge">🖱️ Drag & Drop</span>
+    <span class="badge">🔒 100% Private</span>
+  </div>
+</section>
+
+<div class="card">
+  
+  <div id="step1">
+      <div class="drop" id="pdfDrop">
+        <input type="file" id="pdfFile" accept="application/pdf">
+        <div class="drop-ico" id="pdfIco">📄</div>
+        <div class="drop-main" id="pdfMain">Step 1: Drop a PDF file here</div>
+        <div class="drop-hint" id="pdfHint">The document you want to sign</div>
+      </div>
+  </div>
+
+  <div id="step2" style="display:none;">
+      <div class="drop" id="sigDrop" style="border-color:var(--accent); background:rgba(32,217,192,.03);">
+        <input type="file" id="sigFile" accept="image/*">
+        <div class="drop-ico" style="background:rgba(32,217,192,.1); border-color:rgba(32,217,192,.2);">✍️</div>
+        <div class="drop-main" style="color:var(--accent);">Step 2: Upload Signature Photo</div>
+        <div class="drop-hint">Take a photo of your signature on white paper. We will make it transparent!</div>
+      </div>
+  </div>
+
+  <div id="step3" class="pdf-viewer-wrap">
+      <div class="pdf-controls">
+          <button class="pdf-btn" id="prevPage" onclick="changePage(-1)">◀ Prev</button>
+          <div class="page-info">Page <span id="pageNum">1</span> of <span id="pageCount">?</span></div>
+          <button class="pdf-btn" id="nextPage" onclick="changePage(1)">Next ▶</button>
+      </div>
+      
+      <div class="pdf-canvas-container" id="canvasContainer">
+          <canvas id="pdfCanvas"></canvas>
+          
+          <div id="sigBox" class="sig-box">
+              <img id="sigImg" src="">
+              <div id="resizeHandle" class="resize-handle"></div>
+          </div>
+      </div>
+      
+      <div style="padding: 16px; background: var(--surface); text-align: center;">
+          <p style="font-size:12px; color:var(--yellow); margin-bottom:10px;">Drag the box to place your signature. Use the blue corner to resize.</p>
+          <button class="btn" id="saveBtn" onclick="generateSignedPdf()">✅ Apply Signature & Download</button>
+      </div>
+  </div>
+
+  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <div id="rg" class="rg"></div>
+</div>
+
+<section class="seo">
+<h2>How to Digitally Sign & Self-Attest a PDF</h2>
+<p>In India, applying for government jobs, banking services, or educational institutes often requires you to submit "Self-Attested" copies of your Aadhar Card, PAN Card, or Marksheets. Traditionally, this meant printing the document, signing it with a pen, and paying a cyber cafe to scan it back into a PDF. <strong>ReduceSize PDF Signer</strong> completely eliminates this hassle.</p>
+
+<h3>The "Auto-Transparent" Magic</h3>
+<p>Most people take a photo of their signature using their mobile phone. If you place that photo directly onto a PDF, it looks like an ugly white box blocking the text behind it. Our tool features a <strong>Smart Pixel Manipulator</strong>. When you upload a photo of your signature, the engine instantly detects the white paper background and deletes it, turning your signature into a clean, transparent digital stamp!</p>
+
+<h3>100% Private (No Data Leaks)</h3>
+<p>Your signature and personal documents are highly sensitive. Uploading them to random online PDF editors is extremely risky. We built our tool using advanced client-side JavaScript. This means your PDF and your signature photo are processed <strong>entirely inside your own browser</strong>. We never upload, view, or store your documents. It is the safest way to sign documents online.</p>
+
+<h3>Step-by-Step Instructions</h3>
+<ol>
+  <li><strong>Upload PDF:</strong> Select the document you want to self-attest.</li>
+  <li><strong>Upload Signature:</strong> Take a photo of your signature on a plain white paper and upload it. The background will be removed automatically.</li>
+  <li><strong>Place & Resize:</strong> A transparent signature box will appear on your PDF. Drag it to the correct location and use the blue corner to adjust its size. You can also use the Next/Prev buttons to sign a specific page.</li>
+  <li><strong>Save Document:</strong> Click "Apply Signature". The tool will embed the signature permanently into the PDF and download it securely to your device.</li>
+</ol>
+</section>
+
+<div class="chips-hd">More PDF Tools</div>
+<div class="chips">
+  <a href="/" class="chip"><span class="chip-i">🗜️</span><div class="chip-t"><strong>Compress PDF</strong><span>Reduce file size</span></div></a>
+  <a href="/split-pdf.html" class="chip"><span class="chip-i">✂️</span><div class="chip-t"><strong>Split PDF</strong><span>Extract pages</span></div></a>
+  <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
+  <a href="/unlock-pdf.html" class="chip"><span class="chip-i">🔓</span><div class="chip-t"><strong>Unlock PDF</strong><span>Remove password</span></div></a>
+</div>
+</div>
+
+<footer class="footer">
+  <a class="flogo" href="/"><em>Reduce</em>Size</a>
+  <nav class="fnav">
+    <a href="/compress-image-to-10kb.html">10KB</a>
+    <a href="/compress-image-to-50kb.html">50KB</a>
+    <a href="/image-format-converter.html">Format Converter</a>
+    <a href="/">PDF Compressor</a>
+  </nav>
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+<script>
+// PDF.js Setup
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+let pdfDoc = null;
+let currentArrayBuffer = null;
+let pdfFileName = "Document";
+
+let pageNum = 1;
+let pageRendering = false;
+let pageNumPending = null;
+let canvas = document.getElementById('pdfCanvas');
+let ctx = canvas.getContext('2d');
+let currentViewport = null;
+
+let signatureBytes = null; // Will store the final transparent PNG bytes
+
+// --- 1. UPLOAD PDF ---
+document.getElementById('pdfFile').addEventListener('change', async function(e) {
+    if(this.files.length === 0) return;
+    const file = this.files[0];
+    if(file.type !== 'application/pdf') { alert("Please select a PDF file."); return; }
+    
+    pdfFileName = file.name.replace(/\.[^/.]+$/, "");
+    document.getElementById('pdfMain').innerHTML = `<span style="color:var(--green)">${file.name} loaded</span>`;
+    document.getElementById('pdfIco').innerHTML = '✅';
+    
+    try {
+        currentArrayBuffer = await file.arrayBuffer();
+        pdfDoc = await pdfjsLib.getDocument({data: currentArrayBuffer}).promise;
+        document.getElementById('pageCount').innerText = pdfDoc.numPages;
+        
+        // Show Step 2
+        document.getElementById('step2').style.display = 'block';
+    } catch(err) {
+        alert("Error loading PDF. If it's password protected, unlock it first.");
+    }
+});
+
+// --- 2. UPLOAD SIGNATURE & REMOVE BACKGROUND ---
+document.getElementById('sigFile').addEventListener('change', function(e) {
+    if(this.files.length === 0) return;
+    const file = this.files[0];
+    if(!file.type.startsWith('image/')) { alert("Please select an image file."); return; }
+    
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+            // Process Image: Remove White Background
+            const sigCanvas = document.createElement('canvas');
+            const sigCtx = sigCanvas.getContext('2d');
+            sigCanvas.width = img.width;
+            sigCanvas.height = img.height;
+            sigCtx.drawImage(img, 0, 0);
+            
+            const imgData = sigCtx.getImageData(0, 0, sigCanvas.width, sigCanvas.height);
+            const data = imgData.data;
+            
+            // Loop through pixels, if bright (white-ish), make transparent
+            for(let i=0; i<data.length; i+=4) {
+                let r = data[i], g = data[i+1], b = data[i+2];
+                // Check if color is close to white/light gray
+                if(r > 160 && g > 160 && b > 160) {
+                    data[i+3] = 0; // Alpha = 0 (Transparent)
+                } else {
+                    // Make the remaining ink darker for better visibility
+                    data[i] = Math.max(0, r - 50);
+                    data[i+1] = Math.max(0, g - 50);
+                    data[i+2] = Math.max(0, b - 50);
+                }
+            }
+            sigCtx.putImageData(imgData, 0, 0);
+            
+            // Get final transparent PNG URL
+            const transparentUrl = sigCanvas.toDataURL('image/png');
+            document.getElementById('sigImg').src = transparentUrl;
+            
+            // Save PNG bytes for pdf-lib later
+            fetch(transparentUrl).then(res => res.arrayBuffer()).then(buffer => {
+                signatureBytes = buffer;
+            });
+            
+            // Show Step 3 (Viewer)
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'block';
+            
+            // Render first page
+            renderPage(pageNum);
+            
+            // Show Signature Box
+            const sigBox = document.getElementById('sigBox');
+            sigBox.style.display = 'block';
+            sigBox.style.width = '150px';
+            sigBox.style.height = '60px';
+            
+        };
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+});
+
+// --- 3. PDF VIEWER CONTROLS ---
+function renderPage(num) {
+    pageRendering = true;
+    pdfDoc.getPage(num).then(function(page) {
+        // Calculate scale to fit container width nicely
+        const containerWidth = document.getElementById('canvasContainer').clientWidth - 40;
+        const unscaledViewport = page.getViewport({scale: 1});
+        const scale = Math.min(containerWidth / unscaledViewport.width, 1.5);
+        
+        currentViewport = page.getViewport({scale: scale});
+        canvas.width = currentViewport.width;
+        canvas.height = currentViewport.height;
+
+        const renderContext = { canvasContext: ctx, viewport: currentViewport };
+        const renderTask = page.render(renderContext);
+
+        renderTask.promise.then(function() {
+            pageRendering = false;
+            if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
+            }
+        });
+    });
+    document.getElementById('pageNum').innerText = num;
+}
+
+function changePage(offset) {
+    if(pageNum + offset <= 0 || pageNum + offset > pdfDoc.numPages) return;
+    pageNum += offset;
+    if (pageRendering) {
+        pageNumPending = pageNum;
+    } else {
+        renderPage(pageNum);
+    }
+}
+
+// --- 4. DRAG AND RESIZE LOGIC (Vanilla JS) ---
+const sigBox = document.getElementById('sigBox');
+const resizeHandle = document.getElementById('resizeHandle');
+const container = document.getElementById('canvasContainer');
+
+let isDragging = false, isResizing = false;
+let startX, startY, startW, startH, startLeft, startTop;
+
+// Mouse/Touch start
+sigBox.addEventListener('mousedown', dragStart);
+sigBox.addEventListener('touchstart', dragStart, {passive: false});
+
+resizeHandle.addEventListener('mousedown', resizeStart);
+resizeHandle.addEventListener('touchstart', resizeStart, {passive: false});
+
+document.addEventListener('mousemove', handleMove);
+document.addEventListener('touchmove', handleMove, {passive: false});
+
+document.addEventListener('mouseup', endActions);
+document.addEventListener('touchend', endActions);
+
+function getEventProps(e) {
+    if(e.touches && e.touches.length > 0) return e.touches[0];
+    return e;
+}
+
+function dragStart(e) {
+    if(e.target === resizeHandle) return; // ignore if resizing
+    e.preventDefault();
+    isDragging = true;
+    const evt = getEventProps(e);
+    startX = evt.clientX;
+    startY = evt.clientY;
+    startLeft = sigBox.offsetLeft;
+    startTop = sigBox.offsetTop;
+}
+
+function resizeStart(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    isResizing = true;
+    const evt = getEventProps(e);
+    startX = evt.clientX;
+    startY = evt.clientY;
+    startW = sigBox.offsetWidth;
+    startH = sigBox.offsetHeight;
+}
+
+function handleMove(e) {
+    if(!isDragging && !isResizing) return;
+    e.preventDefault();
+    const evt = getEventProps(e);
+    const dx = evt.clientX - startX;
+    const dy = evt.clientY - startY;
+
+    if(isDragging) {
+        let newL = startLeft + dx;
+        let newT = startTop + dy;
+        sigBox.style.left = newL + 'px';
+        sigBox.style.top = newT + 'px';
+    } else if (isResizing) {
+        let newW = Math.max(50, startW + dx);
+        let newH = Math.max(20, startH + dy);
+        sigBox.style.width = newW + 'px';
+        sigBox.style.height = newH + 'px';
+    }
+}
+
+function endActions() {
+    isDragging = false;
+    isResizing = false;
+}
+
+// --- 5. EMBED SIGNATURE IN PDF (PDF-LIB) ---
+async function generateSignedPdf() {
+    if(!signatureBytes || !currentArrayBuffer) return;
+
+    const btn = document.getElementById('saveBtn');
+    const pw = document.getElementById('pbox');
+    const pb = document.getElementById('pfill');
+    const st = document.getElementById('status');
+    
+    document.getElementById('step3').style.display = 'none';
+    pw.style.display = 'block';
+    
+    try {
+        pb.style.width = '30%';
+        st.innerText = 'Initializing Secure PDF Engine...';
+        
+        // Load original PDF
+        const doc = await PDFLib.PDFDocument.load(currentArrayBuffer);
+        
+        pb.style.width = '60%';
+        st.innerText = 'Embedding Transparent Signature...';
+        
+        // Embed the PNG signature
+        const pngImage = await doc.embedPng(signatureBytes);
+        
+        // Get the specific page the user is viewing
+        const page = doc.getPages()[pageNum - 1];
+        const { width: pdfWidth, height: pdfHeight } = page.getSize();
+        
+        // CALCULATE RELATIVE COORDINATES
+        // Where is the signature box relative to the canvas?
+        const canvasRect = canvas.getBoundingClientRect();
+        const sigRect = sigBox.getBoundingClientRect();
+        
+        // Calculate percentage positions
+        const relX = (sigRect.left - canvasRect.left) / canvasRect.width;
+        const relY = (sigRect.top - canvasRect.top) / canvasRect.height;
+        const relW = sigRect.width / canvasRect.width;
+        const relH = sigRect.height / canvasRect.height;
+        
+        // Convert percentages to PDF Points
+        const finalX = relX * pdfWidth;
+        const finalW = relW * pdfWidth;
+        const finalH = relH * pdfHeight;
+        // pdf-lib Y axis is from bottom to top, DOM is top to bottom. Invert Y.
+        const finalY = pdfHeight - (relY * pdfHeight) - finalH;
+        
+        // Draw the image on the PDF
+        page.drawImage(pngImage, {
+            x: finalX,
+            y: finalY,
+            width: finalW,
+            height: finalH
+        });
+        
+        pb.style.width = '90%';
+        st.innerText = 'Saving Final Document...';
+        
+        // Save PDF
+        const pdfBytes = await doc.save();
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        
+        pb.style.width = '100%';
+        st.innerText = 'Ready! ✅';
+        
+        setTimeout(() => {
+            pw.style.display = 'none';
+            
+            const url = URL.createObjectURL(blob);
+            let finalSize = (blob.size / 1024).toFixed(1) + ' KB';
+            if(blob.size > 1024 * 1024) finalSize = (blob.size / (1024*1024)).toFixed(2) + ' MB';
+            
+            const rg = document.getElementById('rg');
+            rg.innerHTML = `
+                <div class="rc">
+                    <div style="font-size:36px; margin-bottom:10px;">✍️</div>
+                    <div class="rsz">Self-Attested PDF Ready</div>
+                    <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Signature embedded successfully. Size: ${finalSize}</p>
+                    <button class="rb" onclick="dlUrl('${url}','${pdfFileName}_signed.pdf')">⬇ Download Signed PDF</button>
+                    <button class="rb" style="background:rgba(255,255,255,0.05); color:var(--text); margin-top:8px;" onclick="location.reload()">🔄 Sign Another File</button>
+                </div>
+            `;
+        }, 800);
+
+    } catch(err) {
+        alert("Error saving PDF. Please try again.");
+        pw.style.display = 'none';
+        document.getElementById('step3').style.display = 'block';
+    }
+}
+
+function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+</script>
+</body>
+</html>
