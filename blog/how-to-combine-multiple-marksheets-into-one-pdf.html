@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Combine Multiple Marksheets into One PDF for Online Forms</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://reducesize.online/blog/how-to-combine-multiple-marksheets-into-one-pdf.html">
+<meta name="description" content="Learn how to merge your 10th, 12th, and Degree marksheets into a single PDF document safely for government exams and college admissions.">
+<meta name="keywords" content="combine marksheets into one pdf, merge pdf online free, merge multiple documents into one pdf, upload multiple marksheets, ssc document upload, upsc pdf merge">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#6d54f0">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Combine Multiple Marksheets into One PDF for Online Forms">
+<meta property="og:description" content="Portal only has one upload button? Learn how to securely merge multiple educational documents into a single PDF file offline.">
+<meta property="og:url" content="https://reducesize.online/blog/how-to-combine-multiple-marksheets-into-one-pdf.html">
+<meta property="og:site_name" content="ReduceSize Blog">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
+  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
+  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
+  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
+  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Manrope',sans-serif;font-size:16px;
+  line-height:1.7;min-height:100vh;overflow-x:hidden;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:200;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  background:rgba(7,7,18,.88);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
+  color:var(--text);text-decoration:none;letter-spacing:-.5px;
+}
+.nav-logo em{font-style:normal;color:var(--purple-l)}
+.nav-links{display:flex;gap:16px;align-items:center;}
+.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
+.nav-links a:hover{opacity:1;color:var(--purple-l);}
+.nav-pill{
+  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
+  background:rgba(62,207,142,.1);color:var(--green);
+  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
+  display:inline-block; white-space:nowrap;
+}
+
+/* BLOG WRAPPER */
+.b-wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:40px 20px 80px}
+
+/* BLOG HERO */
+.b-hero{text-align:center;margin-bottom:40px;border-bottom:1px solid var(--border);padding-bottom:30px;}
+.b-tag{
+  display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;color:var(--accent);background:rgba(32,217,192,.1);
+  padding:5px 12px;border-radius:20px;margin-bottom:16px;
+}
+.b-title{
+  font-family:'Syne',sans-serif;font-size:clamp(32px, 5vw, 48px);
+  font-weight:800;line-height:1.2;letter-spacing:-1px;margin-bottom:16px;color:#fff;
+}
+.b-meta{font-size:13px;color:var(--muted);font-weight:600;}
+
+/* BLOG CONTENT */
+.b-content{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;box-shadow:0 10px 30px rgba(0,0,0,0.2);}
+.b-content h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--purple-l);margin:32px 0 16px;letter-spacing:-0.5px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;}
+.b-content h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;margin:24px 0 12px;}
+.b-content p{color:#9090b8;font-size:16px;line-height:1.8;margin-bottom:20px;}
+.b-content ul, .b-content ol{padding-left:24px;margin-bottom:24px;color:#9090b8;}
+.b-content li{margin-bottom:10px;line-height:1.7;}
+.b-content strong{color:#eeeeff;font-weight:600;}
+
+/* HIGHLIGHT BOX */
+.b-box{
+    background:rgba(109,84,240,.05); border-left:4px solid var(--purple);
+    padding:20px; border-radius:0 12px 12px 0; margin:24px 0;
+}
+.b-box.danger{
+    background:rgba(255,107,107,.05); border-left-color:var(--red);
+}
+.b-box p{margin:0; color:#e0e0ff; font-size:15px;}
+
+/* CTA BUTTON */
+.b-cta{
+    display:block; text-align:center; background:linear-gradient(120deg, var(--purple) 0%, var(--purple-l) 100%);
+    color:#fff; text-decoration:none; font-size:18px; font-weight:700; font-family:'Syne', sans-serif;
+    padding:16px 24px; border-radius:12px; margin:36px 0; transition:0.3s;
+    box-shadow:0 10px 25px rgba(109,84,240,.4);
+}
+.b-cta:hover{transform:translateY(-2px); box-shadow:0 15px 35px rgba(109,84,240,.5); color:#fff;}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
+.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
+.flogo em{font-style:normal;color:var(--purple-l)}
+.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
+.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
+.fnav a:hover{color:var(--text);background:var(--card)}
+.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
+
+@media(max-width: 600px){
+    .b-content{padding:24px 16px;}
+    .nav { padding: 0 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <div class="nav-links">
+    <a href="/blog/">Blog</a>
+    <span class="nav-pill">✦ FREE FOREVER</span>
+  </div>
+</nav>
+
+<div class="b-wrap">
+    <div class="b-hero">
+        <span class="b-tag">Form Filling Guide</span>
+        <h1 class="b-title">How to Combine Multiple Marksheets into One PDF for Online Forms</h1>
+        <div class="b-meta">Published: June 2026 • 4 Min Read</div>
+    </div>
+
+    <div class="b-content">
+        <p>If you are applying for a government exam (like SSC, UPSC, or State Police), university admissions, or corporate background verification, you will inevitably face a very frustrating technical problem.</p>
+        
+        <p>The instructions will clearly say: <strong>"Please upload your 10th Marksheet, 12th Marksheet, and Graduation Degree."</strong> However, when you look at the portal, there is only <strong>one single "Upload Document" button</strong>. How are you supposed to upload three separate files when the website only allows you to select one?</p>
+
+        <p>The answer is simple: You have to merge (combine) all your individual marksheets into a single PDF document. In this guide, we will show you how to do this safely and instantly, directly from your mobile phone or computer.</p>
+
+        <h2>The Privacy Risk of Educational Documents</h2>
+        <p>Your educational certificates contain highly sensitive personal information, including your full name, date of birth, parent's names, roll numbers, and registration IDs. These are prime targets for identity theft.</p>
+
+        <div class="b-box danger">
+            <p><strong>Warning:</strong> The majority of "Free PDF Mergers" you find on Google upload your marksheets to their remote cloud servers. You never know who has access to your data once it leaves your device or how long they store your documents.</p>
+        </div>
+
+        <p>To prevent data leaks, you must use a tool that utilizes <strong>Client-Side Processing</strong>. This means the tool stitches the files together using your device's own memory (RAM) and never transmits the files over the internet.</p>
+
+        <h2>Step-by-Step: How to Merge Your Documents Securely</h2>
+        <p>Using the offline <a href="/merge-pdf.html" style="color:var(--accent); font-weight:700;">ReduceSize PDF Merger</a>, you can securely combine as many marksheets as you need. Follow these steps:</p>
+
+        <ol>
+            <li><strong>Gather Your Files:</strong> Ensure your 10th, 12th, and graduation documents are saved as PDF files on your device. (If they are currently JPG images, you can convert them to PDF using your phone's gallery).</li>
+            <li><strong>Open the Merger:</strong> Go to the <a href="/merge-pdf.html" style="color:var(--purple-l);">ReduceSize Merge PDF Tool</a> from your browser.</li>
+            <li><strong>Select the Files:</strong> Click the upload box and select all the documents you wish to combine.</li>
+            <li><strong>Reorder the Sequence:</strong> This is a crucial step! Verifying officers prefer documents in chronological order. Use the Up (⬆️) and Down (⬇️) buttons on the screen to arrange them correctly: 10th Marksheet first, 12th Marksheet second, and Graduation last.</li>
+            <li><strong>Click Merge:</strong> Hit the "Merge PDFs Now" button. The secure engine will stitch them together instantly.</li>
+            <li><strong>Download:</strong> Your single, combined PDF is ready to be uploaded to your exam portal.</li>
+        </ol>
+
+        <a href="/merge-pdf.html" class="b-cta">📑 Combine Your Marksheets Now</a>
+
+        <h2>Frequently Asked Questions (FAQs)</h2>
+
+        <h3>1. What if my merged PDF is too large for the portal?</h3>
+        <p>This is a very common issue. Government portals usually have a strict size limit, such as "Upload PDF under 1MB or 500KB." Because merging combines the size of all your individual files, the final PDF might be too large. You can easily fix this by uploading your combined file to our <a href="/" style="color:var(--purple-l);">PDF Compressor</a> to shrink it down to the exact KB size you need.</p>
+
+        <h3>2. Will merging reduce the quality or blur my marks?</h3>
+        <p>No. Merging simply binds the files together page-by-page. It does not compress or alter the resolution of your documents. The marks and text will remain exactly as clear as they were in the original files.</p>
+
+        <h3>3. Can I merge an image and a PDF together?</h3>
+        <p>The PDF Merger tool strictly accepts PDF files. If your 10th marksheet is a PDF but your 12th marksheet is a JPG photo, you will need to convert the JPG into a PDF first. Once both are PDFs, you can merge them seamlessly.</p>
+
+        <h3>4. Can I do this on my mobile phone?</h3>
+        <p>Absolutely. You do not need a desktop or cyber cafe. The ReduceSize platform works perfectly on Android and iPhone browsers. You can select the files directly from your phone's file manager and merge them on the go.</p>
+
+        <h2>Conclusion</h2>
+        <p>Merging multiple documents into a single PDF is a mandatory skill for applying to modern jobs and colleges online. By using a secure, offline browser tool, you protect your sensitive educational data while ensuring your application looks professional and organized. Keep your files safe and make your form filling a stress-free experience.</p>
+    </div>
+</div>
+
+<footer class="footer">
+  <a class="flogo" href="/"><em>Reduce</em>Size</a>
+  <nav class="fnav">
+    <a href="/compress-image-to-10kb.html">10KB</a>
+    <a href="/compress-image-to-50kb.html">50KB</a>
+    <a href="/image-format-converter.html">Format Converter</a>
+    <a href="/">PDF Compressor</a>
+  </nav>
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+</footer>
+
+</body>
+</html>
