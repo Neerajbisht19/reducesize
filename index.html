@@ -12,7 +12,6 @@
 <meta name="author" content="ReduceSize Team">
 <meta name="theme-color" content="#6d54f0">
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Compress & Resize Image Online Free – ReduceSize">
 <meta property="og:description" content="Compress image to exact 10KB, 20KB, 50KB, 100KB online free. No upload, 100% private. Perfect for SSC, UPSC & government forms.">
@@ -23,12 +22,10 @@
 <meta name="twitter:title" content="Compress & Resize Image Online Free – ReduceSize">
 <meta name="twitter:description" content="Compress image to exact 10KB, 20KB, 50KB, 100KB online. No upload. Always free.">
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
-<!-- FAQ Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,7 +55,6 @@
 }
 </script>
 
-<!-- WebSite Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -80,7 +76,6 @@
 }
 </script>
 
-<!-- SoftwareApplication Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -507,26 +502,6 @@ body::after{
 .ftrust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;color:#383858;font-weight:600}
 
 /* ===== MODALS ===== */
-.mo{
-  position:fixed;inset:0;background:rgba(0,0,0,.78);
-  display:none;align-items:center;justify-content:center;
-  z-index:9999;backdrop-filter:blur(6px);
-}
-.mb{
-  background:var(--surface);border:1px solid var(--border);
-  max-width:308px;width:90%;padding:24px;border-radius:16px;
-  text-align:center;box-shadow:0 0 60px rgba(109,84,240,.12);
-  animation:pop .25s ease;
-}
-@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
-.mb h2{font-family:'Syne',sans-serif;font-size:17px;color:var(--yellow);margin-bottom:8px}
-.mb p{font-size:13px;color:#8080a8;line-height:1.6;margin-bottom:5px}
-.mb .tip{color:var(--purple-l);font-weight:600;font-size:13px;margin-top:6px}
-.mb button{
-  margin-top:14px;background:var(--purple);border:none;color:#fff;
-  padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;
-  font-family:'Manrope',sans-serif;
-}
 .pm{
   position:fixed;inset:0;background:rgba(0,0,0,.88);
   display:none;align-items:center;justify-content:center;
@@ -554,7 +529,6 @@ body::after{
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="nav">
   <a class="nav-logo" href="/">
     <em>Reduce</em>Size
@@ -569,7 +543,6 @@ body::after{
   <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="/blog/">📝 Blog & Guides</a>
   <a href="/about.html">ℹ️ About Us</a>
@@ -577,17 +550,8 @@ body::after{
   <a href="/privacy-policy.html">🔒 Privacy Policy</a>
 </div>
 
-<!-- BREADCRUMB (hidden visually, for SEO) -->
-<nav aria-label="breadcrumb" style="position:absolute;opacity:0;height:0;overflow:hidden;" itemscope itemtype="https://schema.org/BreadcrumbList">
-  <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-    <a itemprop="item" href="https://reducesize.online/"><span itemprop="name">Home</span></a>
-    <meta itemprop="position" content="1">
-  </span>
-</nav>
-
 <div class="wrap">
 
-<!-- HERO -->
 <section class="hero">
   <div class="eyebrow">Browser-based · No Upload · Instant</div>
   <h1 class="hero-h1">Compress & Resize<br><span class="grad">Any Image or PDF</span></h1>
@@ -622,14 +586,12 @@ body::after{
   </div>
 </section>
 
-<!-- MAIN TOOL CARD -->
 <div class="card">
   <div class="tabs">
     <button class="tab on" onclick="showTab('imgBox',this)">🖼&nbsp; Image Tools</button>
     <button class="tab" onclick="showTab('pdfBox',this)">📄&nbsp; PDF Tools</button>
   </div>
 
-  <!-- IMAGE TAB -->
   <div id="imgBox" class="tool-section">
     <div class="drop" id="imgDrop">
       <input type="file" id="upload" accept="image/*" multiple>
@@ -672,7 +634,6 @@ body::after{
     <button class="btn" onclick="startMaster()">⚡&nbsp; Process &amp; Download</button>
   </div>
 
-  <!-- PDF TAB -->
   <div id="pdfBox" class="tool-section" style="display:none">
     <div class="drop" id="pdfDropZone">
       <input type="file" id="pdfUp" accept="application/pdf" multiple>
@@ -681,7 +642,7 @@ body::after{
       <div class="drop-hint" id="pdfDropHint">Select one or multiple PDF files</div>
     </div>
     <div class="irow" style="margin-top:14px">
-      <div class="f"><label class="fl">Target Size (KB)</label><input type="number" id="pdfSz" placeholder="e.g. 200" min="50"></div>
+      <div class="f"><label class="fl">Target Size (KB)</label><input type="number" id="pdfSz" placeholder="e.g. 200" min="1"></div>
     </div>
     <button class="btn" onclick="compressPDF()">⚡&nbsp; Compress PDF</button>
   </div>
@@ -690,10 +651,7 @@ body::after{
   <div id="rg" class="rg"></div>
 </div>
 
-<!-- AD SLOT 1 -->
 <div class="ad-slot" aria-label="Advertisement">
-  <!-- Google AdSense -->
-  <!-- Replace below with your actual AdSense ad unit code -->
   <ins class="adsbygoogle"
        style="display:block;width:100%;min-height:90px;"
        data-ad-client="ca-pub-4393982800124912"
@@ -702,7 +660,6 @@ body::after{
        data-full-width-responsive="true"></ins>
 </div>
 
-<!-- HOW IT WORKS -->
 <h2 class="section-hd">How It Works</h2>
 <p class="section-sub">Three simple steps — no account needed, no upload, no waiting.</p>
 <div class="steps">
@@ -723,10 +680,8 @@ body::after{
   </div>
 </div>
 
-<!-- MORE TOOLS -->
 <h2 class="chips-hd" id="moreToolsHd">More Image Tools</h2>
 <div class="chips" id="chips-img">
-  
   <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
   <a href="/document-scanner-online.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Document Scanner</strong><span>Magic filter</span></div></a>
   <a href="/passport-photo-maker.html" class="chip"><span class="chip-i">📸</span><div class="chip-t"><strong>Passport Photo</strong><span>Print maker</span></div></a>
@@ -746,7 +701,6 @@ body::after{
   <a href="/sign-pdf.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Sign PDF</strong><span>Self-attest files</span></div></a>
 </div>
 
-<!-- AD SLOT 2 -->
 <div class="ad-slot" style="margin-top:28px;" aria-label="Advertisement">
   <ins class="adsbygoogle"
        style="display:block;width:100%;min-height:90px;"
@@ -756,7 +710,6 @@ body::after{
        data-full-width-responsive="true"></ins>
 </div>
 
-<!-- TRUST SIGNALS -->
 <h2 class="section-hd">Why 5 Lakh+ Users Trust ReduceSize</h2>
 <div class="trust-section">
   <div class="trust-card">
@@ -781,7 +734,6 @@ body::after{
   </div>
 </div>
 
-<!-- RECENT BLOG SECTION -->
 <h2 class="section-hd">Helpful Guides & Tutorials</h2>
 <p class="section-sub">Step-by-step guides for government exam photo requirements and document handling.</p>
 <div class="blog-grid">
@@ -808,7 +760,6 @@ body::after{
 </div>
 <a href="/blog/" class="view-all-link">View all guides</a>
 
-<!-- AUTHOR BAR (AdSense trust signal) -->
 <div class="author-bar">
   <div class="author-avatar">RS</div>
   <div class="author-info">
@@ -818,7 +769,6 @@ body::after{
   <span class="author-verified">✓ Verified</span>
 </div>
 
-<!-- SEO CONTENT ARTICLE -->
 <article class="seo">
 <h2>Compress Image to Exact KB — Free &amp; Instant</h2>
 <p>ReduceSize.online is a free, browser-based tool that lets you compress images and PDFs to a precise file size — whether that's 10KB, 20KB, 50KB, or 100KB — directly inside your browser. Your files never leave your device, so there is no privacy risk, no waiting for uploads, and no size limits imposed by a server.</p>
@@ -827,92 +777,9 @@ body::after{
 <h2>Why Exact KB Compression Matters</h2>
 <p>Most image compression tools reduce file size by a fixed percentage or to a rough estimate. That approach works fine for casual use, but it fails completely when you need to meet a strict file size requirement — like the ones on SSC, UPSC, Railway, or banking exam portals.</p>
 <p>ReduceSize takes a different approach. It adjusts both image quality and dimensions together in a precise loop until your file lands exactly at or below the number you enter. The result is the highest possible image quality within your chosen size limit, delivered in seconds.</p>
-
-<h3>Who Uses This Tool</h3>
-<p>ReduceSize was originally built for students and job seekers in India who struggle with strict government portal requirements. Today it is used by a wide range of people:</p>
-<ul>
-<li><strong>Students</strong> filling SSC CGL, SSC CHSL, UPSC Civil Services, Railway NTPC, Police Constable, and other government exam forms that require photos under 20KB or 50KB.</li>
-<li><strong>Professionals</strong> sending email attachments with size caps — many email clients block files over 1MB, and compressing images beforehand prevents delivery failures.</li>
-<li><strong>Freelancers and designers</strong> who need to optimize images for websites or client presentations without sacrificing visual quality.</li>
-<li><strong>Anyone</strong> uploading passport photos, ID card scans, or signature images to government portals or banking sites.</li>
-</ul>
-
-<h3>How to Compress an Image to an Exact KB Size</h3>
-<ol>
-<li><strong>Select your file:</strong> Click the upload area or drag and drop one or more images. JPG, PNG, and WEBP formats are all supported.</li>
-<li><strong>Set your target size:</strong> Use one of the quick-select buttons (10KB, 20KB, 30KB, 50KB, 100KB, 200KB) or type any custom value.</li>
-<li><strong>Compress and download:</strong> Click the Process &amp; Download button. The tool processes locally in your browser and delivers the compressed file in seconds.</li>
-</ol>
-
-<h3>How the Compression Algorithm Works</h3>
-<p>When you click Compress, ReduceSize runs a binary-search loop that adjusts JPEG quality and image dimensions simultaneously. It starts at a mid-range quality setting, checks the output file size, then narrows the range — increasing quality if the file is too small, decreasing it if too large. After up to 25 iterations per image, it converges on the highest quality setting that keeps the file at or below your target. If quality alone cannot reach the target, the image dimensions are also scaled down proportionally.</p>
-
-<h3>Privacy and Security</h3>
-<p>Many online tools upload your images to a remote server for processing. This creates privacy risks — your personal photos, ID scans, or passport images could be stored or logged by third parties. ReduceSize processes everything entirely inside your web browser using JavaScript. Your files are never transmitted over the internet. Once you close the browser tab, all data is gone.</p>
-
-<h3>Common Use Cases by Exam Portal</h3>
-<p><strong>SSC CGL and CHSL:</strong> The Staff Selection Commission requires a passport-size photograph between 20KB and 50KB in JPEG format. ReduceSize lets you hit that range precisely.</p>
-<p><strong>UPSC Civil Services:</strong> UPSC forms typically require a photo under 300KB and a signature under 20KB. Use the 20KB quick button for signatures and 200KB for photos.</p>
-<p><strong>Railway NTPC and Group D:</strong> Railway Recruitment Board portals usually cap photos at 50KB. Select the 50KB quick button for a one-click solution.</p>
-<p><strong>State Police and Constable Exams:</strong> Requirements vary by state but typically fall in the 10KB–50KB range. ReduceSize covers all these with its quick-select buttons.</p>
-
-<h2>Frequently Asked Questions</h2>
-<div class="faq-list">
-  <div class="faq-item">
-    <button class="faq-q" onclick="toggleFaq(this)">
-      How do I resize an image to exactly 20KB?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-a">Upload your image, type 20 in the target size field, make sure KB is selected, and click Process & Download. The tool will output the highest-quality version of your image within 20KB.</div>
-  </div>
-  <div class="faq-item">
-    <button class="faq-q" onclick="toggleFaq(this)">
-      Does it work for SSC and UPSC government forms?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-a">Yes — the tool was specifically built for this use case. The quick-select buttons cover the most common government exam size requirements: 10KB for signatures, 20KB for form photos, 50KB for larger portrait photos.</div>
-  </div>
-  <div class="faq-item">
-    <button class="faq-q" onclick="toggleFaq(this)">
-      Can I compress multiple images at once?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-a">Yes. Select as many images as you need in the file picker and all of them will be compressed to your target size in a single batch. Each file can be downloaded individually from the results grid.</div>
-  </div>
-  <div class="faq-item">
-    <button class="faq-q" onclick="toggleFaq(this)">
-      Will my image quality suffer a lot?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-a">Quality is maximized for the size you choose. At very small sizes such as below 15KB, some quality loss is unavoidable. For most government form requirements (20KB–100KB), the output quality is clear enough for official use.</div>
-  </div>
-  <div class="faq-item">
-    <button class="faq-q" onclick="toggleFaq(this)">
-      Are my uploaded files safe and private?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-a">Completely. ReduceSize runs 100% inside your browser — your files are never uploaded to any server. We do not have access to your documents. Everything is deleted from memory when you close the tab.</div>
-  </div>
-  <div class="faq-item">
-    <button class="faq-q" onclick="toggleFaq(this)">
-      Does it work on mobile phones?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-a">Yes. The tool is fully mobile-responsive and works on Android and iOS browsers. You can select images directly from your phone's camera roll and download the compressed output to your device.</div>
-  </div>
-  <div class="faq-item">
-    <button class="faq-q" onclick="toggleFaq(this)">
-      Can I compress a PDF to a specific KB size?
-      <span class="faq-icon">+</span>
-    </button>
-    <div class="faq-a">Yes. Switch to the PDF tab, upload your PDF, enter a target size in KB, and click Compress. The tool renders each page as an image and rebuilds the PDF at the compressed quality. This works best for scanned documents.</div>
-  </div>
-</div>
-
 </article>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-top">
     <div class="footer-brand">
@@ -966,9 +833,8 @@ body::after{
   </div>
 </footer>
 
+<div id="pm" class="pm" onclick="this.style.display='none'"><img id="pmi" alt="Preview"></div>
 
-
-<!-- COMPRESSION ANIMATION OVERLAY -->
 <div id="ov" style="position:fixed;inset:0;background:rgba(2,2,12,.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(12px);">
   <div style="width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
     <div id="scene" style="width:220px;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
@@ -982,7 +848,7 @@ body::after{
       <div id="handL" style="position:absolute;top:50%;transform:translateY(-50%);font-size:32px;opacity:0;z-index:4;left:0;">🤜</div>
       <div id="handR" style="position:absolute;top:50%;transform:translateY(-50%) scaleX(-1);font-size:32px;opacity:0;z-index:4;right:0;">🤜</div>
       <div id="smallBlob" style="position:absolute;width:0;height:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#3ecf8e,#16a35a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;z-index:3;opacity:0;">
-        <span id="sbLbl" style="font-size:9px;font-weight:700;color:rgba(255,255,255,.8);opacity:0;">COMPRESSED</span>
+        <span id="sbLbl" style="font-size:9px;font-weight:700;color:rgba(255,255,255,.8);opacity:0;">PROCESSED</span>
         <strong id="sbVal" style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;opacity:0;">-</strong>
       </div>
     </div>
@@ -1025,7 +891,6 @@ function toggleFaq(btn){
   var ans=btn.nextElementSibling;
   var icon=btn.querySelector('.faq-icon');
   var isOpen=ans.classList.contains('open');
-  // Close all
   document.querySelectorAll('.faq-a').forEach(function(a){a.classList.remove('open');});
   document.querySelectorAll('.faq-icon').forEach(function(i){i.classList.remove('open');});
   if(!isOpen){ans.classList.add('open');icon.classList.add('open');}
@@ -1174,7 +1039,7 @@ function qSet(v,btn){
   btn.classList.add('on');
 }
 
-// ===== MASTER IMAGE COMPRESS =====
+// ===== MASTER IMAGE COMPRESS / UPSIZE =====
 async function startMaster(){
   var fi=document.getElementById('upload'),si=document.getElementById('size'),un=document.getElementById('unit');
   var wInp=document.getElementById('resW').value,hInp=document.getElementById('resH').value;
@@ -1193,7 +1058,7 @@ async function startMaster(){
     st.innerText='Processing Image '+(i+1)+' / '+files.length+'…';
     var blob=await processMasterImg(files[i],tk,w,h);
     if(!blob)continue;
-    var dlName=files[i].name.replace(/\.[^/.]+$/,'')+'-compressed.jpg';
+    var dlName=files[i].name.replace(/\.[^/.]+$/,'')+'-processed.jpg';
     addResult(blob,i,false,dlName);
     if(files.length===1) setDl(blob,dlName,st,files[0].size/1024);
   }
@@ -1206,17 +1071,49 @@ async function processMasterImg(file,tkb,targetW,targetH){
   var finalW=targetW||img.width;var finalH=targetH||img.height;
   var cv=document.createElement('canvas'),ctx=cv.getContext('2d');
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+
   if(!tkb){
     cv.width=finalW;cv.height=finalH;
     ctx.drawImage(img,0,0,finalW,finalH);
     return new Promise(function(r){cv.toBlob(r,'image/jpeg',0.95);});
   }
-  var scale=1,best=null;
+
+  // Quick test to see natural size at highest quality
+  cv.width=finalW;cv.height=finalH;
+  ctx.drawImage(img,0,0,cv.width,cv.height);
+  var maxBlob=await new Promise(function(r){cv.toBlob(r,'image/jpeg',1.0);});
+
+  var scale=1, best=null;
+
+  // 1. IF NEED TO INCREASE SIZE
+  if(maxBlob.size/1024 < tkb) {
+     // Scale up dimensions to generate more pixel data
+     scale = Math.sqrt(tkb / (maxBlob.size/1024)) * 1.2; 
+     var MAX_DIM = 8000; // Cap to prevent crashing browser
+     if(finalW*scale > MAX_DIM) scale = MAX_DIM/finalW;
+     if(finalH*scale > MAX_DIM) scale = MAX_DIM/finalH;
+
+     cv.width=Math.round(finalW*scale);
+     cv.height=Math.round(finalH*scale);
+     ctx.drawImage(img,0,0,cv.width,cv.height);
+
+     var lo=0.5,hi=1.0; 
+     for(var i=0;i<20;i++){
+       var q=(lo+hi)/2;
+       var b=await new Promise(function(r){cv.toBlob(r,'image/jpeg',q);});
+       if(!b)continue;
+       if(b.size/1024 > tkb) hi=q; else{lo=q;best=b;}
+     }
+     return best || await new Promise(function(r){cv.toBlob(r,'image/jpeg',1.0);});
+  }
+
+  // 2. IF NEED TO DECREASE SIZE
   for(var s=0;s<10;s++){
-    cv.width=finalW*scale;cv.height=finalH*scale;
+    cv.width=Math.round(finalW*scale);
+    cv.height=Math.round(finalH*scale);
     ctx.drawImage(img,0,0,cv.width,cv.height);
     var lo=0.05,hi=0.95;
-    for(var i=0;i<25;i++){
+    for(var i=0;i<20;i++){
       var q=(lo+hi)/2;
       var b=await new Promise(function(r){cv.toBlob(r,'image/jpeg',q);});
       if(!b)continue;
@@ -1234,7 +1131,7 @@ async function compressPDF(){
   if(!fi.files.length){alert('Please select a PDF first.');return;}
   var tk=parseFloat(si.value);
   if(!tk||tk<=0){alert('Enter valid size');return;}
-  
+
   var files=fi.files,pw=document.getElementById('pbox'),pb=document.getElementById('pfill');
   pw.style.display='block';
   document.getElementById('rg').innerHTML='';
@@ -1308,8 +1205,16 @@ function openPM(src){document.getElementById('pm').style.display='flex';document
     document.getElementById('sbVal').textContent=compStr;
     document.getElementById('asBefore').textContent=origStr;
     document.getElementById('asAfter').textContent=compStr;
-    var pct=Math.max(0,Math.round((1-compKB/origKB)*100));
-    document.getElementById('amsg').textContent=pct>0?pct+'% size reduced! 🎉':'File processed successfully! ✅';
+    
+    // Check if increased or decreased to set correct message
+    if (compKB < origKB) {
+        var pct = Math.max(0,Math.round((1-compKB/origKB)*100));
+        document.getElementById('amsg').textContent = pct > 0 ? pct + '% size reduced! 🎉' : 'File processed successfully! ✅';
+    } else {
+        var pctInc = Math.max(0,Math.round((compKB/origKB - 1)*100));
+        document.getElementById('amsg').textContent = pctInc + '% size increased! 🚀';
+    }
+
     var dlBtn=document.getElementById('adlBtn');
     dlBtn.textContent='⬇ Download ('+compStr+')';
     dlBtn.style.opacity='0';dlBtn.style.transform='translateY(10px)';
@@ -1358,7 +1263,6 @@ function openPM(src){document.getElementById('pm').style.display='flex';document
 (adsbygoogle=window.adsbygoogle||[]).push({});
 </script>
 
-<!-- Google AdSense Script -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4393982800124912" crossorigin="anonymous"></script>
 
 </body>
