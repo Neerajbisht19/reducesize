@@ -966,20 +966,7 @@ body::after{
   </div>
 </footer>
 
-<!-- MODALS -->
-<div id="mo1" class="mo"><div class="mb">
-  <h2>⚠️ Heads up!</h2>
-  <p>Below 15KB, images may become too blurry to be recognizable.</p>
-  <p class="tip">👉 For best results, try 20KB or higher.</p>
-  <button onclick="document.getElementById('mo1').style.display='none'">Got it 👍</button>
-</div></div>
-<div id="mo2" class="mo"><div class="mb">
-  <h2>⚠️ Heads up!</h2>
-  <p>Below 50KB, PDF pages may become unreadable.</p>
-  <p class="tip">👉 Try 50–100KB or higher for best results.</p>
-  <button onclick="document.getElementById('mo2').style.display='none'">Got it 👍</button>
-</div></div>
-<div id="pm" class="pm" onclick="this.style.display='none'"><img id="pmi" alt="Preview"></div>
+
 
 <!-- COMPRESSION ANIMATION OVERLAY -->
 <div id="ov" style="position:fixed;inset:0;background:rgba(2,2,12,.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(12px);">
@@ -1196,7 +1183,7 @@ async function startMaster(){
   if(!fi.files.length){alert('Please select an image first.');return;}
   var tk=parseFloat(si.value);
   if(tk&&un.value==='mb') tk*=1024;
-  if(tk&&tk<15){document.getElementById('mo1').style.display='flex';return;}
+  
   var w=parseInt(wInp),h=parseInt(hInp);
   if(!tk&&(!w||!h)){alert('Please enter a Target Size (KB) OR both Width and Height to proceed.');return;}
   var files=fi.files,pw=document.getElementById('pbox'),pb=document.getElementById('pfill');
@@ -1247,7 +1234,7 @@ async function compressPDF(){
   if(!fi.files.length){alert('Please select a PDF first.');return;}
   var tk=parseFloat(si.value);
   if(!tk||tk<=0){alert('Enter valid size');return;}
-  if(tk<50){document.getElementById('mo2').style.display='flex';st.innerText='';return;}
+  
   var files=fi.files,pw=document.getElementById('pbox'),pb=document.getElementById('pfill');
   pw.style.display='block';
   document.getElementById('rg').innerHTML='';
