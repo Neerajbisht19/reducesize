@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,7 +161,6 @@
     selectedFiles.forEach((file) => {
       let imgUrl = URL.createObjectURL(file);
       
-      // Load image natively first to get exact fallback dimensions
       let img = new Image();
       img.onload = function() {
           EXIF.getData(file, function() {
@@ -174,7 +172,7 @@
             let date = allTags.DateTimeOriginal || "No Date Found";
             let cameraDetails = make !== "N/A" ? make + ' ' + model : model;
             
-            // --- 100% BULLETPROOF GPS LOGIC ---
+            // --- 100% PERFECT MAPS GPS LOGIC USING .valueOf() ---
             let lat = allTags.GPSLatitude;
             let latRef = allTags.GPSLatitudeRef || "N";
             let lon = allTags.GPSLongitude;
@@ -182,48 +180,42 @@
             
             let gpsStatus = '<span class="exif-safe">✅ Safe (No GPS)</span>';
             
-            if (lat && lon) {
+            if (lat && lon && lat.length === 3 && lon.length === 3) {
                 try {
-                    // Extremely safe decimal converter handles objects, arrays, and numbers
-                    const getDec = (val) => {
-                        if (val == null) return 0;
-                        if (val.numerator !== undefined && val.denominator !== undefined) {
-                            return val.denominator !== 0 ? val.numerator / val.denominator : 0;
-                        }
-                        if (typeof val.valueOf === 'function') return val.valueOf();
-                        return parseFloat(val) || 0;
-                    };
-
-                    let latDec = (getDec(lat[0]) + (getDec(lat[1]) / 60) + (getDec(lat[2]) / 3600)).toFixed(6);
-                    let lonDec = (getDec(lon[0]) + (getDec(lon[1]) / 60) + (getDec(lon[2]) / 3600)).toFixed(6);
+                    // exif-js naturally converts data inside .valueOf()
+                    let latDec = lat[0].valueOf() + (lat[1].valueOf() / 60) + (lat[2].valueOf() / 3600);
+                    let lonDec = lon[0].valueOf() + (lon[1].valueOf() / 60) + (lon[2].valueOf() / 3600);
                     
-                    if (isNaN(latDec) || isNaN(lonDec)) throw new Error("NaN");
-
-                    if (latRef === "S") latDec = latDec * -1;
-                    if (lonRef === "W") lonDec = lonDec * -1;
+                    if (latRef === "S") latDec = -latDec;
+                    if (lonRef === "W") lonDec = -lonDec;
                     
-                    gpsStatus = `
-                      <span class="exif-danger" style="display:block; margin-bottom:6px;">⚠️ Location Exposed</span>
-                      <a href="https://maps.google.com/?q=${latDec},${lonDec}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; background:rgba(255,107,107,0.1); color:#ff6b6b; padding:6px 10px; border-radius:6px; text-decoration:none; font-size:11px; font-weight:800; border:1px solid rgba(255,107,107,0.3);">
-                        📍 Exact Maps Pin
-                      </a>
-                    `;
+                    // Final check to prevent 0.000 ocean bug
+                    if (!isNaN(latDec) && !isNaN(lonDec) && (latDec !== 0 || lonDec !== 0)) {
+                        gpsStatus = `
+                          <span class="exif-danger" style="display:block; margin-bottom:6px;">⚠️ Location Exposed</span>
+                          <a href="https://maps.google.com/?q=${latDec.toFixed(6)},${lonDec.toFixed(6)}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; background:rgba(255,107,107,0.1); color:#ff6b6b; padding:6px 10px; border-radius:6px; text-decoration:none; font-size:11px; font-weight:800; border:1px solid rgba(255,107,107,0.3);">
+                            📍 View Exact Map
+                          </a>
+                        `;
+                    } else {
+                        gpsStatus = '<span class="exif-danger">⚠️ Exposed (Invalid Coords)</span>';
+                    }
                 } catch(e) {
-                    gpsStatus = '<span class="exif-danger">⚠️ Exposed (Coordinates Error)</span>';
+                    gpsStatus = '<span class="exif-danger">⚠️ Exposed (Coords Error)</span>';
                 }
+            } else if (lat || lon) {
+                gpsStatus = '<span class="exif-danger">⚠️ Exposed (Raw Data)</span>';
             }
 
             // --- EXTRACT ALL DEEP DETAILS ---
             let software = allTags.Software || "Original / Not Edited";
             let iso = allTags.ISOSpeedRatings || "N/A";
             
-            // Aperture Fix
             let aperture = "N/A";
             if (allTags.FNumber) {
                 aperture = "f/" + (allTags.FNumber.numerator ? (allTags.FNumber.numerator / allTags.FNumber.denominator).toFixed(1) : parseFloat(allTags.FNumber).toFixed(1));
             }
             
-            // Shutter Speed Fix
             let exposure = "N/A";
             if (allTags.ExposureTime) {
                 let et = allTags.ExposureTime;
@@ -234,7 +226,6 @@
                 }
             }
 
-            // Focal Length Fix
             let focalLength = "N/A";
             if (allTags.FocalLength) {
                 focalLength = (allTags.FocalLength.numerator ? (allTags.FocalLength.numerator / allTags.FocalLength.denominator).toFixed(1) : parseFloat(allTags.FocalLength).toFixed(1)) + "mm";
@@ -243,14 +234,12 @@
             let flash = allTags.Flash || "N/A";
             let whiteBalance = allTags.WhiteBalance || "Auto";
 
-            // Resolution & Megapixels
             let imgWidth = allTags.PixelXDimension || allTags.ImageWidth || img.width;
             let imgHeight = allTags.PixelYDimension || allTags.ImageLength || img.height;
             let megapixels = ((imgWidth * imgHeight) / 1000000).toFixed(1);
 
             let isExifClean = (cameraDetails === "Unknown Device" && !lat && iso === "N/A" && software === "Original / Not Edited");
 
-            // Advanced Grid Builder
             let advancedHtml = isExifClean ? '' : `
               <div style="grid-column: span 2; margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 12px;">
                 <div class="exif-label" style="margin-bottom: 10px;">📊 Full Deep Metadata Extraction</div>
@@ -301,7 +290,7 @@
             resultsDiv.innerHTML += cardHTML;
           });
       };
-      img.src = imgUrl; // Trigger the image load and EXIF read
+      img.src = imgUrl; 
     });
   });
 
