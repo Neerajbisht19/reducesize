@@ -5,6 +5,7 @@
 /* Default: Light Theme (White & Purple) */
 :root {
   --bg: #ffffff;
+  --bg-rgb: 255, 255, 255;
   --surface: #f7f8fc;
   --surface2: #ffffff;
   --border: #e2e4ef;
@@ -26,6 +27,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0b0b14;
+    --bg-rgb: 11, 11, 20;
     --surface: #131323;
     --surface2: #1c1c31;
     --border: rgba(255, 255, 255, 0.08);
@@ -72,7 +74,7 @@ body::after {
   position: sticky; top: 0; z-index: 200; height: 70px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 24px;
-  background: rgba(var(--bg), 0.8);
+  background: rgba(var(--bg-rgb), 0.8);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
