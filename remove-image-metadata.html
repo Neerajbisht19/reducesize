@@ -159,14 +159,21 @@
       const img = new Image();
       await new Promise((resolveImg) => { img.onload = resolveImg; img.onerror = resolveImg; img.src = imgUrl; });
 
-      // exifr.parse(file, true) returns ALL segments merged, including
-      // already-computed decimal `latitude`/`longitude` (ref + rational
-      // math handled internally, unlike the old exif-js manual formula).
+      // exifr.parse(file, true) returns ALL segments merged (camera, date, etc).
+      // exifr.gps(file) is a DEDICATED, purpose-built function for coordinates —
+      // it's more reliable than relying on parse()'s generic merge to expose
+      // latitude/longitude, so we use it as the primary GPS source.
       let tags = {};
+      let gpsData = null;
       try {
         tags = (await exifr.parse(file, true)) || {};
       } catch (err) {
         tags = {};
+      }
+      try {
+        gpsData = await exifr.gps(file);
+      } catch (err) {
+        gpsData = null;
       }
 
       // --- Basic Data ---
@@ -181,9 +188,9 @@
         date = `${d.getFullYear()}:${pad(d.getMonth() + 1)}:${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
       }
 
-      // --- ACCURATE GPS: exifr already returns clean decimal degrees ---
-      const lat = tags.latitude;
-      const lon = tags.longitude;
+      // --- ACCURATE GPS: prefer the dedicated exifr.gps() result, fall back to parse() ---
+      const lat = (gpsData && typeof gpsData.latitude === 'number') ? gpsData.latitude : tags.latitude;
+      const lon = (gpsData && typeof gpsData.longitude === 'number') ? gpsData.longitude : tags.longitude;
       const gpsValid =
         typeof lat === 'number' && typeof lon === 'number' &&
         !isNaN(lat) && !isNaN(lon) &&
@@ -218,7 +225,7 @@
       const flash = (tags.Flash !== undefined) ? (tags.Flash % 2 === 1 ? "Fired" : "Did not fire") : "N/A";
       const whiteBalance = tags.WhiteBalance === 1 ? "Manual" : "Auto";
       const lensModel = tags.LensModel || null;
-      const altitude = (typeof tags.GPSAltitude === 'number') ? `${tags.GPSAltitude.toFixed(1)}m` : null;
+      const altitude = (typeof tags.GPSAltitude === 'number' && isFinite(tags.GPSAltitude)) ? `${tags.GPSAltitude.toFixed(1)}m` : null;
 
       const imgWidth = tags.ExifImageWidth || tags.ImageWidth || img.width;
       const imgHeight = tags.ExifImageHeight || tags.ImageLength || img.height;
