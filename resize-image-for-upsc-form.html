@@ -3,210 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resize Image for UPSC Form Free | Crop, Drag & Add Name – ReduceSize</title>
+<title>Resize Image for UPSC Form Online | OTR Photo & Signature</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/resize-image-for-upsc-form.html">
-<meta name="description" content="Resize photo and signature for UPSC Civil Services form. Crop and drag your photo perfectly. Add Name & Date automatically. Set exactly to 350x350 pixels.">
-<meta name="keywords" content="resize image for upsc form, upsc photo crop online, upsc photo size, upsc signature 350x350, upsc photo name date add">
+<meta name="description" content="Resize and crop photos/signatures for UPSC Civil Services OTR. Auto-add Name & Date, set exact 350x350px, and ensure strict JPEG compliance. 100% Free.">
+<meta name="keywords" content="resize image for upsc form, upsc photo crop online, upsc photo size, upsc signature 350x350, upsc photo name date add, upsc otr photo guidelines">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
+<!-- Cropper.js for professional cropping -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
 
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
+
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:20px;align-items:center;} /* Increased gap to prevent mashing */
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none;
-}
-@media(min-width:600px){ .nav-pill{display:inline-block;} }
-
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
-}
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
-}
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:28px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:46px;height:46px;margin:0 auto 10px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
-}
-.drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:12px;color:var(--muted)}
-
-/* CROP AREA */
+/* =========================================
+   UPSC FORM SPECIFIC UI CSS
+   ========================================= */
 .crop-wrap {
-  display:none; 
-  background:var(--surface2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:20px;
-  position:relative;
-  width: 100%;
-  height: 380px; 
+  display:none; background:var(--surface2); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; margin-bottom:20px; position:relative;
+  width: 100%; height: 400px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
 }
-.crop-wrap img {
-  max-width: 100%;
-  display: block;
-}
+.crop-wrap img { max-width: 100%; display: block; }
 
-/* UPSC SPECIFIC CONTROLS */
-.u-box{
-  background:var(--surface2);border:1px solid rgba(109,84,240,.2);
-  border-radius:12px;padding:16px;margin-bottom:20px;
+.ratio-controls {
+    display: none; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
 }
-.u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
-.u-title::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%}
-
-/* INPUT ROW */
-.irow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
-.irow .f{flex:1;min-width:120px;}
-.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input, .irow select{
-  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
-  padding:12px 14px;border-radius:10px;color:var(--text);
-  font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
-  outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
+.ratio-btn {
+    padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--muted); font-size: 12px; font-weight: 700;
+    cursor: pointer; transition: 0.2s; font-family: 'Manrope', sans-serif;
 }
-.irow input::placeholder {color: rgba(255,255,255,0.2);}
-.irow input:focus, .irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
-
-/* CHECKBOX */
-.cb-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.cb-row input[type="checkbox"]{
-  width:18px;height:18px;accent-color:var(--purple);cursor:pointer;
-}
-.cb-label{font-size:14px;font-weight:600;color:var(--text);cursor:pointer;}
-
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* PROGRESS */
-.pbox{display:none;margin-top:13px}
-.ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{
-  height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));
-  border-radius:10px;transition:width .3s;position:relative;overflow:hidden;
-}
-.plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
+.ratio-btn:hover { background: var(--surface); color: #fff;}
+.ratio-btn.active { background: var(--purple-light); border-color: var(--purple); color: var(--purple-text); }
 
 /* CUTE GREETING CARD */
 .greeting-card {
-    display: none;
-    position: relative;
-    background: linear-gradient(145deg, rgba(109,84,240,0.11) 0%, rgba(32,217,192,0.1) 100%);
-    border: 1px dashed rgba(62,207,142,0.42);
-    border-radius: 12px;
-    padding: 22px 16px;
-    text-align: center;
-    margin-top: 16px;
-    animation: cutePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    overflow: visible;
+    display: none; position: relative; background: linear-gradient(145deg, rgba(109,84,240,0.11) 0%, rgba(32,217,192,0.1) 100%);
+    border: 1px dashed rgba(62,207,142,0.42); border-radius: 12px; padding: 22px 16px;
+    text-align: center; margin-top: 16px; animation: cutePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
-@keyframes cutePop { 
-    0% { opacity: 0; transform: translateY(20px) scale(0.9); } 
-    100% { opacity: 1; transform: translateY(0) scale(1); } 
-}
+@keyframes cutePop { 0% { opacity: 0; transform: translateY(20px) scale(0.9); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
 .greeting-card::after {
-    content: "✨ ✨ ✨";
-    font-size: 20px;
-    position: absolute;
-    top: -20px; left: 50%;
-    transform: translateX(-50%);
-    color: var(--accent);
-    opacity: 0;
-    animation: sparkleOut 0.8s ease-out 0.2s forwards;
-    pointer-events: none;
+    content: "✨ ✨ ✨"; font-size: 20px; position: absolute; top: -20px; left: 50%;
+    transform: translateX(-50%); color: var(--accent); opacity: 0;
+    animation: sparkleOut 0.8s ease-out 0.2s forwards; pointer-events: none;
 }
 @keyframes sparkleOut {
   0% { opacity: 0; transform: translateX(-50%) scale(0.5); top: -20px;}
@@ -214,116 +61,85 @@ body::after{
   100% { opacity: 0; transform: translateX(-50%) scale(1.5); top: -60px;}
 }
 .g-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; animation: heartBeat 2s infinite ease-in-out; }
-@keyframes heartBeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-.g-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.2px; }
+@keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.g-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
 .g-title em { font-style: normal; color: var(--accent); }
 .g-text { font-size: 15px; color: #a0a0c8; line-height: 1.6; margin-bottom: 14px; }
 .g-love { font-size: 14px; font-weight: 700; color: var(--purple-l); display: block; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 10px;}
 .g-signature { display: inline-block; padding: 4px 14px; background: rgba(109,84,240,0.12); border-radius: 20px; margin-top: 6px;}
-
-
-/* RESULTS */
-.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
-.rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;display:flex;flex-direction:column;}
-.rc img{width:100%;height:auto;max-height:280px;object-fit:cover;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
-.ri{padding:12px 10px}
-.rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
-.rb{
-  width:100%;padding:9px;border-radius:7px;border:none;
-  background:rgba(109,84,240,.12);color:var(--purple-l);
-  font-size:13px;font-weight:700;cursor:pointer;
-  font-family:'Manrope',sans-serif;transition:.15s;
-}
-.rb:hover{background:rgba(109,84,240,.24)}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{
-  display:flex;align-items:center;gap:9px;padding:12px 13px;
-  background:var(--surface);border:1px solid var(--border);border-radius:11px;
-  text-decoration:none;color:var(--text);transition:.2s;
-}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{
-  position:relative;z-index:1;border-top:1px solid var(--border);
-  padding:28px 20px 20px;text-align:center;
-}
-.flogo{
-  font-family:'Syne',sans-serif;font-size:17px;font-weight:800;
-  color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;
-}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{
-  font-size:12px;color:var(--muted);text-decoration:none;
-  padding:4px 9px;border-radius:6px;transition:.15s;
-}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-.ftrust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;color:#383858;font-weight:600}
-
-/* MOBILE */
-@media(max-width:600px){
-  .sub-hero{padding:32px 0 20px}
-  .card{padding:16px;border-radius:15px}
-  .chips{grid-template-columns:1fr 1fr}
-}
 </style>
 
+<!-- SEO Structured Data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Resize Image for UPSC Form Free | Crop & Drag",
-"url":"https://reducesize.online/resize-image-for-upsc-form.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Resize photo and signature for UPSC Civil Services form. Crop and drag your photo perfectly. Add Name & Date automatically. Set exactly to 350x350 pixels.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"UPSC Form Photo & Signature Resizer",
+  "url":"https://reducesize.online/resize-image-for-upsc-form.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Professional tool to resize, crop, and compress photos and signatures for UPSC Civil Services OTR forms. 100% Acceptable JPEGs.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What are the exact pixel dimensions required for UPSC photos?","acceptedAnswer":{"@type":"Answer","text":"UPSC mandates that both your photograph and signature must have a minimum resolution of 350 x 350 pixels and a maximum resolution of 1000 x 1000 pixels. The file size must be between 20KB and 300KB."}},
-{"@type":"Question","name":"How do I add my name and date to the UPSC photo?","acceptedAnswer":{"@type":"Answer","text":"Our dedicated UPSC tool has an 'Add Name & Date' feature. Simply check the box, enter your name and the date the photo was taken. The tool will automatically generate a strip at the bottom of your photo and print the details clearly before resizing it."}},
-{"@type":"Question","name":"Will adding text ruin the 300KB limit?","acceptedAnswer":{"@type":"Answer","text":"No. Our algorithm adds the text, resizes the image to your chosen dimensions (like 350x350), and then compresses the final combined image to ensure it strictly stays under the 300KB maximum limit."}},
-{"@type":"Question","name":"Can I use this for the UPSC signature upload as well?","acceptedAnswer":{"@type":"Answer","text":"Yes. For the signature, simply leave the 'Add Text' box unchecked, enter 350 in both Width and Height, and set the target size to around 50KB. The tool will resize your signature perfectly for the portal."}},
-{"@type":"Question","name":"How does the cropping feature work?","acceptedAnswer":{"@type":"Answer","text":"When you upload an image, a dynamic cropping box appears. You can drag and zoom your photo inside the box to select exactly which part you want to keep. The aspect ratio of the box automatically matches your required dimensions."}}
-]}
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"What are the exact pixel dimensions required for UPSC photos?",
+      "acceptedAnswer":{"@type":"Answer","text":"UPSC mandates that both your photograph and signature must have a minimum resolution of 350 x 350 pixels and a maximum resolution of 1000 x 1000 pixels. The file size must be between 20KB and 300KB."}
+    },
+    {
+      "@type":"Question",
+      "name":"How do I add my name and date to the UPSC photo?",
+      "acceptedAnswer":{"@type":"Answer","text":"Our dedicated UPSC tool has an 'Add Name & Date' feature. Simply check the box, enter your name and the date the photo was taken. The tool will automatically generate a strip at the bottom of your photo."}
+    },
+    {
+      "@type":"Question",
+      "name":"Will adding text ruin the 300KB limit?",
+      "acceptedAnswer":{"@type":"Answer","text":"No. Our algorithm adds the text, resizes the image to your chosen dimensions (like 350x350), and then compresses the final combined image to ensure it strictly stays under the 300KB maximum limit."}
+    }
+  ]
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ UPSC Portal Ready</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Crop, Drag, Zoom & Professional Resize</div>
-  <h1>Resize Image for<br><span class="grad">UPSC Online Form</span></h1>
-  <p>Live crop your photo by dragging, set exact 350x350 pixels, and print your <b>Name / Date</b> as per strict UPSC OTR guidelines.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ Crop, Drag, Zoom & Professional Resize</div>
+  <h1 class="hero-h1">Resize Image for<br><span class="grad">UPSC Online Form</span></h1>
+  <p class="hero-sub">Live crop your photo by dragging, set exact 350x350 pixels, and print your <b>Name / Date</b> as per strict UPSC OTR guidelines.</p>
+  
   <div class="badges">
+    <span class="badge">🏛 UPSC OTR Ready</span>
     <span class="badge">✂ Live Crop & Drag</span>
-    <span class="badge">📐 350x350 px</span>
-    <span class="badge">📝 Name/Date</span>
+    <span class="badge">📝 Name/Date Stamp</span>
     <span class="badge">⚖️ Under 300KB</span>
   </div>
 </section>
@@ -332,62 +148,43 @@ body::after{
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="image/*">
     <div class="drop-ico">📸</div>
-    <div class="drop-main" id="dropText">Drop UPSC Photo or Signature here</div>
-    <div class="drop-hint">JPG or PNG (Only 1 file at a time for live cropping)</div>
+    <div class="drop-main" id="dropText">Upload Photo or Signature here</div>
+    <div class="drop-hint">JPG or PNG formats accepted</div>
   </div>
   
   <div id="cropWrap" class="crop-wrap">
     <img id="imageToCrop">
   </div>
 
+  <div id="ratioControls" class="ratio-controls">
+      <button class="ratio-btn active" onclick="setCropRatio(NaN, this)">Free Crop</button>
+      <button class="ratio-btn" onclick="setCropRatio(1, this)">Square (1:1)</button>
+  </div>
+
   <div class="u-box">
-    <div class="u-title">1. Set Final Dimensions (Pixels) & Size</div>
+    <div class="u-title">1. Verify Dimensions & Size</div>
     <div class="irow">
-      <div class="f"><label class="fl">Width (Min 350px)</label><input type="number" id="resW" value="350"></div>
-      <div class="f"><label class="fl">Height (Min 350px)</label><input type="number" id="resH" value="350"></div>
+      <div class="f"><label class="fl">Width (Pixels)</label><input type="number" id="resW" value="350"></div>
+      <div class="f"><label class="fl">Height (Pixels)</label><input type="number" id="resH" value="350"></div>
     </div>
     <div class="irow" style="margin-bottom:0">
       <div class="f"><label class="fl">Max File Size (KB)</label><input type="number" id="size" value="250" placeholder="Max 300KB"></div>
     </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*UPSC allows 20KB to 300KB. 250KB is optimal.</p>
+    <p id="hintText" style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*UPSC OTR requires min 350x350px. 250KB is optimal.</p>
   </div>
 
-  <div class="u-box">
+  <div class="u-box" id="textSettingsBox" style="display:none;">
     <div class="u-title">2. Add Name / Date (Optional)</div>
-    <div class="cb-row">
+    <label class="cb-row">
       <input type="checkbox" id="addTextCb" onchange="toggleTextInputs()">
-      <label for="addTextCb" class="cb-label">Print Text on Photo</label>
-    </div>
+      <span class="cb-label">Add Thin Text Strip at Bottom</span>
+    </label>
     
-    <div id="textInputs" style="display:none;margin-top:12px;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px">
+    <div id="textInputs" style="display:none; margin-top: 10px;">
       <div class="irow">
-        <div class="f"><label class="fl">Name (Optional)</label><input type="text" id="candName" placeholder="e.g. RAHUL KUMAR"></div>
-        <div class="f"><label class="fl">Date (Optional)</label><input type="text" id="photoDate" placeholder="e.g. 15/06/2026"></div>
+        <div class="f"><label class="fl">Name</label><input type="text" id="candName" placeholder="e.g. RAHUL KUMAR"></div>
+        <div class="f"><label class="fl">Date</label><input type="text" id="photoDate" placeholder="e.g. 15/06/2026"></div>
       </div>
-      
-      <div class="irow">
-        <div class="f">
-          <label class="fl">Strip Background Color</label>
-          <select id="stripColor" onchange="updateAspectRatio()">
-            <option value="#ffffff">White (Standard)</option>
-            <option value="#000000">Black</option>
-            <option value="#1a365d">Navy Blue</option>
-            <option value="#2d3748">Dark Grey</option>
-            <option value="#ffff00">Yellow</option>
-          </select>
-        </div>
-        <div class="f">
-          <label class="fl">Font Style</label>
-          <select id="fontStyle">
-            <option value="Arial, Helvetica, sans-serif">Arial (Clean & Standard)</option>
-            <option value="'Times New Roman', Times, serif">Times New Roman (Formal Serif)</option>
-            <option value="Verdana, Geneva, sans-serif">Verdana (Wide & Clear)</option>
-            <option value="'Courier New', Courier, monospace">Courier (Typewriter Mono)</option>
-          </select>
-        </div>
-      </div>
-      
-      <p style="font-size:11px;color:var(--yellow);margin-top:2px;margin-bottom:0">Note: Font color will automatically adjust to be visible against your chosen strip color.</p>
     </div>
   </div>
 
@@ -398,7 +195,7 @@ body::after{
   <div id="greetingCard" class="greeting-card">
     <div class="g-icon">🏛🇮🇳</div>
     <div class="g-title">✨ <em>LBSNAA / IAS</em> Ka Sapna ✨</div>
-    <div class="g-text">Humari dil se dua hai ki aap is saal UPSC Civil Services crack karein.. <br> aur Lal Bahadur Shastri National Academy (LBSNAA) jayein! 🇮🇳✍️ <br><br> Desh ki seva aur aapke ujjwal bhavishya ke liye <br> dher saari shubhkaamnayein! 🌟✨</div>
+    <div class="g-text">Humari dil se dua hai ki aap is saal UPSC Civil Services crack karein.. <br> aur Lal Bahadur Shastri National Academy (LBSNAA) jayein! 🇮🇳✍️</div>
     <span class="g-love">Lots of love, <span class="g-signature">ReduceSize.online ❤️</span></span>
   </div>
 
@@ -406,36 +203,27 @@ body::after{
 </div>
 
 <section class="seo">
-<h2>The Ultimate Guide to Live Cropping & Resizing Images for UPSC Forms</h2>
-<p>If you are applying for the Union Public Service Commission (UPSC) Civil Services (IAS, IPS, IFS) or the NDA exams, you know that their One Time Registration (OTR) and application portals have the strictest image upload guidelines in India. Unlike other exams that only care about the KB size, UPSC requires you to strictly manage the <strong>File Size (KB)</strong>, the <strong>Dimensions (Pixels)</strong>, and increasingly, the <strong>text printed on the photograph</strong>.</p>
-<p>Failing to meet any of these three criteria results in an immediate upload error, or worse, application rejection at a later stage. <strong>ReduceSize.online</strong> has built this dedicated UPSC image tool to solve all these problems simultaneously.</p>
+  <h2>The Master Fixer for UPSC OTR Form Rejections</h2>
+  <p>Applying for the Union Public Service Commission (UPSC) Civil Services (IAS, IPS, IFS) exams requires absolute precision. The UPSC One Time Registration (OTR) portal is powered by legacy systems that are extremely unforgiving. If your image is 1KB over the size limit or even 1 pixel off in dimensions, the system will discard your application without explanation.</p>
 
-<h3>Live Cropping & Aspect Ratio Management</h3>
-<p>The most important part of a passport photo is ensuring your face is centered and prominent. Standard resizing tools often stretch your photo or leave ugly white bars. Our new <strong>Live Cropping</strong> feature lets you upload your raw photo and then visually drag, zoom, and select exactly which part you want to keep. The cropping box is intelligently locked to the aspect ratio derived from your Width and Height inputs (e.g., 350x350 ensures a perfect square crop), so your final image is never distorted.</p>
+  <h3>Why UPSC Portals Reject Photos</h3>
+  <p>Our analysis of common rejection errors on UPSC portals shows three recurring issues:</p>
+  <ul>
+    <li><strong>File Size Too Large:</strong> UPSC portals enforce strict size caps (up to 300KB). If you upload a 3MB phone photo, it will be rejected instantly.</li>
+    <li><strong>Incorrect Aspect Ratio:</strong> UPSC mandates a square ratio for photographs. Uploading a rectangular photo will make your face look distorted or stretched.</li>
+    <li><strong>Invalid Image Format:</strong> Portal validators often fail if the image is not a standard Baseline JPEG. Our tool ensures your output is 100% compliant.</li>
+  </ul>
 
-<h3>Official UPSC Photo & Signature Guidelines (2026)</h3>
-<p>Before you upload, ensure you understand the exact requirements laid out by the commission:</p>
-<ul>
-  <li><strong>File Size limits:</strong> Both the photograph and the signature must be between <strong>20 KB and 300 KB</strong>.</li>
-  <li><strong>Pixel Dimensions:</strong> The width and height must be a minimum of <strong>350 x 350 pixels</strong> and a maximum of <strong>1000 x 1000 pixels</strong>.</li>
-  <li><strong>Format:</strong> Only .JPG or .JPEG files are accepted.</li>
-  <li><strong>The "Name and Date" Rule:</strong> Recent UPSC notifications mandate that the candidate's name and the date on which the photograph was taken must be clearly printed at the bottom of the photo. The date must not be older than 10 days from the application start date.</li>
-</ul>
+  <h3>How our "UPSC Master Fixer" Solves This</h3>
+  <ol>
+    <li><strong>Smart Cropper:</strong> Our cropper is designed to maintain the 350x350 aspect ratio required for OTR. Drag the box so your face is perfectly centered.</li>
+    <li><strong>Anti-Rejection Encoder:</strong> No matter what format you upload (.PNG, .WEBP, .HEIC), our tool forces the output to be a compliant, standard JPEG that the UPSC portal accepts.</li>
+    <li><strong>Exact KB Targeting:</strong> We compress your image to fit the exact limit (e.g., 250KB) without sacrificing the sharpness of your face.</li>
+  </ol>
 
-<h3>How Our Advanced UPSC Tool Works</h3>
-<p>Our tool integrates live cropping, text stamping, resizing, and compression directly in your browser:</p>
-<ol>
-  <li><strong>Upload the raw photo:</strong> Select your high-resolution portrait photo.</li>
-  <li><strong>Crop & Drag:</strong> Use the live cropping box that appears. Drag the photo inside the box and use your mouse wheel (or pinch-to-zoom on mobile) to adjust the selection. Your face should fill about 70-80% of the square area.</li>
-  <li><strong>Set Pixels:</strong> We pre-fill the dimensions to 350x350 pixels (safest setting). Change this to 400x400 if desired. The cropper aspect ratio will adjust automatically.</li>
-  <li><strong>Set KB:</strong> We pre-fill the target size to 250KB.</li>
-  <li><strong>Add Text Automatically:</strong> Check the "Print Text" box. Type your name, date, or both. Our script will automatically generate a thin strip at the bottom of your image and stamp the text securely using your chosen professional font.</li>
-  <li><strong>Download:</strong> Click generate. The final image will be precisely cropped to your dimensions, have your details printed, and weigh exactly as requested.</li>
-</ol>
-
-<h3>Frequently Asked Questions (FAQs)</h3>
-<p><strong>How do I add my name and date to the UPSC photo?</strong><br>Our dedicated UPSC tool has an text feature. Simply check the box, enter your name and the date. The tool will automatically generate a strip at the bottom of your photo and print the details clearly before resizing it. You can choose to enter only your name or only the date as well!</p>
-<p><strong>Does the cropping tool work on mobile phones?</strong><br>Yes, the tool uses Cropper.js, which is fully touch-responsive. You can use your fingers to drag the photo and pinch-to-zoom directly on your smartphone.</p>
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>What are the exact pixel dimensions required for UPSC photos?</strong><br>UPSC mandates that both your photograph and signature must have a minimum resolution of 350 x 350 pixels and a maximum resolution of 1000 x 1000 pixels. The file size must be between 20KB and 300KB.</p>
+  <p><strong>How do I add my name and date to the UPSC photo?</strong><br>Our dedicated UPSC tool has an 'Add Name & Date' feature. Simply check the box, enter your name and the date the photo was taken. The tool will automatically generate a strip at the bottom of your photo.</p>
 </section>
 
 <div class="chips-hd">More Tools</div>
@@ -444,7 +232,7 @@ body::after{
   <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
   <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
   <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
-  <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">📐</span><div class="chip-t"><strong>Reduce Size (KB)</strong><span>Any size</span></div></a>
+  <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
   <a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a>
 </div>
 </div>
@@ -465,6 +253,7 @@ body::after{
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="assets/script.js" defer></script>
 
 <script>
 let currentFile = null;
@@ -473,14 +262,14 @@ let cropper = null;
 document.getElementById('upload').addEventListener('change', function() {
   const cropWrap = document.getElementById('cropWrap');
   const imageToCrop = document.getElementById('imageToCrop');
-  document.getElementById('greetingCard').style.display = 'none'; // Hide greeting on new upload
-  document.getElementById('rg').innerHTML = ''; // clear results
+  document.getElementById('greetingCard').style.display = 'none'; 
+  document.getElementById('rg').innerHTML = ''; 
   
   if(!this.files.length) { 
     cropWrap.style.display='none'; 
     if(cropper) cropper.destroy(); 
     currentFile = null; 
-    document.getElementById('dropText').innerText = "Drop UPSC Photo or Signature here";
+    document.getElementById('dropZone').style.display = 'block';
     return; 
   }
   
@@ -488,19 +277,18 @@ document.getElementById('upload').addEventListener('change', function() {
   if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
   currentFile = f;
   
-  // Show Crop Area & Hide Drop Zone to save space
   document.getElementById('dropZone').style.display = 'none';
   cropWrap.style.display = 'block';
+  document.getElementById('ratioControls').style.display = 'flex';
   imageToCrop.src = URL.createObjectURL(f);
   
-  if(cropper) { cropper.destroy(); }
+  if(cropper) cropper.destroy(); 
 
-  // Initialize Cropper 
   const w = parseInt(document.getElementById('resW').value) || 350;
-  const photoHeight = getPhotoHeight();
+  const h = parseInt(document.getElementById('resH').value) || 350;
 
   cropper = new Cropper(imageToCrop, {
-      aspectRatio: w / photoHeight,
+      aspectRatio: w / h,
       viewMode: 1, 
       autoCropArea: 0.9, 
       background: true, 
@@ -509,27 +297,11 @@ document.getElementById('upload').addEventListener('change', function() {
   });
 });
 
-// Calculate how much height is for photo and how much is for the text strip
-function getPhotoHeight() {
-    const w = parseInt(document.getElementById('resW').value) || 350;
-    const h = parseInt(document.getElementById('resH').value) || 350;
-    const addText = document.getElementById('addTextCb').checked;
-    const cName = document.getElementById('candName').value.trim();
-    const pDate = document.getElementById('photoDate').value.trim();
-    
-    let stripHeight = 0;
-    if (addText && (cName || pDate)) {
-        stripHeight = Math.max(h * 0.08, 24); // EXACTLY HALF of previous: 8% of total height
-    }
-    return h - stripHeight;
-}
-
-// Update Cropper Box Ratio when inputs change
 function updateAspectRatio() {
     if(cropper) {
         const w = parseInt(document.getElementById('resW').value) || 350;
-        const photoHeight = getPhotoHeight();
-        cropper.setAspectRatio(w / photoHeight);
+        const h = parseInt(document.getElementById('resH').value) || 350;
+        cropper.setAspectRatio(w / h);
     }
 }
 
@@ -542,7 +314,13 @@ function toggleTextInputs() {
   const cb = document.getElementById('addTextCb');
   const box = document.getElementById('textInputs');
   box.style.display = cb.checked ? 'block' : 'none';
-  updateAspectRatio();
+}
+
+function setCropRatio(ratio, btn) {
+    document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('formPreset').value = 'custom';
+    if(cropper) cropper.setAspectRatio(ratio);
 }
 
 async function processUPSC() {
@@ -552,108 +330,52 @@ async function processUPSC() {
   const h = parseInt(document.getElementById('resH').value);
   const tkb = parseFloat(document.getElementById('size').value);
   
-  if(!w || !h || w < 350 || h < 350) { alert('Width and Height must be at least 350px for UPSC.'); return; }
-  if(!tkb || tkb > 300) { alert('Size must be under 300KB.'); return; }
+  if(!w || !h) { alert('Please enter valid width and height.'); return; }
+  if(!tkb) { alert('Please enter target KB size.'); return; }
 
   const addText = document.getElementById('addTextCb').checked;
   const cName = document.getElementById('candName').value.trim();
   const pDate = document.getElementById('photoDate').value.trim();
-  const stripColor = document.getElementById('stripColor').value;
-  const fontStyle = document.getElementById('fontStyle').value;
-
-  if(addText && (!cName && !pDate)) {
-    alert('Please enter a Name or Date, or uncheck the text box if resizing a simple signature.');
-    return;
-  }
 
   const btn = document.querySelector('.btn');
   btn.innerText = 'Processing...';
   document.getElementById('rg').innerHTML = '';
-  document.getElementById('greetingCard').style.display = 'none'; // Hide if previously shown
+  document.getElementById('greetingCard').style.display = 'none';
 
   const pw = document.getElementById('pbox');
   const pb = document.getElementById('pfill');
   const st = document.getElementById('status');
   pw.style.display = 'block';
-  pb.style.width = '10%';
+  pb.style.width = '20%';
   st.innerText = 'Extracting Cropped Area...';
 
   try {
-    const photoHeight = getPhotoHeight();
-    const stripHeight = h - photoHeight;
-
-    // Get strictly cropped image data from Cropper.js at EXACT required dimensions
+    // 1. Get raw cropped canvas
     const croppedCanvas = cropper.getCroppedCanvas({
         width: w,
-        height: photoHeight,
+        height: h,
         fillColor: '#ffffff'
     });
 
-    // Create final Master Canvas (w x h)
-    const cv = document.createElement('canvas');
-    const ctx = cv.getContext('2d');
-    cv.width = w;
-    cv.height = h;
-
-    // Background fill (white)
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, w, h);
-
-    // Draw the Cropped Canvas on top directly! No stretching math needed!
-    ctx.drawImage(croppedCanvas, 0, 0, w, photoHeight);
-
-    // Draw Strip & Text
-    if (stripHeight > 0) {
-      ctx.fillStyle = stripColor;
-      ctx.fillRect(0, photoHeight, w, stripHeight);
-      
-      // Smart Font Color
-      if(stripColor === '#ffffff' || stripColor === '#ffff00') {
-          ctx.fillStyle = '#000000';
-      } else {
-          ctx.fillStyle = '#ffffff';
-      }
-      
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      
-      let lines = [];
-      if(cName) lines.push(cName.toUpperCase());
-      if(pDate) lines.push(pDate);
-
-      // Adjust Font Size for Thinner Strip
-      let fontMultiplier = lines.length === 2 ? 0.38 : 0.60;
-      let fontSize = Math.floor(stripHeight * fontMultiplier);
-      ctx.font = `bold ${fontSize}px ${fontStyle}`;
-      
-      if(lines.length === 2) {
-          ctx.fillText(lines[0], w/2, photoHeight + (stripHeight * 0.30));
-          ctx.fillText(lines[1], w/2, photoHeight + (stripHeight * 0.75));
-      } else if (lines.length === 1) {
-          ctx.fillText(lines[0], w/2, photoHeight + (stripHeight * 0.55));
-      }
-    }
-
     pb.style.width = '60%';
-    st.innerText = 'Compressing to KB...';
+    st.innerText = 'Applying Anti-Rejection Compression...';
 
-    // Binary search for exact KB compression
+    // 2. Binary search for exact KB compression
     let lo = 0.1, hi = 1.0, bestBlob = null;
     for(let i=0; i<15; i++) {
       let q = (lo+hi)/2;
-      let blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', q));
+      let blob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', q));
       if(blob.size/1024 > tkb) { hi = q; } 
       else { lo = q; bestBlob = blob; }
     }
 
     if(!bestBlob) {
-        bestBlob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.1));
+        bestBlob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', 0.1));
     }
 
     pb.style.width = '100%';
     st.innerText = 'Done ✅';
     
-    // Show Greeting Card for UPSC
     setTimeout(()=>{
         pw.style.display='none';
         document.getElementById('greetingCard').style.display = 'block';
@@ -663,7 +385,7 @@ async function processUPSC() {
     const url = URL.createObjectURL(bestBlob);
     const d = document.createElement('div');
     d.className = 'rc';
-    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class=\"rb\" onclick=\"dlUrl('${url}','upsc_ready.jpg')\">⬇ Download</button></div>`;
+    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','upsc_ready.jpg')">⬇ Download</button></div>`;
     document.getElementById('rg').appendChild(d);
 
   } catch(e) {
