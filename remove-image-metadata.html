@@ -137,8 +137,8 @@
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
 </footer>
 
-<!-- External Library to Read EXIF Data securely -->
-<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+<!-- External Library to Read EXIF Data securely (exifr handles GPS/rational conversion correctly) -->
+<script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
 
 <!-- Linked to your existing script.js for basic layout logic -->
 <script src="assets/script.js" defer></script>
@@ -147,151 +147,139 @@
 <script>
   let selectedFiles = [];
 
-  document.getElementById('upload').addEventListener('change', function(e) {
+  document.getElementById('upload').addEventListener('change', async function(e) {
     const resultsDiv = document.getElementById('metadata-results');
-    resultsDiv.innerHTML = ''; 
+    resultsDiv.innerHTML = '';
     selectedFiles = Array.from(e.target.files);
-    
-    if (selectedFiles.length > 0) {
-      document.getElementById('cleanAllBtn').style.display = 'block';
-    } else {
-      document.getElementById('cleanAllBtn').style.display = 'none';
+
+    document.getElementById('cleanAllBtn').style.display = selectedFiles.length > 0 ? 'block' : 'none';
+
+    for (const file of selectedFiles) {
+      const imgUrl = URL.createObjectURL(file);
+      const img = new Image();
+      await new Promise((resolveImg) => { img.onload = resolveImg; img.onerror = resolveImg; img.src = imgUrl; });
+
+      // exifr.parse(file, true) returns ALL segments merged, including
+      // already-computed decimal `latitude`/`longitude` (ref + rational
+      // math handled internally, unlike the old exif-js manual formula).
+      let tags = {};
+      try {
+        tags = (await exifr.parse(file, true)) || {};
+      } catch (err) {
+        tags = {};
+      }
+
+      // --- Basic Data ---
+      const make = tags.Make || "N/A";
+      const model = tags.Model || "Unknown Device";
+      const cameraDetails = (make !== "N/A" && model !== "Unknown Device") ? `${make} ${model}` : model;
+
+      let date = "No Date Found";
+      if (tags.DateTimeOriginal instanceof Date && !isNaN(tags.DateTimeOriginal)) {
+        const d = tags.DateTimeOriginal;
+        const pad = n => String(n).padStart(2, '0');
+        date = `${d.getFullYear()}:${pad(d.getMonth() + 1)}:${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+      }
+
+      // --- ACCURATE GPS: exifr already returns clean decimal degrees ---
+      const lat = tags.latitude;
+      const lon = tags.longitude;
+      const gpsValid =
+        typeof lat === 'number' && typeof lon === 'number' &&
+        !isNaN(lat) && !isNaN(lon) &&
+        Math.abs(lat) <= 90 && Math.abs(lon) <= 180 &&
+        !(Math.abs(lat) < 0.0005 && Math.abs(lon) < 0.0005); // reject Null Island false-positives
+
+      let gpsStatus = '<span class="exif-safe">✅ Safe (No GPS)</span>';
+      if (gpsValid) {
+        const mapsUrl = `https://www.google.com/maps?q=${lat.toFixed(6)},${lon.toFixed(6)}`;
+        gpsStatus = `
+          <span class="exif-danger" style="display:block; margin-bottom:6px;">⚠️ Location Exposed</span>
+          <a href="${mapsUrl}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:4px; background:rgba(255,107,107,0.1); color:#ff6b6b; padding:6px 10px; border-radius:6px; text-decoration:none; font-size:11px; font-weight:800; border:1px solid rgba(255,107,107,0.3);">
+            📍 View Exact Map
+          </a>
+          <div style="font-size:10px; color:var(--muted); margin-top:6px;">${lat.toFixed(6)}, ${lon.toFixed(6)}</div>
+        `;
+      } else if (tags.GPSLatitude || tags.GPSLongitude) {
+        gpsStatus = '<span class="exif-danger">⚠️ Exposed (Unreadable Coords)</span>';
+      }
+
+      // --- EXTRACT ALL DEEP DETAILS ---
+      const software = tags.Software || "Original / Not Edited";
+      const iso = tags.ISO || "N/A";
+      const aperture = tags.FNumber ? `f/${Number(tags.FNumber).toFixed(1)}` : "N/A";
+
+      let exposure = "N/A";
+      if (tags.ExposureTime) {
+        exposure = tags.ExposureTime < 1 ? `1/${Math.round(1 / tags.ExposureTime)}s` : `${tags.ExposureTime}s`;
+      }
+
+      const focalLength = tags.FocalLength ? `${Number(tags.FocalLength).toFixed(1)}mm` : "N/A";
+      const flash = (tags.Flash !== undefined) ? (tags.Flash % 2 === 1 ? "Fired" : "Did not fire") : "N/A";
+      const whiteBalance = tags.WhiteBalance === 1 ? "Manual" : "Auto";
+      const lensModel = tags.LensModel || null;
+      const altitude = (typeof tags.GPSAltitude === 'number') ? `${tags.GPSAltitude.toFixed(1)}m` : null;
+
+      const imgWidth = tags.ExifImageWidth || tags.ImageWidth || img.width;
+      const imgHeight = tags.ExifImageHeight || tags.ImageLength || img.height;
+      const megapixels = ((imgWidth * imgHeight) / 1000000).toFixed(1);
+
+      const isExifClean = (cameraDetails === "Unknown Device" && !gpsValid && iso === "N/A" && software === "Original / Not Edited");
+
+      const extraLens = lensModel ? `<div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Lens: <b style="color:var(--text)">${lensModel}</b></div>` : '';
+      const extraAlt = altitude ? `<div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Altitude: <b style="color:var(--text)">${altitude}</b></div>` : '';
+
+      const advancedHtml = isExifClean ? '' : `
+        <div style="grid-column: span 2; margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 12px;">
+          <div class="exif-label" style="margin-bottom: 10px;">📊 Full Deep Metadata Extraction</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: var(--muted);">
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Resolution: <b style="color:var(--text)">${imgWidth}x${imgHeight} (${megapixels} MP)</b></div>
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">ISO: <b style="color:var(--text)">${iso}</b></div>
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Aperture: <b style="color:var(--text)">${aperture}</b></div>
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Shutter: <b style="color:var(--text)">${exposure}</b></div>
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Focal Length: <b style="color:var(--text)">${focalLength}</b></div>
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Flash: <b style="color:var(--text)">${flash}</b></div>
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">White Bal: <b style="color:var(--text)">${whiteBalance}</b></div>
+            <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Software: <b style="color:var(--text)">${software}</b></div>
+            ${extraLens}
+            ${extraAlt}
+          </div>
+        </div>
+      `;
+
+      const cardHTML = `
+        <div class="exif-card">
+          <div class="exif-header">
+            <img src="${imgUrl}" class="exif-thumb" alt="Thumbnail">
+            <div>
+              <div class="exif-title">${file.name}</div>
+              <div style="font-size: 12px; color: var(--muted);">${(file.size / 1024).toFixed(1)} KB</div>
+            </div>
+          </div>
+
+          <div class="exif-grid">
+            <div class="exif-item">
+              <div class="exif-label">Location Data</div>
+              <div class="exif-val">${gpsStatus}</div>
+            </div>
+            <div class="exif-item">
+              <div class="exif-label">Device Info</div>
+              <div class="exif-val" style="color: ${isExifClean ? 'var(--green)' : '#ff6b6b'}">${cameraDetails}</div>
+            </div>
+            <div class="exif-item">
+              <div class="exif-label">Capture Date</div>
+              <div class="exif-val">${date}</div>
+            </div>
+            <div class="exif-item">
+              <div class="exif-label">Privacy Status</div>
+              <div class="exif-val">${isExifClean ? '<span class="exif-safe">Already Clean</span>' : '<span class="exif-danger">⚠️ Deep Data Found</span>'}</div>
+            </div>
+            ${advancedHtml}
+          </div>
+        </div>
+      `;
+      resultsDiv.innerHTML += cardHTML;
     }
-
-    selectedFiles.forEach((file) => {
-      let imgUrl = URL.createObjectURL(file);
-      
-      let img = new Image();
-      img.onload = function() {
-          EXIF.getData(file, function() {
-            let allTags = EXIF.getAllTags(this);
-            
-            // Basic Data
-            let make = allTags.Make || "N/A";
-            let model = allTags.Model || "Unknown Device";
-            let date = allTags.DateTimeOriginal || "No Date Found";
-            let cameraDetails = make !== "N/A" ? make + ' ' + model : model;
-            
-            // --- 100% PERFECT MAPS GPS LOGIC USING .valueOf() ---
-            let lat = allTags.GPSLatitude;
-            let latRef = allTags.GPSLatitudeRef || "N";
-            let lon = allTags.GPSLongitude;
-            let lonRef = allTags.GPSLongitudeRef || "E";
-            
-            let gpsStatus = '<span class="exif-safe">✅ Safe (No GPS)</span>';
-            
-            if (lat && lon && lat.length === 3 && lon.length === 3) {
-                try {
-                    // exif-js naturally converts data inside .valueOf()
-                    let latDec = lat[0].valueOf() + (lat[1].valueOf() / 60) + (lat[2].valueOf() / 3600);
-                    let lonDec = lon[0].valueOf() + (lon[1].valueOf() / 60) + (lon[2].valueOf() / 3600);
-                    
-                    if (latRef === "S") latDec = -latDec;
-                    if (lonRef === "W") lonDec = -lonDec;
-                    
-                    // Final check to prevent 0.000 ocean bug
-                    if (!isNaN(latDec) && !isNaN(lonDec) && (latDec !== 0 || lonDec !== 0)) {
-                        gpsStatus = `
-                          <span class="exif-danger" style="display:block; margin-bottom:6px;">⚠️ Location Exposed</span>
-                          <a href="https://maps.google.com/?q=${latDec.toFixed(6)},${lonDec.toFixed(6)}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; background:rgba(255,107,107,0.1); color:#ff6b6b; padding:6px 10px; border-radius:6px; text-decoration:none; font-size:11px; font-weight:800; border:1px solid rgba(255,107,107,0.3);">
-                            📍 View Exact Map
-                          </a>
-                        `;
-                    } else {
-                        gpsStatus = '<span class="exif-danger">⚠️ Exposed (Invalid Coords)</span>';
-                    }
-                } catch(e) {
-                    gpsStatus = '<span class="exif-danger">⚠️ Exposed (Coords Error)</span>';
-                }
-            } else if (lat || lon) {
-                gpsStatus = '<span class="exif-danger">⚠️ Exposed (Raw Data)</span>';
-            }
-
-            // --- EXTRACT ALL DEEP DETAILS ---
-            let software = allTags.Software || "Original / Not Edited";
-            let iso = allTags.ISOSpeedRatings || "N/A";
-            
-            let aperture = "N/A";
-            if (allTags.FNumber) {
-                aperture = "f/" + (allTags.FNumber.numerator ? (allTags.FNumber.numerator / allTags.FNumber.denominator).toFixed(1) : parseFloat(allTags.FNumber).toFixed(1));
-            }
-            
-            let exposure = "N/A";
-            if (allTags.ExposureTime) {
-                let et = allTags.ExposureTime;
-                if (et.numerator && et.denominator) {
-                    exposure = et.numerator + "/" + et.denominator + "s";
-                } else {
-                    exposure = parseFloat(et) < 1 ? "1/" + Math.round(1/parseFloat(et)) + "s" : et + "s";
-                }
-            }
-
-            let focalLength = "N/A";
-            if (allTags.FocalLength) {
-                focalLength = (allTags.FocalLength.numerator ? (allTags.FocalLength.numerator / allTags.FocalLength.denominator).toFixed(1) : parseFloat(allTags.FocalLength).toFixed(1)) + "mm";
-            }
-
-            let flash = allTags.Flash || "N/A";
-            let whiteBalance = allTags.WhiteBalance || "Auto";
-
-            let imgWidth = allTags.PixelXDimension || allTags.ImageWidth || img.width;
-            let imgHeight = allTags.PixelYDimension || allTags.ImageLength || img.height;
-            let megapixels = ((imgWidth * imgHeight) / 1000000).toFixed(1);
-
-            let isExifClean = (cameraDetails === "Unknown Device" && !lat && iso === "N/A" && software === "Original / Not Edited");
-
-            let advancedHtml = isExifClean ? '' : `
-              <div style="grid-column: span 2; margin-top: 12px; border-top: 1px dashed var(--border); padding-top: 12px;">
-                <div class="exif-label" style="margin-bottom: 10px;">📊 Full Deep Metadata Extraction</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: var(--muted);">
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Resolution: <b style="color:var(--text)">${imgWidth}x${imgHeight} (${megapixels} MP)</b></div>
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">ISO: <b style="color:var(--text)">${iso}</b></div>
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Aperture: <b style="color:var(--text)">${aperture}</b></div>
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Shutter: <b style="color:var(--text)">${exposure}</b></div>
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Focal Length: <b style="color:var(--text)">${focalLength}</b></div>
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Flash: <b style="color:var(--text)">${flash}</b></div>
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">White Bal: <b style="color:var(--text)">${whiteBalance}</b></div>
-                  <div style="background: var(--surface); padding: 6px 10px; border-radius: 6px;">Software: <b style="color:var(--text)">${software}</b></div>
-                </div>
-              </div>
-            `;
-
-            let cardHTML = `
-              <div class="exif-card">
-                <div class="exif-header">
-                  <img src="${imgUrl}" class="exif-thumb" alt="Thumbnail">
-                  <div>
-                    <div class="exif-title">${file.name}</div>
-                    <div style="font-size: 12px; color: var(--muted);">${(file.size/1024).toFixed(1)} KB</div>
-                  </div>
-                </div>
-                
-                <div class="exif-grid">
-                  <div class="exif-item">
-                    <div class="exif-label">Location Data</div>
-                    <div class="exif-val">${gpsStatus}</div>
-                  </div>
-                  <div class="exif-item">
-                    <div class="exif-label">Device Info</div>
-                    <div class="exif-val" style="color: ${isExifClean ? 'var(--green)' : '#ff6b6b'}">${cameraDetails}</div>
-                  </div>
-                  <div class="exif-item">
-                    <div class="exif-label">Capture Date</div>
-                    <div class="exif-val">${date}</div>
-                  </div>
-                  <div class="exif-item">
-                    <div class="exif-label">Privacy Status</div>
-                    <div class="exif-val">${isExifClean ? '<span class="exif-safe">Already Clean</span>' : '<span class="exif-danger">⚠️ Deep Data Found</span>'}</div>
-                  </div>
-                  ${advancedHtml}
-                </div>
-              </div>
-            `;
-            resultsDiv.innerHTML += cardHTML;
-          });
-      };
-      img.src = imgUrl; 
-    });
   });
 
   async function cleanAllMetadata() {
