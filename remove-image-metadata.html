@@ -147,9 +147,9 @@
 <script src="assets/script.js" defer></script>
 
 <!-- Custom Script for EXIF Scanning and Removing -->
+
 <script>
-  
-      let selectedFiles = [];
+  let selectedFiles = [];
 
   document.getElementById('upload').addEventListener('change', function(e) {
     const resultsDiv = document.getElementById('metadata-results');
@@ -172,18 +172,41 @@
         let make = allTags.Make || "N/A";
         let model = allTags.Model || "Unknown Device";
         let date = allTags.DateTimeOriginal || "No Date Found";
-        let lat = allTags.GPSLatitude;
         
+        // --- NAYA LOGIC: GPS To Exact Location (Google Maps) ---
+        let lat = allTags.GPSLatitude;
+        let latRef = allTags.GPSLatitudeRef || "N";
+        let lon = allTags.GPSLongitude;
+        let lonRef = allTags.GPSLongitudeRef || "E";
+        
+        let gpsStatus = '<span class="exif-safe">✅ Safe (No GPS)</span>';
+        
+        if (lat && lon) {
+            try {
+                // EXIF Arrays (Degrees, Minutes, Seconds) ko map coordinates me convert karna
+                let latDec = (lat[0] + (lat[1] / 60) + (lat[2] / 3600)).toFixed(5);
+                let lonDec = (lon[0] + (lon[1] / 60) + (lon[2] / 3600)).toFixed(5);
+                
+                if (latRef === "S") latDec = latDec * -1;
+                if (lonRef === "W") lonDec = lonDec * -1;
+                
+                gpsStatus = `
+                  <span class="exif-danger" style="display:block; margin-bottom:6px;">⚠️ Location Exposed</span>
+                  <a href="https://maps.google.com/?q=${latDec},${lonDec}" target="_blank" style="display:inline-flex; align-items:center; gap:4px; background:rgba(255,107,107,0.1); color:#ff6b6b; padding:6px 10px; border-radius:6px; text-decoration:none; font-size:11px; font-weight:800; border:1px solid rgba(255,107,107,0.3);">
+                    📍 View on Maps
+                  </a>
+                `;
+            } catch(e) {
+                gpsStatus = '<span class="exif-danger">⚠️ Exposed (Coordinates Found)</span>';
+            }
+        }
+
         // Advanced Data
         let software = allTags.Software || "Original / Not Edited";
         let iso = allTags.ISOSpeedRatings || "N/A";
-        let aperture = allTags.FNumber ? "f/" + allTags.FNumber : "N/A";
+        let aperture = allTags.FNumber ? "f/" + parseFloat(allTags.FNumber).toFixed(1) : "N/A";
         let exposure = allTags.ExposureTime ? "1/" + Math.round(1/allTags.ExposureTime) + "s" : "N/A";
         
-        let gpsStatus = lat 
-            ? '<span class="exif-danger">⚠️ Exposed (Coordinates Found)</span>' 
-            : '<span class="exif-safe">✅ Safe (No GPS)</span>';
-
         let cameraDetails = make !== "N/A" ? make + ' ' + model : model;
         let isExifClean = (cameraDetails === "Unknown Device" && !lat && iso === "N/A");
 
@@ -276,6 +299,7 @@
     btn.disabled = false;
   }
 </script>
+
   
 </body>
 </html>
