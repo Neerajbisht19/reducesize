@@ -371,6 +371,30 @@ body::after {
 .fcopy { font-size: 13px; color: var(--muted); margin-bottom: 12px; text-align: center; }
 .ftrust { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; font-size: 12px; color: var(--muted); font-weight: 600; }
 
+/* FOOTER QUICK-LINK CHIPS */
+.fnav {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  max-width: 800px; margin: 0 auto 24px;
+}
+.fnav a {
+  font-size: 12px; font-weight: 700; color: var(--muted); text-decoration: none;
+  padding: 8px 16px; border-radius: 30px;
+  background: var(--surface); border: 1px solid var(--border);
+  transition: 0.2s;
+}
+.fnav a:hover { color: var(--purple); border-color: var(--purple); background: var(--purple-light); }
+
+/* IMAGE PREVIEW LIGHTBOX (hidden until JS opens it via openPM()) */
+.pm {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; cursor: zoom-out; padding: 24px;
+}
+.pm img {
+  max-width: 90vw; max-height: 90vh; border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); object-fit: contain;
+}
+
 /* =========================================
    10. RESPONSIVE ADJUSTMENTS
    ========================================= */
@@ -389,3 +413,4 @@ body::after {
 @media(max-width: 380px) {
   .trust-section { grid-template-columns: 1fr; }
 }
+
