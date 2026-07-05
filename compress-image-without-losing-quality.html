@@ -3,143 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compress Image Without Losing Quality | WebP & Lossless</title>
+<title>Compress Image Without Losing Quality | Lossless WebP Converter</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/compress-image-without-losing-quality.html">
-<meta name="description" content="Compress images without losing quality. Smart AI optimization, WebP converter, EXIF stripper, and live Before/After slider. Best for photographers & SEO.">
-<meta name="keywords" content="compress image without losing quality, lossless image compressor, webp converter, optimize images for web, reduce photo size keeping quality">
+<meta name="description" content="Compress images without losing quality using smart AI. Convert JPG/PNG to WebP, auto-strip EXIF metadata, and use our live Before/After slider. Best for SEO.">
+<meta name="keywords" content="compress image without losing quality, lossless image compressor, webp converter, optimize images for web, strip exif data, reduce photo size keeping quality">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
+
+<!-- Unique CSS strictly for this page's Live Slider & Pro Controls -->
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:20px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none;
-}
-@media(min-width:600px){ .nav-pill{display:inline-block;} }
-
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
-}
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
-}
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:28px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:46px;height:46px;margin:0 auto 10px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
-}
-.drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:12px;color:var(--muted)}
-
-/* BEFORE / AFTER SLIDER (The Magic) */
+/* BEFORE / AFTER SLIDER */
 .compare-wrap {
     position: relative; width: 100%; height: 350px; margin-bottom: 24px;
-    border-radius: 12px; overflow: hidden; background: #000; border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden; background: #000; border: 1px solid var(--border);
     display: none; cursor: crosshair; touch-action: none;
 }
-.compare-img {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none;
-}
-/* Left image (Original) is clipped */
-.clip-orig {
-    z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-}
+.compare-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.clip-orig { z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
 .slider-line {
-    position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: #fff; z-index: 3; transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: #fff; z-index: 3; 
+    transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .slider-btn {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--purple); font-weight: bold; font-size: 18px; box-shadow: 0 0 15px rgba(0,0,0,0.4); z-index: 4; pointer-events: none;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; 
+    background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+    color: var(--purple); font-weight: bold; font-size: 18px; box-shadow: 0 0 15px rgba(0,0,0,0.4); z-index: 4; pointer-events: none;
 }
 .badge-orig { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight:700; z-index: 4; letter-spacing: 0.5px;}
 .badge-comp { position: absolute; top: 12px; right: 12px; background: var(--green); color: #000; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight:700; z-index: 4; letter-spacing: 0.5px;}
 
 /* LIVE STATS CALCULATOR */
 .stats-box {
-    display: none; background: rgba(62,207,142,.1); border: 1px dashed rgba(62,207,142,.3);
-    border-radius: 12px; padding: 16px; margin-bottom: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    display: none; background: var(--green-bg); border: 1px dashed rgba(62,207,142,.3);
+    border-radius: 12px; padding: 16px; margin-bottom: 24px; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
 }
 .stat-item { text-align: center; flex: 1; min-width: 30%; }
 .stat-lbl { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
@@ -147,130 +51,109 @@ body::after{
 .stat-val.highlight { color: var(--green); }
 
 /* PRO CONTROLS */
-.u-box{
-  background:var(--surface2);border:1px solid rgba(109,84,240,.2);
-  border-radius:12px;padding:16px;margin-bottom:20px;
-}
-.u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
-.u-title::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%}
+.u-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 24px; }
+.u-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+.u-title::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
 
 /* SMART MODES */
-.modes { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.modes { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
 .mode-btn {
-    flex: 1; min-width: 100px; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
-    background: rgba(255,255,255,0.02); color: var(--muted); text-align: center; cursor: pointer;
+    flex: 1; min-width: 120px; padding: 12px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--muted); text-align: center; cursor: pointer;
     transition: 0.2s; font-family: 'Manrope', sans-serif;
 }
-.mode-btn strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 2px; }
-.mode-btn span { font-size: 10px; }
-.mode-btn.active { background: rgba(109,84,240,.15); border-color: var(--purple); }
-.mode-btn.active strong { color: var(--purple-l); }
+.mode-btn strong { display: block; font-size: 14px; color: var(--text); margin-bottom: 4px; }
+.mode-btn span { font-size: 11px; }
+.mode-btn.active { background: var(--purple-light); border-color: var(--purple); }
+.mode-btn.active strong { color: var(--purple); }
 
-/* INPUT ROW */
-.irow{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
-.irow .f{flex:1;min-width:140px;}
-.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input, .irow select{
-  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
-  padding:12px 14px;border-radius:10px;color:var(--text);
-  font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
-  outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
-}
-.irow input:focus, .irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
-
-/* CUSTOM CHECKBOX (Web Resizer) */
+/* CUSTOM CHECKBOX */
 .protect-box {
-    background: rgba(32,217,192,.05); border: 1px solid rgba(32,217,192,.2);
-    border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 12px;
-    cursor: pointer; transition: 0.2s;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; display: flex; align-items: flex-start; gap: 12px;
+    cursor: pointer; transition: 0.2s; margin-top: 16px;
 }
-.protect-box input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); cursor: pointer; margin-top: 2px; }
+.protect-box:hover { border-color: var(--accent); }
+.protect-box input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--accent); cursor: pointer; margin-top: 2px; }
 .protect-text { flex: 1; }
-.protect-text strong { display: block; font-size: 14px; color: var(--text); font-weight: 700; margin-bottom: 2px;}
-.protect-text span { display: block; font-size: 12px; color: var(--muted); line-height: 1.4; }
+.protect-text strong { display: block; font-size: 14px; color: var(--text); font-weight: 700; margin-bottom: 4px;}
+.protect-text span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
 
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3); display: none;
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* PROGRESS */
-.pbox{display:none;margin-top:13px}
-.ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s;position:relative;overflow:hidden;}
-.plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-.ftrust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;color:#383858;font-weight:600}
-
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+/* Custom Download Button for this page */
+#dlBtn { display: none; margin-top: 10px; }
 </style>
 
+<!-- SEO Structured Data for Lossless Tool -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Compress Image Without Losing Quality | Lossless WebP",
-"url":"https://reducesize.online/compress-image-without-losing-quality.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Compress images without losing quality. Smart AI optimization, WebP converter, EXIF stripper, and live Before/After slider. Best for photographers & SEO.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Lossless Image Compressor & WebP Converter",
+  "url":"https://reducesize.online/compress-image-without-losing-quality.html",
+  "applicationCategory":"MultimediaApplication",
+  "operatingSystem":"All",
+  "description":"Professional image optimizer. Strip EXIF data, convert to WebP, and compress images visually losslessly for websites and photography portfolios.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How is it possible to reduce file size without losing quality?","acceptedAnswer":{"@type":"Answer","text":"We use advanced 'Lossless' encoding and smart format conversion (like WebP). Additionally, smartphones attach hidden junk data (EXIF) to photos. We strip this unnecessary data to reduce MBs while keeping 100% of the visual pixels intact."}},
-{"@type":"Question","name":"What does 'Optimize for Web (Max 1920px)' mean?","acceptedAnswer":{"@type":"Answer","text":"Modern cameras shoot in 4K resolution, which is unnecessarily massive for websites. Checking this box smoothly scales your image down to Full-HD (1920px). It will look crystal clear on monitors but the file size will drop by up to 90%."}},
-{"@type":"Question","name":"Why should I convert to WebP?","acceptedAnswer":{"@type":"Answer","text":"WebP is a next-generation image format developed by Google specifically for web performance. A WebP image can be 30% smaller than a JPG while retaining the exact same visual quality."}},
-{"@type":"Question","name":"How does the Before & After slider work?","acceptedAnswer":{"@type":"Answer","text":"Once you upload, we instantly generate a compressed preview. You can drag the slider left and right across the photo to compare the original raw file with our optimized version and see for yourself that there is zero quality loss."}}
-]}
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"How is it possible to reduce file size without losing quality?",
+      "acceptedAnswer":{"@type":"Answer","text":"We use advanced lossless encoding algorithms. Additionally, cameras attach hidden EXIF metadata (GPS, camera model) to photos. We strip this unnecessary data to reduce MBs while keeping 100% of the visual pixels intact."}
+    },
+    {
+      "@type":"Question",
+      "name":"What does 'Optimize Dimensions for Web' mean?",
+      "acceptedAnswer":{"@type":"Answer","text":"Modern cameras shoot in 4K resolution, which is unnecessarily large for websites. Checking this box smoothly scales your image down to Full-HD (1920px max). It looks crystal clear on monitors but drops file size by up to 90%."}
+    },
+    {
+      "@type":"Question",
+      "name":"Why should I convert my JPGs to WebP?",
+      "acceptedAnswer":{"@type":"Answer","text":"WebP is a next-generation format recommended by Google. A WebP image can be up to 30% smaller than a standard JPEG while retaining the exact same visual quality, boosting your website's SEO and Core Web Vitals."}
+    }
+  ]
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Pro Optimizer</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Next-Gen Lossless Optimizer</div>
-  <h1>Compress Image<br><span class="grad">Without Losing Quality</span></h1>
-  <p>The ultimate tool for photographers and web developers. Convert to WebP, auto-strip EXIF data, and compare quality live with our interactive slider.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ Next-Gen Lossless Optimizer</div>
+  <h1 class="hero-h1">Compress Image<br><span class="grad">Without Losing Quality</span></h1>
+  <p class="hero-sub">The ultimate tool for photographers and web developers. Convert to WebP, auto-strip EXIF data, and compare quality live with our interactive slider.</p>
+  
   <div class="badges">
     <span class="badge">🎚️ Live Visual Slider</span>
     <span class="badge">🌐 WebP Converter</span>
-    <span class="badge">🧹 Strips Junk Data</span>
+    <span class="badge">🧹 Strips EXIF Junk</span>
   </div>
 </section>
 
@@ -283,8 +166,12 @@ body::after{
     <div class="drop-hint">JPG · PNG · HEIC to WebP Converter</div>
   </div>
 
-  <div id="pbox" class="pbox" style="margin-bottom:20px;"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel">Analyzing pixels...</div></div>
+  <div id="pbox" class="pbox" style="margin-bottom:20px;">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel">Analyzing pixels...</div>
+  </div>
   
+  <!-- Interactive Slider -->
   <div id="compareWrap" class="compare-wrap">
       <div class="badge-orig">Original</div>
       <div class="badge-comp">Optimized</div>
@@ -296,21 +183,23 @@ body::after{
       <div id="sliderBtn" class="slider-btn">◂&nbsp;▸</div>
   </div>
 
+  <!-- Live Stats -->
   <div id="statsBox" class="stats-box">
       <div class="stat-item">
-          <div class="stat-lbl">Original</div>
+          <div class="stat-lbl">Original Weight</div>
           <div id="statOrig" class="stat-val">-</div>
       </div>
       <div class="stat-item">
-          <div class="stat-lbl">Saved</div>
+          <div class="stat-lbl">Data Saved</div>
           <div id="statPct" class="stat-val highlight">-</div>
       </div>
       <div class="stat-item">
-          <div class="stat-lbl">Compressed</div>
+          <div class="stat-lbl">Optimized Weight</div>
           <div id="statComp" class="stat-val">-</div>
       </div>
   </div>
 
+  <!-- Pro Controls -->
   <div class="u-box" id="controlsBox" style="display:none;">
     <div class="u-title">Smart Optimization Rules</div>
     
@@ -333,9 +222,9 @@ body::after{
       <div class="f">
         <label class="fl">Output Format</label>
         <select id="outFormat" onchange="generatePreview()">
-          <option value="webp">WebP (Best for Web Speed)</option>
-          <option value="jpeg">JPG / JPEG (Standard)</option>
-          <option value="png">PNG (Lossless Transparency)</option>
+          <option value="webp">WebP (Best for SEO & Site Speed)</option>
+          <option value="jpeg">JPG / JPEG (Standard Compatibility)</option>
+          <option value="png">PNG (Lossless with Transparency)</option>
         </select>
       </div>
     </div>
@@ -344,7 +233,7 @@ body::after{
         <input type="checkbox" id="webResizeCb" checked onchange="generatePreview()">
         <div class="protect-text">
             <strong>Optimize Dimensions for Web (Max 1920px) 📏</strong>
-            <span>Automatically scales down massive 4K photos to Full-HD web standard. Saves massive bandwidth without losing visible sharpness.</span>
+            <span>Automatically scales down massive 4K photos to Full-HD standard. This saves massive bandwidth without losing any visible sharpness on digital screens.</span>
         </div>
     </label>
   </div>
@@ -353,28 +242,36 @@ body::after{
 
 </div>
 
+<!-- ==========================================
+     HIGH-VALUE SEO CONTENT (LOSSLESS & WEBP) 
+     ========================================== -->
 <section class="seo">
-<h2>How to Compress Images Without Losing Quality</h2>
-<p>If you are a photographer sharing your portfolio, or a web developer trying to score 100 on Google PageSpeed Insights, standard image compressors are your enemy. They brutally crush pixels, leaving your photos looking blurry, washed out, and full of blocky artifacts. <strong>ReduceSize.online Pro Optimizer</strong> uses next-generation encoding to strip out the weight of the file while leaving the visible pixels untouched.</p>
+  <h2>How to Compress Images Without Losing Quality: The Developer's Secret</h2>
+  <p>If you are a professional photographer sharing a high-resolution portfolio, or a web developer trying to score 100/100 on Google PageSpeed Insights, standard "Target KB" image compressors are your biggest enemy. They brutally crush image pixels, leaving your beautiful photos looking washed out, blurry, and full of blocky JPEG artifacts.</p>
+  
+  <p>The <strong>ReduceSize Pro Optimizer</strong> uses a completely different approach. Instead of guessing, our algorithm uses next-generation encoding to strip out the invisible "weight" of the file, leaving the visible pixels untouched. This provides a visually lossless output that loads instantly on web pages.</p>
 
-<h3>The Secret to "Lossless" Compression</h3>
-<p>How can a file go from 5MB to 400KB while looking exactly the same? It comes down to three smart techniques that our tool executes in your browser:</p>
-<ol>
-  <li><strong>EXIF Data Stripping:</strong> When you shoot a photo with an iPhone or DSLR, the file stores hidden metadata (GPS location, camera model, shutter speed, thumbnail preview). This "junk data" can add up to 50KB to your file. Our HTML5 Canvas renderer automatically cleans this out.</li>
-  <li><strong>Smart Web Resizing:</strong> A 4000x3000 pixel image is completely wasted on a website because most screens only display 1920 pixels wide. By keeping our <strong>"Optimize Dimensions"</strong> box checked, your image is mathematically scaled to fit screens perfectly, cutting the file size by 70% instantly.</li>
-  <li><strong>Next-Gen Formats (WebP):</strong> Standard JPG is old technology. Google developed the WebP format to maintain JPG-level quality at half the file size. By selecting WebP in our output settings, you get a massive SEO boost.</li>
-</ol>
+  <h3>The 3 Pillars of Lossless Compression</h3>
+  <p>How exactly does a file go from a massive 5MB to a lightweight 400KB while looking identically crisp to the human eye? It comes down to three smart techniques executing right inside your browser:</p>
+  <ol>
+    <li><strong>EXIF Metadata Stripping:</strong> When you shoot a photo with a DSLR or iPhone, the file stores hidden data (GPS location coordinates, camera model, shutter speed, and hidden thumbnail previews). This "junk data" can unnecessarily add 50KB to 100KB to your file. Our HTML5 Canvas engine automatically strips this hidden data out.</li>
+    <li><strong>Smart Dimension Resizing (The 1920px Rule):</strong> A 4000x3000 pixel image is completely wasted on a website because most modern laptop screens max out at 1920 pixels wide. By keeping our <em>"Optimize Dimensions for Web"</em> box checked, your image is mathematically scaled to fit screens perfectly. The image looks just as sharp, but the file size drops by up to 70%.</li>
+    <li><strong>Next-Gen WebP Conversion:</strong> Standard JPG format is decades old. Google developed the <strong>WebP</strong> format specifically to maintain high visual quality at a fraction of the file size. By selecting WebP in our output settings, your images become inherently faster to load, giving you a massive SEO boost.</li>
+  </ol>
 
-<h3>Trust the Slider: See it to Believe it</h3>
-<p>We don't just tell you the quality is good; we prove it. The moment you upload your image, our engine processes it and presents a live <strong>Before & After Comparison Slider</strong>. Drag the handle back and forth. The left side is your massive original file, the right side is our lightweight optimized output. You won't be able to tell the difference.</p>
+  <h3>Trust the Slider: See It to Believe It</h3>
+  <p>We don't just promise that our tool won't ruin your photo's quality; we let you verify it yourself. The moment you upload your image, our engine processes it locally and presents a live <strong>Before & After Comparison Slider</strong>. </p>
+  <p>Drag the center handle back and forth across your photo. The left side displays your heavy, uncompressed original file, while the right side shows our lightweight, optimized output. Zoom in, look at the edges, and see for yourself—you won't be able to spot the difference!</p>
 
-<h3>Frequently Asked Questions (FAQs)</h3>
-<p><strong>How is it possible to reduce file size without losing quality?</strong><br>We use advanced 'Lossless' encoding and smart format conversion (like WebP). Additionally, smartphones attach hidden junk data (EXIF) to photos. We strip this unnecessary data to reduce MBs while keeping 100% of the visual pixels intact.</p>
-<p><strong>What does 'Optimize for Web (Max 1920px)' mean?</strong><br>Modern cameras shoot in 4K resolution, which is unnecessarily massive for websites. Checking this box smoothly scales your image down to Full-HD (1920px). It will look crystal clear on monitors but the file size will drop by up to 90%.</p>
-<p><strong>Why should I convert to WebP?</strong><br>WebP is a next-generation image format developed by Google specifically for web performance. A WebP image can be 30% smaller than a JPG while retaining the exact same visual quality.</p>
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Is WebP supported on all browsers?</strong><br>Yes! As of recent updates, WebP is universally supported across Google Chrome, Safari, Mozilla Edge, and Firefox on both desktop and mobile platforms. Using WebP is currently the industry standard for fast-loading websites.</p>
+  
+  <p><strong>What is the difference between 'Visually Lossless' and 'Extreme Crush'?</strong><br><em>Visually Lossless</em> uses a 98% quality matrix—it saves a bit of space but guarantees absolute perfection. <em>Web Optimized</em> drops quality to 85%, which is invisible to the human eye but saves massive space. <em>Extreme Crush</em> aggressively compresses the image, which is great for fast loading but might introduce slight artifacts upon zooming.</p>
+  
+  <p><strong>Are my photography files uploaded to a server?</strong><br>No. Whether your raw image is 2MB or 20MB, the entire EXIF stripping, WebP conversion, and compression process happens offline inside your browser. No files are ever transmitted, ensuring your intellectual property is 100% safe.</p>
 </section>
 
-<div class="chips-hd">More Tools</div>
+<div class="chips-hd">Explore Target-Specific Tools</div>
 <div class="chips">
   <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
   <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
@@ -386,25 +283,57 @@ body::after{
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-20kb.html">20KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/compress-image-to-100kb.html">100KB</a>
-    <a href="/reduce-image-size-in-kb.html">Custom KB</a>
-    <a href="/reduce-image-size-for-email.html">Email</a>
-  </nav>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/protect-pdf.html">Protect PDF</a>
+      <a href="/pdf-to-image.html">PDF to Image</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+    <span>📱 Mobile Ready</span>
+  </div>
 </footer>
 
+<!-- Global Navbar/Menu JS -->
+<script src="assets/script.js"></script>
+
+<!-- Specialized JS for the Live Before/After Slider & WebP Converter -->
 <script>
 let currentFile = null;
 let origImgObj = new Image();
 let finalBlob = null;
 let currentQuality = 0.85; // Default Web Optimized
 
-// Mode Selector
+// Mode Selector Logic
 function setMode(mode, btn) {
     document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -416,7 +345,7 @@ function setMode(mode, btn) {
     generatePreview();
 }
 
-// Upload & Init
+// File Upload Init
 document.getElementById('upload').addEventListener('change', async function() {
     if(!this.files.length) return;
     
@@ -430,24 +359,24 @@ document.getElementById('upload').addEventListener('change', async function() {
     const pb = document.getElementById('pfill');
     pw.style.display = 'block'; pb.style.width = '30%';
     
-    // Load Original Image
+    // Load Original Image onto Canvas
     const url = URL.createObjectURL(f);
     origImgObj.src = url;
     await origImgObj.decode();
     
     document.getElementById('imgOrig').src = url;
     
-    // Set Original Stat
+    // Calculate Original Size UI
     const origMB = (f.size / (1024*1024)).toFixed(2);
     document.getElementById('statOrig').innerText = (f.size > 1024*1024) ? `${origMB} MB` : `${(f.size/1024).toFixed(0)} KB`;
     
     pb.style.width = '70%';
     
-    // Generate First Preview
+    // Generate First Optimization Pass
     await generatePreview();
     
     pb.style.width = '100%';
-    setTimeout(()=>{
+    setTimeout(() => {
         pw.style.display = 'none';
         document.getElementById('compareWrap').style.display = 'block';
         document.getElementById('statsBox').style.display = 'flex';
@@ -457,7 +386,7 @@ document.getElementById('upload').addEventListener('change', async function() {
     }, 500);
 });
 
-// Processing Logic
+// Canvas Processing & EXIF stripping logic
 async function generatePreview() {
     if(!currentFile) return;
     
@@ -471,7 +400,7 @@ async function generatePreview() {
     let w = origImgObj.width;
     let h = origImgObj.height;
     
-    // Smart 1920px Resize for Web
+    // Smart 1920px Resize for Web Optimization
     if(resizeWeb && w > 1920) {
         const scale = 1920 / w;
         w = 1920;
@@ -480,7 +409,7 @@ async function generatePreview() {
     
     cv.width = w; cv.height = h;
     
-    // Fill white for JPEGs
+    // Fill white background for JPEGs (removes transparent artifacts)
     if(mime === 'image/jpeg') {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0,0,w,h);
@@ -490,21 +419,21 @@ async function generatePreview() {
     ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(origImgObj, 0, 0, w, h);
     
-    // Lossless PNG override
+    // Override quality for PNGs (lossless inherently)
     let q = (mime === 'image/png') ? null : currentQuality;
     
     finalBlob = await new Promise(r => cv.toBlob(r, mime, q));
     
-    // Update UI
+    // Update Right Side (Optimized Image)
     document.getElementById('imgComp').src = URL.createObjectURL(finalBlob);
     
-    // Update Stats
+    // Update Savings & Compressed Size UI
     const compKB = finalBlob.size / 1024;
     const compMB = compKB / 1024;
     document.getElementById('statComp').innerText = (compKB > 1024) ? `${compMB.toFixed(2)} MB` : `${compKB.toFixed(0)} KB`;
     
     let savingsPct = ((currentFile.size - finalBlob.size) / currentFile.size) * 100;
-    if(savingsPct < 0) savingsPct = 0; // PNG edge cases
+    if(savingsPct < 0) savingsPct = 0; // Failsafe for specific PNG edge cases
     
     document.getElementById('statPct').innerText = `🔥 ${savingsPct.toFixed(1)}%`;
 }
@@ -531,20 +460,21 @@ function initSlider() {
         
         line.style.left = `${pct}%`;
         btn.style.left = `${pct}%`;
+        // Clip the left (original) image dynamically based on drag percentage
         clipImg.style.clipPath = `polygon(0 0, ${pct}% 0, ${pct}% 100%, 0 100%)`;
     }
     
     wrap.addEventListener('mousedown', startDrag);
-    wrap.addEventListener('touchstart', startDrag);
+    wrap.addEventListener('touchstart', startDrag, {passive: true});
     
     window.addEventListener('mouseup', endDrag);
     window.addEventListener('touchend', endDrag);
     
     window.addEventListener('mousemove', moveDrag);
-    window.addEventListener('touchmove', moveDrag);
+    window.addEventListener('touchmove', moveDrag, {passive: true});
 }
 
-// Export
+// File Export Logic
 function downloadOptimized() {
     if(!finalBlob) return;
     
@@ -555,7 +485,9 @@ function downloadOptimized() {
     const url = URL.createObjectURL(finalBlob);
     const a = document.createElement('a');
     a.href = url; a.download = finalName;
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    document.body.appendChild(a); 
+    a.click(); 
+    document.body.removeChild(a);
 }
 </script>
 </body>
