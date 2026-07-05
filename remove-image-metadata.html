@@ -148,7 +148,8 @@
 
 <!-- Custom Script for EXIF Scanning and Removing -->
 <script>
-  let selectedFiles = [];
+  
+      let selectedFiles = [];
 
   document.getElementById('upload').addEventListener('change', function(e) {
     const resultsDiv = document.getElementById('metadata-results');
@@ -162,23 +163,42 @@
     }
 
     selectedFiles.forEach((file, index) => {
-      // Create Object URL for thumbnail
       let imgUrl = URL.createObjectURL(file);
       
       EXIF.getData(file, function() {
-        let make = EXIF.getTag(this, "Make") || "N/A";
-        let model = EXIF.getTag(this, "Model") || "Unknown Device";
-        let date = EXIF.getTag(this, "DateTimeOriginal") || "No Date Found";
+        let allTags = EXIF.getAllTags(this);
         
-        let lat = EXIF.getTag(this, "GPSLatitude");
-        let lon = EXIF.getTag(this, "GPSLongitude");
+        // Basic Data
+        let make = allTags.Make || "N/A";
+        let model = allTags.Model || "Unknown Device";
+        let date = allTags.DateTimeOriginal || "No Date Found";
+        let lat = allTags.GPSLatitude;
         
-        let gpsStatus = (lat && lon) 
-            ? '<span class="exif-danger">⚠️ GPS Location Exposed</span>' 
-            : '<span class="exif-safe">✅ No GPS Found</span>';
+        // Advanced Data
+        let software = allTags.Software || "Original / Not Edited";
+        let iso = allTags.ISOSpeedRatings || "N/A";
+        let aperture = allTags.FNumber ? "f/" + allTags.FNumber : "N/A";
+        let exposure = allTags.ExposureTime ? "1/" + Math.round(1/allTags.ExposureTime) + "s" : "N/A";
+        
+        let gpsStatus = lat 
+            ? '<span class="exif-danger">⚠️ Exposed (Coordinates Found)</span>' 
+            : '<span class="exif-safe">✅ Safe (No GPS)</span>';
 
         let cameraDetails = make !== "N/A" ? make + ' ' + model : model;
-        let isExifClean = (cameraDetails === "Unknown Device" && !lat);
+        let isExifClean = (cameraDetails === "Unknown Device" && !lat && iso === "N/A");
+
+        // Advanced details HTML section
+        let advancedHtml = isExifClean ? '' : `
+          <div style="grid-column: span 2; margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 10px;">
+            <div class="exif-label" style="margin-bottom: 8px;">📸 Advanced Camera Details</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--muted);">
+              <span style="background: var(--surface); padding: 4px 8px; border-radius: 6px;">ISO: <b>${iso}</b></span>
+              <span style="background: var(--surface); padding: 4px 8px; border-radius: 6px;">Aperture: <b>${aperture}</b></span>
+              <span style="background: var(--surface); padding: 4px 8px; border-radius: 6px;">Shutter: <b>${exposure}</b></span>
+              <span style="background: var(--surface); padding: 4px 8px; border-radius: 6px;">Software: <b>${software}</b></span>
+            </div>
+          </div>
+        `;
 
         // Build the UI Card
         let cardHTML = `
@@ -205,9 +225,10 @@
                 <div class="exif-val">${date}</div>
               </div>
               <div class="exif-item">
-                <div class="exif-label">Status</div>
+                <div class="exif-label">Privacy Status</div>
                 <div class="exif-val">${isExifClean ? '<span class="exif-safe">Already Clean</span>' : '<span class="exif-danger">Data Found</span>'}</div>
               </div>
+              ${advancedHtml}
             </div>
           </div>
         `;
@@ -216,7 +237,6 @@
     });
   });
 
-  // Function to remove metadata using HTML5 Canvas (which naturally strips EXIF)
   async function cleanAllMetadata() {
     const btn = document.getElementById('cleanAllBtn');
     btn.innerText = "⏳ Cleaning Images...";
@@ -225,8 +245,6 @@
 
     for (let i = 0; i < selectedFiles.length; i++) {
       let file = selectedFiles[i];
-      
-      // Load image into canvas
       let img = new Image();
       let imgObjUrl = URL.createObjectURL(file);
       
@@ -238,12 +256,10 @@
           let ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0);
           
-          // Export canvas back to Blob (strips metadata natively)
           canvas.toBlob(function(blob) {
             let cleanUrl = URL.createObjectURL(blob);
             let a = document.createElement('a');
             a.href = cleanUrl;
-            // Add 'clean' to filename
             a.download = file.name.replace(/\.[^/.]+$/, "") + "-clean.jpg"; 
             document.body.appendChild(a);
             a.click();
@@ -258,9 +274,8 @@
     btn.innerText = "🧹 Scrub Data & Download Clean Images";
     btn.style.opacity = "1";
     btn.disabled = false;
-    alert("✅ All images have been cleaned and downloaded successfully!");
   }
 </script>
-
+  
 </body>
 </html>
