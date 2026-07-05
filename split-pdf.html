@@ -3,124 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Extract & Remove PDF Pages Online Free | Split PDF</title>
+<title>Split PDF Online Free | Extract or Remove PDF Pages</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/split-pdf.html">
 <meta name="description" content="Extract specific pages or remove unwanted pages from your PDF file easily. Visual page selector, 100% secure, offline browser-based tool.">
-<meta name="keywords" content="split pdf, remove pdf pages, extract pages from pdf, delete pdf pages online, pdf page separator">
+<meta name="keywords" content="split pdf, remove pdf pages, extract pages from pdf, delete pdf pages online, pdf page separator, split pdf pages free">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
 
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:16px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
-  display:inline-block; white-space:nowrap;
-}
-@media(max-width: 480px){
-    .nav { padding: 0 12px; }
-    .nav-logo { font-size: 16px; }
-    .nav-links { gap: 10px; }
-    .nav-links a { font-size: 12px; }
-    .nav-pill { display:none; }
-}
-
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:840px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
-}
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
-}
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:36px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:54px;height:54px;margin:0 auto 12px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
-}
-.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:13px;color:var(--muted)}
-
-/* SELECTOR UI */
+/* =========================================
+   SPLIT PDF SPECIFIC UI CSS
+   ========================================= */
 .sel-head { display:none; justify-content:space-between; align-items:center; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:10px; }
 .mode-toggle { display:flex; background:var(--surface2); border-radius:10px; overflow:hidden; border:1px solid rgba(109,84,240,.2); }
 .mode-btn { flex:1; padding:10px 16px; font-size:13px; font-weight:700; cursor:pointer; color:var(--muted); text-align:center; transition:0.2s; white-space:nowrap; }
@@ -137,7 +38,6 @@ body::after{
     gap:16px; margin-bottom:24px; max-height:50vh; overflow-y:auto; 
     padding-right:8px; padding-bottom:10px;
 }
-/* Scrollbar */
 .page-grid::-webkit-scrollbar { width: 6px; }
 .page-grid::-webkit-scrollbar-track { background: var(--surface2); border-radius: 10px; }
 .page-grid::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 10px; }
@@ -164,88 +64,50 @@ body::after{
 .mode-d .page-card.selected { opacity:0.3; border-color:var(--red); }
 .mode-d .page-card.selected .page-overlay { opacity:1; background:rgba(255,107,107,0.3); color:var(--red); }
 .mode-d .page-card.selected .page-overlay::after { content:'🗑️'; }
-
-/* PROGRESS */
-.pbox{display:none;margin-top:16px}
-.ptrack{height:6px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s ease;position:relative;}
-.plabel{font-size:13px;color:var(--purple-l);margin-top:10px;text-align:center;font-weight:600}
-
-/* RESULTS */
-.rg{display:flex; flex-direction:column; gap:10px; margin-top:16px}
-.rc{background:var(--surface2);border:1px solid rgba(62,207,142,.3);border-radius:11px;overflow:hidden; padding: 20px; text-align: center;}
-.rsz{font-size:16px;font-weight:700;color:var(--green);margin-bottom:6px}
-.rb{
-  width:100%;padding:12px;border-radius:9px;border:none;margin-top:12px;
-  background:var(--green);color:#000;
-  font-size:15px;font-weight:800;cursor:pointer;
-  font-family:'Manrope',sans-serif;transition:.15s;
-}
-.rb:hover{background:#2eb872; box-shadow:0 6px 20px rgba(62,207,142,.3);}
-
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} .sel-head{flex-direction:column; align-items:stretch;} }
 </style>
 
+<!-- SEO Structured Data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Split & Extract PDF Pages Online Free",
-"url":"https://reducesize.online/split-pdf.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Extract specific pages or remove unwanted pages from a PDF. Visual page selector lets you click to keep or delete. 100% secure, offline browser-based tool.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Split & Extract PDF Pages",
+  "url":"https://reducesize.online/split-pdf.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Extract specific pages or remove unwanted pages from a PDF. Visual page selector lets you click to keep or delete. 100% secure, offline browser-based tool.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Private Splitter</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
 
 <div class="wrap">
 <section class="sub-hero">
   <div class="tag">✦ Smart Page Selector</div>
   <h1>Split & Remove<br><span class="grad">Pages from PDF</span></h1>
-  <p>Need just a few pages from a large PDF? Or want to delete 2-3 blank pages? Select the mode below and visually pick the pages you want to keep or delete.</p>
+  <p>Need just a few pages from a large PDF? Or want to delete unwanted pages? Select the mode below and visually pick the pages you want to keep or delete.</p>
   <div class="badges">
     <span class="badge">✅ Click to Keep</span>
     <span class="badge">🗑️ Click to Delete</span>
@@ -257,9 +119,9 @@ body::after{
   
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="application/pdf">
-    <div class="drop-ico" id="dropIco">✂️</div>
-    <div class="drop-main" id="dropMain">Drop a PDF file here</div>
-    <div class="drop-hint" id="dropHint">Upload a document to view its pages</div>
+    <div class="drop-ico">✂️</div>
+    <div class="drop-main">Drop a PDF file here</div>
+    <div class="drop-hint">Upload a document to view its pages</div>
   </div>
 
   <div class="sel-head" id="selHead">
@@ -286,47 +148,25 @@ body::after{
 </div>
 
 <section class="seo">
-<h2>Split, Extract, and Delete PDF Pages Online for Free</h2>
-<p>Working with large PDF documents can be incredibly frustrating. Whether you have downloaded a massive 100-page government exam notification (like SSC, UPSC, or RRB) but only need the 2-page application form, or you scanned a document and accidentally included a blank page, you need a quick way to clean it up. <strong>ReduceSize PDF Splitter</strong> is a free, visual tool designed to help you extract exactly the pages you need, or delete the ones you don't, within seconds.</p>
+  <h2>Split, Extract, and Delete PDF Pages Online for Free</h2>
+  <p>Working with large PDF documents can be incredibly frustrating. Whether you have downloaded a massive 100-page government exam notification (like SSC, UPSC, or RRB) but only need the 2-page application form, or you scanned a document and accidentally included a blank page, you need a quick way to clean it up. <strong>ReduceSize PDF Splitter</strong> is a free, visual tool designed to help you extract exactly the pages you need, or delete the ones you don't, within seconds.</p>
 
-<h3>Why You Need a Reliable PDF Splitter</h3>
-<p>Many online portals and corporate email systems have strict file size limits (often under 2MB). Uploading an entire 50-page PDF just to submit one required page is not only inefficient but will likely cause your upload to fail. By splitting your PDF and extracting only the relevant pages, you drastically reduce the file size and make your submissions clean and professional. Our tool replaces the need for heavy, expensive desktop software by offering a lightweight, browser-based solution.</p>
+  <h3>Why You Need a Reliable PDF Splitter</h3>
+  <p>Many online portals and corporate email systems have strict file size limits (often under 2MB). Uploading an entire 50-page PDF just to submit one required page is not only inefficient but will likely cause your upload to fail. By splitting your PDF and extracting only the relevant pages, you drastically reduce the file size and make your submissions clean and professional.</p>
 
-<h3>Two Intuitive Modes: "Keep" and "Delete"</h3>
-<p>We designed our interface to match how people actually edit their documents. We offer two distinct modes:</p>
-<ul>
-  <li><strong>✅ Select to KEEP Mode:</strong> This mode is perfect for massive documents. By default, no pages are selected. You visually browse the thumbnails and click only the 2 or 3 pages you want to save. The tool will generate a brand new PDF containing strictly those pages.</li>
-  <li><strong>🗑️ Select to DELETE Mode:</strong> This mode is ideal when your document is mostly fine, but you need to remove a few mistakes (like a blank page or an unwanted cover). You simply click the specific pages you want to trash, and the tool keeps everything else intact.</li>
-</ul>
+  <h3>Two Intuitive Modes: "Keep" and "Delete"</h3>
+  <p>We designed our interface to match how people actually edit their documents:</p>
+  <ul>
+    <li><strong>✅ Select to KEEP Mode:</strong> This mode is perfect for massive documents. By default, no pages are selected. You visually browse the thumbnails and click only the few pages you need. The tool generates a brand new PDF containing strictly those pages.</li>
+    <li><strong>🗑️ Select to DELETE Mode:</strong> Ideal when your document is mostly fine, but you need to remove mistakes (like a blank page or an unwanted cover). You simply click the pages you want to trash, and the tool keeps everything else.</li>
+  </ul>
 
-<h3>100% Private: Zero Data Leak & Offline Processing</h3>
-<p>When dealing with personal documents such as Bank Statements, ID Cards (Aadhar, PAN), or Medical Records, uploading them to random internet servers is a huge privacy risk. Most online PDF splitters upload your files to their cloud servers to process them.</p>
-<p>We do things differently. ReduceSize operates entirely on <strong>Client-Side Processing</strong>. When you upload a file to our Splitter, the document is rendered locally on your device's memory. The splitting, page deletion, and PDF generation happen directly inside your web browser. <strong>Your data is never transmitted over the internet</strong>, ensuring total offline security and zero risk of data leaks.</p>
+  <h3>100% Private: Zero Server Uploads</h3>
+  <p>Most online PDF splitters upload your files to their cloud servers. This is a massive privacy risk if you are handling ID cards, Bank Statements, or medical reports. ReduceSize operates on a <strong>Client-Side Processing Architecture</strong>. When you upload a file, the splitting, page deletion, and PDF generation happen <strong>exclusively inside your own web browser</strong>. Your data is never transmitted over the internet, ensuring 100% confidentiality.</p>
 
-<h3>How to Extract or Remove Pages (Step-by-Step)</h3>
-<ol>
-  <li><strong>Upload Safely:</strong> Select your PDF file from your phone or PC. Our tool will instantly generate high-speed visual thumbnails for every page.</li>
-  <li><strong>Choose Your Mode:</strong> Toggle between "Keep Mode" (to extract pages) or "Delete Mode" (to remove pages) at the top of the grid.</li>
-  <li><strong>Make Your Selection:</strong> Click on the page thumbnails. You will see a Green Checkmark (✅) or a Red Trash icon (🗑️) based on your selected mode. You can also use "Select All" to speed up bulk actions.</li>
-  <li><strong>Generate Document:</strong> Click the "Extract & Save PDF" button. A clean, optimized PDF will be generated instantly, ready for you to download.</li>
-</ol>
-
-<h3>Frequently Asked Questions (FAQs)</h3>
-
-<p><strong>Can I delete blank pages from a scanned document?</strong><br>
-Yes! Simply use the "Select to DELETE" mode, visually identify the blank pages in the thumbnail grid, click on them, and hit Extract. The final PDF will have those blank pages perfectly removed.</p>
-
-<p><strong>Does extracting pages reduce the overall file size?</strong><br>
-Absolutely. The final file size is directly proportional to the number of pages you keep. Removing unwanted pages is one of the best ways to reduce file size. If the resulting PDF is still too large for your needs, you can use our <a href="/" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">PDF Compressor</a> to reduce it to an exact KB limit.</p>
-
-<p><strong>Is it safe to split my private bank statement here?</strong><br>
-Yes, it is 100% safe because the processing happens locally on your device without server uploads. Note: If your bank statement is password-protected, our engine will require you to unlock it first. You can easily remove the password using our free <a href="/unlock-pdf.html" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">Unlock PDF Tool</a> before splitting the pages.</p>
-
-<p><strong>Do I need an active internet connection to split the PDF?</strong><br>
-You only need an internet connection to load the website initially. Once the page has loaded, the actual splitting and extraction process happens offline within your browser environment.</p>
-
-<p><strong>Will the extracted pages lose their original quality?</strong><br>
-No. Our tool safely copies the exact binary data of the selected pages. The text, images, and formatting will retain 100% of their original high resolution and quality.</p>
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Can I delete blank pages from a scanned document?</strong><br>Yes! Use the 'Select to DELETE' mode, identify the blank pages, click on them, and hit Extract. The tool will generate a new PDF with those pages removed.</p>
+  <p><strong>Is it safe to split my private bank statement here?</strong><br>Yes, it is 100% safe. Our tool processes all documents locally in your browser. We have no servers to intercept or view your files, making it the safest option available.</p>
 </section>
 
 <div class="chips-hd">More PDF Tools</div>
@@ -359,9 +199,6 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 let currentArrayBuffer = null;
 let currentFileName = "Document";
 let totalNumPages = 0;
-
-// State array to track selections
-// Keep Mode: true means keep. Delete Mode: true means delete.
 let pageSelections = []; 
 let currentMode = 'keep'; 
 
@@ -369,19 +206,13 @@ document.getElementById('upload').addEventListener('change', async function(e) {
     if(this.files.length === 0) return;
     
     const file = this.files[0];
-    if(file.type !== 'application/pdf') {
-        alert("Please select a valid PDF file.");
-        return;
-    }
+    if(file.type !== 'application/pdf') { alert("Please select a valid PDF file."); return; }
     currentFileName = file.name.replace(/\.[^/.]+$/, "");
     
-    // Update Drop UI
     document.getElementById('dropZone').style.display = 'none';
-    
     const pw = document.getElementById('pbox');
     const pb = document.getElementById('pfill');
     const st = document.getElementById('status');
-    
     pw.style.display = 'block';
     pb.style.width = '10%';
     st.innerText = 'Loading Document...';
@@ -392,41 +223,31 @@ document.getElementById('upload').addEventListener('change', async function(e) {
         totalNumPages = pdf.numPages;
         
         document.getElementById('totPages').innerText = totalNumPages;
-        
-        // Initialize State (All unselected)
         pageSelections = new Array(totalNumPages).fill(false);
         
         const grid = document.getElementById('pageGrid');
         grid.innerHTML = '';
         grid.style.display = 'grid';
         
-        // Render Thumbnails Fast
         for (let i = 1; i <= totalNumPages; i++) {
             let progress = 10 + ((i / totalNumPages) * 90);
             pb.style.width = `${progress}%`;
             st.innerText = `Loading Page ${i} of ${totalNumPages}...`;
             
             const page = await pdf.getPage(i);
-            const viewport = page.getViewport({ scale: 0.3 }); // Small scale for fast thumbnail
-            
+            const viewport = page.getViewport({ scale: 0.3 }); 
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             canvas.width = viewport.width;
             canvas.height = viewport.height;
             
             await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-            const imgData = canvas.toDataURL('image/jpeg', 0.8);
             
             const card = document.createElement('div');
             card.className = 'page-card';
             card.id = `pc-${i-1}`;
             card.onclick = () => togglePage(i-1);
-            
-            card.innerHTML = `
-                <img src="${imgData}" loading="lazy">
-                <div class="page-overlay"></div>
-                <div class="page-num">Page ${i}</div>
-            `;
+            card.innerHTML = `<img src="${canvas.toDataURL('image/jpeg', 0.8)}" loading="lazy"><div class="page-overlay"></div><div class="page-num">Page ${i}</div>`;
             grid.appendChild(card);
         }
         
@@ -439,165 +260,81 @@ document.getElementById('upload').addEventListener('change', async function(e) {
         }, 500);
 
     } catch (error) {
-        alert("Error loading PDF. Is it password protected? If yes, unlock it first.");
+        alert("Error loading PDF. If password protected, unlock it first.");
         document.getElementById('dropZone').style.display = 'block';
         pw.style.display = 'none';
     }
 });
 
-// Mode Switcher
 function switchMode(mode) {
     currentMode = mode;
-    
-    // Update Buttons
     document.getElementById('btnModeKeep').classList.remove('active');
     document.getElementById('btnModeDel').classList.remove('active');
-    
-    if(mode === 'keep') {
-        document.getElementById('btnModeKeep').classList.add('active');
-        document.getElementById('pageGrid').className = 'page-grid mode-k';
-    } else {
-        document.getElementById('btnModeDel').classList.add('active');
-        document.getElementById('pageGrid').className = 'page-grid mode-d';
-    }
-    
-    // Reset selections on mode change to avoid confusion
+    if(mode === 'keep') { document.getElementById('btnModeKeep').classList.add('active'); document.getElementById('pageGrid').className = 'page-grid mode-k'; } 
+    else { document.getElementById('btnModeDel').classList.add('active'); document.getElementById('pageGrid').className = 'page-grid mode-d'; }
     clearAll(); 
 }
 
-// Toggle individual page
 function togglePage(index) {
     pageSelections[index] = !pageSelections[index];
-    const card = document.getElementById(`pc-${index}`);
-    
-    if(pageSelections[index]) {
-        card.classList.add('selected');
-    } else {
-        card.classList.remove('selected');
-    }
+    document.getElementById(`pc-${index}`).classList.toggle('selected');
     updateStatusText();
 }
 
 function selectAll() {
     pageSelections.fill(true);
-    for(let i=0; i<totalNumPages; i++) {
-        document.getElementById(`pc-${i}`).classList.add('selected');
-    }
+    for(let i=0; i<totalNumPages; i++) document.getElementById(`pc-${i}`).classList.add('selected');
     updateStatusText();
 }
 
 function clearAll() {
     pageSelections.fill(false);
-    for(let i=0; i<totalNumPages; i++) {
-        document.getElementById(`pc-${i}`).classList.remove('selected');
-    }
+    for(let i=0; i<totalNumPages; i++) document.getElementById(`pc-${i}`).classList.remove('selected');
     updateStatusText();
 }
 
 function updateStatusText() {
     let count = pageSelections.filter(Boolean).length;
     let bTag = document.querySelector('#selectionStatus b');
-    
-    if(currentMode === 'keep') {
-        bTag.innerText = `${count} pages selected to keep`;
-        bTag.style.color = 'var(--green)';
-    } else {
-        bTag.innerText = `${count} pages selected to delete`;
-        bTag.style.color = 'var(--red)';
-    }
+    bTag.innerText = `${count} pages`;
+    bTag.style.color = currentMode === 'keep' ? 'var(--green)' : 'var(--red)';
 }
 
-// Core Engine to Build Final PDF
 async function processPdf() {
-    // Determine which indices we are actually keeping
     let indicesToKeep = [];
-    
     for(let i=0; i<totalNumPages; i++) {
-        if(currentMode === 'keep') {
-            if(pageSelections[i] === true) indicesToKeep.push(i);
-        } else {
-            // Delete Mode: Keep if it's NOT selected
-            if(pageSelections[i] === false) indicesToKeep.push(i);
-        }
+        if(currentMode === 'keep') { if(pageSelections[i]) indicesToKeep.push(i); } 
+        else { if(!pageSelections[i]) indicesToKeep.push(i); }
     }
     
-    if(indicesToKeep.length === 0) {
-        alert("Wait! Your selection will result in an empty PDF with 0 pages. Please adjust your selection.");
-        return;
-    }
-    
-    if(indicesToKeep.length === totalNumPages) {
-        alert("You are keeping all pages! There is nothing to remove.");
-        return;
-    }
+    if(indicesToKeep.length === 0) { alert("Selection results in empty PDF."); return; }
+    if(indicesToKeep.length === totalNumPages) { alert("Nothing to split!"); return; }
 
     const btn = document.getElementById('generateBtn');
-    const pw = document.getElementById('pbox');
-    const pb = document.getElementById('pfill');
-    const st = document.getElementById('status');
-    const rg = document.getElementById('rg');
-    
     btn.style.display = 'none';
-    rg.innerHTML = '';
+    const pw = document.getElementById('pbox'), pb = document.getElementById('pfill'), st = document.getElementById('status');
     pw.style.display = 'block';
-
+    
     try {
         pb.style.width = '30%';
-        st.innerText = 'Initializing Secure PDF Builder...';
-        
-        // Load original document
+        st.innerText = 'Extracting pages...';
         const pdfDoc = await PDFLib.PDFDocument.load(currentArrayBuffer);
-        
-        // Create new empty document
         const newPdf = await PDFLib.PDFDocument.create();
-        
-        pb.style.width = '60%';
-        st.innerText = 'Extracting Required Pages...';
-        
-        // Copy only the required pages
         const copiedPages = await newPdf.copyPages(pdfDoc, indicesToKeep);
         copiedPages.forEach((page) => newPdf.addPage(page));
         
-        pb.style.width = '90%';
-        st.innerText = 'Generating Final File...';
-        
-        // Save and create Blob
-        const pdfBytes = await newPdf.save();
-        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-        
+        const blob = new Blob([await newPdf.save()], { type: 'application/pdf' });
         pb.style.width = '100%';
-        st.innerText = 'PDF Created Successfully! ✅';
+        st.innerText = 'Done ✅';
         
         setTimeout(() => {
             pw.style.display = 'none';
             btn.style.display = 'block';
-            
             const url = URL.createObjectURL(blob);
-            let finalSize = (blob.size / 1024).toFixed(1) + ' KB';
-            if(blob.size > 1024 * 1024) finalSize = (blob.size / (1024*1024)).toFixed(2) + ' MB';
-            
-            let actionText = currentMode === 'keep' ? "Extracted" : "Cleaned";
-            let dlName = `${currentFileName}_${actionText}.pdf`;
-            
-            const d = document.createElement('div');
-            d.className = 'rc';
-            d.innerHTML = `
-                <div style="font-size:36px; margin-bottom:10px;">✂️</div>
-                <div class="rsz">PDF is Ready!</div>
-                <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Final Pages: ${indicesToKeep.length} | Size: ${finalSize}</p>
-                <button class="rb" onclick="dlUrl('${url}','${dlName}')">⬇ Download New PDF</button>
-            `;
-            rg.appendChild(d);
-            
+            document.getElementById('rg').innerHTML = `<div class="rc"><div class="rsz">PDF Ready</div><button class="rb" onclick="dlUrl('${url}','${currentFileName}_split.pdf')">⬇ Download</button></div>`;
         }, 800);
-
-    } catch (error) {
-        alert("Error generating PDF. It might be corrupted.");
-        pw.style.display = 'none';
-        btn.style.display = 'block';
-    }
+    } catch(e) { alert("Error."); pw.style.display = 'none'; btn.style.display = 'block'; }
 }
-
 function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
 </script>
 </body>
