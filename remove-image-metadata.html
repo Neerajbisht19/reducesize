@@ -146,8 +146,7 @@
 <!-- Linked to your existing script.js for basic layout logic -->
 <script src="assets/script.js" defer></script>
 
-<!-- Custom Script for EXIF Scanning and Removing -->
-
+<!-- Custom Script for EXIF Scanning and Removing (Updated Map Logic) -->
 <script>
   let selectedFiles = [];
 
@@ -168,12 +167,11 @@
       EXIF.getData(file, function() {
         let allTags = EXIF.getAllTags(this);
         
-        // Basic Data
         let make = allTags.Make || "N/A";
         let model = allTags.Model || "Unknown Device";
         let date = allTags.DateTimeOriginal || "No Date Found";
         
-        // --- NAYA LOGIC: GPS To Exact Location (Google Maps) ---
+        // --- EXIF MATH LOGIC FOR EXACT LOCATION ---
         let lat = allTags.GPSLatitude;
         let latRef = allTags.GPSLatitudeRef || "N";
         let lon = allTags.GPSLongitude;
@@ -183,9 +181,16 @@
         
         if (lat && lon) {
             try {
-                // EXIF Arrays (Degrees, Minutes, Seconds) ko map coordinates me convert karna
-                let latDec = (lat[0] + (lat[1] / 60) + (lat[2] / 3600)).toFixed(5);
-                let lonDec = (lon[0] + (lon[1] / 60) + (lon[2] / 3600)).toFixed(5);
+                // Converting fraction data (numerator/denominator) to decimal
+                const parseCoord = (coord) => {
+                    let d = coord[0].numerator ? coord[0].numerator / coord[0].denominator : parseFloat(coord[0]);
+                    let m = coord[1].numerator ? coord[1].numerator / coord[1].denominator : parseFloat(coord[1]);
+                    let s = coord[2].numerator ? coord[2].numerator / coord[2].denominator : parseFloat(coord[2]);
+                    return d + (m / 60) + (s / 3600);
+                };
+
+                let latDec = parseCoord(lat).toFixed(6);
+                let lonDec = parseCoord(lon).toFixed(6);
                 
                 if (latRef === "S") latDec = latDec * -1;
                 if (lonRef === "W") lonDec = lonDec * -1;
@@ -201,7 +206,6 @@
             }
         }
 
-        // Advanced Data
         let software = allTags.Software || "Original / Not Edited";
         let iso = allTags.ISOSpeedRatings || "N/A";
         let aperture = allTags.FNumber ? "f/" + parseFloat(allTags.FNumber).toFixed(1) : "N/A";
@@ -210,7 +214,6 @@
         let cameraDetails = make !== "N/A" ? make + ' ' + model : model;
         let isExifClean = (cameraDetails === "Unknown Device" && !lat && iso === "N/A");
 
-        // Advanced details HTML section
         let advancedHtml = isExifClean ? '' : `
           <div style="grid-column: span 2; margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 10px;">
             <div class="exif-label" style="margin-bottom: 8px;">📸 Advanced Camera Details</div>
@@ -223,7 +226,6 @@
           </div>
         `;
 
-        // Build the UI Card
         let cardHTML = `
           <div class="exif-card">
             <div class="exif-header">
@@ -300,6 +302,5 @@
   }
 </script>
 
-  
 </body>
 </html>
