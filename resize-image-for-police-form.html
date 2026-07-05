@@ -3,271 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resize Image for Police Form Online Free | Constable & SI</title>
+<title>Resize Image for Police Form | Constable & SI Form Fixer</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/resize-image-for-police-form.html">
-<meta name="description" content="Resize photo and signature for State Police (UP, Delhi, Bihar) Constable & SI forms. Auto-crop, exact KB sizing, and free instant download.">
-<meta name="keywords" content="resize image for police form, up police photo size, delhi police constable photo, bihar police photo compress, police form image resize">
+<meta name="description" content="Fix form photo rejection instantly. Resize photo and signature for State Police (UP, Delhi, Bihar) Constable & SI forms. Exact KB, dimensions, and strict JPEG output.">
+<meta name="keywords" content="resize image for police form, up police photo size, delhi police constable photo, bihar police photo compress, police form image resize, ssc police form photo">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
+<!-- Cropper.js for professional cropping -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
 
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
+
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:20px;align-items:center;} /* Increased gap */
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none;
-}
-@media(min-width:600px){ .nav-pill{display:inline-block;} }
-
-/* WRAP & SUB-HERO (Fixed Padding for Mashing) */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
-}
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
-}
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* QUICK TARGET TABS */
-.ssc-tabs {
-  display:flex; gap:10px; margin-bottom:20px;
-}
+/* =========================================
+   POLICE FORM SPECIFIC UI CSS
+   ========================================= */
+.ssc-tabs { display:flex; gap:10px; margin-bottom:20px; }
 .ssc-tab {
   flex:1; padding:12px; border-radius:10px; border:1px solid var(--border);
   background:var(--surface2); color:var(--muted); font-size:14px; font-weight:700;
   text-align:center; cursor:pointer; transition:all 0.2s; font-family:'Manrope',sans-serif;
 }
-.ssc-tab.active {
-  background:rgba(109,84,240,.15); border-color:var(--purple); color:var(--purple-l);
-}
+.ssc-tab.active { background:rgba(109,84,240,.15); border-color:var(--purple); color:var(--purple-l); }
 
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:28px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:46px;height:46px;margin:0 auto 10px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
-}
-.drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:12px;color:var(--muted)}
-
-/* CROP AREA */
 .crop-wrap {
-  display:none; 
-  background:var(--surface2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:20px;
-  position:relative;
-  width: 100%;
-  height: 380px; 
+  display:none; background:var(--surface2); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; margin-bottom:20px; position:relative;
+  width: 100%; height: 380px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
 }
-.crop-wrap img {
-  max-width: 100%;
-  display: block;
-}
+.crop-wrap img { max-width: 100%; display: block; }
 
-/* INPUT SECTION */
-.u-box{
-  background:var(--surface2);border:1px solid rgba(109,84,240,.2);
-  border-radius:12px;padding:16px;margin-bottom:20px;
-}
-.u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
-.u-title::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%}
-
-/* INPUT ROW */
-.irow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
-.irow .f{flex:1;min-width:120px;}
-.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input {
-  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
-  padding:12px 14px;border-radius:10px;color:var(--text);
-  font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
-  outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
-}
-.irow input:focus {border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
-
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* PROGRESS */
-.pbox{display:none;margin-top:13px}
-.ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{
-  height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));
-  border-radius:10px;transition:width .3s;position:relative;overflow:hidden;
-}
-.plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
-
-/* CUTE GREETING CARD (The Secret Sauce) */
+/* CUTE GREETING CARD */
 .greeting-card {
-    display: none;
-    position: relative;
-    background: linear-gradient(145deg, rgba(109,84,240,0.11) 0%, rgba(32,217,192,0.1) 100%);
-    border: 1px dashed rgba(62,207,142,0.42);
-    border-radius: 12px;
-    padding: 22px 16px;
-    text-align: center;
-    margin-top: 16px;
-    animation: cutePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    overflow: visible; /* Ensure sparkles are visible */
+    display: none; position: relative; background: linear-gradient(145deg, rgba(109,84,240,0.11) 0%, rgba(32,217,192,0.1) 100%);
+    border: 1px dashed rgba(62,207,142,0.42); border-radius: 12px; padding: 22px 16px;
+    text-align: center; margin-top: 16px; animation: cutePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
-
-/* Unique cute animation */
-@keyframes cutePop { 
-    0% { opacity: 0; transform: translateY(20px) scale(0.9); } 
-    100% { opacity: 1; transform: translateY(0) scale(1); } 
-}
-
-/* Sparkle pseudo-element for appearance effect */
-.greeting-card::after {
-    content: "✨ ✨ ✨";
-    font-size: 20px;
-    position: absolute;
-    top: -20px; left: 50%;
-    transform: translateX(-50%);
-    color: var(--accent);
-    opacity: 0;
-    animation: sparkleOut 0.8s ease-out 0.2s forwards;
-    pointer-events: none;
-}
-
-@keyframes sparkleOut {
-  0% { opacity: 0; transform: translateX(-50%) scale(0.5); top: -20px;}
-  20% { opacity: 1; transform: translateX(-50%) scale(1.2); top: -35px;}
-  100% { opacity: 0; transform: translateX(-50%) scale(1.5); top: -60px;}
-}
-
+@keyframes cutePop { 0% { opacity: 0; transform: translateY(20px) scale(0.9); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
 .g-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; animation: heartBeat 2s infinite ease-in-out; }
-@keyframes heartBeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-.g-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.2px; }
+@keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.g-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
 .g-title em { font-style: normal; color: var(--accent); }
 .g-text { font-size: 15px; color: #a0a0c8; line-height: 1.6; margin-bottom: 14px; }
 .g-love { font-size: 14px; font-weight: 700; color: var(--purple-l); display: block; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 10px;}
 .g-signature { display: inline-block; padding: 4px 14px; background: rgba(109,84,240,0.12); border-radius: 20px; margin-top: 6px;}
-
-/* RESULTS */
-.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
-.rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;display:flex;flex-direction:column;}
-.rc img{width:100%;height:auto;max-height:280px;object-fit:contain;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
-.ri{padding:12px 10px}
-.rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
-.rb{
-  width:100%;padding:9px;border-radius:7px;border:none;
-  background:rgba(109,84,240,.12);color:var(--purple-l);
-  font-size:13px;font-weight:700;cursor:pointer;
-  font-family:'Manrope',sans-serif;transition:.15s;
-}
-.rb:hover{background:rgba(109,84,240,.24)}
-
-/*мобильный режим*/
-@media(max-width:600px){
-  .sub-hero{padding:32px 0 20px}
-  .card{padding:16px;border-radius:15px}
-  .chips{grid-template-columns:1fr 1fr}
-}
 </style>
+
+<!-- SEO Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Police Form Photo & Signature Resizer",
+  "url":"https://reducesize.online/resize-image-for-police-form.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Professional tool to resize, crop, and compress photos and signatures for State Police (UP, Delhi, Bihar) recruitment forms. 100% Acceptable JPEGs.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Police Portal Ready</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Perfect for All State Police</div>
-  <h1>Resize Image for<br><span class="grad">Police Online Forms</span></h1>
-  <p>Live crop your Photo & Signature for UP Police, Delhi Police, Bihar Police Constable and SI exams. Set custom dimensions instantly.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ Perfect for All State Police Forms</div>
+  <h1 class="hero-h1">Resize Image for<br><span class="grad">Police Online Forms</span></h1>
+  <p class="hero-sub">Live crop your photo & signature for UP Police, Delhi Police, Bihar Police Constable and SI exams. Set custom dimensions instantly for portal compliance.</p>
+  
   <div class="badges">
     <span class="badge">🚓 State Police Exams</span>
     <span class="badge">✂ Live Crop & Drag</span>
     <span class="badge">⚖️ Custom KB Limits</span>
+    <span class="badge">✅ 100% JPEG Compliant</span>
   </div>
 </section>
 
@@ -282,7 +119,7 @@ body::after{
     <input type="file" id="upload" accept="image/*">
     <div class="drop-ico">📥</div>
     <div class="drop-main" id="dropText">Upload Photo or Signature here</div>
-    <div class="drop-hint">JPG or PNG formats accepted</div>
+    <div class="drop-hint">JPG, PNG, WEBP all supported</div>
   </div>
   
   <div id="cropWrap" class="crop-wrap">
@@ -298,13 +135,14 @@ body::after{
     <div class="irow" style="margin-bottom:0">
       <div class="f"><label class="fl">Max File Size (KB)</label><input type="number" id="size" value="48"></div>
     </div>
-    <p id="hintText" style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*You can change dimensions and KB size as per your specific State Police notification.</p>
+    <p id="hintText" style="font-size:12px;color:var(--muted);margin-top:10px;margin-bottom:0">*You can manually change these values to match your specific State Police portal guidelines.</p>
   </div>
 
   <button class="btn" onclick="processPolice()">⚡&nbsp; Generate Form Ready Image</button>
 
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
   
+  <!-- Cute Greeting Card -->
   <div id="greetingCard" class="greeting-card">
     <div class="g-icon">👮‍♂️🚨</div>
     <div class="g-title">✨ <em>Uniform</em> Ka Sapna ✨</div>
@@ -314,8 +152,67 @@ body::after{
 
   <div id="rg" class="rg"></div>
 </div>
+
+<section class="seo">
+  <h2>The Master Fixer for Police Constable & SI Form Rejections</h2>
+  <p>Applying for State Police recruitments—like UP Police, Delhi Police Constable, or Bihar Police SI—is a competitive journey. The last thing you need is a <strong>"File Upload Failed"</strong> error right when the server is about to close. Most state police forms are powered by legacy systems that are extremely unforgiving. If your image is 1KB over the size limit or even 1 pixel off in dimensions, the system will discard your application without explanation.</p>
+
+  <h3>Why Online Police Forms Reject Photos</h3>
+  <p>Our analysis of common rejection errors on police portals shows three recurring issues:</p>
+  <ul>
+    <li><strong>File Size Too Large:</strong> Police portals are designed to handle millions of applications. They enforce strict KB caps (e.g., 20KB or 50KB) to keep their database storage costs low. If you upload a 3MB phone photo, it will be rejected instantly.</li>
+    <li><strong>Incorrect Aspect Ratio:</strong> If a form asks for 3.5cm x 4.5cm, it requires a portrait ratio. Uploading a square photo will make your face look distorted or stretched, which is grounds for rejection during manual verification.</li>
+    <li><strong>Invalid Image Format:</strong> Many state portals only accept <em>.JPG</em> or <em>.JPEG</em> files. If you upload a modern HEIC (iPhone) or PNG file, the upload validator will fail.</li>
+  </ul>
+
+  <h3>How our "Master Form Fixer" Solves This</h3>
+  <p>Unlike generic compressors that just shrink your file, our tool acts as a dedicated <strong>Form Fixer</strong>:</p>
+  <ol>
+    <li><strong>Smart Cropper:</strong> When you select "Photo" or "Signature" from our tabs, we automatically lock the aspect ratio to the standard dimensions used by State Police boards. You cannot make a mistake while cropping!</li>
+    <li><strong>Anti-Rejection Encoder:</strong> No matter what format you upload (.PNG, .WEBP, .HEIC), our tool forces the output to be a compliant, standard Baseline JPEG that every recruitment portal accepts.</li>
+    <li><strong>Exact KB Targeting:</strong> Our algorithm doesn't just "reduce" size; it precisely compresses your image to fit the exact limit (e.g., 48KB) without sacrificing the sharpness of your face or signature strokes.</li>
+  </ol>
+
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Do I need to download an app to resize my photo for the form?</strong><br>Absolutely not. Our tool is 100% browser-based. You can open it in Chrome or Safari on your phone, crop your photo, compress it, and download it instantly without installing any third-party software.</p>
+  
+  <p><strong>Are my documents safe when I resize them here?</strong><br>Yes, it is 100% secure. We operate on a zero-upload policy. Your raw image is processed entirely within your web browser's local memory. No files are ever sent to our servers.</p>
+  
+  <p><strong>Why is my signature getting cut off?</strong><br>Ensure that during the cropping phase, you are selecting the entire signature area. If the signature is too large, use the 'Signature' mode in our tool, which is calibrated specifically to handle wide-aspect signatures for official forms.</p>
+</section>
+
+<div class="chips-hd">Explore Related Tools</div>
+<div class="chips">
+  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Passport Photos</span></div></a>
+  <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
+  <a href="/compress-image-to-100kb.html" class="chip"><span class="chip-i">🏷</span><div class="chip-t"><strong>Compress to 100KB</strong><span>High quality</span></div></a>
+  <a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">🔧</span><div class="chip-t"><strong>Master Form Fixer</strong><span>Any portal</span></div></a>
+  <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
+  <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
+</div>
 </div>
 
+<footer class="footer">
+  <a class="flogo" href="/"><em>Reduce</em>Size</a>
+  <nav class="fnav">
+    <a href="/compress-image-to-10kb.html">10KB</a>
+    <a href="/compress-image-to-50kb.html">50KB</a>
+    <a href="/resize-image-for-online-form.html">Form Fixer</a>
+    <a href="/blog/">Blog</a>
+  </nav>
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+    <span>📱 Mobile Ready</span>
+  </div>
+</footer>
+
+<!-- Global External JS -->
+<script src="assets/script.js" defer></script>
+
+<!-- Specialized Cropper Logic -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 
 <script>
@@ -345,8 +242,8 @@ function setMode(mode) {
 document.getElementById('upload').addEventListener('change', function() {
   const cropWrap = document.getElementById('cropWrap');
   const imageToCrop = document.getElementById('imageToCrop');
-  document.getElementById('greetingCard').style.display = 'none'; // Hide greeting on new upload
-  document.getElementById('rg').innerHTML = ''; // clear results
+  document.getElementById('greetingCard').style.display = 'none'; 
+  document.getElementById('rg').innerHTML = ''; 
   
   if(!this.files.length) { 
     cropWrap.style.display='none'; 
@@ -360,14 +257,12 @@ document.getElementById('upload').addEventListener('change', function() {
   if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
   currentFile = f;
   
-  // Show Crop Area & Hide Drop Zone
   document.getElementById('dropZone').style.display = 'none';
   cropWrap.style.display = 'block';
   imageToCrop.src = URL.createObjectURL(f);
   
-  if(cropper) { cropper.destroy(); }
+  if(cropper) cropper.destroy(); 
 
-  // Initialize Cropper 
   const w = parseInt(document.getElementById('resW').value) || 413;
   const h = parseInt(document.getElementById('resH').value) || 531;
 
@@ -376,8 +271,7 @@ document.getElementById('upload').addEventListener('change', function() {
       viewMode: 1, 
       autoCropArea: 0.9, 
       background: true, 
-      responsive: true,
-      guides: true
+      responsive: true
   });
 });
 
@@ -405,7 +299,7 @@ async function processPolice() {
   const btn = document.querySelector('.btn');
   btn.innerText = 'Processing...';
   document.getElementById('rg').innerHTML = '';
-  document.getElementById('greetingCard').style.display = 'none'; // Hide if previously shown
+  document.getElementById('greetingCard').style.display = 'none';
 
   const pw = document.getElementById('pbox');
   const pb = document.getElementById('pfill');
@@ -442,11 +336,9 @@ async function processPolice() {
     
     setTimeout(()=>{
         pw.style.display='none';
-        // SHOW CUTE GREETING CARD HERE
         document.getElementById('greetingCard').style.display = 'block';
     }, 800);
 
-    // Show result
     const url = URL.createObjectURL(bestBlob);
     const d = document.createElement('div');
     d.className = 'rc';
