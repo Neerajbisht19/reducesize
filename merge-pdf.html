@@ -3,234 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merge PDF Files Online Free | Combine Multiple PDFs</title>
+<title>Merge PDF Files Online Free | Combine Multiple PDFs Securely</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/merge-pdf.html">
-<meta name="description" content="Combine multiple PDF files into a single document online for free. Easily reorder files before merging. No upload, 100% secure and private.">
-<meta name="keywords" content="merge pdf, combine pdf online, join pdf files, merge pdf free, combine multiple pdf into one">
+<meta name="description" content="Combine multiple PDF files into a single document online for free. Easily reorder files before merging. No upload limits, 100% offline and private.">
+<meta name="keywords" content="merge pdf, combine pdf online, join pdf files, merge pdf free, combine multiple pdf into one, offline pdf merger">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
 
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:16px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
-  display:inline-block; white-space:nowrap;
-}
-@media(max-width: 480px){
-    .nav { padding: 0 12px; }
-    .nav-logo { font-size: 16px; }
-    .nav-links { gap: 10px; }
-    .nav-links a { font-size: 12px; }
-    .nav-pill { display:none; }
-}
+/* =========================================
+   MERGE PDF TOOL SPECIFIC CSS
+   ========================================= */
+.list-wrap { margin-bottom: 24px; display: none; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from {opacity: 0; transform: translateY(10px);} to {opacity: 1; transform: translateY(0);} }
 
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
+.list-head { 
+    font-size: 13px; font-weight: 800; color: var(--text); text-transform: uppercase; 
+    letter-spacing: 1px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; 
 }
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
+.add-more-btn { 
+    background: var(--purple-light); color: var(--purple); border: 1px solid var(--purple); 
+    padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; 
 }
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:36px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:54px;height:54px;margin:0 auto 12px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
-}
-.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:13px;color:var(--muted)}
-
-/* FILE LIST (DRAG & DROP ROWS) */
-.list-wrap { margin-bottom: 20px; display: none; }
-.list-head { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-.add-more-btn { background: rgba(109,84,240,.15); color: var(--purple-l); border: none; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-.add-more-btn:hover { background: rgba(109,84,240,.3); }
+.add-more-btn:hover { background: var(--purple); color: #fff; }
 
 .f-item {
-    display:flex; align-items:center; gap:12px; background:var(--surface2); 
-    padding:12px 14px; border-radius:12px; margin-bottom:8px; 
-    border:1px solid rgba(255,255,255,0.05); transition: 0.2s;
+    display:flex; align-items:center; gap:16px; background:var(--surface2); 
+    padding:16px; border-radius:14px; margin-bottom:12px; 
+    border:1px solid var(--border); transition: 0.2s;
 }
-.f-item:hover { border-color: rgba(109,84,240,.3); }
-.f-icon { font-size: 20px; }
+.f-item:hover { border-color: var(--purple); box-shadow: 0 4px 12px rgba(109,84,240,0.1); }
+.f-icon { font-size: 28px; }
 .f-info { flex:1; overflow:hidden; }
-.f-name { font-size:14px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text); margin-bottom: 2px;}
-.f-size { font-size:11px; color:var(--muted); }
-.f-ctrl { display:flex; gap:6px; }
+.f-name { font-size:15px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text); margin-bottom: 4px;}
+.f-size { font-size:12px; color:var(--muted); font-weight:600;}
+.f-ctrl { display:flex; gap:8px; }
 .f-btn { 
-    background:rgba(255,255,255,0.05); border:none; color:var(--text); 
-    border-radius:6px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-    cursor:pointer; transition:0.2s; font-size:14px;
+    background:var(--surface); border:1px solid var(--border); color:var(--text); 
+    border-radius:10px; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+    cursor:pointer; transition:0.2s; font-size:16px;
 }
-.f-btn:hover { background:var(--purple); color:#fff; }
-.f-del { background:rgba(255,107,107,0.1); color:var(--red); }
-.f-del:hover { background:var(--red); color:#fff; }
+.f-btn:hover { background:var(--purple); color:#fff; border-color:var(--purple); }
+.f-del { background:rgba(255,107,107,0.1); color:var(--red); border-color:rgba(255,107,107,0.2); }
+.f-del:hover { background:var(--red); color:#fff; border-color:var(--red); }
 
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
+.btn-merge { margin-top: 10px; }
+
+/* SUCCESS BOX */
+.success-box {
+    text-align: center; padding: 32px 20px; background: var(--green-bg);
+    border: 1px solid rgba(62,207,142,0.3); border-radius: 16px;
+    animation: fadeIn 0.4s ease;
 }
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* PROGRESS */
-.pbox{display:none;margin-top:16px}
-.ptrack{height:6px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s ease;position:relative;}
-.plabel{font-size:13px;color:var(--purple-l);margin-top:10px;text-align:center;font-weight:600}
-
-/* RESULTS */
-.rg{display:flex; flex-direction:column; gap:10px; margin-top:16px}
-.rc{background:var(--surface2);border:1px solid rgba(62,207,142,.3);border-radius:11px;overflow:hidden; padding: 20px; text-align: center;}
-.rsz{font-size:16px;font-weight:700;color:var(--green);margin-bottom:6px}
-.rb{
-  width:100%;padding:12px;border-radius:9px;border:none;margin-top:12px;
-  background:var(--green);color:#000;
-  font-size:15px;font-weight:800;cursor:pointer;
-  font-family:'Manrope',sans-serif;transition:.15s;
+.sb-icon { font-size: 48px; margin-bottom: 12px; }
+.sb-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
+.sb-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-weight: 600; }
+.btn-dl {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--green); color: #000; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
 }
-.rb:hover{background:#2eb872; box-shadow:0 6px 20px rgba(62,207,142,.3);}
+.btn-dl:hover { background: #2eb872; box-shadow: 0 8px 24px rgba(62,207,142,0.3); transform: translateY(-2px); }
 
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+@media(max-width: 600px) {
+    .f-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .f-ctrl { width: 100%; justify-content: flex-end; }
+}
 </style>
 
+<!-- SEO Structured Data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Merge PDF Online Free",
-"url":"https://reducesize.online/merge-pdf.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Combine multiple PDF files into one. Fast, secure, and 100% browser-based. Easily reorder your documents before merging. No upload limits.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Secure PDF Merger Online",
+  "url":"https://reducesize.online/merge-pdf.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Combine multiple PDF files into one. Fast, secure, and 100% browser-based. Easily reorder your documents before merging.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Is it safe to merge bank statements and ID proofs here?",
+      "acceptedAnswer":{"@type":"Answer","text":"Absolutely. Our tool processes all documents locally inside your web browser. We have zero access to your files, making it the safest option available on the internet for handling sensitive data."}
+    },
+    {
+      "@type":"Question",
+      "name":"Does merging PDFs reduce their file size?",
+      "acceptedAnswer":{"@type":"Answer","text":"No, merging simply joins the files together, so the final file size will be approximately the total sum of the individual files. You can compress the final file using our PDF Compressor if needed."}
+    },
+    {
+      "@type":"Question",
+      "name":"Can I rearrange the order of my pages before merging?",
+      "acceptedAnswer":{"@type":"Answer","text":"Yes! Once you upload your files, they appear in a list. You can use the Up and Down arrow buttons next to each file to arrange them in the exact sequence you want them merged."}
+    }
+  ]
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Secure Document Tools</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ 100% Secure & Private</div>
-  <h1>Merge PDF Files<br><span class="grad">Into One Document</span></h1>
-  <p>Combine multiple PDFs (Marksheets, ID cards, Resumes) into a single PDF file instantly. No servers involved—your files are merged directly on your device.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ 100% Secure & Private</div>
+  <h1 class="hero-h1">Merge PDF Files<br><span class="grad">Into One Document</span></h1>
+  <p class="hero-sub">Combine multiple PDFs (Marksheets, ID cards, Resumes) into a single file instantly. No servers involved—your files are merged directly on your device.</p>
+  
   <div class="badges">
     <span class="badge">🔒 Zero Data Leak</span>
     <span class="badge">🔄 Easy Reordering</span>
-    <span class="badge">🚀 Super Fast</span>
+    <span class="badge">🚀 Super Fast Engine</span>
+    <span class="badge">♾️ No File Limits</span>
   </div>
 </section>
 
@@ -241,123 +161,163 @@ body::after{
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="application/pdf" multiple>
     <div class="drop-ico">📑</div>
-    <div class="drop-main">Drop your PDFs here or <span>browse</span></div>
-    <div class="drop-hint">Select 2 or more files to combine</div>
+    <div class="drop-main">Drop your PDFs here or <span>browse files</span></div>
+    <div class="drop-hint">Select 2 or more PDF documents to combine</div>
   </div>
 
   <div class="list-wrap" id="listWrap">
       <div class="list-head">
           <span id="fileCount">0 Files Selected</span>
-          <button class="add-more-btn" onclick="document.getElementById('addMoreInput').click()">+ Add More</button>
+          <button class="add-more-btn" onclick="document.getElementById('addMoreInput').click()">+ Add More Files</button>
       </div>
-      <div id="fileList">
-          </div>
       
-      <button class="btn" id="mergeBtn" onclick="processMerge()" style="margin-top:12px;">📑&nbsp; Merge PDFs Now</button>
+      <div id="fileList">
+          <!-- Dynamically populated files go here -->
+      </div>
+      
+      <button class="btn btn-merge" id="mergeBtn" onclick="processMerge()">📑&nbsp; Merge PDFs Now</button>
   </div>
 
-  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <div id="pbox" class="pbox" style="padding: 24px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel" style="margin-top: 12px;">Initializing secure engine...</div>
+  </div>
+  
   <div id="rg" class="rg"></div>
 </div>
 
+<!-- ==========================================
+     HIGH-VALUE SEO CONTENT SECTION
+     ========================================== -->
 <section class="seo">
-<h2>Merge PDF Files Online: The Ultimate Free Tool for Students & Professionals</h2>
-<p>Are you tired of dealing with multiple PDF files scattered across your device? Whether you are a student applying for government jobs (like SSC, UPSC, or Banking) or a professional sending important reports to clients, managing dozens of individual files can be a frustrating experience. <strong>ReduceSize PDF Merger</strong> is built to solve this exact problem. It allows you to quickly and seamlessly combine multiple PDF documents into a single, perfectly organized file.</p>
+  <h2>Merge PDF Files Online: The Ultimate Secure Combiner</h2>
+  <p>Are you tired of dealing with multiple PDF files scattered across your desktop or smartphone? Whether you are a student submitting applications for government jobs (like SSC, UPSC, or Banking) or a professional sending project reports to clients, managing dozens of individual files is incredibly frustrating. <strong>ReduceSize PDF Merger</strong> is engineered to solve this problem efficiently. It allows you to quickly, securely, and flawlessly combine multiple PDF documents into a single, perfectly organized file.</p>
 
-<h3>Why You Need a Reliable PDF Combiner</h3>
-<p>Government portals, university admission sites, and corporate HR platforms usually have strict document upload rules. Often, they provide only one upload button for your "Supporting Documents." If you have your PAN Card, Aadhar Card, 10th Marksheet, and 12th Marksheet saved as separate PDF files, you cannot upload them individually. You are forced to join these files together. Our tool simplifies this process by letting you drag, drop, reorder, and merge your PDFs with a single click, completely free of charge.</p>
+  <h3>Why You Need a Reliable PDF Combiner</h3>
+  <p>Government portals, university admission sites, and corporate HR platforms invariably feature strict document upload rules. More often than not, they provide only one upload button for all your "Supporting Documents." If you have your PAN Card, Aadhar Card, 10th Marksheet, and Degree Certificate saved as separate files, you are forced to stitch them together. Our tool simplifies this process by letting you drag, drop, reorder, and merge your PDFs with a single click.</p>
 
-<h3>100% Privacy Guarantee: Zero Server Uploads</h3>
-<p>The biggest risk with typical online PDF tools is data theft. Most websites require you to upload your highly sensitive, private documents to their remote cloud servers. Once uploaded, you have no idea who is accessing your ID proofs, bank statements, or academic records. </p>
-<p>ReduceSize operates on a revolutionary <strong>Client-Side Processing Architecture</strong>. This means the entire merging process happens exclusively inside your internet browser, utilizing your computer or smartphone's local memory (RAM). <strong>Your files never leave your device, and they are never transmitted over the internet.</strong> This guarantees absolute privacy and security, ensuring your sensitive data remains completely confidential.</p>
+  <h3>100% Privacy Guarantee: Zero Server Uploads</h3>
+  <p>The biggest risk with conventional online PDF tools is data theft. Most websites require you to upload your highly sensitive, private documents to their remote cloud servers. Once uploaded, you have no control over who might access or store your ID proofs and bank statements.</p>
+  <p>ReduceSize operates on a revolutionary <strong>Client-Side Processing Architecture</strong>. This means the entire merging process happens exclusively inside your internet browser, utilizing your computer's local memory. <strong>Your files never leave your device, and they are never transmitted over the internet.</strong> This guarantees absolute privacy, ensuring your sensitive data remains yours.</p>
 
-<h3>Step-by-Step Guide: How to Combine PDFs</h3>
-<p>Merging your files using ReduceSize is incredibly simple and intuitive. Follow these easy steps:</p>
-<ol>
-  <li><strong>Upload Your Files:</strong> Click on the upload box or drag and drop your desired PDF files. You can select two or more files simultaneously. Need to add more later? Just click the "+ Add More" button.</li>
-  <li><strong>Reorder Your Documents:</strong> Once selected, your files will appear in a neat list. Use the convenient <strong>Up (⬆️)</strong> and <strong>Down (⬇️)</strong> arrow buttons to arrange them in the exact sequence you want them to appear in the final document.</li>
-  <li><strong>Click Merge:</strong> Hit the "Merge PDFs Now" button. Our high-speed JavaScript engine will stitch your documents together in a matter of seconds.</li>
-  <li><strong>Download Safely:</strong> Click the download button to save the newly combined PDF directly to your device storage.</li>
-</ol>
+  <h3>Step-by-Step Guide: How to Combine PDFs</h3>
+  <p>Merging your files using our platform requires zero technical knowledge. Follow these easy steps:</p>
+  <ol>
+    <li><strong>Select Your Files:</strong> Click on the upload box or drag and drop your desired PDF files. You can select multiple files simultaneously. Need to add more later? Just click the "+ Add More Files" button.</li>
+    <li><strong>Reorder Your Documents:</strong> Once selected, your files will appear in a neat, interactive list. Use the convenient <strong>Up (⬆️)</strong> and <strong>Down (⬇️)</strong> arrow buttons to arrange them in the exact sequence you want them to appear in the final, unified document.</li>
+    <li><strong>Click Merge:</strong> Hit the "Merge PDFs Now" button. Our high-speed JavaScript engine will securely stitch your documents together in a matter of seconds.</li>
+    <li><strong>Download Safely:</strong> Click the green download button to save the newly combined PDF directly to your hard drive or phone gallery.</li>
+  </ol>
 
-<h3>Top Features of ReduceSize PDF Merger</h3>
-<ul>
-  <li><strong>Lightning Fast Processing:</strong> Because everything runs locally on your browser, there is no waiting for heavy files to upload or download from a server. It works instantly.</li>
-  <li><strong>No Watermarks:</strong> We believe your documents belong to you. We never stamp our logo or any annoying watermarks on your final files.</li>
-  <li><strong>No File Size Limits:</strong> Unlike other platforms that restrict you to 10MB or ask you to pay for premium upgrades, our tool allows you to merge files of any size, limited only by your device's capacity.</li>
-  <li><strong>Retains Original Quality:</strong> The merging process perfectly preserves the original resolution, text clarity, and formatting of your documents. No quality is lost during the merge.</li>
-</ul>
+  <h3>Frequently Asked Questions (FAQs)</h3>
 
-<h3>Frequently Asked Questions (FAQs)</h3>
+  <p><strong>Is it safe to merge bank statements and ID proofs here?</strong><br>
+  Absolutely. As mentioned, our tool processes all documents locally inside your web browser. We have zero access to your files, making it the safest option available on the internet for handling highly classified data.</p>
 
-<p><strong>Is it safe to merge bank statements and ID proofs here?</strong><br>
-Absolutely. As mentioned, our tool processes all documents locally in your browser. We have zero access to your files, making it the safest option available on the internet for handling sensitive data.</p>
+  <p><strong>Does merging PDFs reduce their overall file size?</strong><br>
+  No, merging simply joins the files together end-to-end, so the final file size will be approximately the total sum of the individual files. If the resulting merged PDF is too heavy for your exam portal, you can easily shrink it using our free <a href="/" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">PDF Compressor Tool</a>.</p>
 
-<p><strong>Does merging PDFs reduce their file size?</strong><br>
-No, merging simply joins the files together, so the final file size will be approximately the total sum of the individual files. If the resulting merged PDF is too large for your exam portal, you can easily compress it using our free <a href="/" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">PDF Compressor Tool</a> available on our homepage.</p>
+  <p><strong>Is there a limit to how many PDFs I can combine at once?</strong><br>
+  We do not impose any artificial paywalls or file limits. You can combine 5, 10, or even 30 PDFs at once. However, for a lag-free experience, we recommend merging up to 40 files in a single batch, depending on your device's RAM capacity.</p>
 
-<p><strong>Is there a limit to how many PDFs I can combine?</strong><br>
-We do not impose any artificial limits. You can combine 5, 10, or even 20 PDFs at once. However, for an optimal and lag-free experience, we recommend merging up to 30 files in a single batch, depending on your device's processing power.</p>
-
-<p><strong>What if my PDF is password protected?</strong><br>
-Our engine cannot merge encrypted files. If you attempt to upload a locked document, the tool will notify you. You must first remove the encryption using our dedicated <a href="/unlock-pdf.html" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">Unlock PDF Tool</a>. Once the password is removed, you can return here to merge it seamlessly.</p>
-
-<p><strong>Can I use this tool on my mobile phone?</strong><br>
-Yes! ReduceSize is fully optimized for mobile devices. Whether you are using an Android phone, an iPhone, or an iPad, the merging process works flawlessly directly from your mobile web browser without needing to install any third-party applications.</p>
+  <p><strong>What if my PDF is password protected?</strong><br>
+  Our offline engine cannot merge encrypted files. If you attempt to upload a locked document, the tool will alert you. You must first remove the encryption using our dedicated <a href="/unlock-pdf.html" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">Unlock PDF Tool</a> before merging it.</p>
 </section>
 
-<div class="chips-hd">More PDF Tools</div>
+<div class="chips-hd">Explore More Document Tools</div>
 <div class="chips">
   <a href="/" class="chip"><span class="chip-i">🗜️</span><div class="chip-t"><strong>Compress PDF</strong><span>Reduce file size</span></div></a>
   <a href="/pdf-to-image.html" class="chip"><span class="chip-i">🖼️</span><div class="chip-t"><strong>PDF to Images</strong><span>Extract pages</span></div></a>
+  <a href="/document-scanner-online.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Scan to PDF</strong><span>Remove shadows</span></div></a>
   <a href="/unlock-pdf.html" class="chip"><span class="chip-i">🔓</span><div class="chip-t"><strong>Unlock PDF</strong><span>Remove password</span></div></a>
   <a href="/protect-pdf.html" class="chip"><span class="chip-i">🔒</span><div class="chip-t"><strong>Protect PDF</strong><span>Add password</span></div></a>
+  <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Image Converter</strong><span>JPG, PNG, HEIC</span></div></a>
 </div>
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/image-format-converter.html">Format Converter</a>
-    <a href="/">PDF Compressor</a>
-  </nav>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/document-scanner-online.html">Scan to PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/pdf-to-image.html">PDF to Image</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+    <span>📱 Mobile Ready</span>
+  </div>
 </footer>
 
+<!-- Global External JS -->
+<script src="assets/script.js" defer></script>
+
+<!-- PDF-lib specifically for merging -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
 <script>
 let selectedFiles = [];
 
-// Main dropzone listener
+// Drag & Drop Handling
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--purple)'; dropZone.style.background = 'var(--purple-light)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; dropZone.style.background = ''; });
+dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.style.borderColor = ''; dropZone.style.background = '';
+    handleFiles({ target: { files: e.dataTransfer.files } });
+});
+
+// File Selection Listeners
 document.getElementById('upload').addEventListener('change', handleFiles);
-// Add more input listener
 document.getElementById('addMoreInput').addEventListener('change', handleFiles);
 
 function handleFiles(e) {
     const files = Array.from(e.target.files);
     if(files.length === 0) return;
     
-    // Filter out non-PDFs
+    // Validate PDF files only
     const validFiles = files.filter(f => f.type === 'application/pdf');
     if(validFiles.length < files.length) {
-        alert("Only PDF files are allowed.");
+        alert("Action restricted: Only PDF files are allowed for merging.");
     }
     
-    // Append to array
     selectedFiles = selectedFiles.concat(validFiles);
     
-    // Reset input so same file can be selected again if needed
-    e.target.value = '';
+    // Reset input so same file can be selected again
+    if(e.target.value) e.target.value = '';
     
     updateUI();
 }
 
 function updateUI() {
     const listWrap = document.getElementById('listWrap');
-    const dropZone = document.getElementById('dropZone');
     
     if(selectedFiles.length > 0) {
         dropZone.style.display = 'none';
@@ -420,7 +380,7 @@ function removeFile(index) {
 
 async function processMerge() {
     if(selectedFiles.length < 2) {
-        alert("Please add at least 2 PDF files to merge.");
+        alert("Please add at least 2 PDF files to begin the merging process.");
         return;
     }
 
@@ -435,14 +395,14 @@ async function processMerge() {
     pw.style.display = 'block';
     
     try {
-        pb.style.width = '20%';
+        pb.style.width = '15%';
         st.innerText = 'Initializing Secure Merge Engine...';
         
         const mergedPdf = await PDFLib.PDFDocument.create();
         
         for(let i = 0; i < selectedFiles.length; i++) {
-            pb.style.width = `${20 + ((i / selectedFiles.length) * 60)}%`;
-            st.innerText = `Merging File ${i + 1} of ${selectedFiles.length}...`;
+            pb.style.width = `${15 + ((i / selectedFiles.length) * 70)}%`;
+            st.innerText = `Merging Document ${i + 1} of ${selectedFiles.length}...`;
             
             const file = selectedFiles[i];
             const fileBuffer = await file.arrayBuffer();
@@ -452,9 +412,9 @@ async function processMerge() {
                 pdfDoc = await PDFLib.PDFDocument.load(fileBuffer);
             } catch (err) {
                 if(err.message.includes('encrypted') || err.message.includes('password')) {
-                    throw new Error(`File "${file.name}" is password protected. Please remove the password using our Unlock tool first.`);
+                    throw new Error(`The file "${file.name}" is password protected. Please remove the password using our Unlock Tool first.`);
                 } else {
-                    throw new Error(`Failed to read "${file.name}". The file might be corrupted.`);
+                    throw new Error(`Failed to read "${file.name}". The document might be corrupted.`);
                 }
             }
             
@@ -463,7 +423,7 @@ async function processMerge() {
         }
         
         pb.style.width = '90%';
-        st.innerText = 'Generating Final Document...';
+        st.innerText = 'Finalizing Document Structure...';
         
         const mergedPdfBytes = await mergedPdf.save();
         const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
@@ -479,17 +439,19 @@ async function processMerge() {
             let finalSize = (blob.size / 1024).toFixed(1) + ' KB';
             if(blob.size > 1024 * 1024) finalSize = (blob.size / (1024*1024)).toFixed(2) + ' MB';
             
-            const d = document.createElement('div');
-            d.className = 'rc';
-            d.innerHTML = `
-                <div style="font-size:36px; margin-bottom:10px;">🎉</div>
-                <div class="rsz">Successfully Combined</div>
-                <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Total Files: ${selectedFiles.length} | Size: ${finalSize}</p>
-                <button class="rb" onclick="dlUrl('${url}','Merged_Document.pdf')">⬇ Download Merged PDF</button>
+            rg.innerHTML = `
+                <div class="success-box">
+                    <div class="sb-icon">🎉</div>
+                    <div class="sb-title">Successfully Combined!</div>
+                    <div class="sb-desc">Total Files: ${selectedFiles.length} &nbsp;|&nbsp; Final Size: ${finalSize}</div>
+                    <button class="btn-dl" onclick="dlUrl('${url}','Merged_Document.pdf')">⬇ Download Merged PDF</button>
+                </div>
             `;
-            rg.appendChild(d);
             
-        }, 1000);
+            // Auto download for better UX
+            dlUrl(url, 'Merged_Document.pdf');
+            
+        }, 1200);
 
     } catch (error) {
         alert(error.message);
@@ -498,7 +460,11 @@ async function processMerge() {
     }
 }
 
-function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+function dlUrl(url, name) {
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
 </script>
 </body>
 </html>
