@@ -406,23 +406,9 @@
 
 <div id="ov" style="position:fixed;inset:0;background:rgba(2,2,12,.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(12px);">
   <div style="width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
-    <div id="scene" style="width:220px;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
-      <div id="w1" style="position:absolute;border-radius:50%;border:2px solid rgba(62,207,142,.6);opacity:0;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;"></div>
-      <div id="w2" style="position:absolute;border-radius:50%;border:2px solid rgba(62,207,142,.6);opacity:0;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;"></div>
-      <div id="w3" style="position:absolute;border-radius:50%;border:2px solid rgba(62,207,142,.6);opacity:0;left:50%;top:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;"></div>
-      <div id="bigBlob" style="position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#8b6dff,#4a35cc);box-shadow:0 0 40px rgba(109,84,240,.5);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;z-index:2;">
-        <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.7);">ORIGINAL</span>
-        <strong id="origLabel" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;">-</strong>
-      </div>
-      <div id="handL" style="position:absolute;top:50%;transform:translateY(-50%);font-size:32px;opacity:0;z-index:4;left:0;">🤜</div>
-      <div id="handR" style="position:absolute;top:50%;transform:translateY(-50%) scaleX(-1);font-size:32px;opacity:0;z-index:4;right:0;">🤜</div>
-      <div id="smallBlob" style="position:absolute;width:0;height:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#3ecf8e,#16a35a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;z-index:3;opacity:0;">
-        <span id="sbLbl" style="font-size:9px;font-weight:700;color:rgba(255,255,255,.8);opacity:0;">PROCESSED</span>
-        <strong id="sbVal" style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;opacity:0;">-</strong>
-      </div>
-    </div>
-    <div id="amsg" style="font-size:13px;color:#404068;margin-bottom:12px;opacity:0;transition:opacity .3s;font-weight:500;text-align:center;"></div>
-    <div id="astats" style="display:flex;align-items:center;gap:10px;width:100%;margin-bottom:16px;opacity:0;transform:translateY(12px);transition:opacity .4s,transform .4s;">
+    <div style="font-size:44px;margin-bottom:10px;">✅</div>
+    <div id="amsg" style="font-size:14px;color:#8f8fc0;margin-bottom:18px;font-weight:600;text-align:center;"></div>
+    <div id="astats" style="display:flex;align-items:center;gap:10px;width:100%;margin-bottom:20px;">
       <div style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;text-align:center;">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#404068;margin-bottom:3px;">Before</div>
         <div id="asBefore" style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#ff6b6b;">-</div>
@@ -433,7 +419,7 @@
         <div id="asAfter" style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#3ecf8e;">-</div>
       </div>
     </div>
-    <button id="adlBtn" style="width:100%;padding:14px;border-radius:12px;border:none;background:#3ecf8e;color:#fff;font-size:15px;font-weight:700;font-family:'Manrope',sans-serif;cursor:pointer;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;margin-bottom:8px;"></button>
+    <button id="adlBtn" style="width:100%;padding:14px;border-radius:12px;border:none;background:#3ecf8e;color:#fff;font-size:15px;font-weight:700;font-family:'Manrope',sans-serif;cursor:pointer;margin-bottom:8px;"></button>
     <button onclick="closeAnim()" style="background:none;border:none;color:#505080;font-size:13px;cursor:pointer;margin-top:10px;font-weight:bold;font-family:'Manrope',sans-serif;">Close ✕</button>
   </div>
 </div>
