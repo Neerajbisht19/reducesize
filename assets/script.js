@@ -309,27 +309,16 @@ function addResult(blob,i,isPdf,downloadName){
 }
 function openPM(src){document.getElementById('pm').style.display='flex';document.getElementById('pmi').src=src;}
 
-// ===== COMPRESSION ANIMATION =====
+// ===== COMPRESSION RESULT PANEL (instant, no animation) =====
 (function(){
-  var animBlob=null,animRunning=false;
-  function ez(t){return t<.5?4*t*t*t:(t-1)*(2*t-2)*(2*t-2)+1}
-  function lerp(a,b,t){return a+(b-a)*t}
-  function anim(dur,fn,done){var s=performance.now();(function f(n){var t=Math.min((n-s)/dur,1);fn(ez(t),t);if(t<1)requestAnimationFrame(f);else if(done)done();})(s);}
-  function wave(el,delay){
-    setTimeout(function(){
-      el.style.transition='none';el.style.opacity='.8';el.style.transform='translate(-50%,-50%) scale(0)';
-      requestAnimationFrame(function(){el.style.transition='all .6s ease-out';el.style.transform='translate(-50%,-50%) scale(4)';el.style.opacity='0';});
-    },delay);
-  }
+  var animBlob=null;
   window.showCompressAnim=function(origKB,compKB,blob,fname){
-    if(animRunning)return;animRunning=true;animBlob={blob:blob,name:fname};
+    animBlob={blob:blob,name:fname};
     var origStr=origKB>1024?(origKB/1024).toFixed(1)+' MB':origKB.toFixed(0)+' KB';
     var compStr=compKB.toFixed(1)+' KB';
-    document.getElementById('origLabel').textContent=origStr;
-    document.getElementById('sbVal').textContent=compStr;
     document.getElementById('asBefore').textContent=origStr;
     document.getElementById('asAfter').textContent=compStr;
-    
+
     // Check if increased or decreased to set correct message
     if (compKB < origKB) {
         var pct = Math.max(0,Math.round((1-compKB/origKB)*100));
@@ -341,45 +330,11 @@ function openPM(src){document.getElementById('pm').style.display='flex';document
 
     var dlBtn=document.getElementById('adlBtn');
     dlBtn.textContent='⬇ Download ('+compStr+')';
-    dlBtn.style.opacity='0';dlBtn.style.transform='translateY(10px)';
     dlBtn.onclick=function(){if(animBlob){var a=document.createElement('a');a.href=URL.createObjectURL(animBlob.blob);a.download=animBlob.name;a.click();}closeAnim();};
-    var bb=document.getElementById('bigBlob'),sb=document.getElementById('smallBlob');
-    var hL=document.getElementById('handL'),hR=document.getElementById('handR');
-    var stats=document.getElementById('astats'),amsg=document.getElementById('amsg');
-    bb.style.cssText='position:absolute;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#8b6dff,#4a35cc);box-shadow:0 0 40px rgba(109,84,240,.5);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;z-index:2;opacity:1;';
-    sb.style.cssText='position:absolute;width:0;height:0;border-radius:50%;background:radial-gradient(circle at 40% 35%,#3ecf8e,#16a35a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;z-index:3;opacity:0;';
-    document.getElementById('sbLbl').style.opacity=0;document.getElementById('sbVal').style.opacity=0;
-    hL.style.cssText='position:absolute;top:50%;transform:translateY(-50%);font-size:32px;opacity:0;z-index:4;left:0;';
-    hR.style.cssText='position:absolute;top:50%;transform:translateY(-50%) scaleX(-1);font-size:32px;opacity:0;z-index:4;right:0;';
-    stats.style.opacity='0';stats.style.transform='translateY(12px)';amsg.style.opacity='0';
+
     var ov=document.getElementById('ov');ov.style.opacity='1';ov.style.pointerEvents='all';
-    setTimeout(function(){hL.style.opacity='1';hR.style.opacity='1';},300);
-    setTimeout(function(){
-      var prog=0;
-      var iv=setInterval(function(){
-        prog+=0.04;if(prog>=1){prog=1;clearInterval(iv);}
-        var e=ez(prog);var hp=lerp(0,18,e);hL.style.left=hp+'px';hR.style.right=hp+'px';
-        var mid=Math.sin(prog*Math.PI);
-        var bw=lerp(120,60,e)+mid*20;var bh=lerp(120,60,e)+mid*20;
-        bb.style.width=bw+'px';bb.style.height=bh+'px';bb.style.opacity=lerp(1,0,e*e);
-      },16);
-    },800);
-    setTimeout(function(){
-      bb.style.opacity='0';
-      wave(document.getElementById('w1'),0);wave(document.getElementById('w2'),150);wave(document.getElementById('w3'),300);
-      hL.style.left='-20px';hR.style.right='-20px';hL.style.opacity='0';hR.style.opacity='0';
-    },1600);
-    setTimeout(function(){
-      anim(600,function(t){
-        var sz=lerp(0,64,t);sb.style.width=sz+'px';sb.style.height=sz+'px';sb.style.opacity=t;
-        sb.style.boxShadow='0 0 '+lerp(0,30,t)+'px rgba(62,207,142,'+lerp(0,.6,t)+')';
-      },function(){document.getElementById('sbLbl').style.opacity=1;document.getElementById('sbVal').style.opacity=1;});
-    },1800);
-    setTimeout(function(){stats.style.opacity='1';stats.style.transform='translateY(0)';},2500);
-    setTimeout(function(){amsg.style.opacity='1';},3000);
-    setTimeout(function(){dlBtn.style.opacity='1';dlBtn.style.transform='translateY(0)';animRunning=false;},3200);
   };
-  window.closeAnim=function(){document.getElementById('ov').style.opacity='0';document.getElementById('ov').style.pointerEvents='none';animRunning=false;};
+  window.closeAnim=function(){document.getElementById('ov').style.opacity='0';document.getElementById('ov').style.pointerEvents='none';};
 })();
 
 // ===== ADSENSE INIT =====
