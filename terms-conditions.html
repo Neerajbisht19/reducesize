@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,99 +11,148 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="ReduceSize">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="assets/style.css">
+
 <style>
-:root{--bg:#070712;--surface:#0f0f20;--surface2:#16162c;--border:rgba(255,255,255,0.07);--purple:#6d54f0;--purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;--yellow:#f6c343;--text:#eeeeff;--muted:#6b6b9a;--card:rgba(255,255,255,0.025);--r:18px;--rs:12px;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden;}
-body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);pointer-events:none;z-index:0;}
-.nav{position:sticky;top:0;z-index:200;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(7,7,18,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-.nav-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text);text-decoration:none;letter-spacing:-.5px;}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-pill{font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;background:rgba(62,207,142,.1);color:var(--green);border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;}
-.nav-links{display:flex;gap:16px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-.legal{max-width:740px;margin:32px auto;padding:0 16px 80px;position:relative;z-index:1}
-.legal h1{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;margin-bottom:6px; color:var(--purple-l);}
-.legal .upd{font-size:13px;color:var(--accent);font-weight:700;margin-bottom:28px;text-transform:uppercase;letter-spacing:1px;}
-.legal h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin:32px 0 12px; color:#fff;}
-.legal p{font-size:15px;color:#9090b8;line-height:1.8;margin-bottom:16px}
-.legal ul{padding-left:20px;margin-bottom:16px;}
-.legal li{color:#9090b8;font-size:15px;line-height:1.8;margin-bottom:8px;}
-.legal strong{color:#fff;}
+/* Specific styling for Legal Pages */
+.legal-doc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 40px;
+  box-shadow: var(--card-shadow);
+}
+.legal-doc h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 32px 0 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+.legal-doc p, .legal-doc li {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.legal-doc ul { padding-left: 20px; margin-bottom: 16px; }
+.legal-doc strong { color: var(--text); font-weight: 700; }
+@media(max-width: 600px) {
+  .legal-doc { padding: 24px 16px; }
+}
 </style>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ No Upload · 100% Private</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
-<div class="legal">
-<h1>Terms & Conditions</h1>
-<p class="upd">Effective Date: June 2026</p>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/terms-conditions.html" style="color: var(--purple);">🔒 Terms & Conditions</a>
+</div>
 
-<p>Welcome to ReduceSize.online. These Terms and Conditions outline the rules and regulations for the use of our website and its provided digital utilities. By accessing this website, we assume you accept these terms and conditions. Do not continue to use ReduceSize if you do not agree to take all of the terms and conditions stated on this page.</p>
+<div class="wrap">
 
-<h2>1. The Service</h2>
-<p>ReduceSize provides client-side digital utility tools, including but not limited to Image Compression, PDF Merging, PDF Splitting, Document Scanning, and PDF Decryption. All services provided on the website are currently offered free of charge for personal and non-commercial usage.</p>
+<section class="hero" style="padding-bottom: 24px;">
+  <div class="eyebrow">✦ Acceptable Use Policy</div>
+  <h1 class="hero-h1">Terms & <span class="grad">Conditions</span></h1>
+  <p class="hero-sub">Last updated: June 2026</p>
+</section>
 
-<h2>2. Acceptable Use Policy</h2>
-<p>You agree to use our website and tools strictly for lawful purposes. You are strictly prohibited from:</p>
-<ul>
-<li>Attempting to reverse-engineer, decompile, or copy the source code of our JavaScript compression and encryption engines.</li>
-<li>Using the "Unlock PDF" tool on documents that you do not legally own or do not have explicit permission to access.</li>
-<li>Deploying automated bots, scrapers, or scripts to bulk-process files through our web interface, which may cause denial of service.</li>
-<li>Framing or mirroring our website on other domains without prior written consent.</li>
-</ul>
+<div class="legal-doc">
+  <p>Welcome to ReduceSize.online. By accessing this website, we assume you accept these terms and conditions. Do not continue to use ReduceSize.online if you do not agree to take all of the terms and conditions stated on this page.</p>
 
-<h2>3. User Data & File Ownership</h2>
-<p>Because our platform utilizes Client-Side Processing, your files are never transmitted to, nor stored on, our servers. Consequently, you retain 100% ownership and liability for the files you process. We claim no intellectual property rights over your uploaded images or documents.</p>
+  <h2>1. License to Use</h2>
+  <p>Unless otherwise stated, ReduceSize.online and/or its licensors own the intellectual property rights for all material on ReduceSize.online. All intellectual property rights are reserved. You may access this from ReduceSize.online for your own personal use subjected to restrictions set in these terms and conditions.</p>
+  <p><strong>You must not:</strong></p>
+  <ul>
+    <li>Republish material from ReduceSize.online.</li>
+    <li>Sell, rent or sub-license material from ReduceSize.online.</li>
+    <li>Reproduce, duplicate or copy material from ReduceSize.online.</li>
+    <li>Redistribute content from ReduceSize.online.</li>
+  </ul>
 
-<h2>4. Disclaimer of Warranties</h2>
-<p>The materials and tools on ReduceSize are provided on an 'as is' basis. ReduceSize makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property. Furthermore, while our compression algorithms are highly accurate, we do not guarantee that the output files will be accepted by every third-party government portal or institution.</p>
+  <h2>2. User Responsibility</h2>
+  <p>You agree to use our tools only for lawful purposes. You are strictly prohibited from using our site to process documents that are illegal, infringe on copyrights, or violate the privacy of others. You are responsible for the files you upload and the resulting output.</p>
 
-<h2>5. Limitation of Liability</h2>
-<p>In no event shall ReduceSize or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption, or rejected academic/job applications) arising out of the use or inability to use the materials on ReduceSize's website, even if ReduceSize or an authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+  <h2>3. Privacy & Data Handling</h2>
+  <p>Our commitment to your privacy is absolute. Our tools use client-side technology, meaning your files are processed locally on your device. We do not upload your files to our servers. By using our service, you acknowledge and agree that you are responsible for the security of your own local device.</p>
 
-<h2>6. External Links & Advertising</h2>
-<p>Our website may contain links to external sites that are not operated by us. We use Google AdSense to serve advertisements. We have no control over the content and practices of these third-party sites or advertisements and cannot accept responsibility or liability for their respective privacy policies.</p>
+  <h2>4. Limitation of Liability</h2>
+  <p>In no event shall ReduceSize, nor any of its officers, directors, and employees, be held liable for anything arising out of or in any way connected with your use of this website. ReduceSize shall not be held liable for any indirect, consequential, or special liability arising out of or in any way related to your use of this website.</p>
 
-<h2>7. Modifications to Terms</h2>
-<p>ReduceSize may revise these Terms of Service for its website at any time without prior notice. By using this website, you are agreeing to be bound by the then-current version of these Terms and Conditions.</p>
+  <h2>5. External Links & Advertising</h2>
+  <p>Our website may contain links to external sites that are not operated by us. We use Google AdSense to serve advertisements. We have no control over the content and practices of these third-party sites or advertisements and cannot accept responsibility or liability for their respective privacy policies.</p>
 
-<h2>8. Governing Law</h2>
-<p>Any claim relating to ReduceSize's website shall be governed by the laws of India without regard to its conflict of law provisions.</p>
+  <h2>6. Modifications to Terms</h2>
+  <p>ReduceSize may revise these Terms of Service for its website at any time without prior notice. By using this website, you are agreeing to be bound by the then-current version of these Terms and Conditions.</p>
+
+  <h2>7. Governing Law</h2>
+  <p>Any claim relating to ReduceSize's website shall be governed by the laws of India without regard to its conflict of law provisions.</p>
+</div>
+
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-20kb.html">20KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/compress-image-to-100kb.html">100KB</a>
-    <a href="/blog/">Blog</a>
-    <a href="/about.html">About</a>
-    <a href="/contact-us.html">Contact</a>
-    <a href="/privacy-policy.html">Privacy</a>
-    <a href="/terms-conditions.html">Terms</a>
-    <a href="/disclaimer.html">Disclaimer</a>
-  </nav>
-  <p class="fcopy">© 2025–2026 ReduceSize.online — All rights reserved.</p>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/document-scanner-online.html">Scan to PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+  </div>
 </footer>
-</body></html>
+
+<script src="assets/script.js" defer></script>
+
+</body>
+</html>
