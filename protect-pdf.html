@@ -3,221 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Protect PDF Online Free | Add Password to PDF</title>
+<title>Protect PDF Online Free | Add Password & Prevent Copying</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/protect-pdf.html">
-<meta name="description" content="Secure your PDF files by adding a strong password online. Flatten and encrypt documents directly in your browser. 100% private and free.">
-<meta name="keywords" content="protect pdf, add password to pdf, encrypt pdf online, lock pdf file, secure pdf free">
+<meta name="description" content="Secure your PDF files by adding a strong password online. Flatten and encrypt documents directly in your browser to prevent text copying. 100% private.">
+<meta name="keywords" content="protect pdf, add password to pdf, encrypt pdf online, lock pdf file, prevent copy paste pdf, secure pdf free, flatten pdf">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
 
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
+/* =========================================
+   PROTECT PDF SPECIFIC UI CSS
+   ========================================= */
+.password-box {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px; margin-bottom: 20px;
+    animation: fadeIn 0.4s ease forwards;
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.irow { display: flex; gap: 12px; margin-bottom: 12px; }
+.irow .f { flex: 1; }
+.fl { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; display: block; }
+.pwd-input {
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    padding: 16px; border-radius: 12px; color: var(--text);
+    font-size: 16px; font-family: 'Manrope', sans-serif; font-weight: 700;
+    outline: none; transition: 0.2s; letter-spacing: 2px;
 }
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:16px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
-  display:inline-block; white-space:nowrap;
-}
-@media(max-width: 480px){
-    .nav { padding: 0 12px; }
-    .nav-logo { font-size: 16px; }
-    .nav-links { gap: 10px; }
-    .nav-links a { font-size: 12px; }
-    .nav-pill { display:none; }
+.pwd-input::placeholder { color: var(--muted); letter-spacing: normal; font-weight: 500; font-size: 14px; }
+.pwd-input:focus { border-color: var(--purple); box-shadow: 0 0 0 4px var(--purple-light); }
+
+.pro-tip {
+    background: rgba(246, 195, 67, 0.1); border: 1px dashed rgba(246, 195, 67, 0.4);
+    padding: 12px; border-radius: 8px; font-size: 12px; color: var(--yellow);
+    line-height: 1.5; font-weight: 600; display: flex; align-items: flex-start; gap: 8px;
 }
 
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
+.btn-lock {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--purple); color: #fff; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
+    box-shadow: 0 8px 24px rgba(109, 84, 240, 0.3); display: none;
 }
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
+.btn-lock:hover { background: #7b63f5; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(109, 84, 240, 0.4); }
+
+.success-box {
+    text-align: center; padding: 32px 20px; background: var(--surface2);
+    border: 1px solid rgba(62,207,142,0.3); border-radius: 16px;
+    animation: fadeIn 0.4s ease;
 }
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
+.sb-icon { font-size: 48px; margin-bottom: 12px; }
+.sb-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.sb-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-weight: 600; }
 
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
+.btn-dl {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--green); color: #000; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
 }
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:36px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:54px;height:54px;margin:0 auto 12px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
-}
-.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:13px;color:var(--muted)}
-
-/* INPUT ROW */
-.irow{display:flex;gap:10px;margin-bottom:16px}
-.irow .f{flex:1;}
-.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input{
-  width:100%;background:var(--surface2);border:1px solid rgba(255,255,255,.08);
-  padding:14px 16px;border-radius:10px;color:var(--text);
-  font-size:16px;font-family:'Manrope',sans-serif;font-weight:600;
-  outline:none;transition:border-color .2s; letter-spacing: 1px;
-}
-.irow input::placeholder {color: rgba(255,255,255,0.2); letter-spacing: normal; font-weight: 500;}
-.irow input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
-
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* PROGRESS */
-.pbox{display:none;margin-top:16px}
-.ptrack{height:6px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s ease;position:relative;}
-.plabel{font-size:13px;color:var(--purple-l);margin-top:10px;text-align:center;font-weight:600}
-
-/* RESULTS */
-.rg{display:flex; flex-direction:column; gap:10px; margin-top:16px}
-.rc{background:var(--surface2);border:1px solid rgba(62,207,142,.3);border-radius:11px;overflow:hidden; padding: 20px; text-align: center;}
-.rsz{font-size:16px;font-weight:700;color:var(--green);margin-bottom:6px}
-.rb{
-  width:100%;padding:12px;border-radius:9px;border:none;margin-top:12px;
-  background:var(--green);color:#000;
-  font-size:15px;font-weight:800;cursor:pointer;
-  font-family:'Manrope',sans-serif;transition:.15s;
-}
-.rb:hover{background:#2eb872; box-shadow:0 6px 20px rgba(62,207,142,.3);}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+.btn-dl:hover { background: #2eb872; box-shadow: 0 8px 24px rgba(62,207,142,0.3); transform: translateY(-2px); }
 </style>
 
+<!-- SEO Structured Data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Protect PDF Online Free",
-"url":"https://reducesize.online/protect-pdf.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Add a strong password to your PDF files instantly. Flatten documents to prevent copy-pasting. 100% Secure, private, and works in your browser.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Protect PDF & Encrypt Online",
+  "url":"https://reducesize.online/protect-pdf.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Add a strong password to your PDF files instantly. Flatten documents to prevent copy-pasting. 100% Secure, private, and works offline in your browser.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Can someone copy the text after they open the locked PDF?",
+      "acceptedAnswer":{"@type":"Answer","text":"No. Unlike basic password tools, our engine flattens the PDF. This turns the text into an un-selectable image layer, effectively preventing anyone from copy-pasting your content."}
+    },
+    {
+      "@type":"Question",
+      "name":"Is it safe to lock my confidential legal documents here?",
+      "acceptedAnswer":{"@type":"Answer","text":"Yes, absolutely. Because our tool uses client-side technology, your documents are processed locally on your own computer. We do not have servers to intercept your files."}
+    },
+    {
+      "@type":"Question",
+      "name":"What if I forget the password I set?",
+      "acceptedAnswer":{"@type":"Answer","text":"Because we do not store your files or your passwords, we cannot recover a lost password for you. Please ensure you memorize the password before closing the window."}
+    }
+  ]
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Private Encryption</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Lock & Flatten PDF</div>
-  <h1>Protect PDF Files<br><span class="grad">Add Secure Password</span></h1>
-  <p>Encrypt your private documents before sharing them. Our engine adds a password and flattens the PDF to prevent text copying. 100% Client-Side Privacy.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ Lock & Flatten PDF</div>
+  <h1 class="hero-h1">Protect PDF Files<br><span class="grad">Add Secure Password</span></h1>
+  <p class="hero-sub">Encrypt your private documents before sharing them. Our engine adds a password and flattens the PDF to prevent text copying. 100% Client-Side Privacy.</p>
+  
   <div class="badges">
     <span class="badge">🔒 Strong Password</span>
     <span class="badge">🛡️ Copy-Paste Protection</span>
-    <span class="badge">🚀 Instant Processing</span>
+    <span class="badge">🚀 Instant Offline Processing</span>
   </div>
 </section>
 
@@ -227,85 +152,126 @@ body::after{
     <input type="file" id="upload" accept="application/pdf">
     <div class="drop-ico" id="dropIco">📄</div>
     <div class="drop-main" id="dropMain">Drop a PDF document here</div>
-    <div class="drop-hint" id="dropHint">Upload the file you want to lock</div>
+    <div class="drop-hint" id="dropHint">Upload the file you want to lock securely</div>
   </div>
 
-  <div id="passwordArea" style="display:none; padding:16px; border-radius:12px; background:rgba(255,255,255,0.02); border:1px solid rgba(109,84,240,.2); margin-bottom:16px;">
-      <div class="irow" style="margin-bottom:8px;">
+  <div id="passwordArea" class="password-box" style="display:none;">
+      <div class="irow">
           <div class="f">
-              <label class="fl">Set New Password</label>
-              <input type="text" id="pdfPwd" placeholder="Type a strong password for this PDF">
+              <label class="fl">Set New Secure Password</label>
+              <input type="text" id="pdfPwd" class="pwd-input" placeholder="Type a strong password..." autocomplete="off">
           </div>
       </div>
-      <p style="font-size:11px; color:var(--yellow); margin:0; line-height:1.4;">*Pro Feature: This tool flattens the PDF while locking it. This means the text inside will become uncopyable, adding an extra layer of security!</p>
+      <div class="pro-tip">
+          <span>🛡️</span>
+          <span><strong>Pro Feature:</strong> This tool flattens the PDF while locking it. The text inside will become uncopyable, adding an impenetrable extra layer of security.</span>
+      </div>
   </div>
 
-  <button class="btn" id="lockBtn" style="display:none;" onclick="processLock()">🔒&nbsp; Protect PDF Now</button>
+  <button class="btn-lock" id="lockBtn" onclick="processLock()">🔒&nbsp; Protect & Encrypt PDF Now</button>
 
-  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <div id="pbox" class="pbox" style="padding: 24px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel" style="margin-top: 12px;"></div>
+  </div>
   
   <div id="rg" class="rg"></div>
 </div>
 
+<!-- ==========================================
+     HIGH-VALUE SEO CONTENT SECTION
+     ========================================== -->
 <section class="seo">
-<h2>How to Password Protect and Secure Your PDF Files Online</h2>
-<p>In a world where documents are constantly shared via email, WhatsApp, and cloud storage, protecting your sensitive information is more critical than ever. Whether you are sending financial reports, legal contracts, medical records, or confidential invoices, sending an unprotected PDF leaves your data vulnerable to unauthorized access. <strong>ReduceSize PDF Protector</strong> allows you to easily add a strong, encrypted password to your document, ensuring that only the intended recipient can open and view it.</p>
+  <h2>How to Password Protect and Secure Your PDF Files Online</h2>
+  <p>In a world where digital documents are constantly shared via email, WhatsApp, and cloud storage, protecting your sensitive information is more critical than ever. Whether you are sending financial reports, legal contracts, medical records, or confidential business invoices, sending an unprotected PDF leaves your private data vulnerable to unauthorized access and interception. <strong>ReduceSize PDF Protector</strong> allows you to easily add a strong, encrypted password to your document, ensuring that only the intended recipient can open and view it.</p>
 
-<h3>Double Security: Why "Flattening" is the Ultimate Upgrade</h3>
-<p>Most standard PDF locker tools simply place a basic password layer over your file. However, once the recipient enters the password, they can freely highlight, copy, paste, or even alter the text and digital signatures inside the document. We believe that is a huge security flaw.</p>
-<p>Our tool introduces an advanced <strong>"Flatten and Encrypt"</strong> protocol. When you upload your document, our engine first converts every single page into a high-quality image layer (flattening). After the pages are flattened, it locks the file with your chosen password. As a result, even when the authorized user opens the PDF, the text and signatures are securely baked into the page. <strong>No one can copy, edit, or tamper with your data.</strong></p>
+  <h3>Double Security: Why "Flattening" is the Ultimate Upgrade</h3>
+  <p>Most standard online PDF locker tools simply place a basic password layer over your existing file. However, once the recipient enters the password, they can freely highlight, copy, paste, or even digitally alter the text and signatures inside the document. We believe that is a huge security flaw.</p>
+  <p>Our tool introduces an advanced <strong>"Flatten and Encrypt"</strong> protocol. When you upload your document, our engine first converts every single page into a high-quality image layer (this is called flattening). After the pages are flattened, it locks the file with your chosen password. As a result, even when the authorized user opens the PDF, the text and signatures are securely baked into the page. <strong>No one can copy, edit, or tamper with your data.</strong></p>
 
-<h3>100% Private & Offline (No Server Uploads)</h3>
-<p>Uploading highly confidential documents—like your PAN card details, business trade secrets, or personal bank statements—to a random third-party server to encrypt them completely defeats the purpose of privacy. Unfortunately, that is exactly how most popular PDF websites operate.</p>
-<p>ReduceSize operates on a strictly secure <strong>Client-Side Processing Architecture</strong>. When you select a document and enter a password, the entire encryption and flattening process occurs locally inside your device's web browser (using your RAM). Your document, and the password you create, are <strong>never uploaded, transmitted, or stored on our servers.</strong> This guarantees military-grade offline privacy for your files.</p>
+  <h3>100% Private & Offline (No Server Uploads)</h3>
+  <p>Uploading highly confidential documents—like your PAN card details, business trade secrets, or personal bank statements—to a random third-party server just to encrypt them completely defeats the purpose of privacy. Unfortunately, that is exactly how most popular PDF websites operate.</p>
+  <p>ReduceSize operates on a strictly secure <strong>Client-Side Processing Architecture</strong>. When you select a document and enter a password, the entire encryption and flattening process occurs locally inside your device's web browser (utilizing your RAM). Your document, and the password you create, are <strong>never uploaded, transmitted, or stored on our servers.</strong> This guarantees military-grade offline privacy for your files.</p>
 
-<h3>Step-by-Step Guide: How to Lock Your PDF</h3>
-<p>Securing your files with ReduceSize is fast, free, and intuitive. Follow these simple steps:</p>
-<ol>
-  <li><strong>Upload the Document:</strong> Drag and drop the PDF you want to protect into the upload area.</li>
-  <li><strong>Set a Strong Password:</strong> Type your desired password into the input box. For maximum security, use a mix of letters, numbers, and symbols. (Make sure to securely share this password with your recipient).</li>
-  <li><strong>Protect & Flatten:</strong> Click the "Protect PDF Now" button. Our engine will instantly flatten the pages to prevent copying and apply the encryption lock.</li>
-  <li><strong>Download:</strong> Your highly secure, locked PDF is ready. Download it to your device and share it without worrying about unauthorized access.</li>
-</ol>
+  <h3>Step-by-Step Guide: How to Lock Your PDF</h3>
+  <p>Securing your files with ReduceSize is fast, free, and highly intuitive. Follow these simple steps:</p>
+  <ol>
+    <li><strong>Upload the Document:</strong> Drag and drop the PDF you want to protect into the upload area, or click to select it from your device.</li>
+    <li><strong>Set a Strong Password:</strong> Type your desired password into the input box. For maximum security, use a mix of letters, numbers, and symbols. (Make sure to securely share this password with your recipient via a different channel).</li>
+    <li><strong>Protect & Flatten:</strong> Click the "Protect & Encrypt PDF Now" button. Our engine will instantly flatten the pages to prevent copying and apply the encryption lock.</li>
+    <li><strong>Download:</strong> Your highly secure, locked PDF is ready. Download it to your device and share it without worrying about unauthorized access.</li>
+  </ol>
 
-<h3>Frequently Asked Questions (FAQs)</h3>
+  <h3>Frequently Asked Questions (FAQs)</h3>
 
-<p><strong>Is it safe to lock my confidential legal documents here?</strong><br>
-Yes, absolutely. Because our tool uses client-side JavaScript technology, your documents are processed locally on your own computer or smartphone. We do not have servers to intercept or view your files, ensuring complete confidentiality.</p>
+  <p><strong>Is it safe to lock my confidential legal documents here?</strong><br>
+  Yes, absolutely. Because our tool uses client-side JavaScript technology, your documents are processed locally on your own computer or smartphone. We do not have servers to intercept or view your files, ensuring complete confidentiality.</p>
 
-<p><strong>Can someone copy the text after they open the locked PDF?</strong><br>
-No. Unlike basic password tools, our engine "flattens" the PDF. This turns the text into an un-selectable image layer, effectively preventing anyone from copy-pasting your content or stealing your digital signatures.</p>
+  <p><strong>Can someone copy the text after they open the locked PDF?</strong><br>
+  No. Unlike basic password tools, our engine "flattens" the PDF. This turns the text into an un-selectable image layer, effectively preventing anyone from copy-pasting your content or stealing your digital signatures once the file is unlocked.</p>
 
-<p><strong>What if I forget the password I set?</strong><br>
-Because we do not store your files or your passwords, we cannot recover a lost password for you. Please ensure you memorize the password or store it in a secure password manager before sending the file.</p>
+  <p><strong>What if I forget the password I set?</strong><br>
+  Because we do not store your files or your passwords, we cannot recover a lost password for you. Please ensure you memorize the password or store it in a secure password manager before sending the file.</p>
 
-<p><strong>Does encrypting and flattening a PDF increase its file size?</strong><br>
-Yes, because the flattening process converts text-based pages into high-resolution images, the final file size might increase slightly. If the secured file becomes too large to send via email, you can use our <a href="/" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">PDF Compressor</a> to reduce its size before sharing.</p>
-
-<p><strong>Is there a limit on the number of pages I can protect?</strong><br>
-There is no hard limit imposed by our website. However, since the tool runs on your device's memory, extremely large documents (e.g., 500+ pages) may take longer to process depending on your computer's RAM and processing power.</p>
+  <p><strong>Does encrypting and flattening a PDF increase its file size?</strong><br>
+  Yes, because the flattening process converts text-based pages into high-resolution images to prevent copying, the final file size will increase. If the secured file becomes too large to send via email, you can use our <a href="/" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">PDF Compressor</a> to reduce its size before sharing.</p>
 </section>
 
-<div class="chips-hd">More PDF Tools</div>
+<div class="chips-hd">Explore More Document Tools</div>
 <div class="chips">
   <a href="/" class="chip"><span class="chip-i">🗜️</span><div class="chip-t"><strong>Compress PDF</strong><span>Reduce file size</span></div></a>
   <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
   <a href="/pdf-to-image.html" class="chip"><span class="chip-i">🖼️</span><div class="chip-t"><strong>PDF to Images</strong><span>Extract pages</span></div></a>
   <a href="/unlock-pdf.html" class="chip"><span class="chip-i">🔓</span><div class="chip-t"><strong>Unlock PDF</strong><span>Remove password</span></div></a>
+  <a href="/document-scanner-online.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Scan to PDF</strong><span>Remove shadows</span></div></a>
 </div>
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/image-format-converter.html">Format Converter</a>
-    <a href="/">PDF Compressor</a>
-  </nav>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/document-scanner-online.html">Scan to PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/protect-pdf.html">Protect PDF</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+    <span>📱 Mobile Ready</span>
+  </div>
 </footer>
 
+<!-- Global External JS -->
+<script src="assets/script.js" defer></script>
+
+<!-- Required Libraries for PDF Processing -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -315,30 +281,42 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 
 let currentPdfFile = null;
 
+// Drag and drop setup
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--purple)'; dropZone.style.background = 'var(--purple-light)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; dropZone.style.background = ''; });
+dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.style.borderColor = ''; dropZone.style.background = '';
+    document.getElementById('upload').files = e.dataTransfer.files;
+    document.getElementById('upload').dispatchEvent(new Event('change'));
+});
+
 document.getElementById('upload').addEventListener('change', async function(e) {
     if(this.files.length === 0) return;
     
     currentPdfFile = this.files[0];
     if(currentPdfFile.type !== 'application/pdf') {
-        alert("Please select a valid PDF file.");
+        alert("Please select a valid PDF file format.");
         return;
     }
     
-    // Update Drop UI
+    // Update Drop UI visually
     document.getElementById('dropMain').innerHTML = `<span style="color:var(--green)">${currentPdfFile.name}</span>`;
     let sizeStr = (currentPdfFile.size / 1024).toFixed(1) + ' KB';
     if(currentPdfFile.size > 1024 * 1024) sizeStr = (currentPdfFile.size / (1024*1024)).toFixed(2) + ' MB';
-    document.getElementById('dropHint').innerText = `File Size: ${sizeStr}`;
+    document.getElementById('dropHint').innerText = `Document Size: ${sizeStr}`;
     
-    document.getElementById('dropIco').innerHTML = '📄';
-    document.getElementById('dropIco').style.background = 'rgba(62,207,142,.1)';
-    document.getElementById('dropIco').style.borderColor = 'rgba(62,207,142,.3)';
+    const dropIco = document.getElementById('dropIco');
+    dropIco.innerHTML = '✅';
+    dropIco.style.background = 'var(--green-bg)';
+    dropIco.style.borderColor = 'rgba(62,207,142,.3)';
     
-    // Reset Lower UI & Show Password Area
+    // Reset Lower UI & Show Password Form
     document.getElementById('rg').innerHTML = '';
     document.getElementById('passwordArea').style.display = 'block';
     document.getElementById('lockBtn').style.display = 'block';
     document.getElementById('pdfPwd').value = '';
+    document.getElementById('pdfPwd').focus();
 });
 
 async function processLock() {
@@ -346,7 +324,7 @@ async function processLock() {
 
     const pwd = document.getElementById('pdfPwd').value;
     if(!pwd) {
-        alert("Please enter a password to lock the PDF.");
+        alert("Security Alert: Please enter a password to lock the PDF.");
         document.getElementById('pdfPwd').focus();
         return;
     }
@@ -360,10 +338,11 @@ async function processLock() {
     btn.style.display = 'none';
     rg.innerHTML = '';
     pw.style.display = 'block';
+    document.getElementById('passwordArea').style.display = 'none';
 
     try {
         pb.style.width = '10%';
-        st.innerText = 'Reading Document...';
+        st.innerText = 'Analyzing Document Structure...';
         
         const arrayBuffer = await currentPdfFile.arrayBuffer();
         let pdf;
@@ -372,18 +351,18 @@ async function processLock() {
             pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
         } catch(err) {
             if(err.message && (err.message.includes('encrypted') || err.message.includes('password'))) {
-                throw new Error("This PDF is already password protected!");
+                throw new Error("This PDF is already password protected. You cannot add a second lock.");
             } else {
-                throw new Error("Failed to read PDF. It might be corrupted.");
+                throw new Error("Failed to read the PDF. The file might be corrupted.");
             }
         }
         
         const totalPages = pdf.numPages;
         const { jsPDF } = window.jspdf;
         
-        // We will define the jsPDF instance dynamically based on the first page's orientation
+        // Define jsPDF instance based on first page orientation
         const pg1 = await pdf.getPage(1);
-        const vp1 = pg1.getViewport({scale: 1.5}); // 1.5 scale ensures good reading quality
+        const vp1 = pg1.getViewport({scale: 1.5}); 
         let orientation = vp1.width > vp1.height ? 'landscape' : 'portrait';
         
         st.innerText = 'Applying Encryption Protocol...';
@@ -395,11 +374,11 @@ async function processLock() {
             encryption: {
                 userPassword: pwd,
                 ownerPassword: pwd,
-                userPermissions: ["print"] // Allow printing, but restrict modifying and copying
+                userPermissions: ["print"] // Restrict modifying/copying
             }
         });
         
-        // Process all pages
+        // Render & Flatten all pages
         for (let i = 1; i <= totalPages; i++) {
             let progress = 20 + ((i / totalPages) * 70);
             pb.style.width = `${progress}%`;
@@ -424,7 +403,7 @@ async function processLock() {
         }
         
         pb.style.width = '95%';
-        st.innerText = 'Generating Final File...';
+        st.innerText = 'Packaging Final Secure File...';
         
         const blob = np.output('blob');
         
@@ -434,7 +413,7 @@ async function processLock() {
         setTimeout(() => {
             pw.style.display = 'none';
             btn.style.display = 'block';
-            btn.innerText = '🔄 Protect Another PDF';
+            btn.innerText = '🔄 Protect Another Document';
             
             const url = URL.createObjectURL(blob);
             let finalSize = (blob.size / 1024).toFixed(1) + ' KB';
@@ -444,28 +423,30 @@ async function processLock() {
             let dlName = originalName + "_locked.pdf";
             
             const d = document.createElement('div');
-            d.className = 'rc';
+            d.className = 'success-box';
             d.innerHTML = `
-                <div style="font-size:36px; margin-bottom:10px;">🔒</div>
-                <div class="rsz">Document is Locked</div>
-                <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Size: ${finalSize} | Copy Protected</p>
-                <button class="rb" onclick="dlUrl('${url}','${dlName}')">⬇ Download Locked PDF</button>
+                <div class="sb-icon">🔒</div>
+                <div class="sb-title">Document is Locked</div>
+                <div class="sb-desc">Final Size: ${finalSize} | Text Copy Protected</div>
+                <button class="btn-dl" onclick="dlUrl('${url}','${dlName}')">⬇ Download Locked PDF</button>
             `;
             rg.appendChild(d);
             
-            // Hide password box after success
-            document.getElementById('passwordArea').style.display = 'none';
-            
-        }, 1000);
+        }, 1200);
 
     } catch (error) {
         alert(error.message);
         pw.style.display = 'none';
         btn.style.display = 'block';
+        document.getElementById('passwordArea').style.display = 'block';
     }
 }
 
-function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+function dlUrl(url, name) {
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
 </script>
 </body>
 </html>
