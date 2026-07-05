@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convert Image to PDF Online Free – ReduceSize</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://reducesize.online/image-to-pdf.html">
+<meta name="description" content="Convert multiple JPG, PNG, and WebP images to a single PDF document instantly. 100% free, offline, and secure image to PDF converter.">
+<meta name="keywords" content="image to pdf, jpg to pdf, convert photo to pdf, png to pdf maker, free image to pdf converter, create pdf from images">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#6d54f0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
+  <div class="nav-links">
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ No Upload · 100% Private</span>
+  </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
+<div class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">✦ Fast & Secure Document Maker</div>
+  <h1 class="hero-h1">Convert Images to<br><span class="grad">PDF Document</span></h1>
+  <p class="hero-sub">Easily combine multiple JPG, PNG, or WEBP images into a single, high-quality PDF file. Works entirely in your browser.</p>
+  
+  <div class="badges">
+    <span class="badge">🔒 Zero data collection</span>
+    <span class="badge">⚡ Instant PDF generation</span>
+    <span class="badge">📚 Multiple Images OK</span>
+  </div>
+</section>
+
+<div class="card">
+  <div id="imgBox" class="tool-section">
+    <div class="drop" id="imgDrop">
+      <input type="file" id="upload" accept="image/*" multiple>
+      <div class="drop-ico">🖼️</div>
+      <div class="drop-main">Drop images here or <span>browse files</span></div>
+      <div class="drop-hint">JPG · PNG · WEBP &nbsp;·&nbsp; Select Multiple files</div>
+    </div>
+    
+    <div id="prev" class="prev-grid" style="display:none"></div>
+    
+    <div class="irow" style="margin-top: 20px;">
+      <div class="f">
+        <label class="fl">Page Setup</label>
+        <select id="pdfFormat">
+          <option value="a4">A4 Size (Standard Document)</option>
+          <option value="fit">Fit to Image Size</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" onclick="generatePDF()">📄&nbsp; Generate & Download PDF</button>
+  </div>
+
+  <div id="pbox" class="pbox">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel"></div>
+  </div>
+</div>
+
+<section class="seo">
+  <h2>How to Convert JPG and PNG to PDF Online</h2>
+  <p>Converting images to a PDF document is a daily requirement for students, professionals, and anyone handling paperwork online. Whether you need to compile photos of your homework, ID cards, or scanned documents, <strong>ReduceSize.online</strong> provides a blazing-fast tool to convert them into a single PDF.</p>
+  
+  <h3>100% Secure & Private Conversion</h3>
+  <p>Unlike other PDF tools that force you to upload your sensitive ID cards or personal photos to their servers, our Image to PDF tool works <strong>completely offline in your browser</strong>. Your images never leave your device. The PDF is generated using your device's memory, ensuring maximum privacy and zero risk of data leaks.</p>
+
+  <h3>How to use the Image to PDF Tool</h3>
+  <ol>
+    <li><strong>Select Images:</strong> Click on the upload box and select one or multiple images (JPG, PNG, or WebP) from your gallery or computer.</li>
+    <li><strong>Review Previews:</strong> You will instantly see thumbnail previews of all selected images.</li>
+    <li><strong>Choose Format:</strong> By default, the tool fits your images neatly onto standard A4 pages. If you want the PDF pages to perfectly match the size of your images, select "Fit to Image Size" from the dropdown.</li>
+    <li><strong>Generate & Download:</strong> Click the button, and your PDF will be ready to download in seconds!</li>
+  </ol>
+</section>
+
+<div class="chips-hd">Explore More PDF Tools</div>
+<div class="chips">
+  <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
+  <a href="/split-pdf.html" class="chip"><span class="chip-i">✂️</span><div class="chip-t"><strong>Split PDF</strong><span>Extract pages</span></div></a>
+  <a href="/pdf-to-image.html" class="chip"><span class="chip-i">🖼️</span><div class="chip-t"><strong>PDF to Images</strong><span>Extract pages</span></div></a>
+  <a href="/unlock-pdf.html" class="chip"><span class="chip-i">🔓</span><div class="chip-t"><strong>Unlock PDF</strong><span>Remove password</span></div></a>
+  <a href="/protect-pdf.html" class="chip"><span class="chip-i">🔒</span><div class="chip-t"><strong>Protect PDF</strong><span>Add password</span></div></a>
+  <a href="/sign-pdf.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Sign PDF</strong><span>Self-attest files</span></div></a>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/pdf-to-image.html">PDF to Image</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="assets/script.js" defer></script>
+
+<script>
+  async function generatePDF() {
+    var fileInput = document.getElementById('upload');
+    var formatSelect = document.getElementById('pdfFormat').value; // 'a4' or 'fit'
+    
+    if (!fileInput.files.length) {
+      alert('Please select at least one image first.');
+      return;
+    }
+
+    var files = fileInput.files;
+    var pw = document.getElementById('pbox');
+    var pb = document.getElementById('pfill');
+    var st = document.getElementById('status');
+    
+    pw.style.display = 'block';
+    
+    // Initialize jsPDF
+    var jspdf = window.jspdf;
+    var pdf = null; // Will initialize dynamically based on first image
+
+    for (var i = 0; i < files.length; i++) {
+      pb.style.width = ((i) / files.length * 100) + '%';
+      st.innerText = 'Processing Image ' + (i + 1) + ' of ' + files.length + '...';
+      
+      var file = files[i];
+      
+      // Convert file to image object to get dimensions
+      var img = new Image();
+      img.src = URL.createObjectURL(file);
+      await img.decode();
+      
+      // Draw image on canvas to get clean base64 data
+      var cv = document.createElement('canvas');
+      cv.width = img.width;
+      cv.height = img.height;
+      var ctx = cv.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      var imgData = cv.toDataURL('image/jpeg', 0.95); // High quality JPEG
+      
+      // Logic for adding pages
+      if (formatSelect === 'fit') {
+        // Fit PDF page exactly to Image dimensions (in pixels)
+        var orientation = img.width > img.height ? 'l' : 'p';
+        if (i === 0) {
+           pdf = new jspdf.jsPDF({ orientation: orientation, unit: 'px', format: [img.width, img.height] });
+        } else {
+           pdf.addPage([img.width, img.height], orientation);
+        }
+        pdf.addImage(imgData, 'JPEG', 0, 0, img.width, img.height);
+      } 
+      else {
+        // Fit image into an A4 size page
+        if (i === 0) {
+           pdf = new jspdf.jsPDF(); // Default A4
+        } else {
+           pdf.addPage();
+        }
+        
+        var pdfWidth = pdf.internal.pageSize.getWidth();
+        var pdfHeight = pdf.internal.pageSize.getHeight();
+        var imgRatio = img.width / img.height;
+        var pdfRatio = pdfWidth / pdfHeight;
+        
+        var drawWidth = pdfWidth;
+        var drawHeight = pdfHeight;
+        
+        // Scale image to fit inside A4 properly
+        if (imgRatio > pdfRatio) {
+            drawHeight = pdfWidth / imgRatio;
+        } else {
+            drawWidth = pdfHeight * imgRatio;
+        }
+        
+        // Center the image on the page
+        var x = (pdfWidth - drawWidth) / 2;
+        var y = (pdfHeight - drawHeight) / 2;
+        
+        pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight);
+      }
+    }
+    
+    st.innerText = 'PDF Generated Successfully! ✅';
+    pb.style.width = '100%';
+    
+    // Automatically trigger download
+    pdf.save('ReduceSize-Images.pdf');
+    
+    // Hide progress bar after a moment
+    setTimeout(function(){ pw.style.display = 'none'; }, 2000);
+  }
+</script>
+
+</body>
+</html>
