@@ -3,243 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Online Document Scanner | Pro PDF & Image Scanner</title>
+<title>Online Document Scanner | Pro PDF & Signature Extractor</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/document-scanner-online.html">
-<meta name="description" content="Scan documents and signatures online for free. Pro shadow removal, strict B&W, and easy cropping. Download as clean PDF or JPG.">
-<meta name="keywords" content="online document scanner, image to pdf scanner, signature scanner online, colour scan, b&w scan, magic scan filter online">
+<meta name="description" content="Scan documents and signatures online for free. Remove dark shadows, apply strict B&W filters, and export to clean PDF or JPG. No app needed.">
+<meta name="keywords" content="online document scanner, image to pdf scanner, signature scanner online, extract signature from image, remove shadows from photo, magic scan filter online, b&w scan">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
+<!-- Cropper.js CSS for the cropping tool -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
 
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
+
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:16px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
-  display:inline-block; white-space:nowrap;
-}
-@media(max-width: 480px){
-    .nav { padding: 0 12px; }
-    .nav-logo { font-size: 16px; }
-    .nav-links { gap: 10px; }
-    .nav-links a { font-size: 12px; }
-    .nav-pill { display:none; }
-}
-
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
-}
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
-}
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:36px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:54px;height:54px;margin:0 auto 12px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
-}
-.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:13px;color:var(--muted)}
-
-/* CROP AREA (Perfect Fix) */
+/* =========================================
+   SCANNER SPECIFIC UI CSS
+   ========================================= */
+/* CROP AREA */
 .crop-wrap {
-  background:var(--surface2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:20px;
-  position:relative;
-  width: 100%;
-  height: 480px; 
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; margin-bottom: 20px; position: relative; width: 100%; height: 480px; 
 }
 .crop-wrap img { max-width: 100%; display: block; }
 
 /* FILTER SECTION */
 .filter-box {
-    background: var(--surface2); border: 1px solid rgba(109,84,240,.2);
-    border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: center;
+    box-shadow: var(--card-shadow);
 }
-.f-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom:16px;}
+.f-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+.f-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;}
 .f-btn {
-    flex: 1; min-width: 100px; padding: 12px 10px; border-radius: 8px; border: 1px solid var(--border);
-    background: rgba(255,255,255,0.03); color: var(--muted); cursor: pointer; transition: 0.2s; font-family: 'Manrope', sans-serif;
+    flex: 1; min-width: 110px; padding: 14px 10px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--muted); cursor: pointer; transition: 0.2s; font-family: 'Manrope', sans-serif;
 }
-.f-btn strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 2px;}
-.f-btn span { font-size: 10px; }
-.f-btn.active { background: rgba(32,217,192,.1); border-color: var(--accent); }
-.f-btn.active strong { color: var(--accent); }
-.f-btn:hover:not(.active) { background: rgba(255,255,255,0.06); }
+.f-btn strong { display: block; font-size: 14px; color: var(--text); margin-bottom: 4px; font-weight: 800;}
+.f-btn span { font-size: 11px; }
+.f-btn.active { background: var(--green-bg); border-color: var(--accent); }
+.f-btn.active strong { color: var(--green); }
+.f-btn:hover:not(.active) { border-color: var(--purple); }
 
 /* SLIDER UI */
 .sl-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-.sl-title { font-size: 13px; font-weight: 700; color: var(--purple-l); text-transform: uppercase; letter-spacing: 1px;}
-.sl-val { font-size: 12px; font-weight: 700; color: var(--accent); background: rgba(32,217,192,.1); padding: 2px 8px; border-radius: 6px;}
+.sl-title { font-size: 13px; font-weight: 800; color: var(--text); text-transform: uppercase; letter-spacing: 1px;}
+.sl-val { font-size: 12px; font-weight: 800; color: var(--accent); background: var(--green-bg); padding: 4px 10px; border-radius: 8px;}
 
-input[type=range] {
-  -webkit-appearance: none; width: 100%; background: transparent; margin: 8px 0;
-}
+input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; margin: 12px 0; }
 input[type=range]:focus { outline: none; }
 input[type=range]::-webkit-slider-runnable-track {
-  width: 100%; height: 6px; cursor: pointer; background: rgba(255,255,255,0.1); border-radius: 4px; border: 1px solid rgba(0,0,0,0.1);
+  width: 100%; height: 8px; cursor: pointer; background: var(--surface2); border-radius: 6px; border: 1px solid var(--border);
 }
 input[type=range]::-webkit-slider-thumb {
-  border: 2px solid #fff; height: 20px; width: 20px; border-radius: 50%; background: var(--purple); cursor: pointer; -webkit-appearance: none; margin-top: -8px; box-shadow: 0 0 10px rgba(109,84,240,0.5);
+  border: 3px solid #fff; height: 24px; width: 24px; border-radius: 50%; background: var(--purple); cursor: pointer; -webkit-appearance: none; margin-top: -9px; box-shadow: 0 0 12px rgba(109,84,240,0.6);
 }
 
 /* LIVE PREVIEW CANVAS */
 #previewCanvas {
-    max-width: 100%; height: auto; max-height: 600px; object-fit: contain; border-radius: 8px;
-    border: 1px solid var(--border); background: #fff; margin: 0 auto 20px; display:block;
+    max-width: 100%; height: auto; max-height: 600px; object-fit: contain; border-radius: 12px;
+    border: 1px solid var(--border); background: #fff; margin: 0 auto 24px; display:block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3); margin-bottom:10px;
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
+/* CUSTOM PDF BUTTON */
+.btn-pdf { background: #ff4757; margin-top: 12px; }
+.btn-pdf:hover { background: #ff6b81; box-shadow: 0 12px 32px rgba(255, 71, 87, 0.3); }
 
-.btn-pdf { background: #e53e3e; }
-.btn-pdf:hover { background: #c53030; box-shadow:0 10px 28px rgba(229,62,62,.42); }
-
-/* PROGRESS */
-.pbox{display:none;margin-top:13px}
-.ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s;position:relative;overflow:hidden;}
-.plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+/* HELPER TEXT */
+.helper-text { font-size: 13px; color: var(--yellow); margin-bottom: 16px; text-align: center; font-weight: 600; padding: 10px; background: rgba(246, 195, 67, 0.1); border-radius: 8px; border: 1px dashed rgba(246, 195, 67, 0.3);}
 </style>
 
+<!-- SEO Structured Data for Document Scanner -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Online Document & Signature Scanner",
-"url":"https://reducesize.online/document-scanner-online.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Scan documents and signatures online for free. Pro shadow removal, strict B&W, and easy cropping. Download as clean PDF or JPG.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Online Document & Signature Scanner",
+  "url":"https://reducesize.online/document-scanner-online.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Professional browser-based scanner. Remove shadows from mobile photos, extract signatures with pure B&W filters, and export to PDF instantly.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"How does the Magic Scan filter remove shadows?",
+      "acceptedAnswer":{"@type":"Answer","text":"Our Magic Scan engine uses a color-dodge blending algorithm. It calculates the uneven lighting in the background and neutralizes it, turning grey, shadowy paper into a pure white background while keeping the ink dark."}
+    },
+    {
+      "@type":"Question",
+      "name":"Can I extract a signature from an image using this tool?",
+      "acceptedAnswer":{"@type":"Answer","text":"Yes! Upload your signature photo, select the 'B&W Scan' mode, and use the 'Ink Darkness' slider to make your signature pitch black. The background will turn completely white, making it perfect for official forms."}
+    },
+    {
+      "@type":"Question",
+      "name":"Do I need to download a scanning app to my phone?",
+      "acceptedAnswer":{"@type":"Answer","text":"No. This tool runs entirely in your mobile or desktop web browser. It offers professional-grade scanning, cropping, and PDF export without taking up any storage space on your device."}
+    }
+  ]
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Pro Engine</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Pro Cam Scanner Engine</div>
-  <h1>Scan Documents &<br><span class="grad">Signatures Online</span></h1>
-  <p>Our Pro Engine completely deletes dark shadows from mobile photos. Get crystal clear pure-white paper with bold dark ink. Download as PDF safely.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ Pro Cam Scanner Engine</div>
+  <h1 class="hero-h1">Scan Documents &<br><span class="grad">Signatures Online</span></h1>
+  <p class="hero-sub">Our Pro Engine intelligently deletes dark shadows from mobile photos. Get crystal clear pure-white paper with bold dark ink. Download as PDF instantly.</p>
+  
   <div class="badges">
     <span class="badge">🪄 Pro Shadow Remover</span>
-    <span class="badge">⚫ Pure B&W Mode</span>
+    <span class="badge">⚫ Pure B&W Extractor</span>
     <span class="badge">📄 Export to PDF</span>
+    <span class="badge">🔒 100% Private</span>
   </div>
 </section>
 
@@ -252,19 +163,23 @@ input[type=range]::-webkit-slider-thumb {
     <div class="drop-hint">Drop your raw mobile photo here</div>
   </div>
   
+  <!-- Step 1: Cropping -->
   <div id="step1" style="display:none;">
+      <div class="helper-text">Box is fixed! Drag the edges/corners (blue blocks) to select the document perfectly.</div>
       
       <div id="cropWrap" class="crop-wrap">
         <img id="imageToCrop">
       </div>
       
-      <p style="font-size:12px;color:var(--yellow);margin-bottom:12px;text-align:center;">Box is fixed! Drag the edges/corners (blue blocks) to select the document safely.</p>
-      
-      <button class="btn" id="cropBtn" onclick="startScanProcess()">✂️&nbsp; Crop & Process Filter</button>
+      <button class="btn" id="cropBtn" onclick="startScanProcess()">✂️&nbsp; Crop & Apply Magic Filter</button>
   </div>
 
-  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <div id="pbox" class="pbox" style="margin-top:20px; padding: 20px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border);">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel" style="margin-top: 10px;"></div>
+  </div>
 
+  <!-- Step 2: Filters & Download -->
   <div id="step2" style="display:none;">
       
       <canvas id="previewCanvas"></canvas>
@@ -276,20 +191,20 @@ input[type=range]::-webkit-slider-thumb {
               <strong>Original</strong><span>Raw Photo</span>
           </div>
           <div class="f-btn active" id="btnFilterColor" onclick="setFilter('colour', this)">
-              <strong>🪄 Magic Scan</strong><span>Pro Shadow Delete</span>
+              <strong>🪄 Magic Scan</strong><span>Shadow Delete</span>
           </div>
           <div class="f-btn" id="btnFilterBW" onclick="setFilter('bw', this)">
-              <strong>⚫ B&W Scan</strong><span>Best for Signatures</span>
+              <strong>⚫ B&W Scan</strong><span>Signatures Only</span>
           </div>
         </div>
 
         <div id="intensityContainer">
-            <div class="sl-header" style="margin-top:10px;">
+            <div class="sl-header">
                 <span class="sl-title">🎚️ Ink / Text Darkness</span>
                 <span class="sl-val" id="intVal">50%</span>
             </div>
             <input type="range" id="intensitySlider" min="0" max="100" value="50" oninput="applyFilterToCanvas()">
-            <p style="font-size:11px;color:var(--muted);margin:0;text-align:center;">Increase slider to make faded text darker and bolder.</p>
+            <p style="font-size:12px; color:var(--muted); margin-top:8px;">Slide right to make faded ink pitch black.</p>
         </div>
       </div>
 
@@ -301,35 +216,103 @@ input[type=range]::-webkit-slider-thumb {
 
 </div>
 
-<div class="chips-hd">More Tools</div>
+<!-- ==========================================
+     HIGH-VALUE SEO CONTENT (SCANNER FOCUS) 
+     ========================================== -->
+<section class="seo">
+  <h2>The Best Free Document & Signature Scanner Online</h2>
+  <p>Taking a picture of a document with your smartphone is easy, but making it look like a professionally scanned PDF is incredibly hard. Phone cameras naturally capture the shadows of your hands, uneven room lighting, and greyish-yellow tones on white paper. If you upload these raw images to official portals, they look unprofessional and often get rejected.</p>
+  
+  <p>Our <strong>Online Document Scanner</strong> was built to replicate the magic of premium mobile scanning apps right inside your web browser. Without installing anything, you can crop your documents perfectly, eliminate dark shadows, and export a clean, high-contrast PDF or JPG file instantly.</p>
+
+  <h3>How the "Magic Scan" Engine Removes Shadows</h3>
+  <p>Basic image editors just increase the brightness of the photo, which washes out the ink and makes the document unreadable. Our tool is different. When you click "Apply Magic Filter", our engine uses a sophisticated <em>color-dodge blending algorithm</em>. It mathematically calculates where the shadows are and neutralizes them, leaving the background pure white while simultaneously boosting the contrast of the ink and text. The result is a crisp, professional scan.</p>
+
+  <h3>Perfect for Extracting Signatures</h3>
+  <p>If you need to upload a signature for an SSC, UPSC, or Bank exam, it needs to look like black or blue ink on pure white paper. Here is how to achieve the perfect signature scan:</p>
+  <ol>
+    <li>Upload a regular photo of your signature taken with your phone.</li>
+    <li>Use the blue crop box to tightly select only the signature area.</li>
+    <li>Once processed, select the <strong>⚫ B&W Scan</strong> mode.</li>
+    <li>Use the <strong>Ink Darkness Slider</strong> and move it to the right. Watch as the grey shadows disappear completely, leaving only your pitch-black signature behind!</li>
+    <li>Download it as a JPG and upload it to your form.</li>
+  </ol>
+
+  <h3>Why Export as PDF?</h3>
+  <p>If you are scanning Aadhar Cards, PAN cards, Marksheets, or resumes, it is highly recommended to use our red <strong>"Download as PDF"</strong> button. PDFs are the universal standard for document sharing. They maintain their formatting, prevent unauthorized editing of the text, and look highly professional when printed by the receiver.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Do I need to download an app to scan documents?</strong><br>No. This tool runs entirely in your mobile or desktop web browser. It offers professional-grade scanning, cropping, and PDF export without taking up any storage space on your device.</p>
+  
+  <p><strong>Are my highly sensitive documents uploaded to a server?</strong><br>We respect your privacy completely. The Cropper tool, the Magic Scan algorithms, and the PDF generator all run 100% locally on your device using HTML5 Canvas. Your Aadhar card, PAN card, or signatures are never uploaded to our servers.</p>
+  
+  <p><strong>Can I compress the scanned document after downloading?</strong><br>Yes! If the downloaded JPG or PDF is too large for your application form, you can immediately use our dedicated tools (like "Compress to 50KB" or "Compress to 100KB") to reduce the file size.</p>
+</section>
+
+<div class="chips-hd">More Useful Tools</div>
 <div class="chips">
   <a href="/passport-photo-maker.html" class="chip"><span class="chip-i">📸</span><div class="chip-t"><strong>Passport Photo</strong><span>Print Maker</span></div></a>
-  <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
-  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
-  <a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">🔧</span><div class="chip-t"><strong>Master Form Fixer</strong><span>Any portal</span></div></a>
+  <a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a>
+  <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Documents</span></div></a>
+  <a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">💻</span><div class="chip-t"><strong>Form Fixer</strong><span>Any portal</span></div></a>
   <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
-  <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
+  <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
 </div>
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/passport-photo-maker.html">Passport Maker</a>
-    <a href="/resize-image-for-online-form.html">Form Fixer</a>
-  </nav>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/protect-pdf.html">Protect PDF</a>
+      <a href="/pdf-to-image.html">PDF to Image</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+    <span>📱 Mobile Ready</span>
+  </div>
 </footer>
 
+<!-- Global Scripts -->
+<script src="assets/script.js" defer></script>
+
+<!-- Cropper & PDF Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+<!-- Specialized Scanner Logic -->
 <script>
 let cropper = null; 
 let rawCroppedCanvas = null; 
-let flatCanvas = null; // Store shadow-removed canvas for super fast slider updates
+let flatCanvas = null; 
 let currentFilter = 'colour'; 
 
 document.getElementById('upload').addEventListener('change', function() {
@@ -351,10 +334,6 @@ document.getElementById('upload').addEventListener('change', function() {
   
   if(cropper) { cropper.destroy(); }
 
-  // 100% FIXED CROPPER: 
-  // dragMode: 'none' -> Background me touch se box nahi banega
-  // cropBoxMovable: false -> Box ka center click karke poora box nahi khiskega
-  // Sirf aur sirf edges/corners kaam karenge.
   cropper = new Cropper(imageToCrop, {
       aspectRatio: NaN, 
       viewMode: 1, 
@@ -400,24 +379,18 @@ function startScanProcess() {
         st.innerText = 'Running Pro Scanner Engine...';
         
         setTimeout(() => {
-            
-            // PRO ENGINE: We calculate the flattened (shadow-free) image ONCE.
-            // This makes the slider butter smooth later.
             flatCanvas = document.createElement('canvas');
             flatCanvas.width = rawCroppedCanvas.width;
             flatCanvas.height = rawCroppedCanvas.height;
             const fCtx = flatCanvas.getContext('2d');
             
-            // Draw original
             fCtx.drawImage(rawCroppedCanvas, 0, 0);
             
-            // CamScanner Secret: Divide Original by a Heavily Blurred Background to remove shadows
             let blurRadius = Math.floor(Math.max(flatCanvas.width, flatCanvas.height) * 0.025);
             fCtx.globalCompositeOperation = 'color-dodge';
             fCtx.filter = `blur(${blurRadius}px) invert(100%)`;
             fCtx.drawImage(rawCroppedCanvas, 0, 0);
             
-            // Reset
             fCtx.filter = 'none';
             fCtx.globalCompositeOperation = 'source-over';
             
@@ -457,7 +430,7 @@ function applyFilterToCanvas() {
     const canvas = document.getElementById('previewCanvas');
     const ctx = canvas.getContext('2d');
     
-    let intensityVal = parseInt(document.getElementById('intensitySlider').value); // 0 to 100
+    let intensityVal = parseInt(document.getElementById('intensitySlider').value);
     document.getElementById('intVal').innerText = intensityVal + "%";
     
     canvas.width = rawCroppedCanvas.width;
@@ -468,15 +441,12 @@ function applyFilterToCanvas() {
         return;
     }
     
-    // For Magic/B&W, we start with the perfectly lit flatCanvas
     ctx.drawImage(flatCanvas, 0, 0);
     
-    // Pixel loop to adjust contrast/black levels instantly
     let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let data = imgData.data;
     
     if (currentFilter === 'bw') {
-        // Pure B&W Threshold
         let threshold = 255 - (intensityVal * 1.5); 
         for(let i=0; i<data.length; i+=4) {
              let lum = 0.299*data[i] + 0.587*data[i+1] + 0.114*data[i+2];
@@ -484,17 +454,14 @@ function applyFilterToCanvas() {
              data[i] = data[i+1] = data[i+2] = val;
         }
     } else if (currentFilter === 'colour') {
-        // Levels adjustment: Make ink darker based on slider
-        let blackPoint = intensityVal * 1.5; // 0 to 150
+        let blackPoint = intensityVal * 1.5; 
         for(let i=0; i<data.length; i+=4) {
              let r = data[i], g = data[i+1], b = data[i+2];
              
-             // Contrast Stretch
              r = Math.max(0, ((r - blackPoint) / (255 - blackPoint)) * 255);
              g = Math.max(0, ((g - blackPoint) / (255 - blackPoint)) * 255);
              b = Math.max(0, ((b - blackPoint) / (255 - blackPoint)) * 255);
 
-             // Slight Saturation Boost to make ink pop
              let lum = 0.299 * r + 0.587 * g + 0.114 * b;
              let sat = 1.3;
              r = lum + sat * (r - lum);
@@ -527,7 +494,6 @@ function downloadPDF() {
     const canvas = document.getElementById('previewCanvas');
     const imgData = canvas.toDataURL('image/jpeg', 0.95);
     
-    // Temporarily change button text
     const btn = document.querySelector('.btn-pdf');
     const origText = btn.innerText;
     btn.innerText = '📄 Generating PDF...';
