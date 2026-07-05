@@ -7,217 +7,95 @@
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/unlock-pdf.html">
 <meta name="description" content="Remove passwords from PDF files online for free. Unlock e-Aadhar and bank statements instantly with our advanced bypass engine. 100% private, no server uploads.">
-<meta name="keywords" content="unlock pdf, remove pdf password, pdf password remover online, unlock e-aadhar pdf, decrypt pdf free">
+<meta name="keywords" content="unlock pdf, remove pdf password, pdf password remover online, unlock e-aadhar pdf, decrypt pdf free, secure pdf unlocker">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="assets/style.css">
 
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--red:#ff6b6b;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
+/* =========================================
+   UNLOCK PDF SPECIFIC UI CSS
+   ========================================= */
+.password-box {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px; margin-bottom: 20px;
+    animation: fadeIn 0.4s ease forwards; display:none;
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:16px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s; white-space:nowrap;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:10px;font-weight:700;padding:5px 10px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.5px;text-transform:uppercase;
-  display:inline-block; white-space:nowrap;
-}
-@media(max-width: 480px){
-    .nav { padding: 0 12px; }
-    .nav-logo { font-size: 16px; }
-    .nav-links { gap: 10px; }
-    .nav-links a { font-size: 12px; }
-    .nav-pill { display:none; }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
+.irow { display: flex; gap: 12px; margin-bottom: 12px; }
+.f { flex: 1; }
+.fl { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; display: block; }
+.pwd-input {
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    padding: 16px; border-radius: 12px; color: var(--text);
+    font-size: 16px; font-family: 'Manrope', sans-serif; font-weight: 700;
+    outline: none; transition: 0.2s; letter-spacing: 2px;
 }
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
+.pwd-input::placeholder { color: var(--muted); letter-spacing: normal; font-weight: 500; font-size: 14px; }
+.pwd-input:focus { border-color: var(--purple); box-shadow: 0 0 0 4px var(--purple-light); }
+
+.btn-lock {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--green); color: #000; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
+    box-shadow: 0 8px 24px rgba(62, 207, 142, 0.3); display: none;
 }
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:36px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:54px;height:54px;margin:0 auto 12px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
-}
-.drop-main{font-size:16px;font-weight:700;margin-bottom:4px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:13px;color:var(--muted)}
-
-/* INPUT ROW */
-.irow{display:flex;gap:10px;margin-bottom:16px}
-.irow .f{flex:1;}
-.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input{
-  width:100%;background:var(--surface2);border:1px solid rgba(255,255,255,.08);
-  padding:14px 16px;border-radius:10px;color:var(--text);
-  font-size:16px;font-family:'Manrope',sans-serif;font-weight:600;
-  outline:none;transition:border-color .2s; letter-spacing: 1px;
-}
-.irow input::placeholder {color: rgba(255,255,255,0.2); letter-spacing: normal; font-weight: 500;}
-.irow input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
-
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* PROGRESS */
-.pbox{display:none;margin-top:16px}
-.ptrack{height:6px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s ease;position:relative;}
-.plabel{font-size:13px;color:var(--purple-l);margin-top:10px;text-align:center;font-weight:600}
-
-/* RESULTS */
-.rg{display:flex; flex-direction:column; gap:10px; margin-top:16px}
-.rc{background:var(--surface2);border:1px solid rgba(62,207,142,.3);border-radius:11px;overflow:hidden; padding: 20px; text-align: center;}
-.rsz{font-size:16px;font-weight:700;color:var(--green);margin-bottom:6px}
-.rb{
-  width:100%;padding:12px;border-radius:9px;border:none;margin-top:12px;
-  background:var(--green);color:#000;
-  font-size:15px;font-weight:800;cursor:pointer;
-  font-family:'Manrope',sans-serif;transition:.15s;
-}
-.rb:hover{background:#2eb872; box-shadow:0 6px 20px rgba(62,207,142,.3);}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+.btn-lock:hover { background: #2eb872; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(62, 207, 142, 0.4); }
 </style>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Unlock PDF Online Free",
-"url":"https://reducesize.online/unlock-pdf.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Remove password from PDF files instantly. Advanced engine for unlocking Bank Statements and e-Aadhar documents. 100% Secure and browser-based.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Unlock PDF Password Online",
+  "url":"https://reducesize.online/unlock-pdf.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Securely remove passwords from PDF files online. Unlock e-Aadhar and bank statements instantly with 100% privacy and no server uploads.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Private Unlocker</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Advanced Bypass Engine</div>
-  <h1>Unlock PDF Files<br><span class="grad">Remove Passwords</span></h1>
-  <p>Permanently remove advanced passwords from e-Aadhar and Bank Statements. Our secure hybrid engine unlocks any PDF directly on your device.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ 100% Offline & Private</div>
+  <h1 class="hero-h1">Unlock PDF <span class="grad">Online</span></h1>
+  <p class="hero-sub">Remove password security from PDF documents instantly. Perfect for e-Aadhar, Bank Statements, and legal files. No server uploads—safe & secure.</p>
+  
   <div class="badges">
-    <span class="badge">🔓 Permanent Unlock</span>
-    <span class="badge">🏦 AES Bank PDF Ready</span>
-    <span class="badge">🔒 Zero Server Uploads</span>
+    <span class="badge">🔓 Instant Unlock</span>
+    <span class="badge">🛡️ Offline Processing</span>
+    <span class="badge">⚡ No File Limits</span>
   </div>
 </section>
 
@@ -225,222 +103,145 @@ body::after{
   
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="application/pdf">
-    <div class="drop-ico" id="dropIco">🔒</div>
+    <div class="drop-ico" id="dropIco">🔓</div>
     <div class="drop-main" id="dropMain">Drop a locked PDF here</div>
-    <div class="drop-hint" id="dropHint">e.g. Bank Statements, Aadhar Card, Payslips</div>
+    <div class="drop-hint" id="dropHint">Upload the password-protected document</div>
   </div>
 
-  <div id="passwordArea" style="display:none; padding:16px; border-radius:12px; background:rgba(255,255,255,0.02); border:1px solid rgba(109,84,240,.2); margin-bottom:16px;">
-      <div class="irow" style="margin-bottom:8px;">
+  <div id="passwordArea" class="password-box">
+      <div class="irow">
           <div class="f">
-              <label class="fl">Enter Current PDF Password</label>
-              <input type="text" id="pdfPwd" placeholder="Enter the password to open this file">
+              <label class="fl">Enter PDF Password</label>
+              <input type="text" id="pdfPwd" class="pwd-input" placeholder="Type document password..." autocomplete="off">
           </div>
       </div>
-      <p style="font-size:11px; color:var(--yellow); margin:0; line-height:1.4;">*We need the correct password to decrypt the file. Because this tool runs in your browser, your password is <b>never sent to any server</b>.</p>
   </div>
 
-  <button class="btn" id="unlockBtn" style="display:none;" onclick="processUnlock()">🔓&nbsp; Remove Password Now</button>
+  <button class="btn-lock" id="lockBtn" onclick="processUnlock()">🔓&nbsp; Remove Password Now</button>
 
-  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <div id="pbox" class="pbox" style="padding: 24px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel" style="margin-top: 12px;"></div>
+  </div>
   
   <div id="rg" class="rg"></div>
 </div>
 
 <section class="seo">
-<h2>Unlock PDF Files Online: The Ultimate Tool for e-Aadhar and Bank Statements</h2>
-<p>In today's digital era, receiving important documents via email is the norm. To protect your privacy, institutions often send your e-Aadhar card, bank statements, salary slips, and income tax documents as password-protected PDF files. While this encryption is great for email security, it becomes a massive hurdle when you need to upload these documents to a government exam portal (like SSC, UPSC), a visa application site, or an HR portal. Most digital portals strictly reject locked files because verifying officers cannot open them. <strong>ReduceSize PDF Unlocker</strong> is specifically designed to permanently remove this password layer so you can upload your documents anywhere without errors.</p>
+  <h2>Securely Remove PDF Password Online</h2>
+  <p>Are you trying to open your e-Aadhar card, Bank Statement, or Insurance policy, but stuck because of a password? Many digital documents are encrypted by default to protect your data. However, constantly typing the password for these files is inconvenient. <strong>ReduceSize PDF Unlocker</strong> allows you to decrypt and remove the password from your documents, giving you an unlocked file that opens instantly every time.</p>
 
-<h3>Why Do Most Free PDF Unlockers Fail?</h3>
-<p>If you have ever tried to unlock an Indian bank statement (HDFC, SBI, ICICI) using a standard online tool, you have likely encountered an "Incorrect Password" or "Failed to Decrypt" error—even when you entered the correct password. This happens because modern financial institutions use <strong>AES-256 Advanced Encryption</strong>.</p>
-<p>To solve this, ReduceSize employs a proprietary <strong>Advanced Hybrid Bypass Engine</strong>. When standard decryption fails, our system automatically falls back to an intelligent rendering protocol. It securely reads your document page by page and perfectly rebuilds a fresh, 100% unlocked version of the PDF. This guarantees success on any valid password.</p>
+  <h3>Why Choose Our PDF Unlocker?</h3>
+  <ul>
+    <li><strong>Zero Server Upload:</strong> Most online PDF tools force you to upload your highly confidential files to their servers. We use 100% offline technology—your file stays on your computer the entire time.</li>
+    <li><strong>Fast Decryption:</strong> Our high-speed engine tries a standard decryption protocol first to instantly remove the password protection.</li>
+    <li><strong>Perfect for e-Aadhar & Statements:</strong> Whether it's the standard Aadhar PIN format or a custom bank password, if you have the key, we can help you unlock the door to a permanent solution.</li>
+  </ul>
 
-<h3>100% Private Decryption: Zero Server Uploads</h3>
-<p>Typing the password to your highly sensitive bank statement into a random internet website is extremely dangerous. Traditional PDF unlockers upload both your private document and your password to their cloud servers to process the decryption. This creates a severe data vulnerability.</p>
-<p>ReduceSize eliminates this risk completely. Utilizing modern <strong>Client-Side Processing</strong>, our tool runs the decryption engine entirely inside your local web browser. Your locked PDF, your password, and the resulting unlocked file <strong>never leave your smartphone or computer</strong>. We have zero access to your data, ensuring total offline privacy.</p>
-
-<h3>Step-by-Step Guide: How to Remove PDF Passwords</h3>
-<ol>
-  <li><strong>Upload the Locked PDF:</strong> Drag and drop your encrypted file into the upload area. Our smart detector will instantly verify if the file requires a password.</li>
-  <li><strong>Enter Your Current Password:</strong> To remove the encryption, you must know the original password used to open the file. Type it into the secure input box.</li>
-  <li><strong>Click Unlock:</strong> Hit the "Remove Password Now" button. Our engine will verify the password locally and strip away the security layer within seconds.</li>
-  <li><strong>Download Safely:</strong> A brand new, permanently unlocked version of your PDF will be ready to download and upload to any portal.</li>
-</ol>
-
-<h3>Frequently Asked Questions (FAQs)</h3>
-
-<p><strong>Can this tool unlock a PDF if I forgot the password?</strong><br>
-No. ReduceSize is a utility tool meant for convenience, not a hacking software. You must know the original password to unlock the document. If you are trying to open an e-Aadhar card, the default password is usually the first 4 letters of your name in CAPITAL letters followed by your year of birth (e.g., AMIT1995).</p>
-
-<p><strong>Is it safe to type my bank statement password here?</strong><br>
-Yes, it is 100% safe. Because our tool runs completely on Client-Side JavaScript, the password you type is processed locally in your device's memory. It is never transmitted across the internet or saved on any server.</p>
-
-<p><strong>Will the unlocked PDF lose its original quality?</strong><br>
-Not at all. The tool simply removes the security wrapper around the file. All text, images, signatures, and formatting inside the document will retain their exact original quality and resolution.</p>
-
-<p><strong>Can I compress the PDF after unlocking it?</strong><br>
-Yes! Often, bank statements are large files. Once you have downloaded your unlocked PDF, you can head over to our main <a href="/" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">PDF Compressor Tool</a> to reduce its size to an exact KB limit (like 100KB or 200KB) required by your exam or job portal.</p>
-
-<p><strong>Does this tool work on mobile devices?</strong><br>
-Yes, ReduceSize is fully optimized for mobile use. You can easily select locked PDFs from your Android or iPhone files app, enter the password, and download the unlocked version directly to your mobile storage.</p>
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Is it safe to unlock my private documents here?</strong><br>Yes, 100% safe. Because our tool operates on a zero-upload policy, all processing happens locally on your own computer. We never see, store, or access your files.</p>
+  <p><strong>Can I recover a forgotten password?</strong><br>No. Our tool helps you remove the protection, but you MUST know the current password to decrypt the file. We do not provide password recovery services.</p>
 </section>
 
 <div class="chips-hd">More PDF Tools</div>
 <div class="chips">
   <a href="/" class="chip"><span class="chip-i">🗜️</span><div class="chip-t"><strong>Compress PDF</strong><span>Reduce file size</span></div></a>
   <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
-  <a href="/pdf-to-image.html" class="chip"><span class="chip-i">🖼️</span><div class="chip-t"><strong>PDF to Images</strong><span>Extract pages</span></div></a>
-  <a href="/protect-pdf.html" class="chip"><span class="chip-i">🔒</span><div class="chip-t"><strong>Protect PDF</strong><span>Add password</span></div></a>
+  <a href="/split-pdf.html" class="chip"><span class="chip-i">✂️</span><div class="chip-t"><strong>Split PDF</strong><span>Extract pages</span></div></a>
+  <a href="/document-scanner-online.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Scan to PDF</strong><span>Remove shadows</span></div></a>
 </div>
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/image-format-converter.html">Format Converter</a>
-    <a href="/">PDF Compressor</a>
-  </nav>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/document-scanner-online.html">Scan to PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/protect-pdf.html">Protect PDF</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+  </div>
 </footer>
 
+<script src="assets/script.js" defer></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-// Set worker for robust Mozilla PDF.js
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
 let currentPdfFile = null;
-let currentArrayBuffer = null;
+
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--purple)'; dropZone.style.background = 'var(--purple-light)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; dropZone.style.background = ''; });
+dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.style.borderColor = ''; dropZone.style.background = '';
+    document.getElementById('upload').files = e.dataTransfer.files;
+    document.getElementById('upload').dispatchEvent(new Event('change'));
+});
 
 document.getElementById('upload').addEventListener('change', async function(e) {
     if(this.files.length === 0) return;
-    
     currentPdfFile = this.files[0];
-    if(currentPdfFile.type !== 'application/pdf') {
-        alert("Please select a valid PDF file.");
-        return;
-    }
+    if(currentPdfFile.type !== 'application/pdf') { alert("Please select a PDF."); return; }
     
-    // Update Drop UI
     document.getElementById('dropMain').innerHTML = `<span style="color:var(--green)">${currentPdfFile.name}</span>`;
-    document.getElementById('dropIco').innerHTML = '📄';
-    document.getElementById('dropIco').style.background = 'rgba(62,207,142,.1)';
-    document.getElementById('dropIco').style.borderColor = 'rgba(62,207,142,.3)';
+    document.getElementById('dropHint').innerText = `Document Size: ${(currentPdfFile.size / 1024).toFixed(1)} KB`;
+    document.getElementById('dropIco').innerHTML = '✅';
     
-    // Reset Lower UI
-    document.getElementById('rg').innerHTML = '';
-    document.getElementById('passwordArea').style.display = 'none';
-    document.getElementById('unlockBtn').style.display = 'none';
-    document.getElementById('pdfPwd').value = '';
-
-    // SMART DETECTION using Mozilla PDF.js (Handles AES checks properly)
-    try {
-        currentArrayBuffer = await currentPdfFile.arrayBuffer();
-        await pdfjsLib.getDocument({data: currentArrayBuffer}).promise;
-        
-        // If it succeeds without password, it's not locked.
-        document.getElementById('dropHint').innerText = "Good news! This PDF is already unlocked.";
-        alert("This PDF does not have a password. It is already unlocked!");
-        
-    } catch (err) {
-        if(err.name === 'PasswordException') {
-            // It IS encrypted. Show password input.
-            document.getElementById('dropHint').innerText = "🔒 This file is password protected.";
-            document.getElementById('passwordArea').style.display = 'block';
-            document.getElementById('unlockBtn').style.display = 'block';
-        } else {
-            alert("Error reading PDF. The file might be corrupted.");
-        }
-    }
+    document.getElementById('passwordArea').style.display = 'block';
+    document.getElementById('lockBtn').style.display = 'block';
 });
 
 async function processUnlock() {
-    if(!currentArrayBuffer) return;
-
     const pwd = document.getElementById('pdfPwd').value;
-    if(!pwd) {
-        alert("Please enter the password first.");
-        document.getElementById('pdfPwd').focus();
-        return;
-    }
+    if(!pwd) { alert("Please enter the document password."); return; }
 
-    const btn = document.getElementById('unlockBtn');
+    const btn = document.getElementById('lockBtn');
     const pw = document.getElementById('pbox');
     const pb = document.getElementById('pfill');
     const st = document.getElementById('status');
     const rg = document.getElementById('rg');
     
     btn.style.display = 'none';
-    rg.innerHTML = '';
     pw.style.display = 'block';
+    pb.style.width = '30%';
+    st.innerText = 'Decrypting PDF...';
 
     try {
-        pb.style.width = '30%';
-        st.innerText = 'Verifying Password...';
-        
-        // 1. Verify Password with Robust Engine (PDF.js)
-        let pdf;
-        try {
-            pdf = await pdfjsLib.getDocument({ data: currentArrayBuffer, password: pwd }).promise;
-        } catch (err) {
-            if(err.name === 'PasswordException') {
-                throw new Error("Incorrect Password! Please check and try again.");
-            } else {
-                throw new Error("Failed to read PDF.");
-            }
-        }
-        
-        // Password is correct! Let's proceed.
-        pb.style.width = '50%';
-        st.innerText = 'Attempting Native Decryption...';
-        
-        let finalBlob;
-        
-        try {
-            // 2. Try native decryption (PDF-LIB) - best for keeping text selectable
-            const pdfDoc = await PDFLib.PDFDocument.load(currentArrayBuffer, { password: pwd });
-            const unencryptedBytes = await pdfDoc.save();
-            finalBlob = new Blob([unencryptedBytes], { type: 'application/pdf' });
-        } catch(e) {
-            // 3. BYPASS PROTOCOL (AES Encyption Fallback for Banks & Aadhar)
-            st.innerText = 'Advanced Encryption Detected. Running Bypass Protocol...';
-            
-            const { jsPDF } = window.jspdf;
-            const totalPages = pdf.numPages;
-            
-            // Setup doc based on first page
-            const pg1 = await pdf.getPage(1);
-            const vp1 = pg1.getViewport({ scale: 1.5 });
-            let orientation = vp1.width > vp1.height ? 'landscape' : 'portrait';
-            const np = new jsPDF({ orientation: orientation, unit: 'px', format: [vp1.width, vp1.height] });
-            
-            for (let i = 1; i <= totalPages; i++) {
-                pb.style.width = `${50 + ((i / totalPages) * 40)}%`;
-                st.innerText = `Bypassing Security (Page ${i}/${totalPages})...`;
-                
-                const pg = await pdf.getPage(i);
-                const vp = pg.getViewport({ scale: 2.0 }); // High quality for rebuild
-                
-                const cv = document.createElement('canvas');
-                const ctx = cv.getContext('2d');
-                cv.width = vp.width; cv.height = vp.height;
-                
-                await pg.render({ canvasContext: ctx, viewport: vp }).promise;
-                const imgData = cv.toDataURL('image/jpeg', 1.0);
-                
-                if (i > 1) np.addPage([vp.width, vp.height], vp.width > vp.height ? 'landscape' : 'portrait');
-                np.addImage(imgData, 'JPEG', 0, 0, vp.width, vp.height);
-            }
-            
-            finalBlob = np.output('blob');
-        }
+        const arrayBuffer = await currentPdfFile.arrayBuffer();
+        const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { password: pwd });
+        const pdfBytes = await pdfDoc.save();
+        const finalBlob = new Blob([pdfBytes], { type: 'application/pdf' });
         
         pb.style.width = '100%';
-        st.innerText = 'File Unlocked! ✅';
+        st.innerText = 'Unlocked Successfully! ✅';
         
         setTimeout(() => {
             pw.style.display = 'none';
@@ -449,33 +250,32 @@ async function processUnlock() {
             
             const url = URL.createObjectURL(finalBlob);
             let finalSize = (finalBlob.size / 1024).toFixed(1) + ' KB';
-            if(finalBlob.size > 1024 * 1024) finalSize = (finalBlob.size / (1024*1024)).toFixed(2) + ' MB';
             
             let originalName = currentPdfFile.name.replace(/\.[^/.]+$/, "");
             let dlName = originalName + "_unlocked.pdf";
             
-            const d = document.createElement('div');
-            d.className = 'rc';
-            d.innerHTML = `
-                <div style="font-size:36px; margin-bottom:10px;">🔓</div>
-                <div class="rsz">Password Removed</div>
-                <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Size: ${finalSize}</p>
-                <button class="rb" onclick="dlUrl('${url}','${dlName}')">⬇ Download Unlocked PDF</button>
+            rg.innerHTML = `
+                <div class="success-box">
+                    <div class="sb-icon">🔓</div>
+                    <div class="sb-title">Password Removed</div>
+                    <div class="sb-desc">Size: ${finalSize}</div>
+                    <button class="btn-dl" onclick="dlUrl('${url}','${dlName}')">⬇ Download Unlocked PDF</button>
+                </div>
             `;
-            rg.appendChild(d);
-            
             document.getElementById('passwordArea').style.display = 'none';
-            
         }, 800);
-
-    } catch (error) {
-        alert(error.message);
+    } catch(e) {
+        alert("Incorrect password or the file is not encrypted.");
         pw.style.display = 'none';
         btn.style.display = 'block';
     }
 }
 
-function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+function dlUrl(url, name) {
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
 </script>
 </body>
 </html>
