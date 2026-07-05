@@ -3,139 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resize Image for Online Form | Master Image Fixer</title>
+<title>Resize Image for Online Form | Master Form Fixer & Resizer</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="canonical" href="https://reducesize.online/resize-image-for-online-form.html">
-<meta name="description" content="Fix 'File Too Large' or 'Format Invalid' errors. Resize photo, signature, and documents for any online form. 1-click presets, exact KB sizing, and strict JPEG output.">
-<meta name="keywords" content="resize image for online form, fix form photo rejection, passport photo 50kb maker, signature resizer, convert to standard jpeg for form">
+<meta name="description" content="Fix 'File Too Large' or 'Format Invalid' errors instantly. Resize photo, signature, and documents for any online form. 1-click presets, exact KB sizing, and strict JPEG output.">
+<meta name="keywords" content="resize image for online form, fix form photo rejection, passport photo 50kb maker, signature resizer, convert to standard jpeg for form, resize photo for ssc upsc">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
+<!-- Cropper.js for advanced manual cropping -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
 
+<!-- Linked to external CSS for Unified Global Theme -->
+<link rel="stylesheet" href="assets/style.css">
+
 <style>
-:root{
-  --bg:#070712;--surface:#0f0f20;--surface2:#16162c;
-  --border:rgba(255,255,255,0.07);--purple:#6d54f0;
-  --purple-l:#9b85ff;--accent:#20d9c0;--green:#3ecf8e;
-  --yellow:#f6c343;--text:#eeeeff;--muted:#6b6b9a;
-  --card:rgba(255,255,255,0.025);--r:18px;--rs:12px;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Manrope',sans-serif;font-size:15px;
-  line-height:1.6;min-height:100vh;overflow-x:hidden;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 20% -10%,rgba(109,84,240,.12) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 110%,rgba(32,217,192,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;
-}
-/* NAV */
-.nav{
-  position:sticky;top:0;z-index:200;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  background:rgba(7,7,18,.88);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo{
-  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  color:var(--text);text-decoration:none;letter-spacing:-.5px;
-}
-.nav-logo em{font-style:normal;color:var(--purple-l)}
-.nav-links{display:flex;gap:20px;align-items:center;}
-.nav-links a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600;opacity:0.8;transition:0.2s;}
-.nav-links a:hover{opacity:1;color:var(--purple-l);}
-.nav-pill{
-  font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;
-  background:rgba(62,207,142,.1);color:var(--green);
-  border:1px solid rgba(62,207,142,.2);letter-spacing:.6px;text-transform:uppercase;
-  display:none;
-}
-@media(min-width:600px){ .nav-pill{display:inline-block;} }
-
-/* WRAP & SUB-HERO */
-.wrap{position:relative;z-index:1;max-width:740px;margin:0 auto;padding:0 16px 80px}
-.sub-hero{padding:40px 0 24px;text-align:center}
-.sub-hero .tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);background:rgba(32,217,192,.07);
-  border:1px solid rgba(32,217,192,.18);padding:5px 13px;border-radius:20px;margin-bottom:16px;
-}
-.sub-hero h1{
-  font-family:'Syne',sans-serif;font-size:clamp(28px,6vw,44px);
-  font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px;
-}
-.grad{background:linear-gradient(120deg,var(--purple-l) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.sub-hero p{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto 22px;line-height:1.65}
-
-/* BADGES */
-.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:30px}
-.badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);color:#9090b8;
-}
-
-/* TOOL CARD */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:24px;margin-bottom:28px;
-  position:relative;overflow:hidden;
-}
-.card::before{
-  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--purple),var(--accent),transparent);
-  opacity:.5;
-}
-
-/* SMART PRESET SELECTOR */
+/* =========================================
+   FORM FIXER SPECIFIC UI CSS
+   ========================================= */
 .preset-box {
   background: rgba(109,84,240,.08); border: 1px solid rgba(109,84,240,.3);
-  border-radius: 12px; padding: 16px; margin-bottom: 20px;
+  border-radius: 12px; padding: 20px; margin-bottom: 24px;
 }
 .preset-title {
-  font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; 
+  color: var(--text); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;
 }
-
-/* UPLOAD */
-.drop{
-  position:relative;border:2px dashed rgba(109,84,240,.22);
-  border-radius:13px;padding:28px 14px;text-align:center;
-  background:rgba(109,84,240,.03);cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.drop:hover{border-color:var(--purple);background:rgba(109,84,240,.07)}
-.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-ico{
-  width:46px;height:46px;margin:0 auto 10px;
-  background:rgba(109,84,240,.12);border:1px solid rgba(109,84,240,.2);
-  border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;
-}
-.drop-main{font-size:14px;font-weight:700;margin-bottom:3px}
-.drop-main span{color:var(--purple-l)}
-.drop-hint{font-size:12px;color:var(--muted)}
 
 /* CROP AREA */
 .crop-wrap {
-  display:none; 
-  background:var(--surface2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:12px;
-  position:relative;
-  width: 100%;
-  height: 380px; 
+  display:none; background:var(--surface2); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; margin-bottom:20px; position:relative;
+  width: 100%; height: 400px;
 }
 .crop-wrap img { max-width: 100%; display: block; }
 
@@ -144,128 +47,86 @@ body::after{
     display: none; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
 }
 .ratio-btn {
-    padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border);
-    background: rgba(255,255,255,0.03); color: var(--muted); font-size: 12px; font-weight: 700;
+    padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--muted); font-size: 12px; font-weight: 700;
     cursor: pointer; transition: 0.2s; font-family: 'Manrope', sans-serif;
 }
-.ratio-btn:hover { background: rgba(255,255,255,0.08); color: #fff;}
-.ratio-btn.active { background: rgba(32,217,192,.15); border-color: var(--accent); color: var(--accent); }
-
-/* INPUT SECTION */
-.u-box{
-  background:var(--surface2);border:1px solid rgba(109,84,240,.2);
-  border-radius:12px;padding:16px;margin-bottom:20px;
-}
-.u-title{font-size:13px;font-weight:700;color:var(--purple-l);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px}
-
-/* INPUT ROW */
-.irow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
-.irow .f{flex:1;min-width:120px;}
-.fl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:5px;display:block}
-.irow input, .irow select{
-  width:100%;background:var(--surface);border:1px solid rgba(255,255,255,.08);
-  padding:12px 14px;border-radius:10px;color:var(--text);
-  font-size:14px;font-family:'Manrope',sans-serif;font-weight:600;
-  outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;
-}
-.irow input::placeholder {color: rgba(255,255,255,0.2);}
-.irow input:focus, .irow select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(109,84,240,.1)}
-
-/* BUTTONS */
-.btn{
-  width:100%;padding:14px;border-radius:11px;border:none;
-  background:var(--purple);color:#fff;font-size:16px;font-weight:700;
-  font-family:'Manrope',sans-serif;cursor:pointer;position:relative;overflow:hidden;
-  transition:.2s;box-shadow:0 6px 20px rgba(109,84,240,.3);
-}
-.btn:hover{background:#7b63f5;transform:translateY(-1px);box-shadow:0 10px 28px rgba(109,84,240,.42)}
-.btn:active{transform:scale(.98)}
-
-/* PROGRESS */
-.pbox{display:none;margin-top:13px}
-.ptrack{height:5px;background:var(--surface2);border-radius:10px;overflow:hidden}
-.pfill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--accent));border-radius:10px;transition:width .3s;position:relative;overflow:hidden;}
-.plabel{font-size:12px;color:var(--purple-l);margin-top:7px;text-align:center;font-weight:600}
-
-/* RESULTS */
-.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
-.rc{background:var(--surface2);border:1px solid var(--border);border-radius:11px;overflow:hidden;text-align:center;display:flex;flex-direction:column;}
-.rc img{width:100%;height:auto;max-height:280px;object-fit:contain;background:#fff;border-bottom:1px solid var(--border);cursor:zoom-in;display:block;}
-.ri{padding:12px 10px}
-.rsz{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
-.rb{
-  width:100%;padding:9px;border-radius:7px;border:none;
-  background:rgba(109,84,240,.12);color:var(--purple-l);
-  font-size:13px;font-weight:700;cursor:pointer;
-  font-family:'Manrope',sans-serif;transition:.15s;
-}
-.rb:hover{background:rgba(109,84,240,.24)}
-
-/* SEO SECTION */
-.seo{margin-top:44px;padding:32px 20px;border-top:1px solid var(--border);background:rgba(255,255,255,0.01);border-radius:16px;}
-.seo h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--purple-l);margin:0 0 16px;letter-spacing:-.2px}
-.seo h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin:24px 0 10px}
-.seo p{color:#8080a8;font-size:15px;line-height:1.8;margin-bottom:14px}
-.seo ul,.seo ol{padding-left:20px;margin-bottom:16px;color:#8080a8;font-size:15px;line-height:1.8;}
-.seo li{margin-bottom:6px}
-.seo strong{color:#eeeeff;font-weight:600}
-
-/* CHIPS */
-.chips-hd{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin:36px 0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:9px}
-.chip{display:flex;align-items:center;gap:9px;padding:12px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:.2s;}
-.chip:hover{border-color:rgba(109,84,240,.35);background:rgba(109,84,240,.04);transform:translateY(-1px)}
-.chip-i{font-size:17px;flex-shrink:0}
-.chip-t strong{display:block;font-size:12px;font-weight:700;margin-bottom:1px}
-.chip-t span{font-size:11px;color:var(--muted)}
-
-/* FOOTER */
-.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
-.flogo{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);display:inline-block;margin-bottom:12px;text-decoration:none;}
-.flogo em{font-style:normal;color:var(--purple-l)}
-.fnav{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin-bottom:14px}
-.fnav a{font-size:12px;color:var(--muted);text-decoration:none;padding:4px 9px;border-radius:6px;transition:.15s;}
-.fnav a:hover{color:var(--text);background:var(--card)}
-.fcopy{font-size:12px;color:#383858;margin-bottom:10px}
-.ftrust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;font-size:11px;color:#383858;font-weight:600}
-
-@media(max-width:600px){ .sub-hero{padding:32px 0 20px} .card{padding:16px;border-radius:15px} .chips{grid-template-columns:1fr 1fr} }
+.ratio-btn:hover { background: var(--surface); color: #fff; }
+.ratio-btn.active { background: var(--purple-light); border-color: var(--purple); color: var(--purple-text); }
 </style>
 
+<!-- SEO Structured Data -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication",
-"name":"Resize Image for Online Form | Master Troubleshooter",
-"url":"https://reducesize.online/resize-image-for-online-form.html",
-"applicationCategory":"UtilityApplication","operatingSystem":"All",
-"description":"Fix 'File Too Large' or 'Format Invalid' errors. Resize photo, signature, and documents for any online form. 1-click presets and exact KB sizing.",
-"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Online Form Image Fixer",
+  "url":"https://reducesize.online/resize-image-for-online-form.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Fix photo rejection errors for online forms. 1-click presets for SSC, UPSC, Banking, and University exams. Batch fix dimensions, format, and size.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Why is my photo rejected by the online form?","acceptedAnswer":{"@type":"Answer","text":"Online forms reject photos for 3 main reasons: File size is too large (over the KB limit), the dimensions (width/height) are incorrect, or the format is unsupported (like HEIC or PNG instead of standard JPEG). Our tool fixes all three simultaneously."}},
-{"@type":"Question","name":"How do the 1-Click Smart Templates work?","acceptedAnswer":{"@type":"Answer","text":"Simply select 'Standard Passport Photo' or 'Signature' from the dropdown. The tool automatically sets the correct pixel dimensions, aspect ratio for cropping, and the maximum KB size required by 90% of government and college forms."}},
-{"@type":"Question","name":"What does the 'Anti-Rejection Encoder' do?","acceptedAnswer":{"@type":"Answer","text":"Many portals strictly require standard JPEG formats. Even if you upload a WebP, PNG, or an image from your iPhone, our tool processes and converts it into a universally accepted, 100% compliant Standard JPEG file."}}
-]}
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Why is my photo rejected by the online form?",
+      "acceptedAnswer":{"@type":"Answer","text":"Online forms reject photos for 3 main reasons: File size is too large (over the KB limit), the dimensions (width/height) are incorrect, or the format is unsupported (like HEIC or PNG instead of standard JPEG). Our tool fixes all three simultaneously."}
+    },
+    {
+      "@type":"Question",
+      "name":"How do the 1-Click Smart Templates work?",
+      "acceptedAnswer":{"@type":"Answer","text":"Simply select 'Passport Photo' or 'Signature' from the dropdown. The tool automatically sets the correct pixel dimensions, aspect ratio for cropping, and the maximum KB size required by 90% of government and college forms."}
+    },
+    {
+      "@type":"Question",
+      "name":"What does the 'Anti-Rejection Encoder' do?",
+      "acceptedAnswer":{"@type":"Answer","text":"Many portals strictly require standard JPEG formats. Even if you upload a WebP, PNG, or an image from your iPhone, our tool processes and converts it into a universally accepted, 100% compliant Standard JPEG file."}
+    }
+  ]
+}
 </script>
 </head>
 <body>
+
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ FREE FOREVER</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Master Fixer</span>
   </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ The Master Form Fixer</div>
-  <h1>Resize Image for<br><span class="grad">Any Online Form</span></h1>
-  <p>Form rejecting your photo? Don't panic. Use our 1-click presets or enter your custom rules. We force exact KB size, auto-crop, and output strict JPEGs.</p>
+
+<section class="hero">
+  <div class="eyebrow">✦ The Master Form Fixer</div>
+  <h1 class="hero-h1">Resize Image for<br><span class="grad">Any Online Form</span></h1>
+  <p class="hero-sub">Form rejecting your photo? Don't panic. Use our 1-click smart presets to force exact KB size, auto-crop to ratio, and output strict JPEGs for 100% acceptance.</p>
+  
   <div class="badges">
     <span class="badge">🎯 1-Click Presets</span>
     <span class="badge">✂️ Auto-Crop Ratios</span>
     <span class="badge">🛡️ Strict JPEG Output</span>
+    <span class="badge">🔒 100% Private</span>
   </div>
 </section>
 
@@ -273,19 +134,19 @@ body::after{
   
   <div class="preset-box">
     <div class="preset-title">🛠️ Step 1: Choose Form Requirement</div>
-    <select id="formPreset" onchange="applyPreset()" style="width:100%;background:var(--surface);border:1px solid rgba(109,84,240,.4);padding:12px;border-radius:8px;color:var(--text);font-family:'Manrope',sans-serif;font-weight:600;font-size:15px;outline:none;cursor:pointer;">
+    <select id="formPreset" onchange="applyPreset()" style="width:100%; background:var(--surface2); border:1px solid var(--border); padding:14px; border-radius:10px; color:var(--text); font-family:'Manrope',sans-serif; font-weight:700; cursor:pointer; outline:none;">
       <option value="custom">⚙️ Custom Manual Setup</option>
-      <option value="passport">👤 Standard Passport Photo (3.5x4.5cm | Max 50KB)</option>
-      <option value="sign">✍️ Standard Signature (4x2cm | Max 20KB)</option>
-      <option value="pan">🪪 PAN Card / ID Proof (800x600px | Max 100KB)</option>
-      <option value="doc">📄 A4 Document / Marksheet (1200x1600px | Max 200KB)</option>
+      <option value="passport">👤 Passport Photo (3.5x4.5cm | Max 50KB)</option>
+      <option value="sign">✍️ Signature (4x2cm | Max 20KB)</option>
+      <option value="pan">🪪 ID Proof (800x600px | Max 100KB)</option>
+      <option value="doc">📄 Marksheet/Doc (1200x1600px | Max 200KB)</option>
     </select>
   </div>
 
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="image/*">
     <div class="drop-ico">📥</div>
-    <div class="drop-main" id="dropText">Upload your rejected Image here</div>
+    <div class="drop-main">Upload your rejected image</div>
     <div class="drop-hint">We accept any format (JPG, PNG, WEBP)</div>
   </div>
   
@@ -295,21 +156,20 @@ body::after{
 
   <div id="ratioControls" class="ratio-controls">
       <button class="ratio-btn active" onclick="setCropRatio(NaN, this)">Free Crop</button>
-      <button class="ratio-btn" onclick="setCropRatio(1, this)">Square (1:1)</button>
-      <button class="ratio-btn" onclick="setCropRatio(3/4, this)">Portrait (3:4)</button>
-      <button class="ratio-btn" onclick="setCropRatio(4/3, this)">Landscape (4:3)</button>
+      <button class="ratio-btn" onclick="setCropRatio(1, this)">Square</button>
+      <button class="ratio-btn" onclick="setCropRatio(3/4, this)">Portrait</button>
+      <button class="ratio-btn" onclick="setCropRatio(4/3, this)">Landscape</button>
   </div>
 
   <div class="u-box">
     <div class="u-title">Step 2: Verify Exact Rules</div>
     <div class="irow">
-      <div class="f"><label class="fl">Width (Pixels)</label><input type="number" id="resW" placeholder="Auto"></div>
-      <div class="f"><label class="fl">Height (Pixels)</label><input type="number" id="resH" placeholder="Auto"></div>
+      <div class="f"><label class="fl">Width (px)</label><input type="number" id="resW" placeholder="Auto"></div>
+      <div class="f"><label class="fl">Height (px)</label><input type="number" id="resH" placeholder="Auto"></div>
     </div>
     <div class="irow" style="margin-bottom:0">
       <div class="f"><label class="fl">Max Target Size (KB)</label><input type="number" id="size" placeholder="e.g. 50"></div>
     </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">Note: Final image will be converted to Strict Standard JPEG.</p>
   </div>
 
   <button class="btn" onclick="processFormImage()">⚡&nbsp; Generate 100% Acceptable Image</button>
@@ -319,32 +179,24 @@ body::after{
 </div>
 
 <section class="seo">
-<h2>The Ultimate Tool to Fix Form Image Rejections</h2>
-<p>If you are applying for a University admission, a Government job, a Visa, or opening a Bank Account online, you have likely encountered the dreaded <em>"File Upload Failed"</em> error. Online forms have rigid, outdated legacy systems that require absolute perfection. If your image is 1KB over the limit, or 1 pixel too wide, it will reject it.</p>
-<p><strong>ReduceSize.online Master Form Fixer</strong> is built to solve every single upload error in one click. We don't just compress your photo; we re-encode, re-scale, and re-format it to ensure guaranteed acceptance across all global portals.</p>
+  <h2>Why Online Forms Reject Your Photos</h2>
+  <p>If you are applying for university admission, a government job, a Visa, or opening a Bank Account online, you have likely encountered the frustrating "File Upload Failed" error. Online form portals are powered by rigid, legacy systems that require absolute perfection. If your image is 1KB over the limit, or just 1 pixel too wide, it will be rejected.</p>
+  
+  <p><strong>ReduceSize Master Form Fixer</strong> is built to solve every single upload error in one click. We don't just compress your photo; we re-encode, re-scale, and re-format it to ensure guaranteed acceptance across all global portals.</p>
 
-<h3>The 3 Pillars of Form Rejection (And How We Fix Them)</h3>
+  <h3>The 3 Pillars of Form Rejection</h3>
+  <ul>
+    <li><strong>File Size Too Large:</strong> Portals typically ask for files "Under 50KB" or "Between 10KB and 20KB". Basic phone photos are 3MB+. Our engine uses binary-search compression to hit the exact KB target.</li>
+    <li><strong>Invalid Dimensions:</strong> If a form asks for 3.5cm x 4.5cm, it wants a Portrait aspect ratio. Uploading a square photo will make you look stretched. Our <em>Auto-Crop Ratios</em> prevent this.</li>
+    <li><strong>Format Errors:</strong> iPhone users often upload .HEIC, while others upload .PNG. Government portals almost strictly accept standard `.JPG`. Our <em>Anti-Rejection Encoder</em> ignores your source format and forces a compliant JPEG output.</li>
+  </ul>
 
-<h4>1. "File Size Too Large" Error</h4>
-<p>Forms usually ask for files "Under 50KB" or "Between 10KB and 20KB". When you use standard phone cameras, files are over 3000KB (3MB). If you simply compress them blindly, they become blurry and get rejected by manual verification officers.<br>
-<strong>The Fix:</strong> Our algorithm takes your specific KB request, uses binary search compression, and finds the absolute highest visual quality that mathematically fits just beneath your KB limit.</p>
-
-<h4>2. "Invalid Dimensions or Aspect Ratio" Error</h4>
-<p>If a form asks for 3.5cm x 4.5cm, it means they want a <em>Portrait</em> aspect ratio. If you upload a square photo, the portal will either reject it or stretch your face to look alien.<br>
-<strong>The Fix:</strong> The moment you select a preset (like Passport Photo), our cropper automatically locks into the correct aspect ratio. When you drag your face into the box, it is impossible to get the dimensions wrong. Your face stays perfectly proportioned.</p>
-
-<h4>3. "Format Not Supported" Error</h4>
-<p>Did you screenshot your photo or send it via WhatsApp? It might be saved as a `.PNG` or `.WEBP`. Did you take it on an iPhone? It's likely an `.HEIC` file. Government forms hate these formats and only accept Standard `.JPG` or `.JPEG`.<br>
-<strong>The Fix:</strong> Our <em>Anti-Rejection Encoder</em> ignores your original format. When you click Generate, it paints your photo onto a clean white canvas and exports it strictly as a universally standard Baseline JPEG. No transparent backgrounds, no hidden alpha channels—just pure compliance.</p>
-
-<h3>Using the 1-Click Smart Templates</h3>
-<p>To save you from reading boring notification PDFs, we analyzed hundreds of forms and built presets:
-<ul>
-    <li><strong>Standard Passport Photo:</strong> Locks ratio to Portrait, sets width to 413px, height to 531px, and max size to 50KB. Perfect for SSC, IBPS, and State Exams.</li>
-    <li><strong>Standard Signature:</strong> Locks ratio to wide Landscape, ensuring your full name fits inside 20KB without getting cut off.</li>
-    <li><strong>PAN / Aadhar Scan:</strong> For ID proofs, text readability is key. This preset maintains a larger 800x600 resolution but compresses the file efficiently to 100KB.</li>
-</ul>
-</p>
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Why is my photo rejected by the online form?</strong><br>Online forms reject photos for 3 main reasons: File size is too large (over the KB limit), the dimensions (width/height) are incorrect, or the format is unsupported (like HEIC or PNG instead of standard JPEG). Our tool fixes all three simultaneously.</p>
+  
+  <p><strong>How do the 1-Click Smart Templates work?</strong><br>Simply select 'Standard Passport Photo' or 'Signature' from our preset dropdown. The tool automatically sets the correct pixel dimensions, aspect ratio, and the maximum KB size required by 90% of government and college forms.</p>
+  
+  <p><strong>What does the 'Anti-Rejection Encoder' do?</strong><br>Many portals strictly require standard JPEG formats. Even if you upload a WebP, PNG, or an image from your iPhone, our tool processes and converts it into a universally accepted, 100% compliant Standard JPEG file.</p>
 </section>
 
 <div class="chips-hd">More Tools</div>
@@ -353,8 +205,8 @@ body::after{
   <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
   <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
   <a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a>
-  <a href="/resize-image-for-police-form.html" class="chip"><span class="chip-i">🚓</span><div class="chip-t"><strong>Police Form Image</strong><span>State Exams</span></div></a>
   <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
+  <a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a>
 </div>
 </div>
 
@@ -362,18 +214,18 @@ body::after{
   <a class="flogo" href="/"><em>Reduce</em>Size</a>
   <nav class="fnav">
     <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-20kb.html">20KB</a>
     <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/compress-image-to-100kb.html">100KB</a>
-    <a href="/resize-image-for-ssc-form.html">SSC</a>
-    <a href="/resize-image-for-upsc-form.html">UPSC</a>
-    <a href="/reduce-image-size-for-email.html">Email</a>
+    <a href="/resize-image-for-online-form.html">Form Fixer</a>
     <a href="/blog/">Blog</a>
   </nav>
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span><span>⚡ Instant</span><span>✅ Always Free</span><span>📱 Mobile Ready</span>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="assets/script.js" defer></script>
 
 <script>
 let currentFile = null;
@@ -396,21 +248,20 @@ function applyPreset() {
         document.getElementById('resH').value = '';
         document.getElementById('size').value = '';
         if(cropper) cropper.setAspectRatio(NaN);
-        btns[0].classList.add('active'); // Set Free Crop active
+        btns[0].classList.add('active'); 
     } else {
         const p = presets[val];
         document.getElementById('resW').value = p.w;
         document.getElementById('resH').value = p.h;
         document.getElementById('size').value = p.kb;
         if(cropper) cropper.setAspectRatio(p.ratio);
-        // Deselect all ratio buttons as preset manages ratio
     }
 }
 
 function setCropRatio(ratio, btn) {
     document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('formPreset').value = 'custom'; // Switch to custom mode
+    document.getElementById('formPreset').value = 'custom';
     if(cropper) cropper.setAspectRatio(ratio);
 }
 
@@ -419,14 +270,7 @@ document.getElementById('upload').addEventListener('change', function() {
   const imageToCrop = document.getElementById('imageToCrop');
   document.getElementById('rg').innerHTML = ''; 
   
-  if(!this.files.length) { 
-    cropWrap.style.display='none'; 
-    document.getElementById('ratioControls').style.display='none';
-    if(cropper) cropper.destroy(); 
-    currentFile = null; 
-    document.getElementById('dropZone').style.display = 'block';
-    return; 
-  }
+  if(!this.files.length) return;
   
   const f = this.files[0];
   if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
@@ -437,14 +281,10 @@ document.getElementById('upload').addEventListener('change', function() {
   document.getElementById('ratioControls').style.display = 'flex';
   imageToCrop.src = URL.createObjectURL(f);
   
-  if(cropper) { cropper.destroy(); }
-
-  // Check if preset active, else Free crop
+  if(cropper) cropper.destroy(); 
+  
   const pVal = document.getElementById('formPreset').value;
-  let initialRatio = NaN;
-  if(pVal !== 'custom') {
-      initialRatio = presets[pVal].ratio;
-  }
+  let initialRatio = (pVal !== 'custom') ? presets[pVal].ratio : NaN;
 
   cropper = new Cropper(imageToCrop, {
       aspectRatio: initialRatio,
@@ -476,14 +316,13 @@ async function processFormImage() {
   st.innerText = 'Extracting and Encoding...';
 
   try {
-    let croppedCanvas;
-    
-    // If dimensions provided, force them. Else, just use cropped area size.
-    if(w && h) {
-        croppedCanvas = cropper.getCroppedCanvas({ width: w, height: h, fillColor: '#ffffff' });
-    } else {
-        croppedCanvas = cropper.getCroppedCanvas({ fillColor: '#ffffff' });
-    }
+    let croppedCanvas = cropper.getCroppedCanvas({
+        width: w || undefined,
+        height: h || undefined,
+        fillColor: '#ffffff',
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high'
+    });
 
     pb.style.width = '60%';
     st.innerText = 'Applying Anti-Rejection Compression...';
@@ -497,15 +336,12 @@ async function processFormImage() {
       else { lo = q; bestBlob = blob; }
     }
 
-    if(!bestBlob) {
-        bestBlob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', 0.1));
-    }
+    if(!bestBlob) bestBlob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', 0.1));
 
     pb.style.width = '100%';
     st.innerText = 'Form Ready ✅';
     setTimeout(()=>{pw.style.display='none'}, 1000);
 
-    // Show result
     const url = URL.createObjectURL(bestBlob);
     const d = document.createElement('div');
     d.className = 'rc';
@@ -513,14 +349,18 @@ async function processFormImage() {
     document.getElementById('rg').appendChild(d);
 
   } catch(e) {
-    alert('Error processing image. Try again.');
+    alert('Error processing image.');
     pw.style.display = 'none';
   } finally {
     btn.innerHTML = '⚡&nbsp; Generate 100% Acceptable Image';
   }
 }
 
-function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+function dlUrl(url, name){
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
 </script>
 </body>
 </html>
