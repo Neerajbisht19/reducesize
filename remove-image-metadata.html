@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remove Image Metadata & EXIF Data Online Free – ReduceSize</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://reducesize.online/remove-image-metadata.html">
+<meta name="description" content="Protect your privacy by removing hidden EXIF metadata (GPS location, camera details, date) from your photos. 100% free, offline, and secure.">
+<meta name="keywords" content="remove image metadata, delete exif data online, strip photo location, remove gps from image, clean photo metadata free">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#6d54f0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<!-- Linked to your existing CSS -->
+<link rel="stylesheet" href="assets/style.css">
+
+<!-- Custom Styles for Metadata Cards -->
+<style>
+  .exif-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .exif-header { display: flex; gap: 12px; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+  .exif-thumb { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+  .exif-title { font-weight: 700; font-size: 15px; color: var(--text); word-break: break-all; }
+  .exif-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .exif-item { background: var(--surface2); padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; }
+  .exif-label { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .exif-val { font-weight: 700; color: var(--text); }
+  .exif-danger { color: #ff6b6b; }
+  .exif-safe { color: var(--green); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
+  <div class="nav-links">
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ No Upload · 100% Private</span>
+  </div>
+  <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/blog/">📝 Blog & Guides</a>
+  <a href="/about.html">ℹ️ About Us</a>
+  <a href="/contact-us.html">📧 Contact</a>
+  <a href="/privacy-policy.html">🔒 Privacy Policy</a>
+</div>
+
+<div class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">✦ 100% Privacy Protection Tool</div>
+  <h1 class="hero-h1">Remove Hidden<br><span class="grad">Metadata & EXIF</span></h1>
+  <p class="hero-sub">Photos contain hidden data like your GPS location, camera model, and time. Scan your image to see what's hidden, and strip it instantly before sharing.</p>
+  
+  <div class="badges">
+    <span class="badge">🔒 Processed Locally</span>
+    <span class="badge">🕵️ View Hidden Data</span>
+    <span class="badge">🧹 1-Click Scrubbing</span>
+  </div>
+</section>
+
+<div class="card">
+  <div id="imgBox" class="tool-section">
+    <!-- Image Drop Zone -->
+    <div class="drop" id="imgDrop">
+      <input type="file" id="upload" accept="image/jpeg, image/png, image/webp" multiple>
+      <div class="drop-ico">🕵️</div>
+      <div class="drop-main">Drop images to scan or <span>browse files</span></div>
+      <div class="drop-hint">JPG · PNG · WEBP &nbsp;·&nbsp; Privacy Scanner</div>
+    </div>
+    
+    <!-- Results Area where Metadata will be shown -->
+    <div id="metadata-results"></div>
+
+    <!-- Hidden Process Button (Shows after upload) -->
+    <button id="cleanAllBtn" class="btn" style="display:none; margin-top: 24px;" onclick="cleanAllMetadata()">🧹&nbsp; Scrub Data & Download Clean Images</button>
+  </div>
+</div>
+
+<!-- ==========================================
+     SEO ARTICLE FOR EXIF REMOVER
+     ========================================== -->
+<section class="seo">
+  <h2>Why You Should Remove EXIF Metadata from Photos</h2>
+  <p>Whenever you take a photo with your smartphone or digital camera, the device invisibly embeds a chunk of text data inside the image file. This data is known as <strong>EXIF (Exchangeable Image File Format)</strong> metadata. While it seems harmless, sharing uncleaned photos online can expose severe privacy risks.</p>
+  
+  <h3>What is hidden inside your photos?</h3>
+  <ul>
+    <li><strong>Exact GPS Coordinates:</strong> If your phone's location is on, your photo contains the exact latitude and longitude of where you were standing. Anyone can track it to your home or office address.</li>
+    <li><strong>Camera & Phone Model:</strong> Information about the exact device (e.g., iPhone 15 Pro, Samsung Galaxy) you used.</li>
+    <li><strong>Date & Timestamp:</strong> The exact second the photograph was captured.</li>
+    <li><strong>Software Details:</strong> Tools used to edit the image, like Photoshop.</li>
+  </ul>
+
+  <h3>How our EXIF Stripper Works (100% Offline)</h3>
+  <p>Our tool works fundamentally differently from other websites. When you select an image, our script reads the EXIF data directly inside your web browser and displays it to you. When you click "Scrub Data", we redraw your image entirely from scratch using HTML5 Canvas. This process preserves the visual quality of your photo but permanently destroys the hidden text layer. Because the file never leaves your device, your location data remains strictly yours.</p>
+</section>
+
+<div class="chips-hd">Explore Image Compression Tools</div>
+<div class="chips">
+  <a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a>
+  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
+  <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">📸</span><div class="chip-t"><strong>Compress to 50KB</strong><span>NEET & JEE</span></div></a>
+  <a href="/image-to-pdf.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Image to PDF</strong><span>Convert images</span></div></a>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+      <a href="/passport-photo-maker.html">Passport Photo</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+</footer>
+
+<!-- External Library to Read EXIF Data securely -->
+<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
+<!-- Linked to your existing script.js for basic layout logic -->
+<script src="assets/script.js" defer></script>
+
+<!-- Custom Script for EXIF Scanning and Removing -->
+<script>
+  let selectedFiles = [];
+
+  document.getElementById('upload').addEventListener('change', function(e) {
+    const resultsDiv = document.getElementById('metadata-results');
+    resultsDiv.innerHTML = ''; // Clear previous results
+    selectedFiles = Array.from(e.target.files);
+    
+    if (selectedFiles.length > 0) {
+      document.getElementById('cleanAllBtn').style.display = 'block';
+    } else {
+      document.getElementById('cleanAllBtn').style.display = 'none';
+    }
+
+    selectedFiles.forEach((file, index) => {
+      // Create Object URL for thumbnail
+      let imgUrl = URL.createObjectURL(file);
+      
+      EXIF.getData(file, function() {
+        let make = EXIF.getTag(this, "Make") || "N/A";
+        let model = EXIF.getTag(this, "Model") || "Unknown Device";
+        let date = EXIF.getTag(this, "DateTimeOriginal") || "No Date Found";
+        
+        let lat = EXIF.getTag(this, "GPSLatitude");
+        let lon = EXIF.getTag(this, "GPSLongitude");
+        
+        let gpsStatus = (lat && lon) 
+            ? '<span class="exif-danger">⚠️ GPS Location Exposed</span>' 
+            : '<span class="exif-safe">✅ No GPS Found</span>';
+
+        let cameraDetails = make !== "N/A" ? make + ' ' + model : model;
+        let isExifClean = (cameraDetails === "Unknown Device" && !lat);
+
+        // Build the UI Card
+        let cardHTML = `
+          <div class="exif-card">
+            <div class="exif-header">
+              <img src="${imgUrl}" class="exif-thumb" alt="Thumbnail">
+              <div>
+                <div class="exif-title">${file.name}</div>
+                <div style="font-size: 12px; color: var(--muted);">${(file.size/1024).toFixed(1)} KB</div>
+              </div>
+            </div>
+            
+            <div class="exif-grid">
+              <div class="exif-item">
+                <div class="exif-label">Location Data</div>
+                <div class="exif-val">${gpsStatus}</div>
+              </div>
+              <div class="exif-item">
+                <div class="exif-label">Device Info</div>
+                <div class="exif-val" style="color: ${isExifClean ? 'var(--green)' : '#ff6b6b'}">${cameraDetails}</div>
+              </div>
+              <div class="exif-item">
+                <div class="exif-label">Capture Date</div>
+                <div class="exif-val">${date}</div>
+              </div>
+              <div class="exif-item">
+                <div class="exif-label">Status</div>
+                <div class="exif-val">${isExifClean ? '<span class="exif-safe">Already Clean</span>' : '<span class="exif-danger">Data Found</span>'}</div>
+              </div>
+            </div>
+          </div>
+        `;
+        resultsDiv.innerHTML += cardHTML;
+      });
+    });
+  });
+
+  // Function to remove metadata using HTML5 Canvas (which naturally strips EXIF)
+  async function cleanAllMetadata() {
+    const btn = document.getElementById('cleanAllBtn');
+    btn.innerText = "⏳ Cleaning Images...";
+    btn.style.opacity = "0.7";
+    btn.disabled = true;
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      let file = selectedFiles[i];
+      
+      // Load image into canvas
+      let img = new Image();
+      let imgObjUrl = URL.createObjectURL(file);
+      
+      await new Promise((resolve) => {
+        img.onload = () => {
+          let canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          let ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          
+          // Export canvas back to Blob (strips metadata natively)
+          canvas.toBlob(function(blob) {
+            let cleanUrl = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = cleanUrl;
+            // Add 'clean' to filename
+            a.download = file.name.replace(/\.[^/.]+$/, "") + "-clean.jpg"; 
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            resolve();
+          }, 'image/jpeg', 0.95);
+        };
+        img.src = imgObjUrl;
+      });
+    }
+
+    btn.innerText = "🧹 Scrub Data & Download Clean Images";
+    btn.style.opacity = "1";
+    btn.disabled = false;
+    alert("✅ All images have been cleaned and downloaded successfully!");
+  }
+</script>
+
+</body>
+</html>
