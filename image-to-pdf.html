@@ -75,12 +75,33 @@
       </div>
     </div>
 
-    <button class="btn" onclick="generatePDF()">📄&nbsp; Generate & Download PDF</button>
+    <button class="btn" onclick="generatePDF()">📄&nbsp; Generate PDF</button>
   </div>
 
+  <!-- Processing Status -->
   <div id="pbox" class="pbox">
     <div class="ptrack"><div id="pfill" class="pfill"></div></div>
     <div id="status" class="plabel"></div>
+  </div>
+
+  <!-- Manual Download Box with Rename Feature -->
+  <div id="pdfResult" style="display:none; margin-top: 24px; background: var(--surface2); border: 1px solid var(--border); padding: 24px; border-radius: 16px; text-align: center;">
+    <div style="font-size: 48px; margin-bottom: 12px;">📄</div>
+    <div style="font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px;">Your PDF is Ready!</div>
+    <div style="font-size: 14px; color: var(--muted); margin-bottom: 24px;">File Size: <strong id="pdfSizeText" style="color:var(--text);"></strong></div>
+    
+    <!-- Rename Input -->
+    <div style="margin-bottom: 24px; text-align: left; max-width: 320px; margin-left: auto; margin-right: auto;">
+      <label style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); display: block; margin-bottom: 8px;">Rename File (Optional)</label>
+      <div style="display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+        <input type="text" id="pdfFileName" value="ReduceSize-Document" style="flex: 1; background: transparent; border: none; padding: 14px 16px; color: var(--text); font-size: 15px; font-weight: 600; outline: none; width: 100%;">
+        <span style="padding: 14px 16px; background: rgba(255,255,255,0.03); color: var(--muted); font-size: 15px; font-weight: 700; border-left: 1px solid var(--border);">.pdf</span>
+      </div>
+    </div>
+
+    <a id="pdfDownloadBtn" class="btn" style="background: var(--green); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 24px rgba(62, 207, 142, 0.25);" href="#" download="ReduceSize-Document.pdf">
+      ⬇ Download PDF
+    </a>
   </div>
 </div>
 
@@ -144,13 +165,12 @@
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <script src="assets/script.js" defer></script>
 
 <script>
   async function generatePDF() {
     var fileInput = document.getElementById('upload');
-    var formatSelect = document.getElementById('pdfFormat').value; // 'a4' or 'fit'
+    var formatSelect = document.getElementById('pdfFormat').value;
     
     if (!fileInput.files.length) {
       alert('Please select at least one image first.');
@@ -161,12 +181,13 @@
     var pw = document.getElementById('pbox');
     var pb = document.getElementById('pfill');
     var st = document.getElementById('status');
+    var resultBox = document.getElementById('pdfResult');
     
+    resultBox.style.display = 'none';
     pw.style.display = 'block';
     
-    // Initialize jsPDF
     var jspdf = window.jspdf;
-    var pdf = null; // Will initialize dynamically based on first image
+    var pdf = null; 
 
     for (var i = 0; i < files.length; i++) {
       pb.style.width = ((i) / files.length * 100) + '%';
@@ -174,22 +195,18 @@
       
       var file = files[i];
       
-      // Convert file to image object to get dimensions
       var img = new Image();
       img.src = URL.createObjectURL(file);
       await img.decode();
       
-      // Draw image on canvas to get clean base64 data
       var cv = document.createElement('canvas');
       cv.width = img.width;
       cv.height = img.height;
       var ctx = cv.getContext('2d');
       ctx.drawImage(img, 0, 0);
-      var imgData = cv.toDataURL('image/jpeg', 0.95); // High quality JPEG
+      var imgData = cv.toDataURL('image/jpeg', 0.95); 
       
-      // Logic for adding pages
       if (formatSelect === 'fit') {
-        // Fit PDF page exactly to Image dimensions (in pixels)
         var orientation = img.width > img.height ? 'l' : 'p';
         if (i === 0) {
            pdf = new jspdf.jsPDF({ orientation: orientation, unit: 'px', format: [img.width, img.height] });
@@ -199,9 +216,8 @@
         pdf.addImage(imgData, 'JPEG', 0, 0, img.width, img.height);
       } 
       else {
-        // Fit image into an A4 size page
         if (i === 0) {
-           pdf = new jspdf.jsPDF(); // Default A4
+           pdf = new jspdf.jsPDF(); 
         } else {
            pdf.addPage();
         }
@@ -214,14 +230,12 @@
         var drawWidth = pdfWidth;
         var drawHeight = pdfHeight;
         
-        // Scale image to fit inside A4 properly
         if (imgRatio > pdfRatio) {
             drawHeight = pdfWidth / imgRatio;
         } else {
             drawWidth = pdfHeight * imgRatio;
         }
         
-        // Center the image on the page
         var x = (pdfWidth - drawWidth) / 2;
         var y = (pdfHeight - drawHeight) / 2;
         
@@ -232,11 +246,36 @@
     st.innerText = 'PDF Generated Successfully! ✅';
     pb.style.width = '100%';
     
-    // Automatically trigger download
-    pdf.save('ReduceSize-Images.pdf');
+    // Generate PDF Blob safely in memory
+    var pdfBlob = pdf.output('blob');
+    var pdfUrl = URL.createObjectURL(pdfBlob);
     
-    // Hide progress bar after a moment
-    setTimeout(function(){ pw.style.display = 'none'; }, 2000);
+    // Calculate Size
+    var sizeInKB = (pdfBlob.size / 1024).toFixed(1);
+    var displaySize = sizeInKB > 1024 ? (sizeInKB / 1024).toFixed(2) + ' MB' : sizeInKB + ' KB';
+    
+    // Setup Variables for Download & Rename Feature
+    var downloadBtn = document.getElementById('pdfDownloadBtn');
+    var nameInput = document.getElementById('pdfFileName');
+    
+    downloadBtn.href = pdfUrl;
+    document.getElementById('pdfSizeText').innerText = displaySize;
+    
+    // Set Initial Download Name
+    var currentName = nameInput.value.trim() || 'ReduceSize-Document';
+    downloadBtn.download = currentName + '.pdf';
+
+    // Live update download name when user types
+    nameInput.addEventListener('input', function() {
+        var newName = this.value.trim() || 'ReduceSize-Document';
+        downloadBtn.download = newName + '.pdf';
+    });
+    
+    // Show manual download UI
+    resultBox.style.display = 'block';
+    
+    // Hide progress bar
+    setTimeout(function(){ pw.style.display = 'none'; }, 1500);
   }
 </script>
 
