@@ -13,9 +13,15 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/style.css">
+
+<!-- Custom Preview CSS to ensure it looks good -->
+<style>
+  #customPreviewGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 10px; margin-top: 16px; margin-bottom: 24px; }
+  .preview-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); }
+</style>
 </head>
 <body>
 
@@ -56,14 +62,16 @@
 
 <div class="card">
   <div id="imgBox" class="tool-section">
+    <!-- Dropzone -->
     <div class="drop" id="imgDrop">
       <input type="file" id="upload" accept="image/*" multiple>
-      <div class="drop-ico">🖼️</div>
-      <div class="drop-main">Drop images here or <span>browse files</span></div>
-      <div class="drop-hint">JPG · PNG · WEBP &nbsp;·&nbsp; Select Multiple files</div>
+      <div class="drop-ico" id="dropIco">🖼️</div>
+      <div class="drop-main" id="dropMain">Drop images here or <span>browse files</span></div>
+      <div class="drop-hint" id="dropHint">JPG · PNG · WEBP &nbsp;·&nbsp; Select Multiple files</div>
     </div>
     
-    <div id="prev" class="prev-grid" style="display:none"></div>
+    <!-- Image Previews -->
+    <div id="customPreviewGrid"></div>
     
     <div class="irow" style="margin-top: 20px;">
       <div class="f">
@@ -75,6 +83,7 @@
       </div>
     </div>
 
+    <!-- Generate Button (No auto download) -->
     <button class="btn" onclick="generatePDF()">📄&nbsp; Generate PDF</button>
   </div>
 
@@ -99,7 +108,8 @@
       </div>
     </div>
 
-    <a id="pdfDownloadBtn" class="btn" style="background: var(--green); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 24px rgba(62, 207, 142, 0.25);" href="#" download="ReduceSize-Document.pdf">
+    <!-- Final Download Button -->
+    <a id="pdfDownloadBtn" class="btn" style="background: var(--green); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 24px rgba(62, 207, 142, 0.25);" href="#">
       ⬇ Download PDF
     </a>
   </div>
@@ -165,9 +175,40 @@
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="assets/script.js" defer></script>
 
+<!-- Custom Script for Previews & PDF Generation -->
 <script>
+  // 1. Independent Preview Logic (Fix for missing selections)
+  document.getElementById('upload').addEventListener('change', function(e) {
+    var previewGrid = document.getElementById('customPreviewGrid');
+    var dropMain = document.getElementById('dropMain');
+    var dropHint = document.getElementById('dropHint');
+    var dropIco = document.getElementById('dropIco');
+    
+    previewGrid.innerHTML = ''; 
+    document.getElementById('pdfResult').style.display = 'none'; // Hide download box if new files selected
+
+    if (this.files.length > 0) {
+      dropMain.innerHTML = '<span style="color:var(--green)">' + this.files.length + ' Images Selected</span>';
+      dropHint.innerText = 'Ready to convert!';
+      dropIco.innerHTML = '✅';
+      
+      // Generate Thumbnails
+      Array.from(this.files).forEach(function(file) {
+        var imgUrl = URL.createObjectURL(file);
+        var imgEl = document.createElement('img');
+        imgEl.src = imgUrl;
+        imgEl.className = 'preview-thumb';
+        previewGrid.appendChild(imgEl);
+      });
+    } else {
+      dropMain.innerHTML = 'Drop images here or <span>browse files</span>';
+      dropHint.innerText = 'JPG · PNG · WEBP  ·  Select Multiple files';
+      dropIco.innerHTML = '🖼️';
+    }
+  });
+
+  // 2. PDF Generation Logic (No Auto Download)
   async function generatePDF() {
     var fileInput = document.getElementById('upload');
     var formatSelect = document.getElementById('pdfFormat').value;
@@ -278,6 +319,8 @@
     setTimeout(function(){ pw.style.display = 'none'; }, 1500);
   }
 </script>
+
+<script src="assets/script.js" defer></script>
 
 </body>
 </html>
