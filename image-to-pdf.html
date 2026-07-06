@@ -73,12 +73,22 @@
     <!-- Image Previews -->
     <div id="customPreviewGrid"></div>
     
+    <!-- PDF Settings -->
     <div class="irow" style="margin-top: 20px;">
       <div class="f">
         <label class="fl">Page Setup</label>
         <select id="pdfFormat">
           <option value="a4">A4 Size (Standard Document)</option>
           <option value="fit">Fit to Image Size</option>
+        </select>
+      </div>
+      <!-- NAYA OPTION: PDF Compression -->
+      <div class="f">
+        <label class="fl">PDF Compression</label>
+        <select id="pdfQuality">
+          <option value="0.95">High Quality (Default)</option>
+          <option value="0.65">Medium (Balanced Size)</option>
+          <option value="0.30">Maximum Compression (Small Size)</option>
         </select>
       </div>
     </div>
@@ -178,7 +188,7 @@
 
 <!-- Custom Script for Previews & PDF Generation -->
 <script>
-  // 1. Independent Preview Logic (Fix for missing selections)
+  // 1. Independent Preview Logic
   document.getElementById('upload').addEventListener('change', function(e) {
     var previewGrid = document.getElementById('customPreviewGrid');
     var dropMain = document.getElementById('dropMain');
@@ -186,14 +196,13 @@
     var dropIco = document.getElementById('dropIco');
     
     previewGrid.innerHTML = ''; 
-    document.getElementById('pdfResult').style.display = 'none'; // Hide download box if new files selected
+    document.getElementById('pdfResult').style.display = 'none';
 
     if (this.files.length > 0) {
       dropMain.innerHTML = '<span style="color:var(--green)">' + this.files.length + ' Images Selected</span>';
       dropHint.innerText = 'Ready to convert!';
       dropIco.innerHTML = '✅';
       
-      // Generate Thumbnails
       Array.from(this.files).forEach(function(file) {
         var imgUrl = URL.createObjectURL(file);
         var imgEl = document.createElement('img');
@@ -208,10 +217,11 @@
     }
   });
 
-  // 2. PDF Generation Logic (No Auto Download)
+  // 2. PDF Generation Logic (With Compression Control)
   async function generatePDF() {
     var fileInput = document.getElementById('upload');
     var formatSelect = document.getElementById('pdfFormat').value;
+    var qualitySelect = parseFloat(document.getElementById('pdfQuality').value); // Get selected quality
     
     if (!fileInput.files.length) {
       alert('Please select at least one image first.');
@@ -245,7 +255,9 @@
       cv.height = img.height;
       var ctx = cv.getContext('2d');
       ctx.drawImage(img, 0, 0);
-      var imgData = cv.toDataURL('image/jpeg', 0.95); 
+      
+      // APPLY COMPRESSION LOGIC HERE
+      var imgData = cv.toDataURL('image/jpeg', qualitySelect); 
       
       if (formatSelect === 'fit') {
         var orientation = img.width > img.height ? 'l' : 'p';
