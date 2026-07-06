@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="assets/style.css">
 
-<!-- Custom Preview CSS to ensure it looks good -->
+<!-- Custom Preview CSS -->
 <style>
   #customPreviewGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 10px; margin-top: 16px; margin-bottom: 24px; }
   .preview-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); }
@@ -51,11 +51,11 @@
 <section class="hero">
   <div class="eyebrow">✦ Fast & Secure Document Maker</div>
   <h1 class="hero-h1">Convert Images to<br><span class="grad">PDF Document</span></h1>
-  <p class="hero-sub">Easily combine multiple JPG, PNG, or WEBP images into a single, high-quality PDF file. Works entirely in your browser.</p>
+  <p class="hero-sub">Easily combine multiple JPG, PNG, or WEBP images into a single, high-quality PDF file. Compress to an exact KB size locally in your browser.</p>
   
   <div class="badges">
     <span class="badge">🔒 Zero data collection</span>
-    <span class="badge">⚡ Instant PDF generation</span>
+    <span class="badge">🎯 Custom KB Target</span>
     <span class="badge">📚 Multiple Images OK</span>
   </div>
 </section>
@@ -73,7 +73,7 @@
     <!-- Image Previews -->
     <div id="customPreviewGrid"></div>
     
-    <!-- PDF Settings -->
+    <!-- Setup and Custom KB Target -->
     <div class="irow" style="margin-top: 20px;">
       <div class="f">
         <label class="fl">Page Setup</label>
@@ -82,18 +82,14 @@
           <option value="fit">Fit to Image Size</option>
         </select>
       </div>
-      <!-- NAYA OPTION: PDF Compression -->
+      <!-- NAYA OPTION: Exact KB Target Input -->
       <div class="f">
-        <label class="fl">PDF Compression</label>
-        <select id="pdfQuality">
-          <option value="0.95">High Quality (Default)</option>
-          <option value="0.65">Medium (Balanced Size)</option>
-          <option value="0.30">Maximum Compression (Small Size)</option>
-        </select>
+        <label class="fl">Target Size (KB) Optional</label>
+        <input type="number" id="pdfTargetKB" placeholder="e.g. 200" min="10">
       </div>
     </div>
 
-    <!-- Generate Button (No auto download) -->
+    <!-- Generate Button -->
     <button class="btn" onclick="generatePDF()">📄&nbsp; Generate PDF</button>
   </div>
 
@@ -136,8 +132,8 @@
   <ol>
     <li><strong>Select Images:</strong> Click on the upload box and select one or multiple images (JPG, PNG, or WebP) from your gallery or computer.</li>
     <li><strong>Review Previews:</strong> You will instantly see thumbnail previews of all selected images.</li>
-    <li><strong>Choose Format:</strong> By default, the tool fits your images neatly onto standard A4 pages. If you want the PDF pages to perfectly match the size of your images, select "Fit to Image Size" from the dropdown.</li>
-    <li><strong>Generate & Download:</strong> Click the button, and your PDF will be ready to download in seconds!</li>
+    <li><strong>Set Custom Size (Optional):</strong> If your form requires the PDF to be under 200KB or 500KB, simply type that number into the target box.</li>
+    <li><strong>Generate & Download:</strong> Click the button, and your perfectly sized PDF will be ready to download in seconds!</li>
   </ol>
 </section>
 
@@ -185,10 +181,10 @@
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="assets/script.js" defer></script>
 
-<!-- Custom Script for Previews & PDF Generation -->
 <script>
-  // 1. Independent Preview Logic
+  // 1. Preview Logic
   document.getElementById('upload').addEventListener('change', function(e) {
     var previewGrid = document.getElementById('customPreviewGrid');
     var dropMain = document.getElementById('dropMain');
@@ -217,11 +213,11 @@
     }
   });
 
-  // 2. PDF Generation Logic (With Compression Control)
+  // 2. Custom Target KB PDF Logic
   async function generatePDF() {
     var fileInput = document.getElementById('upload');
     var formatSelect = document.getElementById('pdfFormat').value;
-    var qualitySelect = parseFloat(document.getElementById('pdfQuality').value); // Get selected quality
+    var targetKB = parseFloat(document.getElementById('pdfTargetKB').value);
     
     if (!fileInput.files.length) {
       alert('Please select at least one image first.');
@@ -236,103 +232,123 @@
     
     resultBox.style.display = 'none';
     pw.style.display = 'block';
-    
-    var jspdf = window.jspdf;
-    var pdf = null; 
+    pb.style.width = '10%';
+    st.innerText = 'Reading images...';
 
-    for (var i = 0; i < files.length; i++) {
-      pb.style.width = ((i) / files.length * 100) + '%';
-      st.innerText = 'Processing Image ' + (i + 1) + ' of ' + files.length + '...';
-      
-      var file = files[i];
-      
-      var img = new Image();
-      img.src = URL.createObjectURL(file);
-      await img.decode();
-      
-      var cv = document.createElement('canvas');
-      cv.width = img.width;
-      cv.height = img.height;
-      var ctx = cv.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-      
-      // APPLY COMPRESSION LOGIC HERE
-      var imgData = cv.toDataURL('image/jpeg', qualitySelect); 
-      
-      if (formatSelect === 'fit') {
-        var orientation = img.width > img.height ? 'l' : 'p';
-        if (i === 0) {
-           pdf = new jspdf.jsPDF({ orientation: orientation, unit: 'px', format: [img.width, img.height] });
-        } else {
-           pdf.addPage([img.width, img.height], orientation);
-        }
-        pdf.addImage(imgData, 'JPEG', 0, 0, img.width, img.height);
-      } 
-      else {
-        if (i === 0) {
-           pdf = new jspdf.jsPDF(); 
-        } else {
-           pdf.addPage();
-        }
-        
-        var pdfWidth = pdf.internal.pageSize.getWidth();
-        var pdfHeight = pdf.internal.pageSize.getHeight();
-        var imgRatio = img.width / img.height;
-        var pdfRatio = pdfWidth / pdfHeight;
-        
-        var drawWidth = pdfWidth;
-        var drawHeight = pdfHeight;
-        
-        if (imgRatio > pdfRatio) {
-            drawHeight = pdfWidth / imgRatio;
-        } else {
-            drawWidth = pdfHeight * imgRatio;
-        }
-        
-        var x = (pdfWidth - drawWidth) / 2;
-        var y = (pdfHeight - drawHeight) / 2;
-        
-        pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight);
-      }
+    // Pre-load images for faster iteration
+    var loadedImages = [];
+    for(var i=0; i<files.length; i++) {
+        var img = new Image();
+        img.src = URL.createObjectURL(files[i]);
+        await img.decode();
+        loadedImages.push(img);
     }
-    
+
+    // Function to build PDF at a specific quality ratio
+    const buildPdfAtQuality = (q) => {
+        var jspdf = window.jspdf;
+        var pdf = null;
+        for (var i = 0; i < loadedImages.length; i++) {
+            var img = loadedImages[i];
+            var cv = document.createElement('canvas');
+            
+            // Scale dimensions down slightly if target is extremely small (Quality below 0.3)
+            var scale = 1;
+            if (targetKB && q < 0.3) scale = 0.6;
+            if (targetKB && q < 0.1) scale = 0.3;
+
+            cv.width = img.width * scale;
+            cv.height = img.height * scale;
+            var ctx = cv.getContext('2d');
+            ctx.drawImage(img, 0, 0, cv.width, cv.height);
+            
+            var imgData = cv.toDataURL('image/jpeg', q);
+            
+            if (formatSelect === 'fit') {
+                var orientation = img.width > img.height ? 'l' : 'p';
+                if (i === 0) pdf = new jspdf.jsPDF({ orientation: orientation, unit: 'px', format: [img.width, img.height] });
+                else pdf.addPage([img.width, img.height], orientation);
+                pdf.addImage(imgData, 'JPEG', 0, 0, img.width, img.height);
+            } else {
+                if (i === 0) pdf = new jspdf.jsPDF(); 
+                else pdf.addPage();
+                
+                var pdfWidth = pdf.internal.pageSize.getWidth();
+                var pdfHeight = pdf.internal.pageSize.getHeight();
+                var imgRatio = img.width / img.height;
+                var pdfRatio = pdfWidth / pdfHeight;
+                
+                var drawWidth = pdfWidth;
+                var drawHeight = pdfHeight;
+                
+                if (imgRatio > pdfRatio) drawHeight = pdfWidth / imgRatio;
+                else drawWidth = pdfHeight * imgRatio;
+                
+                var x = (pdfWidth - drawWidth) / 2;
+                var y = (pdfHeight - drawHeight) / 2;
+                
+                pdf.addImage(imgData, 'JPEG', x, y, drawWidth, drawHeight);
+            }
+        }
+        return pdf.output('blob');
+    };
+
+    var finalBlob = null;
+
+    if (!targetKB || targetKB <= 0) {
+        // NORMAL MODE: No target KB specified
+        st.innerText = 'Compiling High Quality PDF...';
+        pb.style.width = '60%';
+        finalBlob = buildPdfAtQuality(0.95);
+    } else {
+        // TARGET MODE: Binary Search to hit the exact KB
+        st.innerText = 'Calculating optimal compression...';
+        let minQ = 0.05, maxQ = 1.0;
+        let bestBlob = null;
+        
+        for(let attempt = 0; attempt < 8; attempt++) {
+            pb.style.width = (20 + (attempt * 10)) + '%';
+            let midQ = (minQ + maxQ) / 2;
+            let tempBlob = buildPdfAtQuality(midQ);
+            let kb = tempBlob.size / 1024;
+            
+            if (kb > targetKB) {
+                maxQ = midQ; // Too big, lower the max quality
+            } else {
+                minQ = midQ; // Under target, push quality up
+                bestBlob = tempBlob;
+            }
+        }
+        // If we couldn't hit it (images too large), fallback to the lowest possible setting
+        finalBlob = bestBlob || buildPdfAtQuality(0.05); 
+    }
+
     st.innerText = 'PDF Generated Successfully! ✅';
     pb.style.width = '100%';
     
-    // Generate PDF Blob safely in memory
-    var pdfBlob = pdf.output('blob');
-    var pdfUrl = URL.createObjectURL(pdfBlob);
-    
-    // Calculate Size
-    var sizeInKB = (pdfBlob.size / 1024).toFixed(1);
+    // Result UI Logic
+    var pdfUrl = URL.createObjectURL(finalBlob);
+    var sizeInKB = (finalBlob.size / 1024).toFixed(1);
     var displaySize = sizeInKB > 1024 ? (sizeInKB / 1024).toFixed(2) + ' MB' : sizeInKB + ' KB';
     
-    // Setup Variables for Download & Rename Feature
     var downloadBtn = document.getElementById('pdfDownloadBtn');
     var nameInput = document.getElementById('pdfFileName');
     
     downloadBtn.href = pdfUrl;
     document.getElementById('pdfSizeText').innerText = displaySize;
     
-    // Set Initial Download Name
     var currentName = nameInput.value.trim() || 'ReduceSize-Document';
     downloadBtn.download = currentName + '.pdf';
 
-    // Live update download name when user types
     nameInput.addEventListener('input', function() {
         var newName = this.value.trim() || 'ReduceSize-Document';
         downloadBtn.download = newName + '.pdf';
     });
     
-    // Show manual download UI
     resultBox.style.display = 'block';
-    
-    // Hide progress bar
     setTimeout(function(){ pw.style.display = 'none'; }, 1500);
   }
 </script>
-
-<script src="assets/script.js" defer></script>
 
 </body>
 </html>
