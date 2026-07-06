@@ -487,14 +487,15 @@ body::after {
   .ql { margin-bottom: 10px; font-size: 10px; }
   .qbtns { gap: 8px; margin-bottom: 20px; }
   .qb { padding: 8px 12px; font-size: 13px; border-radius: 10px; min-width: 65px; }
-  
-  /* Inputs Compact */
-  .irow { gap: 10px; margin-bottom: 16px; flex-direction: column; flex-wrap: wrap; }
-  .irow .fs { flex: none; width: 100%; }
+
+
+     /* Inputs Compact - Fixed for side-by-side Dimensions */
+  .irow { gap: 10px; margin-bottom: 16px; flex-direction: row !important; flex-wrap: nowrap !important; align-items: flex-end; }
+  .irow .f { flex: 1; min-width: 0 !important; }
+  .irow .fs { flex: 0 0 auto !important; width: auto !important; min-width: 70px; }
   .fl { font-size: 12px; margin-bottom: 6px; }
   .irow input, .irow select { padding: 12px 14px; font-size: 14px; border-radius: 10px; }
-  
-  .or-divider { margin: 20px 0; font-size: 11px; }
+
   
   /* Primary Button Compact */
   .btn { padding: 14px; font-size: 15px; border-radius: 12px; }
