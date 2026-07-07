@@ -9,7 +9,10 @@
 <meta name="description" content="Scan documents and signatures online for free. Remove dark shadows, apply strict B&W filters, and export to clean PDF or JPG. No app needed.">
 <meta name="keywords" content="online document scanner, image to pdf scanner, signature scanner online, extract signature from image, remove shadows from photo, magic scan filter online, b&w scan">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#6d54f0">
+
+<!-- Theme Colors for Mobile Top Bar -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,9 +49,9 @@
 }
 .f-btn strong { display: block; font-size: 14px; color: var(--text); margin-bottom: 4px; font-weight: 800;}
 .f-btn span { font-size: 11px; }
-.f-btn.active { background: var(--green-bg); border-color: var(--accent); }
+.f-btn.active { background: var(--green-bg); border-color: var(--accent); transform: scale(1.02); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15); }
 .f-btn.active strong { color: var(--green); }
-.f-btn:hover:not(.active) { border-color: var(--purple); }
+.f-btn:hover:not(.active) { border-color: var(--purple); background: var(--purple-light); }
 
 /* SLIDER UI */
 .sl-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
@@ -76,7 +79,7 @@ input[type=range]::-webkit-slider-thumb {
 .btn-pdf:hover { background: #ff6b81; box-shadow: 0 12px 32px rgba(255, 71, 87, 0.3); }
 
 /* HELPER TEXT */
-.helper-text { font-size: 13px; color: var(--yellow); margin-bottom: 16px; text-align: center; font-weight: 600; padding: 10px; background: rgba(246, 195, 67, 0.1); border-radius: 8px; border: 1px dashed rgba(246, 195, 67, 0.3);}
+.helper-text { font-size: 13px; color: var(--accent); margin-bottom: 16px; text-align: center; font-weight: 600; padding: 12px; background: rgba(14, 165, 233, 0.1); border-radius: 12px; border: 1px dashed rgba(14, 165, 233, 0.3);}
 </style>
 
 <!-- SEO Structured Data for Document Scanner -->
@@ -141,7 +144,13 @@ input[type=range]::-webkit-slider-thumb {
 
 <div class="wrap">
 
-<section class="hero">
+  <!-- 🔥 BREADCRUMB FOR SEO & NAVIGATION -->
+  <div class="breadcrumb" style="padding-left:0; padding-top: 24px;">
+      <a href="/">Home</a> <span class="breadcrumb-sep">/</span>
+      <span style="color:var(--text);">Document Scanner</span>
+  </div>
+
+<section class="hero" style="padding-top: 12px;">
   <div class="eyebrow">✦ Pro Cam Scanner Engine</div>
   <h1 class="hero-h1">Scan Documents &<br><span class="grad">Signatures Online</span></h1>
   <p class="hero-sub">Our Pro Engine intelligently deletes dark shadows from mobile photos. Get crystal clear pure-white paper with bold dark ink. Download as PDF instantly.</p>
@@ -150,11 +159,10 @@ input[type=range]::-webkit-slider-thumb {
     <span class="badge">🪄 Pro Shadow Remover</span>
     <span class="badge">⚫ Pure B&W Extractor</span>
     <span class="badge">📄 Export to PDF</span>
-    <span class="badge">🔒 100% Private</span>
   </div>
 </section>
 
-<div class="card">
+<div class="card" style="padding: 24px;">
   
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="image/*">
@@ -165,7 +173,7 @@ input[type=range]::-webkit-slider-thumb {
   
   <!-- Step 1: Cropping -->
   <div id="step1" style="display:none;">
-      <div class="helper-text">Box is fixed! Drag the edges/corners (blue blocks) to select the document perfectly.</div>
+      <div class="helper-text">💡 Box is fixed! Drag the edges or corners (blue blocks) to perfectly select your document.</div>
       
       <div id="cropWrap" class="crop-wrap">
         <img id="imageToCrop">
@@ -174,9 +182,10 @@ input[type=range]::-webkit-slider-thumb {
       <button class="btn" id="cropBtn" onclick="startScanProcess()">✂️&nbsp; Crop & Apply Magic Filter</button>
   </div>
 
-  <div id="pbox" class="pbox" style="margin-top:20px; padding: 20px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border);">
+  <!-- 🔥 PREMIUM ANIMATED PROGRESS BAR -->
+  <div id="pbox" class="pbox">
     <div class="ptrack"><div id="pfill" class="pfill"></div></div>
-    <div id="status" class="plabel" style="margin-top: 10px;"></div>
+    <div id="status" class="plabel"></div>
   </div>
 
   <!-- Step 2: Filters & Download -->
@@ -249,13 +258,12 @@ input[type=range]::-webkit-slider-thumb {
   <p><strong>Can I compress the scanned document after downloading?</strong><br>Yes! If the downloaded JPG or PDF is too large for your application form, you can immediately use our dedicated tools (like "Compress to 50KB" or "Compress to 100KB") to reduce the file size.</p>
 </section>
 
-<div class="chips-hd">More Useful Tools</div>
+<div class="chips-hd">Explore Companion Tools</div>
 <div class="chips">
   <a href="/passport-photo-maker.html" class="chip"><span class="chip-i">📸</span><div class="chip-t"><strong>Passport Photo</strong><span>Print Maker</span></div></a>
   <a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a>
   <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Documents</span></div></a>
   <a href="/resize-image-for-online-form.html" class="chip"><span class="chip-i">💻</span><div class="chip-t"><strong>Form Fixer</strong><span>Any portal</span></div></a>
-  <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
   <a href="/image-format-converter.html" class="chip"><span class="chip-i">🔄</span><div class="chip-t"><strong>Format Converter</strong><span>JPG, PNG, WebP</span></div></a>
 </div>
 </div>
