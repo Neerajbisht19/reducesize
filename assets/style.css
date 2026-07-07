@@ -1,6 +1,6 @@
 /* =========================================
    REDUCE SIZE — ULTIMATE PREMIUM CSS
-   Auto Light/Dark Mode + Compact Mobile
+   Auto Light/Dark Mode + Animated UI + Compact Mobile
    ========================================= */
 
 /* =========================================
@@ -237,7 +237,7 @@ body::after {
   margin-bottom: 48px; box-shadow: var(--card-shadow); transition: all 0.3s ease;
   width: 100%;
 }
-.card:hover { box-shadow: var(--hover-shadow); }
+.card:hover { box-shadow: var(--hover-shadow); border-color: rgba(99, 102, 241, 0.2); }
 
 .tabs {
   display: flex; gap: 8px; background: var(--surface); flex-wrap: wrap;
@@ -259,7 +259,7 @@ body::after {
   background: var(--purple-light); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin-bottom: 28px;
   width: 100%;
 }
-.drop:hover { border-color: var(--purple); background: rgba(99, 102, 241, 0.12); transform: translateY(-2px); }
+.drop:hover { border-color: var(--purple); background: rgba(99, 102, 241, 0.15); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.1); }
 .drop.drag-over { border-color: var(--accent); background: var(--green-bg); transform: scale(1.02); box-shadow: 0 10px 20px rgba(16, 185, 129, 0.1); }
 .drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
 .drop-ico {
@@ -268,7 +268,7 @@ body::after {
   border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px;
   transition: 0.3s ease;
 }
-.drop:hover .drop-ico { transform: scale(1.1) rotate(-5deg); }
+.drop:hover .drop-ico { transform: scale(1.1) rotate(-5deg); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2); }
 .drop-main { font-size: 17px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
 .drop-main span { color: var(--purple); text-decoration: underline; text-underline-offset: 4px; }
 .drop-hint { font-size: 14px; color: var(--muted); font-weight: 500; }
@@ -319,14 +319,79 @@ body::after {
   box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); margin-top: 10px;
   display: inline-block; text-align: center;
 }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5); }
 .btn:active { transform: scale(0.97); }
 
-/* PROGRESS & RESULTS */
-.pbox { display: none; margin-top: 24px; padding: 24px; background: var(--surface); border-radius: 16px; border: 1px solid var(--border); }
-.ptrack { height: 8px; background: var(--border); border-radius: 10px; overflow: hidden; }
-.pfill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--purple), var(--accent)); border-radius: 10px; transition: width 0.4s ease-out; }
-.plabel { font-size: 14px; color: var(--text); margin-top: 12px; text-align: center; font-weight: 800; }
+/* =========================================
+   🔥 ANIMATED PROGRESS BAR & RESULTS 🔥
+   ========================================= */
+.pbox { 
+  display: none; 
+  margin-top: 24px; 
+  padding: 24px; 
+  background: rgba(var(--bg-rgb), 0.8); 
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px; 
+  border: 1px solid var(--purple-light); 
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+  animation: slideUpFade 0.4s ease forwards;
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ptrack { 
+  height: 12px; 
+  background: var(--surface2); 
+  border: 1px solid var(--border);
+  border-radius: 10px; 
+  overflow: hidden; 
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.pfill { 
+  height: 100%; 
+  width: 0%; 
+  border-radius: 10px; 
+  transition: width 0.3s ease-out; 
+  background-color: var(--purple);
+  /* Moving Candy-Stripe Animation */
+  background-image: linear-gradient(
+    -45deg, 
+    rgba(255, 255, 255, 0.25) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    rgba(255, 255, 255, 0.25) 50%, 
+    rgba(255, 255, 255, 0.25) 75%, 
+    transparent 75%, 
+    transparent
+  );
+  background-size: 30px 30px;
+  animation: moveStripes 1s linear infinite;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+}
+
+@keyframes moveStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 30px 0; }
+}
+
+.plabel { 
+  font-size: 15px; 
+  color: var(--text); 
+  margin-top: 14px; 
+  text-align: center; 
+  font-weight: 800; 
+  animation: pulseText 1.5s ease-in-out infinite; 
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.98); }
+}
 
 .rg { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; margin-top: 32px; }
 .rc { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: 0.3s; }
@@ -488,14 +553,12 @@ body::after {
   .qbtns { gap: 8px; margin-bottom: 20px; }
   .qb { padding: 8px 12px; font-size: 13px; border-radius: 10px; min-width: 65px; }
 
-
-     /* Inputs Compact - Fixed for side-by-side Dimensions */
+  /* Inputs Compact - Fixed for side-by-side Dimensions */
   .irow { gap: 10px; margin-bottom: 16px; flex-direction: row !important; flex-wrap: nowrap !important; align-items: flex-end; }
   .irow .f { flex: 1; min-width: 0 !important; }
   .irow .fs { flex: 0 0 auto !important; width: auto !important; min-width: 70px; }
   .fl { font-size: 12px; margin-bottom: 6px; }
   .irow input, .irow select { padding: 12px 14px; font-size: 14px; border-radius: 10px; }
-
   
   /* Primary Button Compact */
   .btn { padding: 14px; font-size: 15px; border-radius: 12px; }
