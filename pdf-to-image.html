@@ -9,7 +9,10 @@
 <meta name="description" content="Convert PDF to high-quality JPG/PNG images online for free. Extract all pages from a PDF document instantly. 100% secure, offline browser-based tool.">
 <meta name="keywords" content="pdf to image, pdf to jpg, extract pdf pages, convert pdf to images, pdf to png online, free pdf to jpg converter, batch convert pdf to jpg">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#6d54f0">
+
+<!-- Theme Colors for Mobile Top Bar -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,14 +41,14 @@
 /* ZIP DOWNLOAD BUTTON */
 .btn-zip { 
     background: var(--green); color: #000; box-shadow: 0 8px 24px rgba(62,207,142,0.3); 
-    display: none; margin-bottom: 24px; padding: 16px; font-size: 16px;
+    display: none; margin-bottom: 24px; margin-top: 12px; padding: 16px; font-size: 16px; width: 100%; border: none; border-radius: 12px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.3s;
 }
 .btn-zip:hover { background: #2eb872; box-shadow: 0 12px 32px rgba(62,207,142,0.4); transform: translateY(-2px); }
 
 /* RESULTS GRID */
 .rg { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:16px; }
 .rc { background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; display: flex; flex-direction: column; transition: 0.2s; }
-.rc:hover { border-color: var(--purple); box-shadow: var(--card-shadow); transform: translateY(-2px); }
+.rc:hover { border-color: var(--purple); box-shadow: var(--card-shadow); transform: translateY(-2px); background: #fff;}
 .rc img { width:100%; height:220px; object-fit:contain; background:#fff; padding:10px; border-bottom: 1px solid var(--border); }
 .ri { padding:16px; text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
 .rsz { font-family: 'Syne', sans-serif; font-size:16px; font-weight:800; color:var(--text); margin-bottom:10px; }
@@ -120,7 +123,13 @@
 
 <div class="wrap">
 
-<section class="hero">
+  <!-- 🔥 BREADCRUMB FOR SEO & NAVIGATION -->
+  <div class="breadcrumb" style="padding-left:0; padding-top: 24px;">
+      <a href="/">Home</a> <span class="breadcrumb-sep">/</span>
+      <span style="color:var(--text);">PDF to Image</span>
+  </div>
+
+<section class="hero" style="padding-top: 12px;">
   <div class="eyebrow">✦ High Quality Extraction</div>
   <h1 class="hero-h1">PDF to Images<br><span class="grad">Extract Every Page</span></h1>
   <p class="hero-sub">Convert your PDF files into individual high-resolution JPG images. Download specific pages or get them all instantly in a single ZIP file. 100% Secure & offline.</p>
@@ -132,7 +141,7 @@
   </div>
 </section>
 
-<div class="card">
+<div class="card" style="padding: 24px;">
   
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="application/pdf">
@@ -155,12 +164,13 @@
       <button class="btn" id="extractBtn" onclick="extractImages()">🖼️&nbsp; Extract Images Now</button>
   </div>
 
-  <div id="pbox" class="pbox" style="padding: 24px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
+  <!-- 🔥 PREMIUM ANIMATED PROGRESS BAR -->
+  <div id="pbox" class="pbox">
     <div class="ptrack"><div id="pfill" class="pfill"></div></div>
-    <div id="status" class="plabel" style="margin-top: 12px;"></div>
+    <div id="status" class="plabel">Initializing secure engine...</div>
   </div>
   
-  <button class="btn btn-zip" id="zipBtn" onclick="downloadZip()">📦&nbsp; Download All Pages as ZIP</button>
+  <button class="btn-zip" id="zipBtn" onclick="downloadZip()">📦&nbsp; Download All Pages as ZIP</button>
   
   <div id="rg" class="rg"></div>
 </div>
