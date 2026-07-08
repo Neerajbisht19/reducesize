@@ -9,7 +9,10 @@
 <meta name="description" content="Secure your PDF files by adding a strong password online. Flatten and encrypt documents directly in your browser to prevent text copying. 100% private.">
 <meta name="keywords" content="protect pdf, add password to pdf, encrypt pdf online, lock pdf file, prevent copy paste pdf, secure pdf free, flatten pdf">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#6d54f0">
+
+<!-- Theme Colors for Mobile Top Bar -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +61,7 @@
 .success-box {
     text-align: center; padding: 32px 20px; background: var(--surface2);
     border: 1px solid rgba(62,207,142,0.3); border-radius: 16px;
-    animation: fadeIn 0.4s ease;
+    animation: fadeIn 0.4s ease; margin-top: 24px;
 }
 .sb-icon { font-size: 48px; margin-bottom: 12px; }
 .sb-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
@@ -134,7 +137,13 @@
 
 <div class="wrap">
 
-<section class="hero">
+  <!-- 🔥 BREADCRUMB FOR SEO & NAVIGATION -->
+  <div class="breadcrumb" style="padding-left:0; padding-top: 24px;">
+      <a href="/">Home</a> <span class="breadcrumb-sep">/</span>
+      <span style="color:var(--text);">Protect PDF</span>
+  </div>
+
+<section class="hero" style="padding-top: 12px;">
   <div class="eyebrow">✦ Lock & Flatten PDF</div>
   <h1 class="hero-h1">Protect PDF Files<br><span class="grad">Add Secure Password</span></h1>
   <p class="hero-sub">Encrypt your private documents before sharing them. Our engine adds a password and flattens the PDF to prevent text copying. 100% Client-Side Privacy.</p>
@@ -146,7 +155,7 @@
   </div>
 </section>
 
-<div class="card">
+<div class="card" style="padding: 24px;">
   
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="application/pdf">
@@ -170,9 +179,10 @@
 
   <button class="btn-lock" id="lockBtn" onclick="processLock()">🔒&nbsp; Protect & Encrypt PDF Now</button>
 
-  <div id="pbox" class="pbox" style="padding: 24px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
+  <!-- 🔥 PREMIUM ANIMATED PROGRESS BAR -->
+  <div id="pbox" class="pbox">
     <div class="ptrack"><div id="pfill" class="pfill"></div></div>
-    <div id="status" class="plabel" style="margin-top: 12px;"></div>
+    <div id="status" class="plabel">Initializing secure engine...</div>
   </div>
   
   <div id="rg" class="rg"></div>
