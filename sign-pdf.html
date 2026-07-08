@@ -286,7 +286,7 @@ function updateSigSize() {
     document.getElementById('dragSig').style.width = val + 'px';
 }
 
-// --- DRAG AND DROP LOGIC (Mouse + Touch) ---
+// --- DRAG AND DROP LOGIC (Mouse + Touch) FIXED BOUNDARIES ---
 const dragEl = document.getElementById('dragSig');
 const wrapper = document.getElementById('canvasWrapper');
 let isDragging = false;
@@ -313,14 +313,14 @@ function dragMove(e) {
     let newLeft = initialLeft + dx;
     let newTop = initialTop + dy;
     
-    // Bounds checking
+    // 🔥 FIXED: Relaxed boundaries so the signature can reach extreme edges
+    // Now you can place it entirely on the edge!
     const bounds = wrapper.getBoundingClientRect();
-    const sigRect = dragEl.getBoundingClientRect();
     
-    if (newLeft < sigRect.width/2) newLeft = sigRect.width/2;
-    if (newLeft > bounds.width - sigRect.width/2) newLeft = bounds.width - sigRect.width/2;
-    if (newTop < sigRect.height/2) newTop = sigRect.height/2;
-    if (newTop > bounds.height - sigRect.height/2) newTop = bounds.height - sigRect.height/2;
+    if (newLeft < 0) newLeft = 0;
+    if (newLeft > bounds.width) newLeft = bounds.width;
+    if (newTop < 0) newTop = 0;
+    if (newTop > bounds.height) newTop = bounds.height;
 
     dragEl.style.left = newLeft + 'px';
     dragEl.style.top = newTop + 'px';
