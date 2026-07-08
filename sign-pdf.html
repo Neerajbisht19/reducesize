@@ -3,60 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resize Image for UPSC Form | OTR Photo & Signature Fixer</title>
+<title>Sign PDF Online Free | Add Signature to PDF Securely</title>
 <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="canonical" href="https://reducesize.online/resize-image-for-upsc-form.html">
-<meta name="description" content="Resize photo and signature for UPSC Civil Services OTR. Auto-add Name & Date, set exact 350x350px dimensions, and ensure strict JPEG compliance. 100% Free.">
-<meta name="keywords" content="resize image for upsc form, upsc photo crop online, upsc photo size, upsc signature 350x350, upsc photo name date add, upsc otr photo guidelines, civil services application photo">
+<link rel="canonical" href="https://reducesize.online/sign-pdf.html">
+<meta name="description" content="Add your signature to any PDF document online. Self-attest forms easily. 100% free, private, and works completely offline in your browser. No printing needed.">
+<meta name="keywords" content="sign pdf online, add signature to pdf, self attest pdf, e-sign pdf free, insert image in pdf, sign pdf document, offline pdf signer">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#6d54f0">
+
+<!-- Theme Colors for Mobile Top Bar -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-
-<!-- Cropper.js for precise cropping -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
 
 <!-- Linked to external CSS for Unified Global Theme -->
 <link rel="stylesheet" href="assets/style.css">
 
 <style>
 /* =========================================
-   UPSC SPECIFIC UI CSS
+   SIGN PDF SPECIFIC UI CSS
    ========================================= */
-.crop-wrap {
-  display:none; background:var(--surface2); border:1px solid var(--border);
-  border-radius:12px; overflow:hidden; margin-bottom:20px; position:relative;
-  width: 100%; height: 400px; box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+.settings-box {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px; margin-bottom: 24px;
+    animation: fadeIn 0.4s ease forwards;
 }
-.crop-wrap img { max-width: 100%; display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.ratio-controls {
-    display: none; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
+.sig-upload-box {
+    border: 2px dashed var(--purple); background: var(--purple-light);
+    border-radius: 12px; padding: 20px; text-align: center; cursor: pointer;
+    transition: 0.2s; margin-bottom: 20px;
 }
-.ratio-btn {
-    padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border);
-    background: var(--surface2); color: var(--muted); font-size: 12px; font-weight: 700;
-    cursor: pointer; transition: 0.2s; font-family: 'Manrope', sans-serif;
-}
-.ratio-btn:hover { background: var(--surface); color: #fff; }
-.ratio-btn.active { background: var(--purple-light); border-color: var(--purple); color: var(--purple-text); }
+.sig-upload-box:hover { background: rgba(109, 84, 240, 0.15); }
+.sig-text { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--purple); }
+.sig-hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+#sigPreview { max-height: 80px; margin-top: 10px; border-radius: 8px; border: 1px solid var(--border); background: #fff; padding: 4px; display: none; }
 
-/* GREETING CARD */
-.greeting-card {
-    display: none; position: relative; background: linear-gradient(145deg, rgba(109,84,240,0.11) 0%, rgba(32,217,192,0.1) 100%);
-    border: 1px dashed rgba(62,207,142,0.42); border-radius: 12px; padding: 22px 16px;
-    text-align: center; margin-top: 16px; animation: cutePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+.irow { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-end;}
+.irow .f { flex: 1; }
+.fl { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text); margin-bottom: 8px; display: block; }
+.f-input, .f-select {
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    padding: 14px 16px; border-radius: 10px; color: var(--text);
+    font-size: 15px; font-family: 'Manrope', sans-serif; font-weight: 600;
+    outline: none; transition: 0.2s;
 }
-@keyframes cutePop { 0% { opacity: 0; transform: translateY(20px) scale(0.9); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-.g-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; animation: heartBeat 2s infinite ease-in-out; }
-@keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-.g-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-.g-title em { font-style: normal; color: var(--accent); }
-.g-text { font-size: 15px; color: #a0a0c8; line-height: 1.6; margin-bottom: 14px; }
-.g-love { font-size: 14px; font-weight: 700; color: var(--purple-l); display: block; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 10px;}
-.g-signature { display: inline-block; padding: 4px 14px; background: rgba(109,84,240,0.12); border-radius: 20px; margin-top: 6px;}
+.f-input:focus, .f-select:focus { border-color: var(--purple); box-shadow: 0 0 0 4px var(--purple-light); }
+.f-select { -webkit-appearance: none; appearance: none; cursor: pointer; }
+
+.btn-sign {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--purple); color: #fff; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
+    box-shadow: 0 8px 24px rgba(109, 84, 240, 0.3); display: none;
+}
+.btn-sign:hover { background: #7b63f5; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(109, 84, 240, 0.4); }
+
+.success-box {
+    text-align: center; padding: 32px 20px; background: var(--surface2);
+    border: 1px solid rgba(62,207,142,0.3); border-radius: 16px;
+    animation: fadeIn 0.4s ease; margin-top: 24px;
+}
+.sb-icon { font-size: 48px; margin-bottom: 12px; }
+.sb-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.sb-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-weight: 600; }
+
+.btn-dl {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--green); color: #000; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
+}
+.btn-dl:hover { background: #2eb872; box-shadow: 0 8px 24px rgba(62,207,142,0.3); transform: translateY(-2px); }
+
+@media(max-width: 600px) {
+    .irow { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .irow .f { width: 100%; }
+}
 </style>
 
 <!-- SEO Structured Data -->
@@ -64,11 +89,11 @@
 {
   "@context":"https://schema.org",
   "@type":"WebApplication",
-  "name":"UPSC Form Photo & Signature Resizer",
-  "url":"https://reducesize.online/resize-image-for-upsc-form.html",
+  "name":"Sign PDF Document Online",
+  "url":"https://reducesize.online/sign-pdf.html",
   "applicationCategory":"UtilityApplication",
   "operatingSystem":"All",
-  "description":"Professional tool to resize, crop, and compress photos and signatures for UPSC Civil Services OTR forms. 100% Acceptable JPEGs.",
+  "description":"Add your signature to a PDF document online for free. Self-attest applications easily. 100% private and offline processing in browser.",
   "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
 }
 </script>
@@ -79,13 +104,18 @@
   "mainEntity":[
     {
       "@type":"Question",
-      "name":"What are the exact pixel dimensions required for UPSC photos?",
-      "acceptedAnswer":{"@type":"Answer","text":"UPSC mandates that both your photograph and signature must have a minimum resolution of 350 x 350 pixels and a maximum resolution of 1000 x 1000 pixels. The file size must be between 20KB and 300KB."}
+      "name":"How do I sign a PDF without printing it?",
+      "acceptedAnswer":{"@type":"Answer","text":"Simply upload your PDF to our tool, then upload a photo of your signature (written on a white piece of paper). Select the page and position, and our tool will digitally stamp your signature onto the document."}
     },
     {
       "@type":"Question",
-      "name":"How do I add my name and date to the UPSC photo?",
-      "acceptedAnswer":{"@type":"Answer","text":"Our dedicated UPSC tool has an 'Add Name & Date' feature. Simply check the box, enter your name and the date the photo was taken. The tool will automatically generate a strip at the bottom of your photo."}
+      "name":"Is it safe to upload my signature here?",
+      "acceptedAnswer":{"@type":"Answer","text":"Yes! ReduceSize operates on a strict zero-upload policy. Your PDF and your signature image are merged locally inside your computer's browser. Nothing is ever sent to or stored on our servers."}
+    },
+    {
+      "@type":"Question",
+      "name":"Can I choose which page to sign?",
+      "acceptedAnswer":{"@type":"Answer","text":"Absolutely. The tool allows you to specify the exact page number (e.g., Page 3) and select the placement (like Bottom Right or Bottom Left) for perfect alignment."}
     }
   ]
 }
@@ -94,10 +124,15 @@
 <body>
 
 <nav class="nav">
-  <a class="nav-logo" href="/"><em>Reduce</em>Size</a>
+  <a class="nav-logo" href="/">
+    <em>Reduce</em>Size
+    <span class="nav-logo-badge">FREE</span>
+  </a>
   <div class="nav-links">
-    <a href="/blog/">Blog</a>
-    <span class="nav-pill">✦ UPSC Portal Ready</span>
+    <a href="/blog/" class="nl-desktop">Blog</a>
+    <a href="/about.html" class="nl-desktop">About</a>
+    <a href="/contact-us.html" class="nl-desktop">Contact</a>
+    <span class="nav-pill">⚡ Private e-Sign</span>
   </div>
   <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
@@ -110,245 +145,377 @@
 </div>
 
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Crop, Drag, Zoom & Professional Resize</div>
-  <h1>Resize Image for<br><span class="grad">UPSC Online Form</span></h1>
-  <p>Live crop your photo by dragging, set exact 350x350 pixels, and print your <b>Name / Date</b> as per strict UPSC OTR guidelines.</p>
+
+  <!-- 🔥 BREADCRUMB FOR SEO & NAVIGATION -->
+  <div class="breadcrumb" style="padding-left:0; padding-top: 24px;">
+      <a href="/">Home</a> <span class="breadcrumb-sep">/</span>
+      <span style="color:var(--text);">Sign PDF</span>
+  </div>
+
+<section class="hero" style="padding-top: 12px;">
+  <div class="eyebrow">✦ Self Attest & E-Sign</div>
+  <h1 class="hero-h1">Sign PDF Online<br><span class="grad">Fast & Secure</span></h1>
+  <p class="hero-sub">Add your signature or stamp to any PDF document instantly. No need to print, sign, and scan ever again. 100% Private, processed in your browser.</p>
+  
   <div class="badges">
-    <span class="badge">🏛 UPSC OTR Ready</span>
-    <span class="badge">✂ Live Crop & Drag</span>
-    <span class="badge">📝 Name/Date Stamp</span>
-    <span class="badge">⚖️ Under 300KB</span>
+    <span class="badge">✍️ Add Image Signature</span>
+    <span class="badge">🎯 Smart Positioning</span>
+    <span class="badge">🔒 100% Offline Privacy</span>
   </div>
 </section>
 
-<div class="card">
+<div class="card" style="padding: 24px;">
+  
   <div class="drop" id="dropZone">
-    <input type="file" id="upload" accept="image/*">
-    <div class="drop-ico">📸</div>
-    <div class="drop-main" id="dropText">Upload UPSC Photo or Signature here</div>
-    <div class="drop-hint">JPG or PNG formats accepted</div>
-  </div>
-  
-  <div id="cropWrap" class="crop-wrap">
-    <img id="imageToCrop">
+    <input type="file" id="uploadPdf" accept="application/pdf">
+    <div class="drop-ico" id="dropIco">📄</div>
+    <div class="drop-main" id="dropMain">Drop your PDF document here</div>
+    <div class="drop-hint" id="dropHint">Upload the file you want to sign</div>
   </div>
 
-  <div id="ratioControls" class="ratio-controls">
-      <button class="ratio-btn active" onclick="setCropRatio(NaN, this)">Free Crop</button>
-      <button class="ratio-btn" onclick="setCropRatio(1, this)">Square (1:1)</button>
-  </div>
-
-  <div class="u-box">
-    <div class="u-title">Verify Dimensions & Size</div>
-    <div class="irow">
-      <div class="f"><label class="fl">Width (Pixels)</label><input type="number" id="resW" value="350"></div>
-      <div class="f"><label class="fl">Height (Pixels)</label><input type="number" id="resH" value="350"></div>
-    </div>
-    <div class="irow" style="margin-bottom:0">
-      <div class="f"><label class="fl">Max File Size (KB)</label><input type="number" id="size" value="250" placeholder="Max 300KB"></div>
-    </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*UPSC OTR requires min 350x350px. 250KB is optimal.</p>
-  </div>
-
-  <div class="u-box" id="textSettingsBox" style="display:none;">
-    <div class="u-title">Add Name / Date (Optional)</div>
-    <label class="cb-row" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-      <input type="checkbox" id="addTextCb" onchange="toggleTextInputs()">
-      <span class="cb-label">Print Text Strip at Bottom</span>
-    </label>
-    
-    <div id="textInputs" style="display:none; margin-top: 10px;">
-      <div class="irow">
-        <div class="f"><label class="fl">Name</label><input type="text" id="candName" placeholder="e.g. RAHUL KUMAR"></div>
-        <div class="f"><label class="fl">Date</label><input type="text" id="photoDate" placeholder="e.g. 15/06/2026"></div>
+  <div id="settingsArea" class="settings-box" style="display:none;">
+      
+      <div class="sig-upload-box" onclick="document.getElementById('uploadSig').click()">
+          <input type="file" id="uploadSig" accept="image/png, image/jpeg, image/webp" style="display:none;">
+          <div class="sig-text" id="sigText">✍️ Click to Upload Signature Image</div>
+          <div class="sig-hint">Take a photo of your signature on blank paper (JPG/PNG)</div>
+          <img id="sigPreview">
       </div>
-    </div>
+
+      <div class="irow">
+          <div class="f">
+              <label class="fl">Page Number</label>
+              <input type="number" id="pageNo" class="f-input" value="1" min="1">
+          </div>
+          <div class="f">
+              <label class="fl">Signature Position</label>
+              <select id="posSelect" class="f-select">
+                  <option value="br">Bottom Right (Default)</option>
+                  <option value="bl">Bottom Left</option>
+                  <option value="tr">Top Right</option>
+                  <option value="bc">Bottom Center</option>
+              </select>
+          </div>
+      </div>
+      <p style="font-size: 12px; color: var(--yellow); font-weight: 600; margin-bottom: 0;">*Tip: Use a signature image with a white or transparent background for best results.</p>
   </div>
 
-  <button class="btn" onclick="processUPSC()">⚡&nbsp; Generate UPSC Ready Image</button>
+  <button class="btn-sign" id="signBtn" onclick="processSign()">✍️&nbsp; Sign Document Now</button>
 
-  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <!-- 🔥 PREMIUM ANIMATED PROGRESS BAR -->
+  <div id="pbox" class="pbox">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel">Initializing secure engine...</div>
+  </div>
   
-  <div id="greetingCard" class="greeting-card">
-    <div class="g-icon">🏛🇮🇳</div>
-    <div class="g-title">✨ <em>LBSNAA / IAS</em> Ka Sapna ✨</div>
-    <div class="g-text">Humari dil se dua hai ki aap is saal UPSC Civil Services crack karein.. <br> aur Lal Bahadur Shastri National Academy (LBSNAA) jayein! 🇮🇳✍️</div>
-    <span class="g-love">Lots of love, <span class="g-signature">ReduceSize.online ❤️</span></span>
-  </div>
-
   <div id="rg" class="rg"></div>
 </div>
 
+<!-- ==========================================
+     HIGH-VALUE SEO CONTENT SECTION
+     ========================================== -->
 <section class="seo">
-  <h2>The Master Fixer for UPSC OTR Form Rejections</h2>
-  <p>Applying for the Union Public Service Commission (UPSC) Civil Services (IAS, IPS, IFS) exams requires absolute precision. The UPSC One Time Registration (OTR) portal is powered by legacy systems that are extremely unforgiving. If your image is 1KB over the size limit or even 1 pixel off in dimensions, the system will discard your application without explanation.</p>
+  <h2>The Easiest Way to Sign a PDF Document Online</h2>
+  <p>The days of printing a document, signing it with a pen, scanning it back into your computer, and saving it as a new file are over. Whether you need to self-attest an application form for an exam, sign a legal contract, or approve a corporate invoice, <strong>ReduceSize PDF Signer</strong> allows you to digitally stamp your signature onto any page of a PDF document in just a few seconds.</p>
 
-  <h3>Why UPSC Portals Reject Photos</h3>
-  <p>Our analysis of common rejection errors on UPSC portals shows three recurring issues:</p>
-  <ul>
-    <li><strong>File Size Too Large:</strong> UPSC portals enforce strict size caps (up to 300KB). If you upload a 3MB phone photo, it will be rejected instantly.</li>
-    <li><strong>Incorrect Aspect Ratio:</strong> UPSC mandates a square ratio for photographs. Uploading a rectangular photo will make your face look distorted or stretched.</li>
-    <li><strong>Invalid Image Format:</strong> Many state portals only accept <em>.JPG</em> or <em>.JPEG</em> files. If you upload a modern HEIC (iPhone) or PNG file, the upload validator will fail.</li>
-  </ul>
-
-  <h3>How our "UPSC Master Fixer" Solves This</h3>
+  <h3>How to Self-Attest Documents Digitally</h3>
+  <p>Many government portals (like SSC, UPSC, or State Police) and bank KYC processes require you to upload "Self-Attested" documents. This means your signature must be present on your Aadhar Card, PAN Card, or Marksheet PDF. Here is how you can do it digitally:</p>
   <ol>
-    <li><strong>Smart Cropper:</strong> When you upload a photo, our cropper automatically locks into the aspect ratio required for OTR. You cannot make a mistake while cropping!</li>
-    <li><strong>Anti-Rejection Encoder:</strong> No matter what format you upload (.PNG, .WEBP, .HEIC), our tool forces the output to be a compliant, standard Baseline JPEG that every recruitment portal accepts.</li>
-    <li><strong>Exact KB Targeting:</strong> Our algorithm precisely compresses your image to fit the exact limit without sacrificing the sharpness of your face or signature strokes.</li>
+    <li>Take a clean piece of white, unlined paper and sign your name using a black or blue pen.</li>
+    <li>Take a clear photo of this signature using your smartphone. (For the best results, you can use our <a href="/document-scanner-online.html" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">Document Scanner</a> to turn the background pure white).</li>
+    <li>Upload your main document (PDF) to this tool.</li>
+    <li>Upload your signature photo, select the "Bottom Right" position, and click "Sign Document". The tool will neatly paste your signature onto the PDF!</li>
   </ol>
+
+  <h3>100% Private & Offline (No Server Uploads)</h3>
+  <p>Your signature is one of your most highly sensitive pieces of personal data. Uploading it to a random third-party server poses a massive risk of identity theft and document forgery. We take your privacy seriously.</p>
+  <p>ReduceSize operates on a strictly secure <strong>Client-Side Processing Architecture</strong>. When you upload your PDF and your signature image, the entire merging process occurs locally inside your device's web browser (utilizing your computer's RAM). Your files and your signature are <strong>never uploaded, transmitted, or stored on our servers.</strong> This guarantees absolute offline privacy.</p>
+
+  <h3>Frequently Asked Questions (FAQs)</h3>
+
+  <p><strong>Is it safe to upload my signature here?</strong><br>
+  Yes! As explained above, ReduceSize operates on a strict zero-upload policy. Your PDF and your signature image are merged locally inside your browser. Nothing is ever sent to or stored on our servers.</p>
+
+  <p><strong>Can I choose which page to sign?</strong><br>
+  Absolutely. If you have a 10-page contract and only need to sign the last page, simply type "10" in the Page Number box. You can also select the exact placement (like Bottom Right, Bottom Left, or Top Right) for perfect alignment.</p>
+
+  <p><strong>What formats are supported for the signature?</strong><br>
+  You can upload your signature in standard image formats including JPG, JPEG, PNG, and WebP. For the most professional look, we recommend using a PNG file with a transparent background.</p>
+
+  <p><strong>What if my PDF is password protected?</strong><br>
+  Our offline signer cannot edit encrypted or locked files. If your PDF requires a password to open, you must first remove the encryption using our free <a href="/unlock-pdf.html" style="color:var(--purple-l); text-decoration:none; font-weight:bold;">Unlock PDF Tool</a> before you can add a signature to it.</p>
 </section>
 
-<div class="chips-hd">More Tools</div>
+<div class="chips-hd">Explore More Document Tools</div>
 <div class="chips">
-  <a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a>
-  <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
-  <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
-  <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
-  <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
-  <a href="/reduce-image-size-for-email.html" class="chip"><span class="chip-i">📧</span><div class="chip-t"><strong>Reduce for Email</strong><span>Fast sending</span></div></a>
+  <a href="/" class="chip"><span class="chip-i">🗜️</span><div class="chip-t"><strong>Compress PDF</strong><span>Reduce file size</span></div></a>
+  <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
+  <a href="/pdf-to-image.html" class="chip"><span class="chip-i">🖼️</span><div class="chip-t"><strong>PDF to Images</strong><span>Extract pages</span></div></a>
+  <a href="/protect-pdf.html" class="chip"><span class="chip-i">🔒</span><div class="chip-t"><strong>Protect PDF</strong><span>Add password</span></div></a>
+  <a href="/document-scanner-online.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Scan to PDF</strong><span>Remove shadows</span></div></a>
 </div>
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-20kb.html">20KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/compress-image-to-100kb.html">100KB</a>
-    <a href="/resize-image-for-ssc-form.html">SSC</a>
-    <a href="/resize-image-for-upsc-form.html">UPSC</a>
-    <a href="/reduce-image-size-for-email.html">Email</a>
-    <a href="/blog/">Blog</a>
-  </nav>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/document-scanner-online.html">Scan to PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/protect-pdf.html">Protect PDF</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+    <span>📱 Mobile Ready</span>
+  </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<!-- Global External JS -->
 <script src="assets/script.js" defer></script>
 
+<!-- Required Library for PDF Processing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
 <script>
-let currentFile = null;
-let cropper = null; 
+let currentPdfFile = null;
+let currentSigFile = null;
+let maxPages = 1;
 
-document.getElementById('upload').addEventListener('change', function() {
-  const cropWrap = document.getElementById('cropWrap');
-  const imageToCrop = document.getElementById('imageToCrop');
-  document.getElementById('greetingCard').style.display = 'none'; 
-  document.getElementById('rg').innerHTML = ''; 
-  
-  if(!this.files.length) { 
-    cropWrap.style.display='none'; 
-    if(cropper) cropper.destroy(); 
-    currentFile = null; 
-    document.getElementById('dropZone').style.display = 'block';
-    return; 
-  }
-  
-  const f = this.files[0];
-  if(!f.type.startsWith('image/')) { alert('Please select an image file.'); return; }
-  currentFile = f;
-  
-  document.getElementById('dropZone').style.display = 'none';
-  cropWrap.style.display = 'block';
-  document.getElementById('ratioControls').style.display = 'flex';
-  imageToCrop.src = URL.createObjectURL(f);
-  
-  if(cropper) cropper.destroy(); 
-
-  const w = parseInt(document.getElementById('resW').value) || 350;
-  const h = parseInt(document.getElementById('resH').value) || 350;
-
-  cropper = new Cropper(imageToCrop, {
-      aspectRatio: w / h,
-      viewMode: 1, 
-      autoCropArea: 0.9, 
-      background: true, 
-      responsive: true,
-      guides: true
-  });
+// Drag and drop setup for PDF
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--purple)'; dropZone.style.background = 'var(--purple-light)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; dropZone.style.background = ''; });
+dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.style.borderColor = ''; dropZone.style.background = '';
+    document.getElementById('uploadPdf').files = e.dataTransfer.files;
+    document.getElementById('uploadPdf').dispatchEvent(new Event('change'));
 });
 
-function toggleTextInputs() {
-  const cb = document.getElementById('addTextCb');
-  const box = document.getElementById('textInputs');
-  box.style.display = cb.checked ? 'block' : 'none';
-}
-
-async function processUPSC() {
-  if(!cropper) { alert('Please upload an image first.'); return; }
-  
-  const w = parseInt(document.getElementById('resW').value);
-  const h = parseInt(document.getElementById('resH').value);
-  const tkb = parseFloat(document.getElementById('size').value);
-  
-  if(!w || !h) { alert('Please enter valid width and height.'); return; }
-  if(!tkb) { alert('Please enter target KB size.'); return; }
-
-  const addText = document.getElementById('addTextCb').checked;
-  const cName = document.getElementById('candName').value.trim();
-  const pDate = document.getElementById('photoDate').value.trim();
-
-  const btn = document.querySelector('.btn');
-  btn.innerText = 'Processing...';
-  document.getElementById('rg').innerHTML = '';
-  document.getElementById('greetingCard').style.display = 'none'; 
-
-  const pw = document.getElementById('pbox');
-  const pb = document.getElementById('pfill');
-  const st = document.getElementById('status');
-  pw.style.display = 'block';
-  pb.style.width = '20%';
-  st.innerText = 'Extracting Cropped Area...';
-
-  try {
-    const croppedCanvas = cropper.getCroppedCanvas({
-        width: w,
-        height: h,
-        fillColor: '#ffffff'
-    });
-
-    pb.style.width = '60%';
-    st.innerText = 'Compressing to exact KB...';
-
-    // Binary search for exact KB compression
-    let lo = 0.1, hi = 1.0, bestBlob = null;
-    for(let i=0; i<15; i++) {
-      let q = (lo+hi)/2;
-      let blob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', q));
-      if(blob.size/1024 > tkb) { hi = q; } 
-      else { lo = q; bestBlob = blob; }
-    }
-
-    if(!bestBlob) {
-        bestBlob = await new Promise(r => croppedCanvas.toBlob(r, 'image/jpeg', 0.1));
-    }
-
-    pb.style.width = '100%';
-    st.innerText = 'Done ✅';
+// PDF Upload Handler
+document.getElementById('uploadPdf').addEventListener('change', async function(e) {
+    if(this.files.length === 0) return;
     
-    setTimeout(()=>{
-        pw.style.display='none';
-        document.getElementById('greetingCard').style.display = 'block';
-    }, 800);
+    currentPdfFile = this.files[0];
+    if(currentPdfFile.type !== 'application/pdf') {
+        alert("Please select a valid PDF file format.");
+        return;
+    }
+    
+    // Update Drop UI visually
+    document.getElementById('dropMain').innerHTML = `<span style="color:var(--green)">${currentPdfFile.name}</span>`;
+    let sizeStr = (currentPdfFile.size / 1024).toFixed(1) + ' KB';
+    if(currentPdfFile.size > 1024 * 1024) sizeStr = (currentPdfFile.size / (1024*1024)).toFixed(2) + ' MB';
+    document.getElementById('dropHint').innerText = `Document Size: ${sizeStr}`;
+    
+    const dropIco = document.getElementById('dropIco');
+    dropIco.innerHTML = '✅';
+    dropIco.style.background = 'var(--green-bg)';
+    dropIco.style.borderColor = 'rgba(62,207,142,.3)';
+    
+    // Attempt to read total pages
+    try {
+        const arrayBuffer = await currentPdfFile.arrayBuffer();
+        const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+        maxPages = pdfDoc.getPageCount();
+        document.getElementById('pageNo').setAttribute('max', maxPages);
+        document.getElementById('pageNo').value = maxPages; // Default to last page
+    } catch(e) {
+        if(e.message.includes('encrypted')) {
+            alert("This PDF is password protected! Please unlock it first using our Unlock PDF tool.");
+            return;
+        }
+    }
 
-    const url = URL.createObjectURL(bestBlob);
-    const d = document.createElement('div');
-    d.className = 'rc';
-    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','upsc_ready.jpg')">⬇ Download</button></div>`;
-    document.getElementById('rg').appendChild(d);
+    // Show Settings
+    document.getElementById('rg').innerHTML = '';
+    document.getElementById('settingsArea').style.display = 'block';
+    checkReadyState();
+});
 
-  } catch(e) {
-    alert('Error processing image. Try again.');
-    pw.style.display = 'none';
-  } finally {
-    btn.innerHTML = '⚡&nbsp; Generate UPSC Ready Image';
-  }
+// Signature Upload Handler
+document.getElementById('uploadSig').addEventListener('change', function(e) {
+    if(this.files.length === 0) return;
+    
+    const f = this.files[0];
+    if(!f.type.startsWith('image/')) {
+        alert("Please upload a valid image file (JPG, PNG) for your signature.");
+        return;
+    }
+    
+    currentSigFile = f;
+    const url = URL.createObjectURL(f);
+    
+    document.getElementById('sigText').innerText = "✅ Signature Selected";
+    const preview = document.getElementById('sigPreview');
+    preview.src = url;
+    preview.style.display = 'inline-block';
+    
+    checkReadyState();
+});
+
+function checkReadyState() {
+    if(currentPdfFile && currentSigFile) {
+        document.getElementById('signBtn').style.display = 'block';
+    }
 }
 
-function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
+async function processSign() {
+    if(!currentPdfFile || !currentSigFile) return;
+
+    let targetPage = parseInt(document.getElementById('pageNo').value);
+    if(targetPage < 1) targetPage = 1;
+    if(targetPage > maxPages) targetPage = maxPages;
+    
+    const pos = document.getElementById('posSelect').value;
+
+    const btn = document.getElementById('signBtn');
+    const pw = document.getElementById('pbox');
+    const pb = document.getElementById('pfill');
+    const st = document.getElementById('status');
+    const rg = document.getElementById('rg');
+    
+    btn.style.display = 'none';
+    rg.innerHTML = '';
+    pw.style.display = 'block';
+
+    try {
+        pb.style.width = '20%';
+        st.innerText = 'Loading Document Engine...';
+        
+        // Load PDF
+        const pdfBytes = await currentPdfFile.arrayBuffer();
+        const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+        
+        pb.style.width = '50%';
+        st.innerText = 'Processing Signature Image...';
+        
+        // Load Image
+        const sigBytes = await currentSigFile.arrayBuffer();
+        let sigImage;
+        if (currentSigFile.type === 'image/png') {
+            sigImage = await pdfDoc.embedPng(sigBytes);
+        } else {
+            sigImage = await pdfDoc.embedJpg(sigBytes);
+        }
+        
+        pb.style.width = '80%';
+        st.innerText = 'Applying Digital Stamp...';
+        
+        // Get Page
+        const pages = pdfDoc.getPages();
+        const page = pages[targetPage - 1];
+        const { width, height } = page.getSize();
+        
+        // Scale Image (Make it look like a standard signature size)
+        const maxWidth = 150; 
+        const dims = sigImage.scale(maxWidth / sigImage.width);
+        
+        // Positioning Logic
+        const margin = 40;
+        let x = 0, y = 0;
+        
+        switch(pos) {
+            case 'br': // Bottom Right
+                x = width - dims.width - margin;
+                y = margin;
+                break;
+            case 'bl': // Bottom Left
+                x = margin;
+                y = margin;
+                break;
+            case 'tr': // Top Right
+                x = width - dims.width - margin;
+                y = height - dims.height - margin;
+                break;
+            case 'bc': // Bottom Center
+                x = (width / 2) - (dims.width / 2);
+                y = margin;
+                break;
+        }
+        
+        // Draw Image
+        page.drawImage(sigImage, {
+            x: x,
+            y: y,
+            width: dims.width,
+            height: dims.height,
+        });
+        
+        pb.style.width = '95%';
+        st.innerText = 'Saving Final PDF...';
+        
+        const modifiedPdfBytes = await pdfDoc.save();
+        const blob = new Blob([modifiedPdfBytes], { type: 'application/pdf' });
+        
+        pb.style.width = '100%';
+        st.innerText = 'Document Signed Successfully! ✍️';
+        
+        setTimeout(() => {
+            pw.style.display = 'none';
+            btn.style.display = 'block';
+            btn.innerText = '🔄 Sign Another Document';
+            
+            const url = URL.createObjectURL(blob);
+            let finalSize = (blob.size / 1024).toFixed(1) + ' KB';
+            if(blob.size > 1024 * 1024) finalSize = (blob.size / (1024*1024)).toFixed(2) + ' MB';
+            
+            let originalName = currentPdfFile.name.replace(/\.[^/.]+$/, "");
+            let dlName = originalName + "_Signed.pdf";
+            
+            const d = document.createElement('div');
+            d.className = 'success-box';
+            d.innerHTML = `
+                <div class="sb-icon">✍️</div>
+                <div class="sb-title">Document is Ready</div>
+                <div class="sb-desc">Final Size: ${finalSize} | Saved as ${dlName}</div>
+                <button class="btn-dl" onclick="dlUrl('${url}','${dlName}')">⬇ Download Signed PDF</button>
+            `;
+            rg.appendChild(d);
+            
+            // Auto download
+            dlUrl(url, dlName);
+            
+        }, 1200);
+
+    } catch (error) {
+        alert("An error occurred while signing the PDF. The file might be corrupted or severely restricted.");
+        pw.style.display = 'none';
+        btn.style.display = 'block';
+    }
+}
+
+function dlUrl(url, name) {
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
 </script>
 </body>
 </html>
