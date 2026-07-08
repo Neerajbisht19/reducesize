@@ -9,7 +9,10 @@
 <meta name="description" content="Remove passwords from PDF files online for free. Unlock e-Aadhar and bank statements instantly with our advanced bypass engine. 100% private, no server uploads.">
 <meta name="keywords" content="unlock pdf, remove pdf password, pdf password remover online, unlock e-aadhar pdf, decrypt pdf free, secure pdf unlocker">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#6d54f0">
+
+<!-- Theme Colors for Mobile Top Bar -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,6 +50,22 @@
     box-shadow: 0 8px 24px rgba(62, 207, 142, 0.3); display: none;
 }
 .btn-lock:hover { background: #2eb872; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(62, 207, 142, 0.4); }
+
+/* SUCCESS BOX */
+.success-box {
+    text-align: center; padding: 32px 20px; background: var(--surface2);
+    border: 1px solid rgba(62,207,142,0.3); border-radius: 16px;
+    animation: fadeIn 0.4s ease; margin-top: 24px;
+}
+.sb-icon { font-size: 48px; margin-bottom: 12px; }
+.sb-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.sb-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-weight: 600; }
+.btn-dl {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--green); color: #000; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
+}
+.btn-dl:hover { background: #2eb872; box-shadow: 0 8px 24px rgba(62,207,142,0.3); transform: translateY(-2px); }
 </style>
 
 <script type="application/ld+json">
@@ -87,7 +106,13 @@
 
 <div class="wrap">
 
-<section class="hero">
+  <!-- 🔥 BREADCRUMB FOR SEO & NAVIGATION -->
+  <div class="breadcrumb" style="padding-left:0; padding-top: 24px;">
+      <a href="/">Home</a> <span class="breadcrumb-sep">/</span>
+      <span style="color:var(--text);">Unlock PDF</span>
+  </div>
+
+<section class="hero" style="padding-top: 12px;">
   <div class="eyebrow">✦ 100% Offline & Private</div>
   <h1 class="hero-h1">Unlock PDF <span class="grad">Online</span></h1>
   <p class="hero-sub">Remove password security from PDF documents instantly. Perfect for e-Aadhar, Bank Statements, and legal files. No server uploads—safe & secure.</p>
@@ -99,7 +124,7 @@
   </div>
 </section>
 
-<div class="card">
+<div class="card" style="padding: 24px;">
   
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="application/pdf">
@@ -119,9 +144,10 @@
 
   <button class="btn-lock" id="lockBtn" onclick="processUnlock()">🔓&nbsp; Remove Password Now</button>
 
-  <div id="pbox" class="pbox" style="padding: 24px; background: var(--surface2); border-radius: 12px; border: 1px solid var(--border);">
+  <!-- 🔥 PREMIUM ANIMATED PROGRESS BAR -->
+  <div id="pbox" class="pbox">
     <div class="ptrack"><div id="pfill" class="pfill"></div></div>
-    <div id="status" class="plabel" style="margin-top: 12px;"></div>
+    <div id="status" class="plabel">Initializing secure engine...</div>
   </div>
   
   <div id="rg" class="rg"></div>
@@ -191,7 +217,6 @@
 </footer>
 
 <script src="assets/script.js" defer></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
 <script>
@@ -209,7 +234,7 @@ dropZone.addEventListener('drop', e => {
 document.getElementById('upload').addEventListener('change', async function(e) {
     if(this.files.length === 0) return;
     currentPdfFile = this.files[0];
-    if(currentPdfFile.type !== 'application/pdf') { alert("Please select a PDF."); return; }
+    if(currentPdfFile.type !== 'application/pdf') { alert("Please select a PDF file."); return; }
     
     document.getElementById('dropMain').innerHTML = `<span style="color:var(--green)">${currentPdfFile.name}</span>`;
     document.getElementById('dropHint').innerText = `Document Size: ${(currentPdfFile.size / 1024).toFixed(1)} KB`;
@@ -250,6 +275,7 @@ async function processUnlock() {
             
             const url = URL.createObjectURL(finalBlob);
             let finalSize = (finalBlob.size / 1024).toFixed(1) + ' KB';
+            if(finalBlob.size > 1024 * 1024) finalSize = (finalBlob.size / (1024*1024)).toFixed(2) + ' MB';
             
             let originalName = currentPdfFile.name.replace(/\.[^/.]+$/, "");
             let dlName = originalName + "_unlocked.pdf";
@@ -258,14 +284,18 @@ async function processUnlock() {
                 <div class="success-box">
                     <div class="sb-icon">🔓</div>
                     <div class="sb-title">Password Removed</div>
-                    <div class="sb-desc">Size: ${finalSize}</div>
+                    <div class="sb-desc">Final Size: ${finalSize} | Saved as ${dlName}</div>
                     <button class="btn-dl" onclick="dlUrl('${url}','${dlName}')">⬇ Download Unlocked PDF</button>
+                    <button class="btn-dl" style="background:var(--purple-light); color:var(--purple); margin-top:10px;" onclick="location.reload()">🔄 Unlock Another</button>
                 </div>
             `;
             document.getElementById('passwordArea').style.display = 'none';
+            
+            // Auto download
+            dlUrl(url, dlName);
         }, 800);
     } catch(e) {
-        alert("Incorrect password or the file is not encrypted.");
+        alert("Error: Incorrect password or the file is using an advanced encryption method not supported offline.");
         pw.style.display = 'none';
         btn.style.display = 'block';
     }
