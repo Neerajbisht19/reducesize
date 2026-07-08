@@ -9,7 +9,10 @@
 <meta name="description" content="Extract specific pages or remove unwanted pages from your PDF file easily. Visual page selector, 100% secure, offline browser-based tool.">
 <meta name="keywords" content="split pdf, remove pdf pages, extract pages from pdf, delete pdf pages online, pdf page separator, split pdf pages free">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#6d54f0">
+
+<!-- Theme Colors for Mobile Top Bar -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,6 +67,23 @@
 .mode-d .page-card.selected { opacity:0.3; border-color:var(--red); }
 .mode-d .page-card.selected .page-overlay { opacity:1; background:rgba(255,107,107,0.3); color:var(--red); }
 .mode-d .page-card.selected .page-overlay::after { content:'🗑️'; }
+
+/* SUCCESS BOX */
+.success-box {
+    text-align: center; padding: 32px 20px; background: var(--surface2);
+    border: 1px solid rgba(62,207,142,0.3); border-radius: 16px;
+    animation: fadeIn 0.4s ease; margin-top: 24px;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.sb-icon { font-size: 48px; margin-bottom: 12px; }
+.sb-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.sb-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; font-weight: 600; }
+.btn-dl {
+    width: 100%; padding: 16px; border-radius: 12px; border: none;
+    background: var(--green); color: #000; font-size: 16px; font-weight: 800;
+    font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s;
+}
+.btn-dl:hover { background: #2eb872; box-shadow: 0 8px 24px rgba(62,207,142,0.3); transform: translateY(-2px); }
 </style>
 
 <!-- SEO Structured Data -->
@@ -104,10 +124,18 @@
 </div>
 
 <div class="wrap">
-<section class="sub-hero">
-  <div class="tag">✦ Smart Page Selector</div>
-  <h1>Split & Remove<br><span class="grad">Pages from PDF</span></h1>
-  <p>Need just a few pages from a large PDF? Or want to delete unwanted pages? Select the mode below and visually pick the pages you want to keep or delete.</p>
+
+  <!-- 🔥 BREADCRUMB FOR SEO & NAVIGATION -->
+  <div class="breadcrumb" style="padding-left:0; padding-top: 24px;">
+      <a href="/">Home</a> <span class="breadcrumb-sep">/</span>
+      <span style="color:var(--text);">Split PDF</span>
+  </div>
+
+<section class="hero" style="padding-top: 12px;">
+  <div class="eyebrow">✦ Smart Page Selector</div>
+  <h1 class="hero-h1">Split & Remove<br><span class="grad">Pages from PDF</span></h1>
+  <p class="hero-sub">Need just a few pages from a large PDF? Or want to delete unwanted pages? Select the mode below and visually pick the pages you want to keep or delete.</p>
+  
   <div class="badges">
     <span class="badge">✅ Click to Keep</span>
     <span class="badge">🗑️ Click to Delete</span>
@@ -115,7 +143,7 @@
   </div>
 </section>
 
-<div class="card">
+<div class="card" style="padding: 24px;">
   
   <div class="drop" id="dropZone">
     <input type="file" id="upload" accept="application/pdf">
@@ -143,7 +171,12 @@
 
   <button class="btn" id="generateBtn" style="display:none;" onclick="processPdf()">✂️&nbsp; Extract & Save PDF</button>
 
-  <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
+  <!-- 🔥 PREMIUM ANIMATED PROGRESS BAR -->
+  <div id="pbox" class="pbox">
+    <div class="ptrack"><div id="pfill" class="pfill"></div></div>
+    <div id="status" class="plabel">Initializing secure engine...</div>
+  </div>
+  
   <div id="rg" class="rg"></div>
 </div>
 
@@ -169,28 +202,60 @@
   <p><strong>Is it safe to split my private bank statement here?</strong><br>Yes, it is 100% safe. Our tool processes all documents locally in your browser. We have no servers to intercept or view your files, making it the safest option available.</p>
 </section>
 
-<div class="chips-hd">More PDF Tools</div>
+<div class="chips-hd">Explore More Document Tools</div>
 <div class="chips">
   <a href="/" class="chip"><span class="chip-i">🗜️</span><div class="chip-t"><strong>Compress PDF</strong><span>Reduce file size</span></div></a>
   <a href="/merge-pdf.html" class="chip"><span class="chip-i">📑</span><div class="chip-t"><strong>Merge PDF</strong><span>Combine files</span></div></a>
   <a href="/pdf-to-image.html" class="chip"><span class="chip-i">🖼️</span><div class="chip-t"><strong>PDF to Images</strong><span>Extract pages</span></div></a>
   <a href="/unlock-pdf.html" class="chip"><span class="chip-i">🔓</span><div class="chip-t"><strong>Unlock PDF</strong><span>Remove password</span></div></a>
+  <a href="/document-scanner-online.html" class="chip"><span class="chip-i">📄</span><div class="chip-t"><strong>Scan to PDF</strong><span>Remove shadows</span></div></a>
 </div>
 </div>
 
 <footer class="footer">
-  <a class="flogo" href="/"><em>Reduce</em>Size</a>
-  <nav class="fnav">
-    <a href="/compress-image-to-10kb.html">10KB</a>
-    <a href="/compress-image-to-50kb.html">50KB</a>
-    <a href="/image-format-converter.html">Format Converter</a>
-    <a href="/">PDF Compressor</a>
-  </nav>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="flogo" href="/"><em>Reduce</em>Size</a>
+      <p>Free browser-based image compressor & PDF utility suite. Built in India, for everyone.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Image Tools</h4>
+      <a href="/compress-image-to-10kb.html">Compress to 10KB</a>
+      <a href="/compress-image-to-20kb.html">Compress to 20KB</a>
+      <a href="/compress-image-to-50kb.html">Compress to 50KB</a>
+      <a href="/compress-image-to-100kb.html">Compress to 100KB</a>
+      <a href="/image-format-converter.html">Format Converter</a>
+    </div>
+    <div class="footer-col">
+      <h4>PDF Tools</h4>
+      <a href="/merge-pdf.html">Merge PDF</a>
+      <a href="/split-pdf.html">Split PDF</a>
+      <a href="/document-scanner-online.html">Scan to PDF</a>
+      <a href="/unlock-pdf.html">Unlock PDF</a>
+      <a href="/protect-pdf.html">Protect PDF</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="/about.html">About Us</a>
+      <a href="/blog/">Blog & Guides</a>
+      <a href="/contact-us.html">Contact Us</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-conditions.html">Terms & Conditions</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
   <p class="fcopy">© 2025-2026 ReduceSize.online — All rights reserved.</p>
+  <div class="ftrust">
+    <span>🔒 Zero Upload</span>
+    <span>⚡ Instant</span>
+    <span>✅ Always Free</span>
+    <span>📱 Mobile Ready</span>
+  </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="assets/script.js" defer></script>
 
 <script>
 // Set worker for Mozilla PDF.js
@@ -201,6 +266,16 @@ let currentFileName = "Document";
 let totalNumPages = 0;
 let pageSelections = []; 
 let currentMode = 'keep'; 
+
+// Drag & Drop
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.style.borderColor = 'var(--purple)'; dropZone.style.background = 'var(--purple-light)'; });
+dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = ''; dropZone.style.background = ''; });
+dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.style.borderColor = ''; dropZone.style.background = '';
+    document.getElementById('upload').files = e.dataTransfer.files;
+    document.getElementById('upload').dispatchEvent(new Event('change'));
+});
 
 document.getElementById('upload').addEventListener('change', async function(e) {
     if(this.files.length === 0) return;
@@ -235,7 +310,7 @@ document.getElementById('upload').addEventListener('change', async function(e) {
             st.innerText = `Loading Page ${i} of ${totalNumPages}...`;
             
             const page = await pdf.getPage(i);
-            const viewport = page.getViewport({ scale: 0.3 }); 
+            const viewport = page.getViewport({ scale: 0.4 }); 
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             canvas.width = viewport.width;
@@ -307,8 +382,8 @@ async function processPdf() {
         else { if(!pageSelections[i]) indicesToKeep.push(i); }
     }
     
-    if(indicesToKeep.length === 0) { alert("Selection results in empty PDF."); return; }
-    if(indicesToKeep.length === totalNumPages) { alert("Nothing to split!"); return; }
+    if(indicesToKeep.length === 0) { alert("Selection results in an empty PDF. Please select at least one page."); return; }
+    if(indicesToKeep.length === totalNumPages) { alert("Nothing to split! You have selected all pages."); return; }
 
     const btn = document.getElementById('generateBtn');
     btn.style.display = 'none';
@@ -318,22 +393,48 @@ async function processPdf() {
     try {
         pb.style.width = '30%';
         st.innerText = 'Extracting pages...';
+        
         const pdfDoc = await PDFLib.PDFDocument.load(currentArrayBuffer);
         const newPdf = await PDFLib.PDFDocument.create();
         const copiedPages = await newPdf.copyPages(pdfDoc, indicesToKeep);
         copiedPages.forEach((page) => newPdf.addPage(page));
         
-        const blob = new Blob([await newPdf.save()], { type: 'application/pdf' });
+        const pdfBytes = await newPdf.save();
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        
         pb.style.width = '100%';
-        st.innerText = 'Done ✅';
+        st.innerText = 'Extraction Complete ✅';
         
         setTimeout(() => {
             pw.style.display = 'none';
             btn.style.display = 'block';
             const url = URL.createObjectURL(blob);
-            document.getElementById('rg').innerHTML = `<div class="rc"><div class="rsz">PDF Ready</div><button class="rb" onclick="dlUrl('${url}','${currentFileName}_split.pdf')">⬇ Download</button></div>`;
-        }, 800);
-    } catch(e) { alert("Error."); pw.style.display = 'none'; btn.style.display = 'block'; }
+            
+            let finalSize = (blob.size / 1024).toFixed(1) + ' KB';
+            if(blob.size > 1024 * 1024) finalSize = (blob.size / (1024*1024)).toFixed(2) + ' MB';
+            
+            const dlName = `${currentFileName}_split.pdf`;
+            
+            document.getElementById('rg').innerHTML = `
+                <div class="success-box">
+                    <div class="sb-icon">✂️</div>
+                    <div class="sb-title">PDF Split Successfully!</div>
+                    <div class="sb-desc">Final Size: ${finalSize} | Saved as ${dlName}</div>
+                    <button class="btn-dl" onclick="dlUrl('${url}','${dlName}')">⬇ Download New PDF</button>
+                    <button class="btn-dl" style="background:var(--purple-light); color:var(--purple); margin-top:10px;" onclick="location.reload()">🔄 Split Another Document</button>
+                </div>
+            `;
+            
+            // Auto download
+            dlUrl(url, dlName);
+            
+        }, 1000);
+        
+    } catch(e) { 
+        alert("Error generating the split PDF."); 
+        pw.style.display = 'none'; 
+        btn.style.display = 'block'; 
+    }
 }
 function dlUrl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a)}
 </script>
