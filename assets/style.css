@@ -1,6 +1,6 @@
 /* =========================================
    REDUCE SIZE — ULTIMATE PREMIUM CSS
-   Auto Light/Dark Mode + Animated UI + Compact Mobile
+   Auto Light/Dark Mode + Animated UI + Compact Web-App Layout
    ========================================= */
 
 /* =========================================
@@ -167,17 +167,17 @@ body::after {
 .mobile-menu a:hover { background: var(--purple-light); color: var(--purple); transform: translateX(5px); }
 
 /* =========================================
-   4. HERO SECTION
+   4. HERO SECTION (Compact Web-App Style)
    ========================================= */
-.wrap { position: relative; z-index: 1; max-width: 840px; margin: 0 auto; padding: 0 20px 80px; }
-.hero { text-align: center; padding: 80px 0 50px; width: 100%; }
+.wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 20px 80px; }
+.hero { text-align: center; padding: 30px 0 15px; width: 100%; }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--purple-text); background: var(--purple-light);
-  border: 1px solid rgba(99, 102, 241, 0.2); padding: 8px 24px;
-  border-radius: 30px; margin-bottom: 28px; transition: 0.3s;
+  border: 1px solid rgba(99, 102, 241, 0.2); padding: 6px 20px;
+  border-radius: 30px; margin-bottom: 16px; transition: 0.3s;
 }
 .eyebrow:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15); }
 .eyebrow::before {
@@ -188,8 +188,8 @@ body::after {
 @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
 
 .hero-h1 {
-  font-family: 'Syne', sans-serif; font-size: clamp(36px, 8vw, 64px);
-  font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; color: var(--text);
+  font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800; line-height: 1.2; letter-spacing: -1px; margin-bottom: 12px; color: var(--text);
   word-wrap: break-word; 
 }
 
@@ -201,32 +201,32 @@ body::after {
 }
 @keyframes gradientPulse { to { background-position: 200% center; } }
 
-.hero-sub { font-size: 17px; color: var(--muted); max-width: 580px; margin: 0 auto 36px; line-height: 1.8; font-weight: 500; }
+.hero-sub { font-size: 15px; color: var(--muted); max-width: 600px; margin: 0 auto 20px; line-height: 1.6; font-weight: 500; }
 
-.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 48px; }
+.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 24px; }
 .badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; padding: 8px 14px; border-radius: 10px;
   background: var(--surface); border: 1px solid var(--border); color: var(--muted);
   transition: 0.3s; cursor: default;
 }
 .badge:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-light); transform: translateY(-2px); }
 
 /* =========================================
-   5. STATS
+   5. STATS (Compact)
    ========================================= */
-.stats { display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; gap: 16px; width: 100%; }
+.stats { display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; gap: 12px; width: 100%; }
 .stat {
-  flex: 1; min-width: 120px; padding: 24px 12px; text-align: center; border-radius: 20px;
+  flex: 1; min-width: 110px; padding: 16px 10px; text-align: center; border-radius: 16px;
   background: var(--surface); border: 1px solid var(--border);
   transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.stat:hover { transform: translateY(-5px); box-shadow: var(--card-shadow); border-color: rgba(99, 102, 241, 0.3); }
+.stat:hover { transform: translateY(-3px); box-shadow: var(--card-shadow); border-color: rgba(99, 102, 241, 0.3); }
 .stat-n {
-  font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
-  color: var(--purple); margin-bottom: 6px;
+  font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800;
+  color: var(--purple); margin-bottom: 4px;
 }
-.stat-l { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1.2px; }
+.stat-l { font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
 /* =========================================
    6. MAIN TOOL CARD & UI ELEMENTS
@@ -486,20 +486,20 @@ body::after {
    9. FOOTER
    ========================================= */
 .footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 64px 24px 40px; background: var(--surface); width: 100%; }
-.footer-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); max-width: 840px; margin: 0 auto 40px; gap: 40px; text-align: left; }
+.footer-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); max-width: 960px; margin: 0 auto 40px; gap: 40px; text-align: left; }
 .flogo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--text); display: inline-block; margin-bottom: 12px; text-decoration: none; letter-spacing: -0.5px; }
 .flogo em { font-style: normal; color: var(--purple); }
 .footer-brand p { font-size: 14px; color: var(--muted); line-height: 1.7; }
 .footer-col h4 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text); margin-bottom: 20px; }
 .footer-col a { display: block; font-size: 15px; color: var(--muted); text-decoration: none; padding: 8px 0; transition: 0.2s; font-weight: 500; }
 .footer-col a:hover { color: var(--purple); transform: translateX(4px); }
-.footer-divider { border: none; border-top: 1px solid var(--border); margin: 0 auto 32px; max-width: 840px; }
+.footer-divider { border: none; border-top: 1px solid var(--border); margin: 0 auto 32px; max-width: 960px; }
 .fcopy { font-size: 14px; color: var(--muted); margin-bottom: 16px; text-align: center; font-weight: 500; }
 .ftrust { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; font-size: 13px; color: var(--muted); font-weight: 700; }
 
 .fnav {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
-  max-width: 840px; margin: 0 auto 32px;
+  max-width: 960px; margin: 0 auto 32px;
 }
 .fnav a {
   font-size: 13px; font-weight: 700; color: var(--muted); text-decoration: none;
