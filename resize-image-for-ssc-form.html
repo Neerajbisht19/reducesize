@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resize Image for Police Form | Constable & SI Form Fixer</title>
+<title>Resize Image for SSC Form Online | CGL, CHSL & MTS Photo Fixer</title>
 <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="canonical" href="https://reducesize.online/resize-image-for-police-form.html">
-<meta name="description" content="Fix form photo rejection instantly. Resize photo and signature for State Police (UP, Delhi, Bihar) Constable & SI forms. Exact KB, dimensions, and strict JPEG output.">
-<meta name="keywords" content="resize image for police form, up police photo size, delhi police constable photo, bihar police photo compress, police form image resize, ssc police form photo">
+<link rel="canonical" href="https://reducesize.online/resize-image-for-ssc-form.html">
+<meta name="description" content="Fix SSC form photo rejection instantly. Resize photo and signature for SSC CGL, CHSL, MTS & GD exams. Exact KB, dimensions (3.5x4.5cm), and strict JPEG output.">
+<meta name="keywords" content="resize image for ssc form, ssc cgl photo size, ssc chsl signature size, ssc photo compress, ssc form image resize, ssc mts photo size">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#6d54f0">
 
@@ -23,7 +23,7 @@
 
 <style>
 /* =========================================
-   POLICE FORM SPECIFIC UI CSS
+   SSC FORM SPECIFIC UI CSS
    ========================================= */
 .ssc-tabs { display:flex; gap:10px; margin-bottom:20px; }
 .ssc-tab {
@@ -71,12 +71,38 @@
 {
   "@context":"https://schema.org",
   "@type":"WebApplication",
-  "name":"Police Form Photo & Signature Resizer",
-  "url":"https://reducesize.online/resize-image-for-police-form.html",
+  "name":"SSC Form Photo & Signature Resizer",
+  "url":"https://reducesize.online/resize-image-for-ssc-form.html",
   "applicationCategory":"UtilityApplication",
   "operatingSystem":"All",
-  "description":"Professional tool to resize, crop, and compress photos and signatures for State Police (UP, Delhi, Bihar) recruitment forms. 100% Acceptable JPEGs.",
+  "description":"Professional tool to resize, crop, and compress photos and signatures for SSC CGL, CHSL, MTS and GD recruitment forms. 100% Acceptable JPEGs.",
   "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
+
+<!-- FAQ Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"What is the exact photo size required for SSC CGL and CHSL?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"SSC requires photographs between 20 KB and 50 KB, in JPEG format, with approximate dimensions of 3.5cm x 4.5cm. Both ears should be visible and the background should be light-colored."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"What is the signature size limit for SSC forms?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"SSC signatures must be between 10 KB and 20 KB, in JPEG format, with approximate dimensions of 4.0cm x 2.0cm, signed in black or blue ink on white paper."
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -88,7 +114,7 @@
     <a href="/blog/" class="nl-desktop">Blog</a>
     <a href="/about.html" class="nl-desktop">About</a>
     <a href="/contact-us.html" class="nl-desktop">Contact</a>
-    <span class="nav-pill">⚡ Police Portal Ready</span>
+    <span class="nav-pill">⚡ SSC Portal Ready</span>
   </div>
   <button class="ham" onclick="toggleMenu()" aria-label="Menu">☰</button>
 </nav>
@@ -103,12 +129,12 @@
 <div class="wrap">
 
 <section class="hero">
-  <div class="eyebrow">✦ Perfect for All State Police Exams</div>
-  <h1 class="hero-h1">Resize Image for<br><span class="grad">Police Online Forms</span></h1>
-  <p class="hero-sub">Live crop your Photo & Signature for UP Police, Delhi Police, Bihar Police Constable and SI exams. Set custom dimensions instantly for portal compliance.</p>
+  <div class="eyebrow">✦ Perfect for SSC CGL, CHSL, MTS & GD Exams</div>
+  <h1 class="hero-h1">Resize Image for<br><span class="grad">SSC Online Forms</span></h1>
+  <p class="hero-sub">Live crop your Photo & Signature to the exact SSC specification — 20-50KB photo, 10-20KB signature. Set custom dimensions instantly for portal compliance.</p>
   
   <div class="badges">
-    <span class="badge">🚓 State Police Exams</span>
+    <span class="badge">📝 SSC CGL / CHSL / MTS</span>
     <span class="badge">✂ Live Crop & Drag</span>
     <span class="badge">⚖️ Custom KB Limits</span>
   </div>
@@ -141,17 +167,17 @@
     <div class="irow" style="margin-bottom:0">
       <div class="f"><label class="fl">Max File Size (KB)</label><input type="number" id="size" value="48"></div>
     </div>
-    <p id="hintText" style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*You can manually change these values to match your specific State Police notification.</p>
+    <p id="hintText" style="font-size:11px;color:var(--muted);margin-top:6px;margin-bottom:0">*413x531px equals 3.5 x 4.5cm. SSC photo limit is 50KB. You can adjust these to match your specific SSC notification (CGL/CHSL/MTS/GD).</p>
   </div>
 
-  <button class="btn" onclick="processPolice()">⚡&nbsp; Generate Form Ready Image</button>
+  <button class="btn" onclick="processSSC()">⚡&nbsp; Generate Form Ready Image</button>
 
   <div id="pbox" class="pbox"><div class="ptrack"><div id="pfill" class="pfill"></div></div><div id="status" class="plabel"></div></div>
   
   <div id="greetingCard" class="greeting-card">
-    <div class="g-icon">👮‍♂️🚨</div>
-    <div class="g-title">✨ <em>Uniform</em> Ka Sapna ✨</div>
-    <div class="g-text">Humari dil se dua hai ki aap is saal zaroor select hon.. <br> aur uniform pehnein. 👮‍♂️💪 <br><br> Aapke ujjwal bhavishya (bright future) ke liye <br> dher saari shubhkaamnayein! 🌟✨</div>
+    <div class="g-icon">📝🎯</div>
+    <div class="g-title">✨ <em>Selection</em> Ka Sapna ✨</div>
+    <div class="g-text">Humari dil se dua hai ki aap is saal SSC CGL/CHSL zaroor crack karein.. <br> aur apni manzil paayein. 📝💪 <br><br> Aapke ujjwal bhavishya (bright future) ke liye <br> dher saari shubhkaamnayein! 🌟✨</div>
     <span class="g-love">Lots of love, <span class="g-signature">ReduceSize.online ❤️</span></span>
   </div>
 
@@ -159,24 +185,30 @@
 </div>
 
 <section class="seo">
-  <h2>The Master Fixer for Police Constable & SI Form Rejections</h2>
-  <p>Applying for State Police recruitments—like UP Police, Delhi Police Constable, or Bihar Police SI—is a competitive journey. The last thing you need is a <strong>"File Upload Failed"</strong> error right when the server is about to close. Most state police forms are powered by legacy systems that are extremely unforgiving. If your image is 1KB over the size limit or even 1 pixel off in dimensions, the system will discard your application without explanation.</p>
+  <h2>The Master Fixer for SSC CGL, CHSL & MTS Form Rejections</h2>
+  <p>Applying for SSC recruitments—like CGL, CHSL, MTS, or GD Constable—is a competitive journey. The last thing you need is a <strong>"File Upload Failed"</strong> error right when the server is about to close. The SSC application portal is powered by legacy systems that are extremely unforgiving. If your image is 1KB over the size limit or even 1 pixel off in dimensions, the system will discard your application without explanation.</p>
 
-  <h3>Why Online Police Forms Reject Photos</h3>
-  <p>Our analysis of common rejection errors on police portals shows three recurring issues:</p>
+  <h3>Why SSC Forms Reject Photos</h3>
+  <p>Our analysis of common rejection errors on the SSC portal shows three recurring issues:</p>
   <ul>
-    <li><strong>File Size Too Large:</strong> Police portals are designed to handle millions of applications. They enforce strict KB caps (e.g., 20KB or 50KB) to keep their database storage costs low. If you upload a 3MB phone photo, it will be rejected instantly.</li>
-    <li><strong>Incorrect Aspect Ratio:</strong> If a form asks for 3.5cm x 4.5cm, it requires a portrait ratio. Uploading a square photo will make your face look distorted or stretched, which is grounds for rejection during manual verification.</li>
-    <li><strong>Invalid Image Format:</strong> Many state portals only accept <em>.JPG</em> or <em>.JPEG</em> files. If you upload a modern HEIC (iPhone) or PNG file, the upload validator will fail.</li>
+    <li><strong>File Size Too Large:</strong> SSC enforces a strict 20KB-50KB cap for photos and 10KB-20KB for signatures. If you upload a 3MB phone photo, it will be rejected instantly.</li>
+    <li><strong>Incorrect Aspect Ratio:</strong> SSC requires a 3.5cm x 4.5cm portrait ratio for photos. Uploading a square photo will make your face look distorted or stretched, which is grounds for rejection during manual verification.</li>
+    <li><strong>Invalid Image Format:</strong> The SSC portal only accepts <em>.JPG</em> or <em>.JPEG</em> files. If you upload a modern HEIC (iPhone) or PNG file, the upload validator will fail.</li>
   </ul>
 
   <h3>How our "Master Form Fixer" Solves This</h3>
   <p>Unlike generic compressors that just shrink your file, our tool acts as a dedicated <strong>Form Fixer</strong>:</p>
   <ol>
-    <li><strong>Smart Cropper:</strong> When you select "Photo" or "Signature" from our tabs, we automatically lock the aspect ratio to the standard dimensions used by State Police boards. You cannot make a mistake while cropping!</li>
-    <li><strong>Anti-Rejection Encoder:</strong> No matter what format you upload (.PNG, .WEBP, .HEIC), our tool forces the output to be a compliant, standard Baseline JPEG that every recruitment portal accepts.</li>
+    <li><strong>Smart Cropper:</strong> When you select "Photo" or "Signature" from our tabs, we automatically lock the aspect ratio to the standard dimensions used by SSC (3.5x4.5cm photo, 4x2cm signature). You cannot make a mistake while cropping!</li>
+    <li><strong>Anti-Rejection Encoder:</strong> No matter what format you upload (.PNG, .WEBP, .HEIC), our tool forces the output to be a compliant, standard Baseline JPEG that the SSC portal accepts.</li>
     <li><strong>Exact KB Targeting:</strong> Our algorithm doesn't just "reduce" size; it precisely compresses your image to fit the exact limit (e.g., 48KB) without sacrificing the sharpness of your face or signature strokes.</li>
   </ol>
+
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>What is the exact photo size required for SSC CGL and CHSL?</strong><br>
+  SSC requires photographs between 20KB and 50KB, in JPEG format, with approximate dimensions of 3.5cm x 4.5cm. Both ears should be visible and the background should be light-colored.</p>
+  <p><strong>What is the signature size limit for SSC forms?</strong><br>
+  SSC signatures must be between 10KB and 20KB, in JPEG format, with approximate dimensions of 4.0cm x 2.0cm, signed in black or blue ink on white paper.</p>
 </section>
 
 <div class="chips-hd">More Tools</div>
@@ -184,7 +216,7 @@
   <a href="/compress-image-to-10kb.html" class="chip"><span class="chip-i">✍️</span><div class="chip-t"><strong>Compress to 10KB</strong><span>Signatures</span></div></a>
   <a href="/compress-image-to-20kb.html" class="chip"><span class="chip-i">🪪</span><div class="chip-t"><strong>Compress to 20KB</strong><span>Form photos</span></div></a>
   <a href="/compress-image-to-50kb.html" class="chip"><span class="chip-i">🖼</span><div class="chip-t"><strong>Compress to 50KB</strong><span>Balanced quality</span></div></a>
-  <a href="/resize-image-for-ssc-form.html" class="chip"><span class="chip-i">📝</span><div class="chip-t"><strong>SSC Form Image</strong><span>CGL · CHSL</span></div></a>
+  <a href="/resize-image-for-police-form.html" class="chip"><span class="chip-i">👮</span><div class="chip-t"><strong>Police Form Image</strong><span>Constable · SI</span></div></a>
   <a href="/resize-image-for-upsc-form.html" class="chip"><span class="chip-i">🏛</span><div class="chip-t"><strong>UPSC Form Image</strong><span>IAS · IPS</span></div></a>
   <a href="/reduce-image-size-in-kb.html" class="chip"><span class="chip-i">🎯</span><div class="chip-t"><strong>Custom KB Size</strong><span>Precision tool</span></div></a>
 </div>
@@ -229,13 +261,13 @@ function setMode(mode) {
         document.getElementById('resW').value = 413;
         document.getElementById('resH').value = 531;
         document.getElementById('size').value = 48;
-        document.getElementById('hintText').innerText = "*413x531 px equals 3.5 x 4.5 cm. SSC/Police limit is 50KB.";
+        document.getElementById('hintText').innerText = "*413x531px equals 3.5 x 4.5cm. SSC photo limit is 50KB.";
     } else {
         document.getElementById('modeSign').classList.add('active');
         document.getElementById('resW').value = 472;
         document.getElementById('resH').value = 236;
         document.getElementById('size').value = 18;
-        document.getElementById('hintText').innerText = "*472x236 px equals 4.0 x 2.0 cm. Police limit is 20KB.";
+        document.getElementById('hintText').innerText = "*472x236px equals 4.0 x 2.0cm. SSC signature limit is 20KB.";
     }
     updateAspectRatio();
 }
@@ -288,7 +320,7 @@ function updateAspectRatio() {
 document.getElementById('resW').addEventListener('input', updateAspectRatio);
 document.getElementById('resH').addEventListener('input', updateAspectRatio);
 
-async function processPolice() {
+async function processSSC() {
   if(!cropper) { alert('Please upload an image first.'); return; }
   
   const w = parseInt(document.getElementById('resW').value);
@@ -345,7 +377,7 @@ async function processPolice() {
     const url = URL.createObjectURL(bestBlob);
     const d = document.createElement('div');
     d.className = 'rc';
-    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','police_form_ready.jpg')">⬇ Download</button></div>`;
+    d.innerHTML = `<img src="${url}" loading="lazy"><div class="ri"><div class="rsz">${(bestBlob.size/1024).toFixed(1)} KB</div><button class="rb" onclick="dlUrl('${url}','ssc_form_ready.jpg')">⬇ Download</button></div>`;
     document.getElementById('rg').appendChild(d);
 
   } catch(e) {
