@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +23,54 @@
   #customPreviewGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 10px; margin-top: 16px; margin-bottom: 24px; }
   .preview-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); }
 </style>
+
+<!-- SEO Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Image to PDF Converter",
+  "url":"https://reducesize.online/image-to-pdf.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Free browser-based tool to combine multiple JPG, PNG, or WEBP images into a single PDF, with optional exact KB size targeting. No upload, 100% private.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
+
+<!-- FAQ Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Can I combine multiple images into one PDF?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes, you can select multiple JPG, PNG, or WEBP images at once and they will be combined into a single multi-page PDF document."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Can I set an exact file size for the PDF?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes, you can optionally enter a target size in KB and the tool will compress the images so the final PDF matches that limit, useful for online form uploads."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Is my data uploaded to a server?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"No. The entire conversion happens locally in your browser. Your images and the resulting PDF never leave your device."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -135,6 +184,14 @@
     <li><strong>Set Custom Size (Optional):</strong> If your form requires the PDF to be under 200KB or 500KB, simply type that number into the target box.</li>
     <li><strong>Generate & Download:</strong> Click the button, and your perfectly sized PDF will be ready to download in seconds!</li>
   </ol>
+
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Can I combine multiple images into one PDF?</strong><br>
+  Yes, you can select multiple JPG, PNG, or WEBP images at once and they will be combined into a single multi-page PDF document.</p>
+  <p><strong>Can I set an exact file size for the PDF?</strong><br>
+  Yes, you can optionally enter a target size in KB and the tool will compress the images so the final PDF matches that limit, useful for online form uploads.</p>
+  <p><strong>Is my data uploaded to a server?</strong><br>
+  No. The entire conversion happens locally in your browser. Your images and the resulting PDF never leave your device.</p>
 </section>
 
 <div class="chips-hd">Explore More PDF Tools</div>
