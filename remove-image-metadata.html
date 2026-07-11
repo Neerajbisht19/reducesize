@@ -31,6 +31,54 @@
   .exif-danger { color: #ff6b6b; }
   .exif-safe { color: var(--green); }
 </style>
+
+<!-- SEO Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Image Metadata & EXIF Remover",
+  "url":"https://reducesize.online/remove-image-metadata.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Free browser-based tool to scan and remove hidden EXIF metadata — GPS location, camera model, timestamp — from photos before sharing online.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
+
+<!-- FAQ Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"What is EXIF metadata in a photo?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"EXIF metadata is hidden data embedded in every photo by your phone or camera, including GPS location, camera model, and the exact date and time the photo was taken."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Does removing EXIF data reduce photo quality?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"No. Removing EXIF metadata only strips hidden text data from the file, it does not touch the visible pixels, so image quality stays exactly the same."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Is it safe to remove metadata online?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes, on ReduceSize.online the entire process happens locally in your browser. Your photo is never uploaded to any server, so it stays 100% private."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -101,6 +149,14 @@
 
   <h3>How our EXIF Stripper Works (100% Offline)</h3>
   <p>Our tool works fundamentally differently from other websites. When you select an image, our script reads the EXIF data directly inside your web browser and displays it to you. When you click "Scrub Data", we redraw your image entirely from scratch using HTML5 Canvas. This process preserves the visual quality of your photo but permanently destroys the hidden text layer. Because the file never leaves your device, your location data remains strictly yours.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>What is EXIF metadata in a photo?</strong><br>
+  EXIF metadata is hidden data embedded in every photo by your phone or camera, including GPS location, camera model, and the exact date and time the photo was taken.</p>
+  <p><strong>Does removing EXIF data reduce photo quality?</strong><br>
+  No. Removing EXIF metadata only strips hidden text data from the file, it does not touch the visible pixels, so image quality stays exactly the same.</p>
+  <p><strong>Is it safe to remove metadata online?</strong><br>
+  Yes, on ReduceSize.online the entire process happens locally in your browser. Your photo is never uploaded to any server, so it stays 100% private.</p>
 </section>
 
 <div class="chips-hd">Explore Image Compression Tools</div>
