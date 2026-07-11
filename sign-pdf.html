@@ -75,6 +75,54 @@
 .btn-dl { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--green); color: #000; font-size: 16px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; transition: 0.2s; margin-top: 16px;}
 </style>
 
+<!-- SEO Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Visual PDF Signer",
+  "url":"https://reducesize.online/sign-pdf.html",
+  "applicationCategory":"UtilityApplication",
+  "operatingSystem":"All",
+  "description":"Free browser-based tool to visually place your signature anywhere on a PDF, with automatic background removal from a photographed signature. No upload, 100% private.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}
+}
+</script>
+
+<!-- FAQ Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Do I need a transparent signature image to sign a PDF?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"No. You can simply sign on a plain white paper, take a photo with your phone, and upload it. The tool automatically removes the white background."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Can I sign every page of the PDF at once?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes, there is an option to apply your signature to all pages of the document automatically, or you can place it individually per page."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Is the PDF signing process private and secure?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes, the entire signing process runs locally in your browser using a client-side engine. Your PDF and signature are never uploaded to any server."
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 
@@ -166,6 +214,14 @@
   <p>Forget the old days of guessing where your signature will land. <strong>ReduceSize Visual PDF Signer</strong> gives you a live preview of every page in your document. You can simply drag and drop your signature exactly where the dotted line is!</p>
   <h3>Magic Background Removal</h3>
   <p>Don't have a transparent PNG of your signature? No problem. Just sign on a blank piece of white paper, click a photo with your phone, and upload it. Our smart client-side algorithm will automatically detect the white paper, make it 100% transparent, and darken your ink so it blends perfectly into the PDF document.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <p><strong>Do I need a transparent signature image to sign a PDF?</strong><br>
+  No. You can simply sign on a plain white paper, take a photo with your phone, and upload it. The tool automatically removes the white background.</p>
+  <p><strong>Can I sign every page of the PDF at once?</strong><br>
+  Yes, there is an option to apply your signature to all pages of the document automatically, or you can place it individually per page.</p>
+  <p><strong>Is the PDF signing process private and secure?</strong><br>
+  Yes, the entire signing process runs locally in your browser using a client-side engine. Your PDF and signature are never uploaded to any server.</p>
 </section>
 
 </div>
@@ -426,3 +482,4 @@ function dlUrl(url, name) {
 </script>
 </body>
 </html>
+
