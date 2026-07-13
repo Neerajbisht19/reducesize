@@ -34,17 +34,12 @@
     {
       "@type": "Question",
       "name": "How do I compress an image to exactly 20KB?",
-      "acceptedAnswer": {"@type": "Answer","text": "Upload your image on ReduceSize, click the '20 KB' quick button, then click 'Process & Download'. The tool automatically finds the best quality setting to land at exactly 20KB."}
+      "acceptedAnswer": {"@type": "Answer","text": "Upload your image on ReduceSize, click the '20 KB' quick button, then click 'Process & Download'."}
     },
     {
       "@type": "Question",
       "name": "Are my files uploaded to any server?",
-      "acceptedAnswer": {"@type": "Answer","text": "No. ReduceSize processes everything inside your browser using JavaScript. Your files never leave your device."}
-    },
-    {
-      "@type": "Question",
-      "name": "Does this work for SSC and UPSC government forms?",
-      "acceptedAnswer": {"@type": "Answer","text": "Yes. Quick-select buttons cover the most common requirements: 10KB for signatures, 20KB–50KB for photos."}
+      "acceptedAnswer": {"@type": "Answer","text": "No. ReduceSize processes everything inside your browser. Your files never leave your device."}
     }
   ]
 }
@@ -90,43 +85,14 @@
 
 <div class="wrap">
 
+<!-- 🔥 Sirf Heading (Baki sab Tool ke neeche shift kar diya) -->
 <section class="hero">
   <div class="eyebrow">Browser-based · No Upload · Instant</div>
   <h1 class="hero-h1">Compress & Resize<br><span class="grad">Any Image or PDF</span></h1>
-  <p class="hero-sub">Hit exact KB targets — 10KB, 20KB, 50KB, 100KB — without uploading anything. 100% private. Built for SSC, UPSC & all government forms.</p>
-
-  <!-- Badges Wapas Aa Gaye -->
-  <div class="badges">
-    <span class="badge">🔒 No file upload</span>
-    <span class="badge">⚡ Instant result</span>
-    <span class="badge">📱 Works on mobile</span>
-    <span class="badge">✅ SSC / UPSC ready</span>
-    <span class="badge">∞ Multiple files</span>
-    <span class="badge">🆓 Always free</span>
-  </div>
-
-  <!-- Stats Wapas Aa Gaye (With Safe/Genuine Text) -->
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-n">100%</div>
-      <div class="stat-l">Private & Secure</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">Free</div>
-      <div class="stat-l">Forever</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">Fast</div>
-      <div class="stat-l">Processing</div>
-    </div>
-    <div class="stat">
-      <div class="stat-n">Exact</div>
-      <div class="stat-l">KB Targeting</div>
-    </div>
-  </div>
+  <p class="hero-sub">Hit exact KB targets — 10KB, 20KB, 50KB, 100KB — without uploading anything. 100% private. Built for SSC & UPSC forms.</p>
 </section>
 
-<!-- THE MAIN TOOL CARD -->
+<!-- 🔥 THE MAIN TOOL CARD (Ab seedha Heading ke neeche dikhega) -->
 <div class="card">
   <div class="tabs">
     <button class="tab on" onclick="showTab('imgBox',this)">🖼&nbsp; Image Tools</button>
@@ -192,8 +158,25 @@
   <div id="rg" class="rg"></div>
 </div>
 
-<!-- Steps Wapas Aa Gaye -->
-<h2 class="section-hd">How It Works</h2>
+<!-- 🔥 Badges & Stats ab Tool ke neeche chale gaye -->
+<div class="badges" style="margin-top: 40px;">
+  <span class="badge">🔒 No file upload</span>
+  <span class="badge">⚡ Instant result</span>
+  <span class="badge">📱 Works on mobile</span>
+  <span class="badge">✅ SSC / UPSC ready</span>
+  <span class="badge">∞ Multiple files</span>
+  <span class="badge">🆓 Always free</span>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Private & Secure</div></div>
+  <div class="stat"><div class="stat-n">Free</div><div class="stat-l">Forever</div></div>
+  <div class="stat"><div class="stat-n">Fast</div><div class="stat-l">Processing</div></div>
+  <div class="stat"><div class="stat-n">Exact</div><div class="stat-l">KB Targeting</div></div>
+</div>
+
+<!-- Steps -->
+<h2 class="section-hd" style="margin-top: 60px;">How It Works</h2>
 <p class="section-sub">Three simple steps — no account needed, no upload, no waiting.</p>
 <div class="steps">
   <div class="step">
@@ -290,15 +273,6 @@
 </div>
 <a href="/blog/" class="view-all-link">View all guides</a>
 
-<div class="author-bar">
-  <div class="author-avatar">RS</div>
-  <div class="author-info">
-    <strong>ReduceSize Editorial Team</strong>
-    <small>Reviewed & updated June 2026 · Browser Tool Experts</small>
-  </div>
-  <span class="author-verified">✓ Verified</span>
-</div>
-
 <article class="seo">
 <h2>Compress Image to Exact KB — Free &amp; Instant</h2>
 <p>ReduceSize.online is a free, browser-based tool that lets you compress images and PDFs to a precise file size — whether that's 10KB, 20KB, 50KB, or 100KB — directly inside your browser. Your files never leave your device, so there is no privacy risk, no waiting for uploads, and no size limits imposed by a server.</p>
@@ -367,7 +341,6 @@
 <div id="pm" class="pm" onclick="this.style.display='none'"><img id="pmi" alt="Preview"></div>
 
 <div id="ov" style="position:fixed;inset:0;background:rgba(2,2,12,.95);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(12px);">
-  <!-- Validation Modal Content kept same -->
   <div style="width:300px;max-width:90vw;display:flex;flex-direction:column;align-items:center;">
     <div style="font-size:44px;margin-bottom:10px;">✅</div>
     <div id="amsg" style="font-size:14px;color:#8f8fc0;margin-bottom:18px;font-weight:600;text-align:center;"></div>
@@ -390,7 +363,10 @@
 <canvas id="pdfCv" style="display:none"></canvas>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+
 <script src="assets/script.js" defer></script>
+
+<!-- Google Auto-Ads Script -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4393982800124912" crossorigin="anonymous"></script>
 
 </body>
